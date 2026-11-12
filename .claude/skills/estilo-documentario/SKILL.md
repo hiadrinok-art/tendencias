@@ -49,7 +49,8 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - **Pare e peça aprovação.** Depois passe a tabela para `cena/plano.json`:
   - `beats[]`: `t` = início da palavra-gatilho (de `palavras.json`), `acao`, `alvo` (id do elemento), `som`;
   - `camera[]`: `[t, x, y, zoom]` em coordenadas do mundo; o motor passa uma spline por eles;
-  - `audio.trilha_envelope`: `[t, dB]`; faça a música **morrer no impacto** e voltar na virada.
+  - `audio.trilha_abaixo_da_voz`: ex. `14`. O `montar.py` mede a trilha a cada 0,5 s e a mantém 14 dB abaixo da fala, compensando o crescendo da música. **Use sempre.**
+  - `audio.trilha_envelope`: `[t, dB]` como **desvio** (0 = normal, -60 = silêncio, +9 = subir no fim). Faça a música **morrer no impacto** e voltar na virada.
 - Ações do motor: `datilografar`, `cair`, `alfinete`, `desenhar` (traços `.traco` de SVG), `circular`, `carimbar` (impacto exato em `t` + tremor), `congelar`, `acender` (traços + nós `.no-luz`), `reacender`, `mover` (`para: {x, y, rotation}`), `apagar`.
   - `foco` (opcional) diz qual elemento fica aceso, quando não é o próprio alvo (ex.: circular palavras de um documento).
   - `sons_extras: [[t, som]]` para sons sem destaque (sino, salva).
@@ -82,4 +83,7 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - **Câmera (piloto Pernambuco):** a spline Catmull-Rom passava do ponto quando uma viagem longa vinha logo depois de um trecho parado, mostrando a borda preta do mundo. O motor agora usa PCHIP (cúbica monotônica), que nunca passa do keyframe.
 - **Wikimedia:** a API e o upload.wikimedia.org dão 429 em IP compartilhado. Tente de novo depois de alguns minutos e use uma silhueta provisória enquanto isso.
 - **Direito autoral de pinturas:** confira a data de morte do artista (no Brasil, 70 anos). Ex.: Parreiras (1937) é domínio público; Murillo La Greca (1985) não.
-- Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16.
+- Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16 em **duas passadas lineares**. A de uma passada comprime e desfaz o envelope.
+- Para medir música × voz, use as pausas reais da narração (`silencedetect`), não os tempos do Whisper: as palavras podem estar adiantadas.
+- `data-duration` do `#root` e do `<audio>` precisa ser igual a `duracao` do plano, senão o render sai com tela preta no fim.
+- Piloto de 80 s: ~1,5 h no total; render de 6,5 min.
