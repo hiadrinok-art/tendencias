@@ -1,0 +1,74 @@
+/* Estilo "xilogravura de cordel": papel creme, tinta preta chapada, vermelho de impressão,
+   tipos de madeira, sombras duras e bordas ásperas. Só muda a pele; posições e ids são os mesmos. */
+@font-face { font-family: "Madeira"; src: url("../assets/fontes/InterDisplay-Black.otf") format("opentype"); }
+:root { --tinta: #15120f; --papel: #f1e7d0; --papel2: #e6d8b8; --verm: #b3201c; }
+
+html, body, #root { background: #15120f; }
+#mundo { background:
+    radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.18), transparent 70%),
+    repeating-linear-gradient(17deg, rgba(90,70,40,.06) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-71deg, rgba(90,70,40,.05) 0 1px, transparent 1px 13px),
+    var(--papel2) !important; }
+
+.peca { box-shadow: 16px 16px 0 var(--tinta) !important; }
+.papel { background: var(--papel) !important; color: var(--tinta) !important; border: 10px solid var(--tinta); box-sizing: border-box; }
+.datil, .serif { font-family: "Madeira", sans-serif !important; color: var(--tinta); text-transform: uppercase; letter-spacing: 2px; font-style: normal !important; }
+.datil, .serif, .carimbo, #retrato-caneca img, #bandeira1817 svg { filter: url(#aspero); }
+
+/* textos grandes com cara de tipo de madeira */
+#data1817 { font-size: 132px !important; line-height: 1.05; }
+#data1824 { font-size: 250px !important; }
+#data1825 { font-size: 112px !important; line-height: 1.1; }
+#dias75 { font-size: 130px !important; color: var(--verm) !important; }
+#confed { font-size: 104px !important; }
+#documento .corpo { font-size: 58px !important; line-height: 1.6 !important; text-transform: none !important; font-family: "Serifa", serif !important; font-style: italic !important; font-weight: bold; }
+#documento .cab, #sentenca1817 .tit, #sentenca-forca .tit, #constituinte .tit { color: var(--verm) !important; }
+#sentenca-forca .corpo { text-transform: none !important; }
+
+/* carimbos viram blocos de impressão em vermelho chapado */
+.carimbo { background: var(--verm); color: var(--papel) !important; border: none !important; border-radius: 4px !important;
+           mix-blend-mode: normal !important; font-family: "Madeira", sans-serif !important; box-shadow: 10px 10px 0 var(--tinta); }
+
+/* mapas: tinta preta sobre papel, sem cores */
+#mapa-recife, #mapa-pe { background: var(--papel) !important; border: 10px solid var(--tinta); box-sizing: border-box; }
+#mapa-recife svg path { stroke: var(--tinta) !important; }
+#mapa-recife svg path[fill^="rgba(70"] { fill: rgba(21,18,15,.18) !important; }
+#mapa-recife svg path[fill^="rgba(120"] { fill: var(--papel2) !important; }
+#mapa-recife #setas path { stroke: var(--verm) !important; }
+#mapa-recife .rot { color: var(--tinta) !important; font-family: "Madeira", sans-serif !important; }
+#pe-forma, #alagoas path { fill: rgba(21,18,15,.12) !important; stroke: var(--tinta) !important; stroke-width: 10 !important; }
+#alagoas path { fill: rgba(179,32,28,.25) !important; }
+#alagoas text { font-family: "Madeira", sans-serif !important; fill: var(--tinta) !important; }
+#mapa-pe .rot { font-family: "Madeira", sans-serif !important; color: var(--tinta) !important; }
+
+/* bandeira com contorno de xilogravura */
+#bandeira1817 { box-shadow: none !important; }
+#bandeira1817 svg { filter: url(#aspero) drop-shadow(16px 16px 0 #15120f) !important; }
+#bandeira1817 svg rect, #bandeira1817 svg path, #bandeira1817 svg circle { stroke: var(--tinta); stroke-width: 9; paint-order: stroke; }
+#bandeira1817 svg g[stroke-width="48"] path { stroke-width: 48; }
+
+/* calendário e sentença */
+#tracos75 { stroke: var(--tinta) !important; stroke-width: 7 !important; }
+#sentenca1817 .linhas { background: repeating-linear-gradient(180deg, transparent 0 56px, var(--tinta) 56px 62px, transparent 62px 90px) !important; }
+#sentenca1817 .selo { background: var(--verm) !important; box-shadow: 8px 8px 0 var(--tinta) !important; }
+
+/* jornal */
+#typhis .mast { font-family: "Madeira", sans-serif !important; }
+#typhis .fio { border-top-color: var(--tinta) !important; }
+
+/* retrato gravado: preto e branco de alto contraste */
+#retrato-caneca { background: var(--papel) !important; border: 10px solid var(--tinta); }
+#retrato-caneca img { filter: url(#aspero) grayscale(1) contrast(3.4) brightness(1.15) !important; mix-blend-mode: multiply; }
+
+/* acabamento: vinheta de papel e grão de tinta */
+#luz { background: radial-gradient(ellipse 75% 70% at 50% 45%, rgba(0,0,0,0) 55%, rgba(40,25,10,.55) 100%) !important; }
+#grao { opacity: .22 !important; mix-blend-mode: multiply !important; }
+
+/* correções do 1º teste: cores do arco-íris preservadas, retrato legível, grão de matriz no papel */
+#bandeira1817 svg g[clip-path] path:nth-child(1) { stroke: #c8202a !important; }
+#bandeira1817 svg g[clip-path] path:nth-child(2) { stroke: #f2c230 !important; }
+#bandeira1817 svg g[clip-path] path:nth-child(3) { stroke: #2f8f3f !important; }
+#retrato-caneca img { filter: url(#aspero) grayscale(1) brightness(2.1) contrast(1.9) !important; }
+.papel { background-image:
+    repeating-linear-gradient(0deg, rgba(21,18,15,.045) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(90deg, rgba(21,18,15,.02) 0 1px, transparent 1px 23px) !important; }

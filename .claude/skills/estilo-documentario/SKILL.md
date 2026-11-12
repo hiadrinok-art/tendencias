@@ -24,6 +24,7 @@ O fluxo foi testado de ponta a ponta: 27 s renderizados em ~2,5 min em CPU.
 | `scripts/conferir_sincronia.py` | confere se cada beat cai na palavra-gatilho (tolerância 80 ms) e se há destaques colados |
 | `scripts/conferir_video.sh` | quadros a cada 0,5 s, folhas de contato e RMS por 0,5 s |
 | `scripts/analisar_camera.py` | velocidade da câmera quadro a quadro e trancos |
+| `modelo/estilos/` | peles visuais trocáveis só por CSS (padrão: mesa de arquivo; `cordel.css`: xilogravura). Veja o LEIA-ME |
 | `references/` | regras de estilo, modelo de tabela e notas de renderização |
 
 ## Fluxo
