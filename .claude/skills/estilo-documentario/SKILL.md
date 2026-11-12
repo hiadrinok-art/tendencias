@@ -50,7 +50,9 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
   - `beats[]`: `t` = início da palavra-gatilho (de `palavras.json`), `acao`, `alvo` (id do elemento), `som`;
   - `camera[]`: `[t, x, y, zoom]` em coordenadas do mundo; o motor passa uma spline por eles;
   - `audio.trilha_envelope`: `[t, dB]`; faça a música **morrer no impacto** e voltar na virada.
-- Ações do motor: `datilografar`, `cair`, `alfinete`, `desenhar` (traços `.traco` de SVG), `circular`, `carimbar` (impacto exato em `t` + tremor), `congelar`, `acender` (traços + nós `.no-luz`), `reacender`.
+- Ações do motor: `datilografar`, `cair`, `alfinete`, `desenhar` (traços `.traco` de SVG), `circular`, `carimbar` (impacto exato em `t` + tremor), `congelar`, `acender` (traços + nós `.no-luz`), `reacender`, `mover` (`para: {x, y, rotation}`), `apagar`.
+  - `foco` (opcional) diz qual elemento fica aceso, quando não é o próprio alvo (ex.: circular palavras de um documento).
+  - `sons_extras: [[t, som]]` para sons sem destaque (sino, salva).
 - `python3 scripts/conferir_sincronia.py cena/plano.json trabalho/palavras.json`
 
 ### 4. Construir o mundo
@@ -77,4 +79,7 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - A câmera precisa **segurar** no destaque até ele terminar: ponha um keyframe extra antes de sair.
 - Trechos de câmera viajando sobre a mesa vazia por mais de ~0,7 s ficam fracos: ponha objetos no caminho ou encurte a viagem.
 - Cartões vazios esperando um carimbo por segundos parecem erro: faça o cartão entrar junto com o destaque ou tenha conteúdo nele.
+- **Câmera (piloto Pernambuco):** a spline Catmull-Rom passava do ponto quando uma viagem longa vinha logo depois de um trecho parado, mostrando a borda preta do mundo. O motor agora usa PCHIP (cúbica monotônica), que nunca passa do keyframe.
+- **Wikimedia:** a API e o upload.wikimedia.org dão 429 em IP compartilhado. Tente de novo depois de alguns minutos e use uma silhueta provisória enquanto isso.
+- **Direito autoral de pinturas:** confira a data de morte do artista (no Brasil, 70 anos). Ex.: Parreiras (1937) é domínio público; Murillo La Greca (1985) não.
 - Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16.

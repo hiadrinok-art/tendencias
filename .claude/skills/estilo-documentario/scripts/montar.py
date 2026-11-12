@@ -7,6 +7,7 @@ Mixagem (audio/mix.wav):
   - narração com atraso_narracao;
   - trilha com envelope de volume em dB (trilha_envelope: [[t, dB], ...], interpolação linear);
   - efeitos posicionados no tempo de cada beat que tem "som" (no impacto do carimbo, exatamente em t);
+  - "sons_extras": [[t, som]] para sons que não pertencem a um destaque;
   - normalização final para -16 LUFS (padrão de redes/YouTube), pico máximo -1.5 dBTP.
 """
 import json, subprocess, sys
@@ -43,6 +44,12 @@ for b in P["beats"]:
     entradas += ["-i", str(base / A["efeitos"][som])]
     ganho = {"carimbo": 1.0, "papel": 0.55, "maquina": 0.45}.get(som, 0.6)
     filtros.append(f"[{idx}:a]aresample=48000,volume={ganho},adelay={int(max(t,0)*1000)}:all=1,apad[e{idx}]")
+    mix.append(f"[e{idx}]"); idx += 1
+
+# sons sem destaque próprio: "sons_extras": [[t, "nome"], ...]
+for t, som in P.get("sons_extras", []):
+    entradas += ["-i", str(base / A["efeitos"][som])]
+    filtros.append(f"[{idx}:a]aresample=48000,volume=0.8,adelay={int(max(t + off, 0)*1000)}:all=1,apad[e{idx}]")
     mix.append(f"[e{idx}]"); idx += 1
 
 filtros.append("".join(mix) + f"amix=inputs={len(mix)}:normalize=0:duration=longest,atrim=0:{dur},loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[out]")

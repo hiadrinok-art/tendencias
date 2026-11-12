@@ -1,7 +1,7 @@
 /* motor.js — motor genérico do estilo documentário para HyperFrames.
  *
  * Lê window.PLANO (gerado de plano.json por montar.py) e monta UMA timeline GSAP pausada:
- *   - câmera contínua (spline Catmull-Rom não uniforme pelos keyframes do plano, sem paradas secas);
+ *   - câmera contínua (cúbica monotônica PCHIP pelos keyframes do plano: suave e sem passar do ponto);
  *   - um destaque aceso por vez (os anteriores apagam para OPACIDADE_APAGADO);
  *   - ações disparadas no tempo exato da palavra-gatilho (+ atraso_narracao);
  *   - grão de filme e tremor de câmera determinísticos.
@@ -16,20 +16,32 @@
   function semente(s) { return function () { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
   const $ = (id) => document.getElementById(id);
 
-  // Catmull-Rom não uniforme (Barry–Goldman) sobre knots = tempos.
+  // Interpolação cúbica monotônica (PCHIP, Fritsch–Carlson) com knots = tempos.
+  // Suave (derivada contínua) e SEM overshoot: a câmera nunca passa do keyframe nem mostra a borda do mundo.
+  function tangentes(ts, vs) {
+    const n = ts.length, h = [], d = [], m = new Array(n).fill(0);
+    for (let i = 0; i < n - 1; i++) { h[i] = ts[i + 1] - ts[i]; d[i] = (vs[i + 1] - vs[i]) / h[i]; }
+    if (n === 2) { m[0] = m[1] = d[0]; return m; }
+    for (let i = 1; i < n - 1; i++) {
+      if (d[i - 1] * d[i] <= 0) { m[i] = 0; continue; }
+      const w1 = 2 * h[i] + h[i - 1], w2 = h[i] + 2 * h[i - 1];
+      m[i] = (w1 + w2) / (w1 / d[i - 1] + w2 / d[i]);
+    }
+    const ponta = (h0, h1, d0, d1) => { let v = ((2 * h0 + h1) * d0 - h0 * d1) / (h0 + h1);
+      if (Math.sign(v) !== Math.sign(d0)) v = 0; else if (Math.sign(d0) !== Math.sign(d1) && Math.abs(v) > Math.abs(3 * d0)) v = 3 * d0; return v; };
+    m[0] = ponta(h[0], h[1], d[0], d[1]);
+    m[n - 1] = ponta(h[n - 2], h[n - 3], d[n - 2], d[n - 3]);
+    return m;
+  }
+  const cacheTan = new Map();
   function splineAt(ts, vs, t) {
     const n = ts.length;
     if (t <= ts[0]) return vs[0];
     if (t >= ts[n - 1]) return vs[n - 1];
+    let m = cacheTan.get(vs); if (!m) { m = tangentes(ts, vs); cacheTan.set(vs, m); }
     let i = 0; while (ts[i + 1] < t) i++;
-    const t1 = ts[i], t2 = ts[i + 1];
-    const p1 = vs[i], p2 = vs[i + 1];
-    const t0 = i > 0 ? ts[i - 1] : t1 - (t2 - t1), p0 = i > 0 ? vs[i - 1] : p1 - (p2 - p1);
-    const t3 = i + 2 < n ? ts[i + 2] : t2 + (t2 - t1), p3 = i + 2 < n ? vs[i + 2] : p2 + (p2 - p1);
-    const L = (a, b, ta, tb) => (tb - t) / (tb - ta) * a + (t - ta) / (tb - ta) * b;
-    const a1 = L(p0, p1, t0, t1), a2 = L(p1, p2, t1, t2), a3 = L(p2, p3, t2, t3);
-    const b1 = L(a1, a2, t0, t2), b2 = L(a2, a3, t1, t3);
-    return L(b1, b2, t1, t2);
+    const h = ts[i + 1] - ts[i], u = (t - ts[i]) / h, u2 = u * u, u3 = u2 * u;
+    return (2 * u3 - 3 * u2 + 1) * vs[i] + (u3 - 2 * u2 + u) * h * m[i] + (-2 * u3 + 3 * u2) * vs[i + 1] + (u3 - u2) * h * m[i + 1];
   }
 
   function prepararTracos(el) {
