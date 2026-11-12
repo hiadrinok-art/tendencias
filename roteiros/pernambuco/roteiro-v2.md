@@ -2,7 +2,7 @@
 
 Reescrita do [roteiro original](roteiro-original.md), pensada para o estilo documentário da skill: frases curtas, **uma ideia por frase**, palavras concretas que viram destaques na tela e um gancho no fim de cada cena.
 
-**Duração estimada:** ~1.100 palavras de narração ≈ **8 min** de fala (≈ 8,5 min com respiros).
+**Duração estimada:** 983 palavras de narração ≈ **7 min** de fala (≈ 7,5 min com respiros).
 
 ---
 
@@ -16,7 +16,7 @@ Reescrita do [roteiro original](roteiro-original.md), pensada para o estilo docu
 | A escravidão aparecia numa frase só | Agora tem **duas camadas**: o custo humano do açúcar (Cena 2) e a **resistência** (Palmares, Cena 3), para não reduzir as pessoas escravizadas a vítimas sem nome. |
 | A Cena 7 ("desafios") era vaga e genérica | Virou uma cena curta, com contraste concreto: a desigualdade que vem dos engenhos × o **Porto Digital**, no mesmo bairro da sinagoga de 1636. |
 | O final repetia perguntas sem resposta | O final **responde** e retoma os símbolos do vídeo (república, Palmares, frevo, maracatu, forró), fechando o ciclo. |
-| "15 min" | A narração original dava ~6 min. A v2 dá ~8 min sem enrolação. |
+| "15 min" | A narração original dava ~6 min. A v2 dá ~7 min, com mais conteúdo e sem enrolação. |
 
 **Fatos para conferir antes de publicar** estão no fim do arquivo.
 
