@@ -134,6 +134,15 @@
         const nos = el.querySelectorAll(".no-luz");
         nos.forEach((n, i) => tl.fromTo(n, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, t + i * 0.025));
       },
+      mover(b, el, t) {
+        // b.para = {x, y, rotation}: deslocamento relativo à posição atual
+        const d = b.para || {};
+        tl.set(el, { opacity: 1 }, t);
+        tl.to(el, { x: "+=" + (d.x || 0), y: "+=" + (d.y || 0), rotation: "+=" + (d.rotation || 0), duration: b.duracao || 1.2, ease: "power2.inOut" }, t);
+      },
+      apagar(b, el, t) {
+        tl.to(el, { opacity: 0, duration: b.duracao || 0.8, ease: "sine.inOut" }, t);
+      },
       reacender(b, el, t) {
         tl.fromTo(el, { opacity: OPACIDADE_APAGADO }, { opacity: 1, duration: 0.5, ease: "sine.out" }, t);
         if (b.circulo) {
@@ -152,7 +161,9 @@
       const el = $(b.alvo); const t = b.t + off;
       if (!el) throw new Error("alvo não encontrado: " + b.alvo);
       if (!acoes[b.acao]) throw new Error("ação desconhecida: " + b.acao);
-      if (b.acao !== "circular") focar(el, t);
+      // b.foco: qual elemento fica aceso (padrão: o próprio alvo). "circular" e "apagar" não mudam o foco sozinhos.
+      const foco = b.foco ? $(b.foco) : ((b.acao === "circular" || b.acao === "apagar") ? null : el);
+      if (foco) focar(foco, t);
       acoes[b.acao](b, el, t);
       eventos.push({ t: +t.toFixed(3), tipo: b.acao, alvo: b.alvo, beat: b.id, gatilho: b.gatilho });
     });
