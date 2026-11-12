@@ -5,77 +5,76 @@ description: Cria minidocumentários animados feitos 100% em código (sem gerado
 
 # Estilo documentário
 
-Transforma **narração + tema** em um MP4 1920×1080 a 30 fps em que cada quadro é desenhado em código.
+Transforma **narração + tema** em um MP4 1920×1080 a 30 fps em que cada quadro é desenhado em código e renderizado no **HyperFrames** (`npx hyperframes`, HTML + GSAP → MP4).
+O fluxo foi testado de ponta a ponta: 27 s renderizados em ~2,5 min em CPU.
 
 ## Regras inegociáveis
-1. **Nada de vídeo gerado por IA nem banco de imagens.** Todo quadro é código (HTML/CSS/SVG/Canvas + animação), renderizado no HyperFrames ou, se ele não estiver disponível, num renderizador próprio (ver `references/renderizacao.md`).
-2. **Uma câmera só, um mundo só.** O vídeo inteiro é um movimento de câmera contínuo sobre uma grande cena (mesa, mapa, linha do tempo). Sem cortes nem troca de slide: a câmera desliza, aproxima, recua, viaja e mergulha de novo, sempre com easing e nunca com parada seca.
-3. **Regras de leitura** (detalhes em `references/regras-de-estilo.md`):
-   - uma ideia por frase e **um destaque aceso por vez**;
-   - cada frase aparece na tela **uma única vez**, curta, em letra grande;
-   - o visual entra **exatamente na palavra falada** (o círculo é desenhado quando a palavra é dita).
-4. **Imagens só com licença livre e documentada** (Wikimedia Commons / Wikipedia, domínio público, CC). Cada arquivo ganha uma linha em `creditos.csv`.
-5. **Sons reais.** Use os efeitos e trilhas da pasta do usuário (máquina de escrever, carimbo, papel, textura de filme antigo). Não sintetize sons se houver material profissional.
+1. **Nada de vídeo gerado por IA nem banco de imagens/vídeos.** Todo quadro é código (HTML/CSS/SVG + GSAP).
+2. **Uma câmera só, um mundo só.** Um plano-sequência contínuo sobre uma grande cena (mesa, mapa, linha do tempo). Sem cortes, sem parada seca: o `motor.js` interpola a câmera com spline.
+3. **Regras de leitura** (`references/regras-de-estilo.md`): uma ideia por frase, **um destaque aceso por vez**, cada frase aparece uma única vez, e o visual entra **na palavra falada**.
+4. **Imagens só com licença livre e documentada** (Wikimedia Commons, domínio público, CC), com uma linha por arquivo em `creditos.csv`. Sem foto com licença? **Desenhe em SVG** (prédios, mapas, objetos).
+5. **Sons reais.** Use o pacote do usuário. Sem pacote, gere efeitos e trilha no ElevenLabs (se o conector existir) ou use fontes livres, sempre registrando nos créditos.
 
-## Entradas esperadas (uma pasta)
-| Pasta | Conteúdo | Obrigatório |
-|---|---|---|
-| `narracao/` | áudio da voz (wav/mp3) e, se houver, o roteiro em texto | sim |
-| `fotos/` | fotos reais com licença livre + `creditos.csv` | não: a skill busca |
-| `referencias/` | imagens de estilo (Pinterest etc.), **só inspiração, nunca entram no vídeo** | não |
-| `efeitos/` | trilhas, SFX, texturas | recomendado |
-
-Se faltar algo, siga o fluxo mesmo assim e avise o que foi substituído.
+## O que tem aqui
+| Caminho | Para quê |
+|---|---|
+| `modelo/` | Projeto inicial pronto: `index.html` (mundo e elementos), `motor.js` (câmera, foco, ações, grão: **genérico, não editar por vídeo**), `cena.js` (desenhos gerados por código do vídeo atual), `plano.json` (exemplo completo), fontes e GSAP locais |
+| `scripts/transcrever.py` | narração → `palavras.json` com o tempo de cada palavra (faster-whisper) |
+| `scripts/montar.py` | `plano.json` → `plano.js` + `audio/mix.wav` (narração, trilha com envelope, efeitos no beat, normalização a -16 LUFS) |
+| `scripts/conferir_sincronia.py` | confere se cada beat cai na palavra-gatilho (tolerância 80 ms) e se há destaques colados |
+| `scripts/conferir_video.sh` | quadros a cada 0,5 s, folhas de contato e RMS por 0,5 s |
+| `scripts/analisar_camera.py` | velocidade da câmera quadro a quadro e trancos |
+| `references/` | regras de estilo, modelo de tabela e notas de renderização |
 
 ## Fluxo
 
-### 1. Preparar e transcrever
-- Transcreva a narração **com tempos por palavra** (ex.: Whisper com `word_timestamps=True`). Salve em `trabalho/palavras.json`.
-- Olhe as referências e descreva a direção de arte em 5 a 8 linhas: paleta, luz, materiais (papel, filme, madeira) e tipografia.
+### 0. Preparar o ambiente (uma vez por sessão)
+```bash
+mkdir -p ~/hf && cd ~/hf && npm init -y >/dev/null && npm i hyperframes   # Node >= 22 e ffmpeg
+pip install faster-whisper opencv-python-headless matplotlib
+cp -r <skill>/modelo  <projeto>/cena
+```
+Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.org` (fotos) e `elevenlabsusercontent.com` (baixar áudio gerado).
 
-### 2. Buscar fotos (se o usuário não entregou todas)
-- Identifique pessoas, lugares e objetos citados.
-- Busque **só** em fontes com licença livre (Wikimedia Commons primeiro). Pesquise em **inglês**.
-- Para cada foto, registre em `fotos/creditos.csv`: `arquivo,titulo,autor,licenca,url_fonte`. Sem licença clara, não use.
-- Referências de estilo (Pinterest) só inspiram e não são baixadas para o vídeo.
+### 1. Narração e transcrição
+- Se o usuário só tiver o roteiro, gere a voz (ElevenLabs: `creative_list_voices` com `languages=["pt"]`, e um narrador de documentário de sotaque pt-BR funciona bem com `eleven_multilingual_v2`).
+- `python3 scripts/transcrever.py cena/audio/narracao.mp3 trabalho/palavras.json`
+
+### 2. Fotos e direção de arte
+- Busque só em fontes com licença livre, pesquisando em inglês. **A API do Commons limita requisições (HTTP 429) em IPs compartilhados**: baixe direto de `upload.wikimedia.org/wikipedia/commons/<h>/<hh>/<Arquivo>` (h = md5 do nome do arquivo) e confirme a licença na página quando possível.
+- Referências de estilo só inspiram, nunca entram no vídeo.
 
 ### 3. Plano em tabela, ANTES de qualquer código
-Monte a tabela de beats (modelo em `references/modelo-plano.md`):
+- Monte a tabela (`references/modelo-plano.md`) e **pergunte as ambiguidades**. Padrão: destaques em sequência, um aceso por vez, e a foto apaga quando a ideia entra.
+- **Pare e peça aprovação.** Depois passe a tabela para `cena/plano.json`:
+  - `beats[]`: `t` = início da palavra-gatilho (de `palavras.json`), `acao`, `alvo` (id do elemento), `som`;
+  - `camera[]`: `[t, x, y, zoom]` em coordenadas do mundo; o motor passa uma spline por eles;
+  - `audio.trilha_envelope`: `[t, dB]`; faça a música **morrer no impacto** e voltar na virada.
+- Ações do motor: `datilografar`, `cair`, `alfinete`, `desenhar` (traços `.traco` de SVG), `circular`, `carimbar` (impacto exato em `t` + tremor), `congelar`, `acender` (traços + nós `.no-luz`), `reacender`.
+- `python3 scripts/conferir_sincronia.py cena/plano.json trabalho/palavras.json`
 
-| # | início–fim (s) | fala | palavra-gatilho | único destaque na tela | texto na tela | câmera | som |
-|---|---|---|---|---|---|---|---|
-
-- Um beat por ideia. Cada destaque é casado com a palavra-gatilho (tempo exato do `palavras.json`).
-- **Liste as ambiguidades e pergunte ao usuário** (ex.: "nome + idade: dois destaques em sequência ou um só?"; "a foto sai quando a ideia entra?"). Padrão quando o usuário não responder: em sequência, um aceso por vez, e a foto apaga quando a ideia entra.
-- **Pare e peça aprovação da tabela.** Mudar a tabela é muito mais barato do que mudar o vídeo pronto.
-
-### 4. Construir o mundo e a câmera
-- Monte um único "mundo" grande (ex.: 8000×5000 px) com todos os elementos posicionados: fotos "caindo na mesa", mapa, carimbos, anotações.
-- A câmera é uma transformação (translate/scale/rotate leve) animada por keyframes com easing suave (`power2.inOut`/`sine.inOut`). Entre beats a câmera **sempre se move** (drift lento), nunca congela.
-- Cada destaque é disparado no tempo da palavra-gatilho: círculo desenhado (stroke-dashoffset), sublinhado, carimbo ou foto entrando.
-- Textura de filme antigo/grão e vinheta por cima de tudo.
+### 4. Construir o mundo
+- Em `index.html`, posicione os elementos no mundo (`#mundo`, ~8800×4320 px). Todo elemento destacável leva `class="foco"` e um `id` usado no plano.
+- Desenhos gerados (rede neural, gráficos) ficam em `cena.js`.
+- **Garanta que a câmera nunca mostre a borda do mundo**: com centro `x` e zoom `z`, a área visível vai de `x - 960/z` a `x + 960/z`.
+- `python3 scripts/montar.py cena`
 
 ### 5. Autoverificação (obrigatória, antes de mostrar ao usuário)
-Rode `scripts/conferir_video.sh <video.mp4>` e analise:
-- **Quadros parados por beat:** extraia o quadro do meio de cada beat e confira contra a direção de arte (ex.: "claro demais, cara de pergaminho sem a luz das referências" → corrigir luz e contraste).
-- **Velocidade da câmera:** `scripts/analisar_camera.py` mede o deslocamento quadro a quadro. Picos = trancos. Suavize keyframes até não haver picos acima do limiar.
-- **Varredura a cada 0,5 s:** procure texto cortado, elemento pequeno demais (rosto com menos de ~25% da altura quando for o destaque), sobreposição, mais de um destaque aceso, tela vazia ou ruído/"chuvisco".
-- **Áudio:** meça a trilha (volume RMS/onsets com ffmpeg ou librosa). Escolha uma trilha que cresça com a narrativa, faça a música **morrer no golpe de efeito** (ex.: carimbo) e voltar no momento de virada (ex.: "a luz acende"). Narração sempre inteligível (música por volta de −18 a −22 dB sob a voz).
-- Corrija sozinho o que encontrar e repita a verificação.
+1. `npx hyperframes lint cena`: precisa dar 0 erros (fontes sempre via `@font-face` local).
+2. `npx hyperframes check cena`: os avisos `canvas_covered #mundo`, `text_occluded` sob `#luz` e `canvas_overflow` fora da câmera são **falsos positivos** deste estilo (as camadas já levam `data-layout-ignore` e `data-layout-allow-overflow`). Leia o resto.
+3. `npx hyperframes snapshot cena --at <meio de cada beat> -o conf/snap --no-end` e **olhe a folha de contato**. Procure: borda do mundo à mostra, desenho cortado, câmera saindo antes do destaque terminar, traço que não fecha, texto pequeno.
+4. Corrija, repita o snapshot só nos tempos problemáticos e renderize: `npx hyperframes render cena -o saida/documentario.mp4`.
+5. `scripts/analisar_camera.py`: trancos no fade de entrada e saída são normais. "Câmera parada" sobre áreas lisas (madeira escura) pode ser falso positivo, porque o detector precisa de textura.
+6. `scripts/conferir_video.sh`: revise as folhas (a cada 0,5 s) procurando trechos vazios de mais de 1 s.
+7. Volume: `ffmpeg -i video.mp4 -af ebur128 -f null -` deve dar de -14 a -18 LUFS.
 
-### 6. Entregar
-- Renderize o MP4 1920×1080 a 30 fps com a narração sincronizada.
-- Entregue: o vídeo, a tabela final, `creditos.csv` e uma lista curta do que foi corrigido na autoverificação.
-- Peça feedback explícito. Problemas comuns da 1ª versão: **fotos pequenas demais, personagem que quase não aparece, final confuso**. Não pare na primeira versão.
+### 6. Entregar e iterar
+- Entregue o MP4, a tabela final, `creditos.csv` e a lista do que a autoverificação corrigiu e do que ficou pendente.
+- Ajustes do usuário mudam primeiro o `plano.json`/tabela, depois o código. Rode a autoverificação de novo.
 
-### 7. Iterar
-O usuário pode mandar ajustes por áudio ou texto. Transforme cada ajuste em mudança na **tabela** primeiro e só depois no código. Renderize de novo e repita o passo 5.
-
-## Estrutura de trabalho sugerida
-```
-projeto/
-  narracao/ fotos/ referencias/ efeitos/
-  trabalho/palavras.json  trabalho/plano.md  trabalho/direcao-de-arte.md
-  cena/ (código do mundo e da câmera)
-  saida/documentario.mp4  saida/creditos.csv
-```
+## Lições do primeiro teste
+- `vector-effect="non-scaling-stroke"` quebra a animação de traço: o comprimento não bate e o círculo nunca fecha. Não use.
+- A câmera precisa **segurar** no destaque até ele terminar: ponha um keyframe extra antes de sair.
+- Trechos de câmera viajando sobre a mesa vazia por mais de ~0,7 s ficam fracos: ponha objetos no caminho ou encurte a viagem.
+- Cartões vazios esperando um carimbo por segundos parecem erro: faça o cartão entrar junto com o destaque ou tenha conteúdo nele.
+- Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16.

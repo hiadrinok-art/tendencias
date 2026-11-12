@@ -1,0 +1,283 @@
+{
+  "titulo": "Máquinas podem pensar? (teste)",
+  "fps": 30,
+  "largura": 1920,
+  "altura": 1080,
+  "atraso_narracao": 0.5,
+  "duracao": 27.0,
+  "audio": {
+    "narracao": "audio/narracao.mp3",
+    "trilha": "audio/trilha.mp3",
+    "trilha_db_base": -21,
+    "trilha_envelope": [
+      [
+        0.0,
+        -40
+      ],
+      [
+        1.5,
+        -21
+      ],
+      [
+        13.5,
+        -18
+      ],
+      [
+        13.74,
+        -18
+      ],
+      [
+        13.9,
+        -60
+      ],
+      [
+        21.4,
+        -60
+      ],
+      [
+        21.56,
+        -24
+      ],
+      [
+        23.5,
+        -17
+      ],
+      [
+        25.6,
+        -17
+      ],
+      [
+        26.4,
+        -60
+      ]
+    ],
+    "efeitos": {
+      "maquina": "audio/maquina.mp3",
+      "papel": "audio/papel.mp3",
+      "carimbo": "audio/carimbo.wav"
+    }
+  },
+  "camera": [
+    [
+      0.0,
+      1150,
+      900,
+      1.3
+    ],
+    [
+      2.3,
+      1450,
+      900,
+      1.0
+    ],
+    [
+      3.4,
+      2200,
+      880,
+      1.05
+    ],
+    [
+      4.8,
+      1450,
+      1520,
+      1.15
+    ],
+    [
+      6.7,
+      1800,
+      1250,
+      0.8
+    ],
+    [
+      7.8,
+      3000,
+      1000,
+      0.72
+    ],
+    [
+      8.6,
+      3800,
+      950,
+      1.05
+    ],
+    [
+      10.2,
+      3750,
+      1950,
+      1.0
+    ],
+    [
+      12.6,
+      3800,
+      2350,
+      0.95
+    ],
+    [
+      13.74,
+      3800,
+      2470,
+      1.12
+    ],
+    [
+      15.3,
+      5000,
+      1300,
+      0.62
+    ],
+    [
+      16.5,
+      5500,
+      1250,
+      0.9
+    ],
+    [
+      17.7,
+      6050,
+      1250,
+      0.9
+    ],
+    [
+      19.5,
+      6850,
+      1250,
+      1.0
+    ],
+    [
+      21.6,
+      6450,
+      2700,
+      0.95
+    ],
+    [
+      22.5,
+      6420,
+      2700,
+      0.92
+    ],
+    [
+      23.7,
+      4100,
+      1750,
+      0.38
+    ],
+    [
+      24.94,
+      1650,
+      1300,
+      0.78
+    ],
+    [
+      27.0,
+      1620,
+      1300,
+      0.84
+    ]
+  ],
+  "beats": [
+    {
+      "id": 1,
+      "fala": "1950.",
+      "gatilho": "1950",
+      "t": 0.05,
+      "acao": "datilografar",
+      "alvo": "ano1950",
+      "som": "maquina"
+    },
+    {
+      "id": 2,
+      "fala": "Alan Turing faz uma pergunta.",
+      "gatilho": "Alan",
+      "t": 2.48,
+      "acao": "cair",
+      "alvo": "foto-turing",
+      "som": "papel"
+    },
+    {
+      "id": 3,
+      "fala": "Máquinas podem pensar?",
+      "gatilho": "Máquinas",
+      "t": 4.7,
+      "acao": "datilografar",
+      "alvo": "pergunta",
+      "som": "maquina"
+    },
+    {
+      "id": 3.1,
+      "fala": "(pensar)",
+      "gatilho": "pensar",
+      "t": 5.66,
+      "acao": "circular",
+      "alvo": "pergunta",
+      "circulo": "circulo-pensar"
+    },
+    {
+      "id": 4,
+      "fala": "Seis anos depois, em Dartmouth,",
+      "gatilho": "Dartmouth",
+      "t": 8.42,
+      "acao": "alfinete",
+      "alvo": "pino",
+      "som": "papel"
+    },
+    {
+      "id": 5,
+      "fala": "um grupo de cientistas dá um nome a essa ideia.",
+      "gatilho": "cientistas",
+      "t": 9.88,
+      "acao": "desenhar",
+      "alvo": "predio"
+    },
+    {
+      "id": 6,
+      "fala": "Inteligência artificial.",
+      "gatilho": "artificial",
+      "t": 13.74,
+      "acao": "carimbar",
+      "alvo": "carimbo",
+      "som": "carimbo"
+    },
+    {
+      "id": 7,
+      "fala": "Vieram décadas de promessas...",
+      "gatilho": "promessas",
+      "t": 16.48,
+      "acao": "desenhar",
+      "alvo": "promessas"
+    },
+    {
+      "id": 8,
+      "fala": "e de invernos.",
+      "gatilho": "invernos",
+      "t": 17.58,
+      "acao": "congelar",
+      "alvo": "invernos"
+    },
+    {
+      "id": 9,
+      "fala": "Até que, em 2012,",
+      "gatilho": "2012",
+      "t": 19.46,
+      "acao": "datilografar",
+      "alvo": "ano2012",
+      "som": "maquina"
+    },
+    {
+      "id": 10,
+      "fala": "as redes neurais acordaram.",
+      "gatilho": "acordaram",
+      "t": 21.56,
+      "acao": "acender",
+      "alvo": "rede",
+      "pre": 20.82
+    },
+    {
+      "id": 11,
+      "fala": "E a pergunta de Turing voltou à mesa.",
+      "gatilho": "pergunta",
+      "t": 23.28,
+      "acao": "reacender",
+      "alvo": "pergunta",
+      "circulo": "circulo-pensar"
+    }
+  ]
+}

@@ -4,6 +4,9 @@
 Uso: python3 analisar_camera.py video.mp4 [--limiar 3.0]
 Requer: opencv-python, numpy.
 Saída: camera_velocidade.csv e camera_velocidade.png (picos em vermelho).
+
+Observações: trancos no primeiro e no último segundo costumam ser o fade de entrada e saída.
+"Câmera parada" sobre áreas lisas (ex.: mesa escura) pode ser falso positivo, porque o detector precisa de textura.
 """
 import argparse, csv
 import cv2, numpy as np

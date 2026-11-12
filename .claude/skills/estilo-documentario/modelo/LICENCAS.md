@@ -1,0 +1,3 @@
+- assets/gsap.min.js: GSAP 3 (GreenSock), licença padrão gratuita, inclusive uso comercial.
+- assets/fontes/FreeMonoBold.ttf: GNU FreeFont, GPL com exceção de fontes.
+- assets/fontes/Caladea-*.ttf: Caladea, Apache 2.0.

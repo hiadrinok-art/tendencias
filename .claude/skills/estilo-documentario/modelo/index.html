@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Documentário — teste</title>
+<style>
+  @font-face { font-family: "Datilo"; src: url("assets/fontes/FreeMonoBold.ttf") format("truetype"); }
+  @font-face { font-family: "Serifa"; src: url("assets/fontes/Caladea-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "Serifa"; font-style: italic; src: url("assets/fontes/Caladea-Italic.ttf") format("truetype"); }
+  @font-face { font-family: "Serifa"; font-weight: bold; src: url("assets/fontes/Caladea-Bold.ttf") format("truetype"); }
+  html, body { margin: 0; padding: 0; background: #0d0907; overflow: hidden; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #0d0907; }
+
+  /* ---------- câmera ---------- */
+  #tremor { position: absolute; inset: 0; }
+  #mundo  { position: absolute; left: 0; top: 0; width: 8800px; height: 4320px; transform-origin: 0 0;
+            background:
+              radial-gradient(ellipse at 30% 30%, rgba(255,190,120,.10), transparent 55%),
+              repeating-linear-gradient(92deg, rgba(0,0,0,.18) 0 3px, transparent 3px 41px),
+              repeating-linear-gradient(88deg, rgba(255,220,180,.04) 0 2px, transparent 2px 23px),
+              linear-gradient(180deg, #3a2618, #2a1a10 60%, #22150d); }
+  .peca { position: absolute; box-shadow: 0 30px 60px rgba(0,0,0,.55), 0 6px 14px rgba(0,0,0,.4); }
+  .papel { background:
+             radial-gradient(ellipse at 50% 40%, #efe2c4 0%, #e3d1ab 70%, #cdb68a 100%);
+           color: #2a1f16; }
+  .datil { font-family: "Datilo", monospace; }
+  .serif { font-family: "Serifa", serif; }
+  .foco  { opacity: 0; }
+  .letra { opacity: 0; }
+  svg .traco { fill: none; }
+
+  /* região A — Turing */
+  #folha1950 { left: 600px; top: 520px; width: 1050px; height: 720px; transform: rotate(-2deg); }
+  #ano1950   { position: absolute; left: 0; right: 0; top: 170px; text-align: center; font-size: 330px; letter-spacing: 10px; }
+  #foto-turing { left: 1880px; top: 400px; width: 660px; padding: 26px 26px 110px; background: #f3ecdc; transform: rotate(3deg); }
+  #foto-turing img { display: block; width: 100%; filter: sepia(.35) contrast(1.1); }
+  #foto-turing .legenda { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 56px; }
+  #cartao-pergunta { left: 700px; top: 1330px; width: 1500px; height: 420px; transform: rotate(-1.5deg); }
+  #pergunta { position: absolute; left: 0; right: 0; top: 130px; text-align: center; font-size: 132px; font-style: italic; }
+  .pensar { position: relative; display: inline-block; }
+  .pensar svg { position: absolute; left: -45px; top: -38px; width: calc(100% + 90px); height: calc(100% + 76px); overflow: visible; }
+
+  /* região B — Dartmouth */
+  #mapa { left: 2950px; top: 330px; width: 1700px; height: 1250px; transform: rotate(1.2deg);
+          background:
+            repeating-linear-gradient(0deg, rgba(90,60,30,.18) 0 2px, transparent 2px 125px),
+            repeating-linear-gradient(90deg, rgba(90,60,30,.18) 0 2px, transparent 2px 125px),
+            radial-gradient(ellipse at 50% 45%, #e9d9b3, #cdb382 90%); }
+  #mapa svg { position: absolute; inset: 0; }
+  #mapa .rotulo { position: absolute; font-size: 48px; color: rgba(60,40,20,.65); letter-spacing: 6px; }
+  #pino { position: absolute; left: 820px; top: 520px; }
+  #pino .cabeca { position: absolute; left: -34px; top: -34px; width: 68px; height: 68px; border-radius: 50%;
+                  background: radial-gradient(circle at 35% 35%, #ff7a5c, #a3160b 70%); box-shadow: 0 10px 18px rgba(0,0,0,.5); }
+  #pino .nome { position: absolute; left: 70px; top: -60px; white-space: nowrap; font-size: 96px; color: #2a1f16; }
+  #predio { left: 3080px; top: 1680px; width: 1400px; height: 600px; background: transparent; box-shadow: none; }
+  #ficha  { left: 3050px; top: 2280px; width: 1500px; height: 420px; transform: rotate(.8deg); }
+  #carimbo { position: absolute; left: 160px; top: 110px; padding: 34px 50px; border: 14px solid #b0161e; border-radius: 18px;
+             color: #b0161e; font-size: 112px; font-weight: bold; letter-spacing: 8px; white-space: nowrap;
+             transform: rotate(-6deg); mix-blend-mode: multiply; }
+
+  /* região D — linha do tempo e rede */
+  #faixa { left: 4750px; top: 900px; width: 2750px; height: 760px; transform: rotate(-.6deg); }
+  #faixa svg { position: absolute; inset: 0; overflow: visible; }
+  #faixa .ano { position: absolute; top: 470px; font-size: 92px; }
+  #ano2012 { left: 2330px; }
+  #invernos { position: absolute; inset: 0; }
+  #invernos .geada { position: absolute; top: 250px; height: 300px; border-radius: 50%;
+                     background: radial-gradient(ellipse at 50% 50%, rgba(150,200,255,.85), rgba(170,210,255,.35) 55%, rgba(170,210,255,0) 72%);
+                     filter: blur(6px); }
+  #invernos .palavra { position: absolute; top: 560px; font-size: 64px; color: #1c324d; font-style: italic; }
+  #rede { left: 5600px; top: 2150px; width: 1700px; height: 1100px; background: transparent; box-shadow: none; }
+  #rede svg { position: absolute; inset: 0; overflow: visible; }
+
+  /* ---------- acabamento de tela ---------- */
+  #luz { position: absolute; inset: 0; pointer-events: none;
+         background: radial-gradient(ellipse 70% 65% at 50% 45%, rgba(255,200,140,.10), rgba(0,0,0,0) 55%, rgba(0,0,0,.72) 100%); }
+  #grao { position: absolute; left: -200px; top: -200px; width: 2320px; height: 1480px; pointer-events: none; opacity: .16;
+          mix-blend-mode: overlay;
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  #pisca { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="27">
+  <audio id="trilha-sonora" src="audio/mix.wav" data-start="0" data-duration="27" data-volume="1"></audio>
+
+  <div id="tremor"><div id="mundo" data-layout-allow-overflow>
+    <!-- A: 1950 / Turing / pergunta -->
+    <div id="folha1950" class="peca papel"><div id="ano1950" class="datil foco" data-texto="1950"></div></div>
+    <div id="foto-turing" class="peca foco"><img src="assets/turing.jpg" alt="Alan Turing"><!-- troque pela sua foto com licença --><div class="legenda datil">Alan Turing</div></div>
+    <div id="cartao-pergunta" class="peca papel">
+      <div id="pergunta" class="serif foco">Máquinas podem <span class="pensar">pensar?<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path id="circulo-pensar" class="traco" d="M8,55 C6,20 40,6 62,8 C88,10 98,35 95,58 C92,85 60,96 38,93 C14,90 4,72 10,48 C14,36 22,28 30,24" stroke="#b0161e" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
+    </div>
+
+    <!-- B: Dartmouth -->
+    <div id="mapa" class="peca">
+      <svg viewBox="0 0 1700 1250">
+        <g fill="none" stroke="rgba(90,60,30,.45)" stroke-width="4">
+          <path d="M120,1100 C300,950 260,760 420,640 C560,540 520,380 700,300 C880,220 980,120 1100,60"/>
+          <path d="M240,1180 C420,1030 380,840 540,720 C680,620 640,460 820,380 C1000,300 1100,200 1220,140"/>
+          <path d="M1500,1180 C1420,980 1560,860 1480,700 C1400,540 1520,420 1460,260"/>
+        </g>
+        <path d="M60,820 C300,800 520,700 760,560 C900,480 1100,470 1640,420" fill="none" stroke="rgba(60,90,130,.55)" stroke-width="10"/>
+        <path d="M200,300 L820,520" fill="none" stroke="rgba(120,40,20,.45)" stroke-width="5" stroke-dasharray="18 16"/>
+      </svg>
+      <div class="rotulo datil" data-layout-ignore style="left:120px;top:90px">NEW HAMPSHIRE</div>
+      <div class="rotulo datil" data-layout-ignore style="left:1100px;top:1120px">VERMONT ←</div>
+      <div id="pino" class="foco"><div class="cabeca"></div><div class="nome serif" data-texto="Dartmouth, 1956"></div></div>
+    </div>
+    <div id="predio" class="peca foco">
+      <svg viewBox="0 0 1400 600" width="1400" height="600">
+        <g stroke="#e9dcc0" stroke-width="5" stroke-linecap="round">
+          <path class="traco" d="M100,560 L1300,560"/>
+          <path class="traco" d="M140,560 L140,250 L1260,250 L1260,560"/>
+          <path class="traco" d="M140,250 L1260,250"/>
+          <path class="traco" d="M520,250 L700,140 L880,250"/>
+          <path class="traco" d="M640,140 L640,70 L760,70 L760,140"/>
+          <path class="traco" d="M700,70 L700,10"/>
+          <path class="traco" d="M560,250 L560,560 M640,250 L640,560 M760,250 L760,560 M840,250 L840,560"/>
+          <path class="traco" d="M200,300 h70 v80 h-70 z M330,300 h70 v80 h-70 z M200,440 h70 v80 h-70 z M330,440 h70 v80 h-70 z"/>
+          <path class="traco" d="M1000,300 h70 v80 h-70 z M1130,300 h70 v80 h-70 z M1000,440 h70 v80 h-70 z M1130,440 h70 v80 h-70 z"/>
+          <path class="traco" d="M660,560 L660,460 C660,420 740,420 740,460 L740,560"/>
+        </g>
+      </svg>
+    </div>
+    <div id="ficha" class="peca papel"><div id="carimbo" class="serif foco">INTELIGÊNCIA ARTIFICIAL</div></div>
+
+    <!-- D: linha do tempo e rede neural -->
+    <div id="faixa" class="peca papel">
+      <svg viewBox="0 0 2750 760">
+        <path d="M150,400 L2600,400" stroke="#2a1f16" stroke-width="8" fill="none"/>
+        <g stroke="#2a1f16" stroke-width="6"><path d="M150,370 v60 M2600,370 v60"/></g>
+        <g id="promessas" class="foco" stroke="#a8641c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <path class="traco" d="M250,380 C330,240 380,150 420,90 M392,118 L420,90 L432,128"/>
+          <path class="traco" d="M1050,380 C1120,250 1170,170 1210,110 M1182,138 L1210,110 L1222,148"/>
+          <path class="traco" d="M1550,380 C1610,270 1650,200 1690,150 M1662,178 L1690,150 L1702,188"/>
+        </g>
+      </svg>
+      <div class="ano datil" style="left:60px">1956</div>
+      <div id="ano2012" class="ano datil foco" data-texto="2012"></div>
+      <div id="invernos" class="foco">
+        <div class="geada" style="left:900px;width:300px"></div>
+        <div class="geada" style="left:1450px;width:300px"></div>
+        <div class="palavra serif" style="left:1000px">invernos</div>
+      </div>
+    </div>
+    <div id="rede" class="peca foco"><svg viewBox="0 0 1700 1100" id="rede-svg"></svg></div>
+  </div></div>
+
+  <div id="luz" data-layout-ignore></div>
+  <div id="grao" data-layout-ignore></div>
+  <div id="pisca" data-layout-ignore></div>
+
+  <script src="assets/gsap.min.js"></script>
+  <script src="plano.js"></script>
+  <script src="motor.js"></script>
+  <script src="cena.js"></script>
+</div>
+</body>
+</html>
