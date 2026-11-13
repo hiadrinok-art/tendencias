@@ -2,7 +2,9 @@
 
 Adaptação do [roteiro original](roteiro-original.md) para a skill **estilo-documentario**: tudo desenhado em código sobre um único "mundo", com câmera contínua, um destaque por vez sincronizado com a palavra, fotos só com licença livre e efeitos sonoros reais.
 
-> **Status:** rascunho para aprovação. Os tempos exatos de cada palavra-gatilho só existem depois de gerar a narração. Até lá a coluna "gatilho" indica a **palavra**, não o segundo.
+> **Substituído:** este plano segue o roteiro original. O plano atual, para o roteiro v2 e com o estilo misto, está em [`roteiro-completo.md`](roteiro-completo.md).
+>
+> **Status (antigo):** rascunho para aprovação. Os tempos exatos de cada palavra-gatilho só existem depois de gerar a narração. Até lá a coluna "gatilho" indica a **palavra**, não o segundo.
 
 ## Resumo
 
