@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Engenharia Reversa</title>
+<style>
+@page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+:root { --ink:#16161a; --muted:#5d5d66; --gold:#a8822a; --soft:#f6f2e8; --line:#e4e0d6; --green:#2f7a55; --red:#b23b3b; }
+* { box-sizing: border-box; }
+body { font-family: Inter, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.55; margin:0; }
+h1 { font-family: "Inter Display", Inter; font-size: 34pt; line-height:1.05; margin: 0 0 10px; letter-spacing:-0.02em; }
+h2 { font-family: "Inter Display", Inter; font-size: 19pt; margin: 0 0 8px; letter-spacing:-0.01em; }
+h2 .n { color: var(--gold); margin-right: 6px; }
+h3 { font-size: 12pt; margin: 16px 0 4px; }
+p { margin: 0 0 9px; }
+.chapter { page-break-before: always; }
+.lead { font-size: 12pt; color: var(--muted); }
+.box { background: var(--soft); border-left: 4px solid var(--gold); padding: 10px 14px; margin: 12px 0; border-radius: 4px; break-inside: avoid; }
+.box.green { border-color: var(--green); background:#eef6f1; }
+.box.red { border-color: var(--red); background:#f9eeee; }
+.box b.t { display:block; margin-bottom:3px; }
+table { width:100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 9.5pt; break-inside: avoid; }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 7px; text-align:left; vertical-align: top; }
+th { background: #faf8f3; font-weight: 600; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.8pt; background:#f1efe9; padding: 1px 4px; border-radius:3px; }
+pre { font-family: "DejaVu Sans Mono", monospace; font-size: 8.5pt; background:#1d1d22; color:#eee; padding:10px 12px; border-radius:6px; white-space: pre-wrap; break-inside: avoid; }
+ol li, ul li { margin-bottom: 4px; }
+.cover { height: 250mm; display:flex; flex-direction:column; justify-content:space-between; }
+.cover .tag { color: var(--gold); font-weight:700; letter-spacing:.12em; font-size:9pt; text-transform:uppercase; }
+.toc { columns: 2; font-size: 10.5pt; }
+.toc div { margin-bottom: 4px; }
+.steps { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+.step { border:1px solid var(--line); border-radius:8px; padding:10px 12px; break-inside: avoid; }
+.step .k { color: var(--gold); font-weight:800; font-size: 15pt; line-height:1; }
+.step b { display:block; margin: 4px 0 2px; }
+.flow { display:flex; gap:6px; align-items:stretch; margin: 10px 0; flex-wrap: wrap; }
+.flow div { flex:1; min-width: 80px; border:1px solid var(--line); border-radius:6px; padding:7px; font-size:9pt; text-align:center; background:#fff; }
+.flow .arr { flex:0; min-width:auto; border:none; padding:7px 0; color:var(--gold); font-weight:700; }
+.ex { border: 1.5px dashed var(--gold); border-radius: 8px; padding: 10px 14px; margin: 12px 0; break-inside: avoid; }
+.ex b.t { color: var(--gold); }
+.check li { list-style: none; margin-left: -18px; }
+.check li::before { content: "☐  "; color: var(--gold); }
+.small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div>
+    <div class="tag">Guia de estudo · Tendências</div>
+    <h1>Engenharia<br>Reversa</h1>
+    <p class="lead">Como descobrir o que existe por dentro de uma ferramenta,<br>entender por que ela funciona e criar a sua própria versão.</p>
+  </div>
+  <div>
+    <p><b>Para quem é:</b> quem cria conteúdo, usa IA no dia a dia e quer parar de só <i>consumir</i> ferramentas para começar a <i>entendê-las</i>. Você não precisa saber programar.</p>
+    <p><b>Como usar:</b> leia um capítulo por vez. No final de cada um há um exercício curto. Faça antes de seguir.</p>
+    <div class="toc">
+      <div>1 · O que é engenharia reversa</div>
+      <div>2 · Por que vale aprender</div>
+      <div>3 · O que pode e o que não pode</div>
+      <div>4 · O método em 6 passos</div>
+      <div>5 · Os 5 "esqueletos" das ferramentas de IA</div>
+      <div>6 · Caso real: Claude Mem por dentro</div>
+      <div>7 · Como pedir isso ao Claude</div>
+      <div>8 · Glossário e checklist</div>
+    </div>
+    <p class="small" style="margin-top:18px">Novembro de 2026</p>
+  </div>
+</section>
+
+<!-- 1 -->
+<section class="chapter">
+  <h2><span class="n">1</span>O que é engenharia reversa</h2>
+  <p class="lead">É olhar para algo pronto e descobrir, de trás para frente, como foi feito.</p>
+  <p>Normalmente se constrói assim: <b>ideia → projeto → produto</b>. Na engenharia reversa você faz o caminho inverso: <b>produto → como funciona → ideia por trás</b>.</p>
+
+  <div class="box"><b class="t">Analogia do bolo</b>
+  Você come um bolo incrível numa confeitaria. A confeitaria não te dá a receita. Mas você prova, repara na textura, sente o cheiro de laranja, vê que a massa é úmida e densa. Em casa, testa: "acho que tem iogurte". Erra, ajusta, tenta de novo. Em algumas tentativas, chega a um bolo parecido, e às vezes melhor para o seu gosto.<br><br>
+  Isso é engenharia reversa: <b>observar → formular hipóteses → testar → recriar</b>.</div>
+
+  <h3>Exemplos do dia a dia que você já faz</h3>
+  <ul>
+    <li><b>Reels que viralizou:</b> você assiste várias vezes para entender o gancho, o corte, a música, o tempo de cada cena. Isso é engenharia reversa de conteúdo.</li>
+    <li><b>Perfil concorrente:</b> você nota que os posts de maior alcance são carrosséis com 7 slides e pergunta no final. Você "descobriu a fórmula".</li>
+    <li><b>Ferramenta de IA:</b> você vê "o limite nunca acaba" e pergunta: <i>como</i> isso é possível? É aqui que este guia entra.</li>
+  </ul>
+
+  <h3>As duas perguntas centrais</h3>
+  <table>
+    <tr><th>Pergunta</th><th>O que você procura</th></tr>
+    <tr><td><b>O que ela promete?</b></td><td>O slogan, o marketing. Ex.: "memória entre uma sessão e outra".</td></tr>
+    <tr><td><b>O que ela realmente faz?</b></td><td>O mecanismo. Ex.: "grava um resumo num arquivo quando a conversa termina e lê esse arquivo quando a próxima começa".</td></tr>
+  </table>
+  <p>O valor da engenharia reversa está na distância entre essas duas respostas. Quase sempre o mecanismo é <b>mais simples</b> do que o marketing faz parecer, e é isso que permite você recriar.</p>
+
+  <div class="ex"><b class="t">Exercício 1</b><br>
+  Escolha um app que você usa todo dia (ex.: o filtro de um app de foto). Escreva em uma linha o que ele <i>promete</i> e em outra o que você <i>acha</i> que ele faz por dentro. Não precisa acertar, o objetivo é treinar a pergunta.</div>
+</section>
+
+<!-- 2 -->
+<section class="chapter">
+  <h2><span class="n">2</span>Por que vale aprender</h2>
+  <table>
+    <tr><th>Benefício</th><th>Na prática</th></tr>
+    <tr><td><b>Não cair em hype</b></td><td>Você percebe quando "revolucionário" é só um arquivo de texto com instruções.</td></tr>
+    <tr><td><b>Avaliar risco</b></td><td>Sabendo o que a ferramenta grava ou para onde envia dados, você decide se instala.</td></tr>
+    <tr><td><b>Economizar</b></td><td>Muitas vezes os 20% que você precisa cabem numa versão sua, gratuita e mais leve.</td></tr>
+    <tr><td><b>Personalizar</b></td><td>Sua versão fala português, segue seu fluxo (Instagram, Canva, roteiros) e não tem o que você não usa.</td></tr>
+    <tr><td><b>Gerar conteúdo</b></td><td>"Abri a ferramenta X e descobri que ela é só isso" é um ótimo formato de post.</td></tr>
+  </table>
+
+  <div class="box"><b class="t">A regra dos 80/20</b>
+  Na maioria das ferramentas, <b>20% do código entrega 80% do valor</b>. O resto é compatibilidade com outros apps, painéis, telemetria, instaladores, correções de casos raros. Seu trabalho é achar esses 20%.</div>
+
+  <p>Exemplo real: o Claude Mem tem cerca de 100 MB de código. O que ele faz de essencial (anotar o que aconteceu e lembrar depois) pode ser recriado com dois arquivos pequenos. Você vê isso no capítulo 6.</p>
+
+  <div class="ex"><b class="t">Exercício 2</b><br>
+  Pense numa ferramenta paga que você usa. Liste as 3 funções que você <i>realmente</i> usa. Agora conte quantas funções ela tem no total. Essa diferença é o "enfeite".</div>
+</section>
+
+<!-- 3 -->
+<section class="chapter">
+  <h2><span class="n">3</span>O que pode e o que não pode</h2>
+  <p>Engenharia reversa é uma prática legítima e antiga, usada em engenharia, design, segurança e educação. Mas tem limites claros.</p>
+
+  <div class="box green"><b class="t">✔ Pode</b>
+  <ul style="margin:4px 0 0">
+    <li>Estudar <b>código aberto</b> (open source). Ele foi publicado justamente para ser lido.</li>
+    <li>Observar o <b>comportamento</b> de qualquer ferramenta que você usa: o que ela mostra, o que pede, o que entrega.</li>
+    <li>Recriar a <b>ideia</b> com seu próprio código, seus textos e seu nome.</li>
+    <li>Copiar trechos de código aberto <b>respeitando a licença</b> e dando crédito.</li>
+  </ul></div>
+
+  <div class="box red"><b class="t">✘ Não pode</b>
+  <ul style="margin:4px 0 0">
+    <li>Quebrar proteções: senhas, licenças pagas, DRM, código embaralhado de propósito.</li>
+    <li>Recriar algo cujo objetivo é <b>burlar limites ou termos de uso</b> (ex.: rodízio de contas gratuitas para fugir de cobrança).</li>
+    <li>Copiar <b>marca, logo, nome ou visual</b> e apresentar como se fosse o original.</li>
+    <li>Usar o que descobriu para invadir, prejudicar ou enganar alguém.</li>
+  </ul></div>
+
+  <h3>Licenças: o "manual de uso" do código aberto</h3>
+  <p>Todo projeto aberto tem um arquivo <code>LICENSE</code>. Ele diz o que você pode fazer.</p>
+  <table>
+    <tr><th>Licença</th><th>Em uma frase</th></tr>
+    <tr><td><b>MIT</b></td><td>Faça quase tudo, só mantenha o aviso de autoria original.</td></tr>
+    <tr><td><b>Apache 2.0</b></td><td>Parecida com MIT, e você precisa avisar se modificou algo.</td></tr>
+    <tr><td><b>CC-BY</b></td><td>Use e adapte, mas sempre dê crédito ao autor.</td></tr>
+    <tr><td><b>GPL</b></td><td>Se você distribuir uma versão modificada, ela também precisa ser aberta.</td></tr>
+    <tr><td><b>Sem licença</b></td><td>Por padrão, <b>todos os direitos reservados</b>. Pode ler e aprender, não copiar.</td></tr>
+  </table>
+
+  <div class="ex"><b class="t">Exercício 3</b><br>
+  Das 5 ferramentas da imagem que você me mandou, qual você <b>não</b> deveria recriar e por quê? (Resposta: a OmniRoute. O valor central dela é contornar limites trocando de provedor ou conta, e isso esbarra em termos de uso.)</div>
+</section>
+
+<!-- 4 -->
+<section class="chapter">
+  <h2><span class="n">4</span>O método em 6 passos</h2>
+  <p class="lead">Use sempre a mesma sequência. Com o tempo vira automático.</p>
+  <div class="steps">
+    <div class="step"><span class="k">1</span><b>Promessa → pergunta</b>Transforme o slogan numa pergunta técnica.<br><i>"Memória entre sessões" → onde grava? quando grava? como devolve?</i></div>
+    <div class="step"><span class="k">2</span><b>Ache a fonte oficial</b>Procure o repositório original no GitHub. Desconfie de cópias com o mesmo nome. Veja autor, data e estrelas.</div>
+    <div class="step"><span class="k">3</span><b>Leia o mapa</b>Comece pelos arquivos que explicam a estrutura: README, arquivo de configuração, pasta <code>docs/</code>. Não comece pelo código.</div>
+    <div class="step"><span class="k">4</span><b>Identifique o esqueleto</b>Quase toda ferramenta de IA é um de 5 tipos (capítulo 5). Descobrir o tipo já explica metade.</div>
+    <div class="step"><span class="k">5</span><b>Separe núcleo de enfeite</b>Liste 3 a 5 coisas que entregam o valor. O resto é enfeite.</div>
+    <div class="step"><span class="k">6</span><b>Recrie enxuto</b>Escolha o jeito mais simples de entregar o núcleo. Teste num caso real. Anote o que deixou de fora.</div>
+  </div>
+
+  <h3>Dicas para cada passo</h3>
+  <ul>
+    <li><b>Passo 2:</b> o README costuma ter o link oficial. Blogs e listas copiam números (estrelas, % de economia) que mudam com o tempo. Confie no repositório.</li>
+    <li><b>Passo 3:</b> procure palavras como <i>architecture</i>, <i>how it works</i>, <i>overview</i>. Desenvolvedores costumam explicar a ideia em texto antes do código.</li>
+    <li><b>Passo 5:</b> pergunte "se eu tirasse isso, a promessa ainda seria cumprida?". Se sim, é enfeite.</li>
+    <li><b>Passo 6:</b> a ordem de preferência é <b>skill → hooks → MCP → proxy → serviço</b>, do mais simples ao mais complexo.</li>
+  </ul>
+
+  <div class="box"><b class="t">O entregável de uma análise</b>
+  Ao final, você deve conseguir preencher: <b>Promete</b> ___ · <b>Faz</b> ___ · <b>Esqueleto</b> ___ · <b>Núcleo</b> (3 a 5 itens) · <b>Riscos</b> ___ · <b>Dá para recriar?</b> fácil / média / difícil.</div>
+
+  <div class="ex"><b class="t">Exercício 4</b><br>
+  Aplique só o <b>passo 1</b> nas 5 ferramentas da imagem. Exemplo: "Headroom: o mesmo resultado com menos tokens" → <i>o que ele tira do texto antes de mandar para a IA, e como garante que nada importante some?</i></div>
+</section>
+
+<!-- 5 -->
+<section class="chapter">
+  <h2><span class="n">5</span>Os 5 "esqueletos" das ferramentas de IA</h2>
+  <p>Quase tudo que aparece em listas de "plugins incríveis para Claude" é construído de um destes 5 jeitos. Aprenda a reconhecê-los.</p>
+
+  <h3>1. Skill: um manual de instruções</h3>
+  <p>Um arquivo de texto (<code>SKILL.md</code>) que ensina a IA a fazer uma tarefa. Não tem programa rodando, só instruções bem escritas. A IA lê quando o assunto aparece.</p>
+  <p class="small">Como reconhecer: a pasta tem basicamente arquivos <code>.md</code>. · Exemplos: Claude Code Setup, Task Observer.</p>
+
+  <h3>2. Hooks: alarmes que disparam sozinhos</h3>
+  <p>Pequenos scripts ligados a <b>momentos</b> da conversa: quando ela começa, antes ou depois de a IA usar uma ferramenta, quando termina. É como um despertador: "toda vez que X acontecer, faça Y".</p>
+  <div class="flow"><div>Sessão começa</div><div class="arr">→</div><div>Você escreve</div><div class="arr">→</div><div>IA usa ferramenta</div><div class="arr">→</div><div>Resposta termina</div><div class="arr">→</div><div>Sessão fecha</div></div>
+  <p class="small">Como reconhecer: arquivo <code>hooks.json</code>. · Exemplo: Claude Mem.</p>
+
+  <h3>3. MCP: tomadas para novas ferramentas</h3>
+  <p>Um "adaptador" que dá à IA ferramentas novas: acessar o Canva, o Gmail, um banco de dados. A IA passa a poder <i>fazer</i> coisas fora da conversa.</p>
+  <p class="small">Como reconhecer: arquivo <code>.mcp.json</code> ou algo chamado <i>mcp server</i>. · Exemplos: os conectores Canva e ElevenLabs que você usa.</p>
+
+  <h3>4. Proxy: um intermediário no caminho</h3>
+  <p>Um programa que fica <b>entre</b> o Claude Code e a internet. Toda mensagem passa por ele, que pode comprimir, trocar de modelo ou registrar. É como um assistente que lê e resume suas cartas antes de enviá-las.</p>
+  <p class="small">Como reconhecer: fala em <code>ANTHROPIC_BASE_URL</code> ou <i>localhost</i>. · Exemplos: Headroom, OmniRoute.</p>
+
+  <h3>5. Serviço de fundo: um funcionário trabalhando escondido</h3>
+  <p>Um programa que fica ligado o tempo todo no computador, com um banco de dados, processando coisas enquanto você trabalha.</p>
+  <p class="small">Como reconhecer: pastas <code>server/</code>, <code>worker</code>, menção a SQLite ou Postgres. · Exemplo: o "motor" do Claude Mem.</p>
+
+  <table>
+    <tr><th>Esqueleto</th><th>Dificuldade de recriar</th><th>Risco típico</th></tr>
+    <tr><td>Skill</td><td>Fácil</td><td>Baixo: é só texto</td></tr>
+    <tr><td>Hooks</td><td>Fácil / média</td><td>Médio: roda comandos sozinho</td></tr>
+    <tr><td>MCP</td><td>Média</td><td>Médio: acessa serviços externos</td></tr>
+    <tr><td>Proxy</td><td>Difícil</td><td>Alto: vê tudo que você envia</td></tr>
+    <tr><td>Serviço de fundo</td><td>Difícil</td><td>Médio/alto: grava muita coisa</td></tr>
+  </table>
+
+  <div class="ex"><b class="t">Exercício 5</b><br>
+  Classifique as 5 ferramentas da imagem por esqueleto. (Resposta: Setup = skill · Task Observer = skill · Claude Mem = hooks + serviço · Headroom = proxy · OmniRoute = proxy.)</div>
+</section>
+
+<!-- 6 -->
+<section class="chapter">
+  <h2><span class="n">6</span>Caso real: Claude Mem por dentro</h2>
+  <p class="lead">Vamos aplicar os 6 passos numa ferramenta de verdade. Esta análise foi feita lendo o código-fonte em novembro de 2026.</p>
+
+  <h3>Passo 1 · Promessa → pergunta</h3>
+  <p>"Memória entre uma sessão e outra" → <i>Onde ele guarda? Em que momento? Como a memória volta para a conversa?</i></p>
+
+  <h3>Passo 2 · Fonte oficial</h3>
+  <p><code>github.com/thedotmack/claude-mem</code>. Existem cópias, e uma delas tem links de criptomoeda no topo, sinal claro de que não é confiável.</p>
+
+  <h3>Passo 3 · O mapa</h3>
+  <p>O arquivo que revela tudo é <code>plugin/hooks/hooks.json</code>. Ele lista em que momentos o Claude Mem entra em ação.</p>
+
+  <h3>Passo 4 · Esqueleto: hooks + serviço de fundo</h3>
+  <table>
+    <tr><th>Momento</th><th>O que o Claude Mem faz</th></tr>
+    <tr><td>Sessão começa</td><td>Liga o serviço e <b>injeta as memórias relevantes</b> na conversa</td></tr>
+    <tr><td>Você escreve</td><td>Registra o início da tarefa</td></tr>
+    <tr><td>IA usa uma ferramenta</td><td>Cada ação vira uma "observação" enviada ao serviço</td></tr>
+    <tr><td>Antes de ler um arquivo</td><td>Dispara um hook chamado <code>file-context</code>; pelo nome, parece anexar o que já se sabe daquele arquivo (não li o código desse trecho)</td></tr>
+    <tr><td>Resposta termina</td><td>Pede a uma IA que <b>resuma</b> o que aconteceu</td></tr>
+    <tr><td>Sessão fecha</td><td>Finaliza e guarda no banco local</td></tr>
+  </table>
+
+  <h3>Passo 5 · Núcleo vs enfeite</h3>
+  <div class="steps">
+    <div class="step"><b>Núcleo (o que importa)</b>1. Capturar o que aconteceu<br>2. Resumir com IA<br>3. Guardar<br>4. Devolver no começo da próxima sessão</div>
+    <div class="step"><b>Enfeite (dá para tirar)</b>Integração com Cursor, Codex e Gemini; painel visual; sincronização na nuvem; instaladores; banco Postgres</div>
+  </div>
+  <div class="box"><b class="t">Detalhe que só quem lê o código descobre</b>
+  Se o serviço cair, o Claude Mem <b>descarta de propósito</b> o que não conseguiu processar, em vez de guardar para depois. Motivo, segundo a própria documentação: reprocessar uma fila antiga gastaria sua cota de IA sem você perceber. Isso é uma decisão de projeto, e você só descobre lendo.</div>
+
+  <h3>Passo 6 · Recriação enxuta</h3>
+  <p>Dois hooks, sem serviço e sem banco:</p>
+  <pre>Quando a resposta termina  → escreve um resumo curto em  memoria/2026-11-15.md
+Quando a sessão começa     → lê os últimos 3 arquivos de memoria/ e mostra à IA</pre>
+  <p>Fica mais simples e menos "inteligente", mas entrega a promessa principal. <b>Dificuldade: média.</b></p>
+</section>
+
+<!-- 7 -->
+<section class="chapter">
+  <h2><span class="n">7</span>Como pedir isso ao Claude</h2>
+  <p>Você não precisa ler código sozinho. O seu repositório <code>tendencias</code> já tem a skill <b>engenharia-reversa</b>, que ensina o Claude a seguir este método. Basta pedir.</p>
+
+  <h3>Frases que funcionam</h3>
+  <table>
+    <tr><th>Você quer…</th><th>Diga…</th></tr>
+    <tr><td>Entender</td><td>"Faz engenharia reversa do [nome/link]. O que ele promete e o que realmente faz?"</td></tr>
+    <tr><td>Avaliar</td><td>"Esse plugin é seguro? O que ele grava e para onde manda?"</td></tr>
+    <tr><td>Achar o núcleo</td><td>"Quais são os 20% dessa ferramenta que entregam o valor?"</td></tr>
+    <tr><td>Recriar</td><td>"Recria uma versão enxuta em português, do jeito mais simples possível."</td></tr>
+    <tr><td>Aprender</td><td>"Me explica o esqueleto dessa ferramenta como se eu não programasse."</td></tr>
+    <tr><td>Partindo de um print</td><td>Mande a imagem e escreva: "engenharia reversa da número 3".</td></tr>
+  </table>
+
+  <div class="box"><b class="t">Dica: peça provas</b>
+  Peça sempre "mostra o arquivo onde você viu isso". Uma boa análise aponta o arquivo e a linha. Se a resposta vier só de blogs e notícias, ela ainda é hipótese, não descoberta.</div>
+
+  <h3>Sinais de alerta numa ferramenta</h3>
+  <ul>
+    <li>Promete "ilimitado" ou "grátis para sempre" usando serviços pagos de terceiros.</li>
+    <li>Pede sua chave de API ou senha sem explicar para onde ela vai.</li>
+    <li>Repositório com links de criptomoeda, sem licença, ou cópia de outro com nome igual.</li>
+    <li>Números de estrelas ou economia muito diferentes entre fontes.</li>
+    <li>É um proxy: tudo o que você escreve passa por ele.</li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section class="chapter">
+  <h2><span class="n">8</span>Glossário e checklist</h2>
+  <table>
+    <tr><th>Termo</th><th>O que significa</th></tr>
+    <tr><td><b>Código aberto / open source</b></td><td>Código publicado para qualquer um ler, geralmente no GitHub.</td></tr>
+    <tr><td><b>Repositório (repo)</b></td><td>A "pasta" de um projeto no GitHub, com todo o código e o histórico.</td></tr>
+    <tr><td><b>Fork</b></td><td>Uma cópia de um repositório feita por outra pessoa.</td></tr>
+    <tr><td><b>Clonar</b></td><td>Baixar uma cópia do repositório para ler no computador.</td></tr>
+    <tr><td><b>README</b></td><td>O arquivo de apresentação do projeto. Sempre leia primeiro.</td></tr>
+    <tr><td><b>Licença</b></td><td>As regras do que você pode fazer com o código.</td></tr>
+    <tr><td><b>Token</b></td><td>Pedaço de texto que a IA processa. Mais tokens = mais custo e mais limite gasto.</td></tr>
+    <tr><td><b>Contexto</b></td><td>Tudo o que a IA "está vendo" na conversa naquele momento.</td></tr>
+    <tr><td><b>Skill</b></td><td>Manual de instruções em texto que ensina uma tarefa à IA.</td></tr>
+    <tr><td><b>Hook</b></td><td>Script disparado automaticamente num momento da conversa.</td></tr>
+    <tr><td><b>MCP</b></td><td>Padrão para conectar a IA a ferramentas externas.</td></tr>
+    <tr><td><b>Proxy</b></td><td>Intermediário por onde passam todas as mensagens.</td></tr>
+    <tr><td><b>Plugin</b></td><td>Pacote que junta skills, hooks e MCPs para instalar de uma vez.</td></tr>
+  </table>
+
+  <h3>Checklist de uma engenharia reversa</h3>
+  <ul class="check">
+    <li>Escrevi a promessa e transformei em pergunta técnica</li>
+    <li>Achei o repositório oficial (não uma cópia)</li>
+    <li>Li a licença e sei o que posso fazer</li>
+    <li>Li o README e os arquivos de configuração</li>
+    <li>Identifiquei o esqueleto (skill, hooks, MCP, proxy ou serviço)</li>
+    <li>Listei de 3 a 5 itens de núcleo</li>
+    <li>Anotei os riscos (o que grava, para onde envia, quanto custa)</li>
+    <li>Decidi: recriar, usar o original ou não usar</li>
+    <li>Se recriei: nome e textos próprios, crédito ao original quando a licença pede</li>
+  </ul>
+
+  <div class="ex"><b class="t">Desafio final</b><br>
+  Escolha o <b>Claude Code Setup</b> (o mais simples) e peça: <i>"Faz engenharia reversa do claude-code-setup seguindo a skill, e depois recria uma versão para o meu fluxo de conteúdo."</i> Compare o resultado com o checklist acima.</div>
+</section>
+
+</body>
+</html>
