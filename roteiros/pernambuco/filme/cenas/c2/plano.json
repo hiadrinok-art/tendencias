@@ -1,0 +1,235 @@
+{
+ "titulo": "Pernambuco — Cena 2: O açúcar",
+ "dur_prov": 43.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#folha-1535",
+   "#folha-1535",
+   1.15
+  ],
+  [
+   "@1.1-0.6",
+   "#folha-1535",
+   "#folha-1535",
+   1.05
+  ],
+  [
+   "@1.1+0.1",
+   "#caravela",
+   "#caravela",
+   0.85
+  ],
+  [
+   "@2-1.2",
+   "#caravela",
+   "#caravela",
+   0.8
+  ],
+  [
+   "@2-0.3",
+   "#foto-olinda",
+   "#foto-olinda",
+   0.7
+  ],
+  [
+   "@3-1.1",
+   "#foto-olinda",
+   "#foto-olinda",
+   0.66
+  ],
+  [
+   "@3-0.2",
+   "#cana",
+   "#cana",
+   0.62
+  ],
+  [
+   "@4-1.0",
+   "#cana",
+   "#cana",
+   0.6
+  ],
+  [
+   "@4-0.2",
+   "#foto-engenho",
+   "#foto-engenho",
+   0.7
+  ],
+  [
+   "@5-1.0",
+   "#foto-engenho",
+   "#foto-engenho",
+   0.66
+  ],
+  [
+   "@5-0.2",
+   "#torrao",
+   "#torrao",
+   1.15
+  ],
+  [
+   "@6-0.9",
+   "#torrao",
+   "#torrao",
+   1.08
+  ],
+  [
+   "@6-0.1",
+   "#livro",
+   "#livro",
+   0.42
+  ],
+  [
+   "@6.1-0.4",
+   "#livro",
+   "#livro",
+   0.44
+  ],
+  [
+   "@6.1+0.6",
+   "#marca-escr",
+   "#marca-escr",
+   1.0
+  ],
+  [
+   "@7-1.9",
+   "#marca-escr",
+   "#marca-escr",
+   0.95
+  ],
+  [
+   "@7-1.2",
+   "#mapa-c2",
+   "#mapa-c2",
+   0.7
+  ],
+  [
+   "@8-1.0",
+   "#mapa-c2",
+   "#mapa-c2",
+   0.68
+  ],
+  [
+   "@8-0.1",
+   "#carta",
+   "#carta",
+   0.52
+  ],
+  [
+   "@9-1.0",
+   "#carta",
+   "#carta",
+   0.5
+  ],
+  [
+   "@9-0.1",
+   "#livro",
+   "#livro",
+   0.42
+  ],
+  [
+   "@fim",
+   "#livro",
+   "#livro",
+   0.4
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "1535",
+   "t_prov": 0.9,
+   "acao": "datilografar",
+   "alvo": "data1535",
+   "som": "maquina"
+  },
+  {
+   "id": 1.1,
+   "gatilho": "desembarca",
+   "t_prov": 2.6,
+   "acao": "desenhar",
+   "alvo": "caravela",
+   "som": "madeira"
+  },
+  {
+   "id": 2,
+   "gatilho": "Olinda",
+   "t_prov": 7.5,
+   "acao": "cair",
+   "alvo": "foto-olinda",
+   "som": "papel"
+  },
+  {
+   "id": 3,
+   "gatilho": "cana",
+   "t_prov": 11.5,
+   "acao": "desenhar",
+   "alvo": "cana",
+   "som": "folhas"
+  },
+  {
+   "id": 4,
+   "gatilho": "engenhos",
+   "t_prov": 14.5,
+   "acao": "cair",
+   "alvo": "foto-engenho",
+   "som": "papel"
+  },
+  {
+   "id": 5,
+   "gatilho": "custo",
+   "t_prov": 20.0,
+   "acao": "desenhar",
+   "alvo": "torrao"
+  },
+  {
+   "id": 6,
+   "gatilho": "Centenas",
+   "t_prov": 22.6,
+   "acao": "cair",
+   "alvo": "livro",
+   "som": "pagina"
+  },
+  {
+   "id": 6.1,
+   "gatilho": "escravizados",
+   "t_prov": 25.5,
+   "acao": "circular",
+   "alvo": "livro",
+   "circulo": "sub-escr",
+   "som": "pena"
+  },
+  {
+   "id": 7,
+   "gatilho": "terras",
+   "t_prov": 29.5,
+   "acao": "apagar",
+   "alvo": "nomes-povos",
+   "foco": "mapa-c2",
+   "duracao": 3.2,
+   "desloc": 0.3
+  },
+  {
+   "id": 8,
+   "gatilho": "Europa",
+   "t_prov": 34.5,
+   "acao": "desenhar",
+   "alvo": "rota",
+   "som": "pena",
+   "foco": "carta"
+  },
+  {
+   "id": 9,
+   "gatilho": "feridas",
+   "t_prov": 38.5,
+   "acao": "apagar",
+   "alvo": "torrao",
+   "foco": "livro",
+   "duracao": 1.6
+  }
+ ],
+ "sons_extras": []
+}

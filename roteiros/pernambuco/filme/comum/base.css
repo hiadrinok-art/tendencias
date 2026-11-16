@@ -51,7 +51,7 @@ svg .traco { fill: none; }
 
 /* alfinete (pino) com nome */
 .pino { position: absolute; width: 0; height: 0; }
-.pino .cabeca { position: absolute; left: -26px; top: -26px; width: 52px; height: 52px; border-radius: 50%;
+.pino .cabeca { position: absolute; left: -40px; top: -40px; width: 80px; height: 80px; border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ff7a5c, #a3160b 70%); box-shadow: 0 8px 14px rgba(0,0,0,.5); }
 .pino .nome { position: absolute; left: 46px; top: -46px; white-space: nowrap; font-size: 64px; color: #2a1f16; font-family: "Datilo", monospace; }
 .pino.nome-esq .nome { left: auto; right: 46px; }

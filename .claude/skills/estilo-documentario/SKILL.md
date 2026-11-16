@@ -87,6 +87,10 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - **Foco em elementos aninhados:** nunca dê foco a um filho de um elemento que já foi aceso (ex.: nomes dentro de um mapa). Apagar o pai apaga o filho junto. Use `"foco": "<id do pai>"` nesses beats.
 - **HyperFrames remove `<style id>` do modelo**: injete CSS da cena por código (`B.css(...)`).
 - **Rode `hyperframes validate`** em toda cena: ele acusa erros de JavaScript e imagens faltando (ex.: um 429 do Wikimedia salvo como `.jpg`).
+- **Rode `scripts/checar_enquadramento.js <cena>/index.html`** antes de renderizar: para cada destaque ele confere se a peça está inteira na tela, legível e por pelo menos 1 s. Pegou câmera saindo cedo, fotos cortadas e destaques fora do quadro.
+- **Câmera precisa de PARADAS:** para cada destaque, um keyframe de chegada (`@id-0.3`) e um de permanência antes de viajar ao próximo (`@prox-1.0`). Sem a parada a câmera sai assim que chega.
+- **Fotos com altura conhecida:** a câmera mede antes de a imagem carregar. O `preparar.sh` grava as dimensões em `imagens.js` e `B.foto` já cria a moldura no tamanho certo.
+- **Traço direto na madeira escura:** use cor clara (creme `#e9dcc0`), não marrom.
 - Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16 em **duas passadas lineares**. A de uma passada comprime e desfaz o envelope.
 - Para medir música × voz, use as pausas reais da narração (`silencedetect`), não os tempos do Whisper: as palavras podem estar adiantadas.
 - `data-duration` do `#root` e do `<audio>` precisa ser igual a `duracao` do plano, senão o render sai com tela preta no fim.

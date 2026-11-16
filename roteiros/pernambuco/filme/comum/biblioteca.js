@@ -38,7 +38,10 @@
       return `<div id="${id}" class="carimbo${foco ? " foco" : ""}" style="${estilo({ left: x, top: y, "font-size": size, transform: `rotate(${rot}deg)` })}">${texto}</div>`;
     },
     foto({ id, src, x, y, w, rot = 0, legenda = "", foco = true, extra = {} }) {
-      return `<div id="${id}" class="foto${foco ? " foco" : ""}" style="${estilo({ left: x, top: y, width: w, transform: `rotate(${rot}deg)`, ...extra })}"><img src="${src}" alt="${legenda}">${legenda ? `<div class="legenda">${legenda}</div>` : ""}</div>`;
+      const nome = src.split("/").pop(), dim = (window.IMG || {})[nome];
+      if (!dim) console.error("IMAGEM FALTANDO: " + nome);       // o validate do HyperFrames acusa
+      const hImg = dim ? Math.round((w - 52) * dim[1] / dim[0]) : Math.round((w - 52) * 0.66);
+      return `<div id="${id}" class="foto${foco ? " foco" : ""}" style="${estilo({ left: x, top: y, width: w, height: hImg + 136, transform: `rotate(${rot}deg)`, ...extra })}"><img src="${src}" alt="${legenda}" style="height:${hImg}px">${legenda ? `<div class="legenda">${legenda}</div>` : ""}</div>`;
     },
     rotulo({ texto, x, y, size = 48, extra = {} }) {
       return `<div class="rotulo" style="${estilo({ left: x, top: y, "font-size": size, ...extra })}">${texto}</div>`;

@@ -83,14 +83,21 @@
 
     // ---- câmera
     // Keyframes podem mirar elementos: x/y = "#id" ou "#id+120" / "#id-80" (centro do elemento no mundo).
-    const mundoRect = $("mundo").getBoundingClientRect();
     function coord(v, eixo) {
       if (typeof v !== "string") return v;
-      const m = v.match(/^#([\w-]+?)\s*([+-]\s*\d+(?:\.\d+)?)?$/);
-      if (!m) throw new Error("coordenada de câmera inválida: " + v);
-      const el = $(m[1]); if (!el) throw new Error("câmera mira elemento inexistente: #" + m[1]);
-      const r = el.getBoundingClientRect(), d = parseFloat((m[2] || "0").replace(/\s/g, ""));
-      return (eixo === "x" ? r.left - mundoRect.left + r.width / 2 : r.top - mundoRect.top + r.height / 2) + d;
+      // 1º: o texto inteiro é um id existente (ex.: "#folha-1535"); 2º: "#id+120" / "#id-80" (deslocamento)
+      let el = $(v.slice(1)), d = 0;
+      if (!el) {
+        const m = v.match(/^#([\w-]+?)\s*([+-]\s*\d+(?:\.\d+)?)$/);
+        if (!m) throw new Error("câmera mira elemento inexistente: " + v);
+        el = $(m[1]); d = parseFloat(m[2].replace(/\s/g, ""));
+        if (!el) throw new Error("câmera mira elemento inexistente: " + v);
+      }
+      // posição de LAYOUT (offsetLeft/Top somados até o #mundo): não depende da escala da página nem de transforms
+      let x = el.offsetWidth / 2, y = el.offsetHeight / 2, n = el;
+      if (el instanceof SVGElement) { const bb = el.getBBox(); x = bb.x + bb.width / 2; y = bb.y + bb.height / 2; n = el.ownerSVGElement.parentNode; }
+      while (n && n.id !== "mundo") { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+      return (eixo === "x" ? x : y) + d;
     }
     const ks = P.camera.map((k) => [k[0], coord(k[1], "x"), coord(k[2], "y"), k[3]]);
     const ts = ks.map((k) => k[0] + off);

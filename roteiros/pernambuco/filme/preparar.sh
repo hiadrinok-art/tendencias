@@ -7,6 +7,12 @@ cp -r "$B/comum/assets" "$B/comum/estilos" "$D/" ; cp "$B/comum/"{base.css,motor
 # só copia imagens VÁLIDAS (um 429 do Wikimedia vem como HTML com nome .jpg)
 mkdir -p "$D/img"; rm -f "$D/img/"*.jpg
 for f in "$B/imagens/"*.jpg; do [ -f "$f" ] && file "$f" | grep -qE "JPEG|PNG" && cp "$f" "$D/img/"; done
+# dimensões reais das imagens: as fotos nascem com a altura certa (a câmera mede antes de a imagem carregar)
+python3 -c "
+import json,glob,os
+from PIL import Image
+d={os.path.basename(f):list(Image.open(f).size) for f in glob.glob('$D/img/*.jpg')}
+open('$D/imagens.js','w').write('window.IMG = '+json.dumps(d)+';\\n')"
 if [ -f "$B/palavras.json" ]; then python3 "$S/resolver_tempos.py" "$B" "$c"; DUR=$(python3 -c "import json;print(json.load(open('$B/cenas.json'))['$c']['dur'])")
 else python3 "$B/provisorio.py" "$B" "$c"; DUR=$(python3 -c "import json;print(json.load(open('$D/plano.resolvido.json'))['duracao'])"); fi
 TIT=$(python3 -c "import json;print(json.load(open('$D/plano.json')).get('titulo','$c'))")

@@ -108,7 +108,8 @@
    "acao": "congelar",
    "alvo": "pe-cores",
    "foco": "mapa-pe",
-   "som": "ondas"
+   "som": "ondas",
+   "panoramica": true
   },
   {
    "id": 4,
