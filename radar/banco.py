@@ -1,9 +1,16 @@
-"""Banco SQLite do MVP. Todas as consultas usam parâmetros (sem SQL montado com texto)."""
+"""Banco SQLite do MVP. Todas as consultas usam parâmetros (sem SQL montado com texto).
+
+Cada requisição abre a própria conexão (``conectar``). Uma conexão única
+compartilhada entre threads misturava as transações de pedidos simultâneos:
+um pedido podia desfazer a gravação de outro, e a maioria recebia erro 500.
+"""
 
 from __future__ import annotations
 
 import sqlite3
 from contextlib import contextmanager
+
+ESPERA_BANCO_OCUPADO = 10  # segundos esperando outra escrita terminar
 
 ESQUEMA = """
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -39,12 +46,23 @@ CREATE TABLE IF NOT EXISTS auditoria (
 
 
 def conectar(caminho: str) -> sqlite3.Connection:
-    conexao = sqlite3.connect(caminho, check_same_thread=False, isolation_level=None)
+    """Abre uma conexão nova. Use uma por requisição e feche ao final."""
+    conexao = sqlite3.connect(caminho, timeout=ESPERA_BANCO_OCUPADO, isolation_level=None,
+                              check_same_thread=False)
     conexao.row_factory = sqlite3.Row
     conexao.execute("PRAGMA foreign_keys = ON")
-    conexao.execute("PRAGMA journal_mode = WAL")
-    conexao.executescript(ESQUEMA)
+    conexao.execute(f"PRAGMA busy_timeout = {ESPERA_BANCO_OCUPADO * 1000}")
     return conexao
+
+
+def preparar(caminho: str) -> None:
+    """Cria as tabelas e liga o modo WAL (leituras não esperam escritas)."""
+    conexao = conectar(caminho)
+    try:
+        conexao.execute("PRAGMA journal_mode = WAL")
+        conexao.executescript(ESQUEMA)
+    finally:
+        conexao.close()
 
 
 @contextmanager

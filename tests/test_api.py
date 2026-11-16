@@ -1,31 +1,8 @@
 import pytest
-from fastapi.testclient import TestClient
 
-from radar.app import criar_app
 from radar.config import Config
 
-ORIGEM = "https://radar.exemplo"
-SENHA = "Radar-de-editais-2026"
-CONTA = {
-    "email": "compras@empresa.com.br",
-    "senha": SENHA,
-    "cnpj": "07.722.779/0001-06",
-    "ramos": ["ti"],
-    "ufs": ["SP"],
-    "palavras_chave": ["backup"],
-    "aceite_termos": True,
-}
-
-
-@pytest.fixture
-def cliente(tmp_path):
-    config = Config(segredo="s" * 40, banco=str(tmp_path / "t.db"), https=False, origens=[ORIGEM])
-    with TestClient(criar_app(config), headers={"Origin": ORIGEM}) as c:
-        yield c
-
-
-def criar_conta(cliente, **mudancas):
-    return cliente.post("/conta", json={**CONTA, **mudancas})
+from .conftest import CONTA, SENHA, criar_conta
 
 
 def test_cadastro_login_e_perfil(cliente):
@@ -109,7 +86,7 @@ def test_troca_de_senha_derruba_outras_sessoes(cliente):
     assert cliente.get("/eu").status_code == 200
 
 
-def test_lgpd_exportar_e_excluir(cliente):
+def test_lgpd_exportar_e_excluir(cliente, consultar):
     criar_conta(cliente)
     dados = cliente.get("/eu/dados").json()
     assert dados["email"] == CONTA["email"] and "senha_hash" not in dados
@@ -119,10 +96,9 @@ def test_lgpd_exportar_e_excluir(cliente):
     assert cliente.request("DELETE", "/eu", json={"senha": SENHA}).status_code == 200
     assert cliente.get("/eu").status_code == 401
 
-    conexao = cliente.app.state.conexao
-    assert conexao.execute("SELECT COUNT(*) FROM usuarios").fetchone()[0] == 0
-    assert conexao.execute("SELECT COUNT(*) FROM sessoes").fetchone()[0] == 0
-    logs = " ".join(str(tuple(l)) for l in conexao.execute("SELECT * FROM auditoria"))
+    assert consultar("SELECT COUNT(*) FROM usuarios")[0][0] == 0
+    assert consultar("SELECT COUNT(*) FROM sessoes")[0][0] == 0
+    logs = " ".join(str(tuple(l)) for l in consultar("SELECT * FROM auditoria"))
     assert CONTA["email"] not in logs and "c***@e***.com.br" in logs
 
 

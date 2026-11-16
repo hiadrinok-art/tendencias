@@ -2,12 +2,13 @@
 
 Rodar localmente:
     RADAR_SEGREDO=... RADAR_HTTPS=0 RADAR_ORIGENS=http://localhost:3000 \
-        uvicorn radar.app:app --reload
+        uvicorn radar.app:app --no-server-header --no-proxy-headers
 """
 
 from __future__ import annotations
 
 import json
+import sqlite3
 from datetime import datetime, timezone
 from typing import Literal
 
@@ -16,12 +17,13 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from . import banco
 from .config import Config
-from .seguranca import auditoria, senhas, sessoes, validacao
+from .seguranca import auditoria, dispositivos, rede, senhas, sessoes, validacao
 from .seguranca.limite import JanelaDeslizante
-from .seguranca.protecao_http import ProtecaoHTTP
+from .seguranca.protecao_http import LimiteDeCorpo, ProtecaoHTTP
 
 Ramo = Literal["ti", "obra", "eng", "limp", "alim", "saude", "mob"]
 UF = Literal[
@@ -30,6 +32,7 @@ UF = Literal[
 ]
 
 ERRO_LOGIN = "E-mail ou senha incorretos."
+QUINZE_MINUTOS = 15 * 60
 
 
 class NovaConta(BaseModel):
@@ -77,36 +80,59 @@ class Confirmacao(BaseModel):
 
 def criar_app(config: Config) -> FastAPI:
     app = FastAPI(title="Radar de Editais", docs_url=None, redoc_url=None, openapi_url=None)
-    conexao = banco.conectar(config.banco)
+    banco.preparar(config.banco)
+    proxies = set(config.proxies_confiaveis)
 
+    # Limites. Todos contam por janela de tempo e se esvaziam sozinhos.
     limite_ip_login = JanelaDeslizante(limite=20, janela=60)
-    falhas_por_email = JanelaDeslizante(limite=5, janela=15 * 60)
     limite_ip_cadastro = JanelaDeslizante(limite=10, janela=60 * 60)
+    # Erros de senha: por e-mail+IP (trava só quem está errando) e por e-mail
+    # no total (ataque distribuído; não vale para dispositivo já usado pelo dono).
+    falhas_email_ip = JanelaDeslizante(limite=5, janela=QUINZE_MINUTOS)
+    falhas_email = JanelaDeslizante(limite=20, janela=QUINZE_MINUTOS)
+    # Senha pedida de novo para trocar senha ou excluir conta.
+    falhas_confirmacao = JanelaDeslizante(limite=5, janela=QUINZE_MINUTOS)
+    app.state.limites = {
+        "ip_login": limite_ip_login, "ip_cadastro": limite_ip_cadastro,
+        "email_ip": falhas_email_ip, "email": falhas_email, "confirmacao": falhas_confirmacao,
+    }
 
-    app.add_middleware(
-        ProtecaoHTTP, origens_permitidas=config.origens, https=config.https,
-        nome_cookie=config.nome_cookie,
-    )
+    app.add_middleware(ProtecaoHTTP, origens_permitidas=config.origens, https=config.https,
+                       nome_cookie=config.nome_cookie)
     if config.origens:
         app.add_middleware(
             CORSMiddleware, allow_origins=config.origens, allow_credentials=True,
             allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"],
         )
+    app.add_middleware(LimiteDeCorpo)  # o último adicionado é o primeiro a rodar
+
+    # Erros sempre no formato {"erro": ...}, sem o padrão que revela o framework.
+    @app.exception_handler(StarletteHTTPException)
+    async def erro_http(request: Request, erro: StarletteHTTPException):
+        return JSONResponse({"erro": erro.detail}, status_code=erro.status_code,
+                            headers=getattr(erro, "headers", None))
 
     @app.exception_handler(RequestValidationError)
     async def erro_de_validacao(request: Request, erro: RequestValidationError):
-        # A resposta padrão do FastAPI repete o valor enviado, o que devolveria
-        # a senha no corpo do erro. Aqui só vão o campo e a mensagem.
+        # Nunca repete o valor enviado (seria devolver a senha no corpo do erro).
         campos = [
             {"campo": ".".join(str(p) for p in e["loc"][1:]), "mensagem": e["msg"]}
             for e in erro.errors()
         ]
         return JSONResponse({"erro": "Dados inválidos.", "campos": campos}, status_code=422)
 
-    def ip_de(request: Request) -> str:
-        return request.client.host if request.client else ""
+    def db():
+        conexao = banco.conectar(config.banco)
+        try:
+            yield conexao
+        finally:
+            conexao.close()
 
-    def auditar(evento: str, request: Request, **extra) -> None:
+    def ip_de(request: Request) -> str:
+        conexao_ip = request.client.host if request.client else ""
+        return rede.ip_real(conexao_ip, request.headers.get("x-forwarded-for"), proxies)
+
+    def auditar(conexao, evento: str, request: Request, **extra) -> None:
         auditoria.registrar(conexao, evento, segredo=config.segredo, ip=ip_de(request), **extra)
 
     def token_de(request: Request) -> str | None:
@@ -115,7 +141,7 @@ def criar_app(config: Config) -> FastAPI:
             return cabecalho[7:].strip()
         return request.cookies.get(config.nome_cookie)
 
-    def usuario_atual(request: Request):
+    def usuario_atual(request: Request, conexao=Depends(db)):
         usuario_id = sessoes.validar(conexao, token_de(request))
         if usuario_id is None:
             raise HTTPException(401, "Faça login para continuar.")
@@ -124,24 +150,39 @@ def criar_app(config: Config) -> FastAPI:
             raise HTTPException(401, "Faça login para continuar.")
         return usuario
 
-    def abrir_sessao(resposta: Response, usuario_id: int) -> None:
+    def abrir_sessao(conexao, resposta: Response, usuario_id: int, email: str) -> None:
         token = sessoes.criar(conexao, usuario_id)
         resposta.set_cookie(
             config.nome_cookie, token, httponly=True, secure=config.https, samesite="strict",
             max_age=int(sessoes.DURACAO_MAXIMA.total_seconds()), path="/",
         )
+        resposta.set_cookie(
+            dispositivos.NOME_COOKIE, dispositivos.emitir(config.segredo, email), httponly=True,
+            secure=config.https, samesite="strict", max_age=dispositivos.DURACAO_SEGUNDOS, path="/",
+        )
 
-    def conferir_senha_ou_401(usuario, senha: str) -> None:
+    def bloqueio(janela: JanelaDeslizante, chave: str, mensagem: str) -> HTTPException:
+        return HTTPException(429, mensagem,
+                             headers={"Retry-After": str(janela.segundos_para_liberar(chave))})
+
+    def conferir_senha(conexao, request: Request, usuario, senha: str) -> None:
+        """Confirma a senha do usuário logado, com limite de tentativas."""
+        chave = str(usuario["id"])
+        if falhas_confirmacao.bloqueado(chave):
+            raise bloqueio(falhas_confirmacao, chave, "Muitas tentativas erradas. Aguarde alguns minutos.")
         if not senhas.verificar(senha, usuario["senha_hash"]):
+            falhas_confirmacao.registrar(chave)
+            auditar(conexao, "confirmacao_falhou", request, usuario_id=usuario["id"])
             raise HTTPException(401, "Senha incorreta.")
+        falhas_confirmacao.zerar(chave)
 
     @app.get("/saude")
     def saude():
         return {"ok": True}
 
     @app.post("/conta", status_code=201)
-    def criar_conta(dados: NovaConta, request: Request, resposta: Response):
-        if not limite_ip_cadastro.permitir(ip_de(request)):
+    def criar_conta(dados: NovaConta, request: Request, resposta: Response, conexao=Depends(db)):
+        if not limite_ip_cadastro.permitir(rede.chave_de_limite(ip_de(request))):
             raise HTTPException(429, "Muitos cadastros a partir desta rede. Tente mais tarde.")
         if not dados.aceite_termos:
             raise HTTPException(422, "É preciso aceitar os termos de uso e a política de privacidade.")
@@ -150,52 +191,60 @@ def criar_app(config: Config) -> FastAPI:
             raise HTTPException(422, " ".join(problemas))
 
         agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        with banco.transacao(conexao):
-            if conexao.execute("SELECT 1 FROM usuarios WHERE email = ?", (dados.email,)).fetchone():
-                raise HTTPException(409, "Não foi possível criar a conta com esse e-mail.")
-            cursor = conexao.execute(
-                "INSERT INTO usuarios (email, senha_hash, cnpj, ramos, ufs, palavras_chave,"
-                " termos_versao, termos_aceitos_em, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (dados.email, senhas.gerar_hash(dados.senha), dados.cnpj,
-                 json.dumps(sorted(set(dados.ramos))), json.dumps(sorted(set(dados.ufs))),
-                 json.dumps(dados.palavras_chave), config.versao_termos, agora, agora),
-            )
-            auditar("conta_criada", request, usuario_id=cursor.lastrowid, email=dados.email)
-            abrir_sessao(resposta, cursor.lastrowid)
+        senha_hash = senhas.gerar_hash(dados.senha)  # fora da transação: não segura o banco
+        try:
+            with banco.transacao(conexao):
+                cursor = conexao.execute(
+                    "INSERT INTO usuarios (email, senha_hash, cnpj, ramos, ufs, palavras_chave,"
+                    " termos_versao, termos_aceitos_em, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (dados.email, senha_hash, dados.cnpj,
+                     json.dumps(sorted(set(dados.ramos))), json.dumps(sorted(set(dados.ufs))),
+                     json.dumps(dados.palavras_chave), config.versao_termos, agora, agora),
+                )
+                auditar(conexao, "conta_criada", request, usuario_id=cursor.lastrowid, email=dados.email)
+                abrir_sessao(conexao, resposta, cursor.lastrowid, dados.email)
+        except sqlite3.IntegrityError:
+            raise HTTPException(409, "Não foi possível criar a conta com esse e-mail.") from None
         return {"ok": True}
 
     @app.post("/sessao")
-    def entrar(dados: Login, request: Request, resposta: Response):
-        ip = ip_de(request)
+    def entrar(dados: Login, request: Request, resposta: Response, conexao=Depends(db)):
         email = validacao.normalizar_email(dados.email)
-        if not limite_ip_login.permitir(ip):
+        chave_ip = rede.chave_de_limite(ip_de(request))
+        chave_par = f"{email}|{chave_ip}"
+
+        if not limite_ip_login.permitir(chave_ip):
             raise HTTPException(429, "Muitas tentativas. Aguarde um minuto.")
-        if falhas_por_email.bloqueado(email):
-            espera = falhas_por_email.segundos_para_liberar(email)
-            auditar("login_bloqueado", request, email=email)
-            raise HTTPException(
-                429, "Conta bloqueada temporariamente por tentativas erradas.",
-                headers={"Retry-After": str(espera)},
-            )
+        if falhas_email_ip.bloqueado(chave_par):
+            auditar(conexao, "login_bloqueado", request, email=email, detalhe="email+ip")
+            raise bloqueio(falhas_email_ip, chave_par, "Muitas tentativas erradas. Aguarde alguns minutos.")
+        dispositivo_ok = dispositivos.confiavel(
+            config.segredo, email, request.cookies.get(dispositivos.NOME_COOKIE))
+        if falhas_email.bloqueado(email) and not dispositivo_ok:
+            auditar(conexao, "login_bloqueado", request, email=email, detalhe="email")
+            raise bloqueio(falhas_email, email,
+                           "Esta conta recebeu muitas tentativas erradas. Entre por um "
+                           "dispositivo que você já usou ou aguarde alguns minutos.")
 
         usuario = conexao.execute("SELECT * FROM usuarios WHERE email = ?", (email,)).fetchone()
         hash_salvo = usuario["senha_hash"] if usuario else senhas.HASH_FICTICIO
         senha_ok = senhas.verificar(dados.senha, hash_salvo)
         if usuario is None or not senha_ok:
-            falhas_por_email.registrar(email)
-            auditar("login_falhou", request, email=email)
+            falhas_email_ip.registrar(chave_par)
+            falhas_email.registrar(email)
+            auditar(conexao, "login_falhou", request, email=email)
             raise HTTPException(401, ERRO_LOGIN)
 
-        falhas_por_email.zerar(email)
+        falhas_email_ip.zerar(chave_par)
         if senhas.precisa_rehash(usuario["senha_hash"]):
             conexao.execute("UPDATE usuarios SET senha_hash = ? WHERE id = ?",
                             (senhas.gerar_hash(dados.senha), usuario["id"]))
-        abrir_sessao(resposta, usuario["id"])
-        auditar("login_ok", request, usuario_id=usuario["id"], email=email)
+        abrir_sessao(conexao, resposta, usuario["id"], email)
+        auditar(conexao, "login_ok", request, usuario_id=usuario["id"], email=email)
         return {"ok": True}
 
     @app.delete("/sessao")
-    def sair(request: Request, resposta: Response):
+    def sair(request: Request, resposta: Response, conexao=Depends(db)):
         token = token_de(request)
         if token:
             sessoes.encerrar(conexao, token)
@@ -214,23 +263,23 @@ def criar_app(config: Config) -> FastAPI:
 
     @app.put("/eu/senha")
     def trocar_senha(dados: TrocaSenha, request: Request, resposta: Response,
-                     usuario=Depends(usuario_atual)):
-        conferir_senha_ou_401(usuario, dados.senha_atual)
+                     usuario=Depends(usuario_atual), conexao=Depends(db)):
+        conferir_senha(conexao, request, usuario, dados.senha_atual)
         problemas = validacao.problemas_da_senha(dados.senha_nova, usuario["email"])
         if problemas:
             raise HTTPException(422, " ".join(problemas))
+        novo_hash = senhas.gerar_hash(dados.senha_nova)
         with banco.transacao(conexao):
-            conexao.execute("UPDATE usuarios SET senha_hash = ? WHERE id = ?",
-                            (senhas.gerar_hash(dados.senha_nova), usuario["id"]))
+            conexao.execute("UPDATE usuarios SET senha_hash = ? WHERE id = ?", (novo_hash, usuario["id"]))
             sessoes.encerrar_todas(conexao, usuario["id"])
-            auditar("senha_trocada", request, usuario_id=usuario["id"])
-            abrir_sessao(resposta, usuario["id"])
+            auditar(conexao, "senha_trocada", request, usuario_id=usuario["id"])
+            abrir_sessao(conexao, resposta, usuario["id"], usuario["email"])
         return {"ok": True}
 
     @app.get("/eu/dados")
-    def exportar_dados(request: Request, usuario=Depends(usuario_atual)):
+    def exportar_dados(request: Request, usuario=Depends(usuario_atual), conexao=Depends(db)):
         """Direito de acesso (LGPD, art. 18): tudo o que guardamos sobre a conta."""
-        auditar("dados_exportados", request, usuario_id=usuario["id"])
+        auditar(conexao, "dados_exportados", request, usuario_id=usuario["id"])
         dados = {k: usuario[k] for k in usuario.keys() if k != "senha_hash"}
         for campo in ("ramos", "ufs", "palavras_chave"):
             dados[campo] = json.loads(dados[campo])
@@ -238,16 +287,16 @@ def criar_app(config: Config) -> FastAPI:
 
     @app.delete("/eu")
     def excluir_conta(dados: Confirmacao, request: Request, resposta: Response,
-                      usuario=Depends(usuario_atual)):
+                      usuario=Depends(usuario_atual), conexao=Depends(db)):
         """Direito de eliminação (LGPD, art. 18): apaga a conta e todas as sessões."""
-        conferir_senha_ou_401(usuario, dados.senha)
+        conferir_senha(conexao, request, usuario, dados.senha)
         with banco.transacao(conexao):
             conexao.execute("DELETE FROM usuarios WHERE id = ?", (usuario["id"],))
-            auditar("conta_excluida", request, usuario_id=usuario["id"])
+            auditar(conexao, "conta_excluida", request, usuario_id=usuario["id"])
         resposta.delete_cookie(config.nome_cookie, path="/")
+        resposta.delete_cookie(dispositivos.NOME_COOKIE, path="/")
         return {"ok": True}
 
-    app.state.conexao = conexao
     return app
 
 
