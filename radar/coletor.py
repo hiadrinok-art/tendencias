@@ -28,7 +28,15 @@ from .seguranca.validacao import cnpj_valido, limpar_texto, so_digitos
 log = logging.getLogger("radar.coletor")
 
 URL_PNCP = "https://pncp.gov.br/api/consulta/v1/contratacoes/publicacao"
-MODALIDADES = {6: "Pregão eletrônico", 4: "Concorrência eletrônica"}
+# Modalidades em que fornecedores disputam (códigos do PNCP).
+MODALIDADES = {
+    6: "Pregão eletrônico",
+    4: "Concorrência eletrônica",
+    8: "Dispensa de licitação",
+    5: "Concorrência presencial",
+    7: "Pregão presencial",
+    12: "Credenciamento",
+}
 TAMANHO_PAGINA = 50
 UFS = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
        "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}
@@ -94,10 +102,13 @@ def converter(bruto: dict, modalidade: int) -> dict | None:
         "link_origem": link_seguro(bruto.get("linkSistemaOrigem")),
         "link_pncp": f"https://pncp.gov.br/app/editais/{cnpj}/{ano}/{sequencial}",
         "ramos": json.dumps(classificar(objeto)),
+        "ano": ano,
+        "sequencial": sequencial,
     }
 
 
 def gravar(conexao, linhas: list[dict]) -> int:
+    linhas = [l for l in linhas if l]
     if not linhas:
         return 0
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -110,42 +121,81 @@ def gravar(conexao, linhas: list[dict]) -> int:
     return len(linhas)
 
 
-def _pagina(cliente: httpx.Client, params: dict, tentativas: int = 4) -> dict:
+class PncpFalhou(RuntimeError):
+    pass
+
+
+PAUSA_ENTRE_PAGINAS = 0.4   # segundos; evita o bloqueio "429 Too Many Requests" do PNCP
+ESPERA_MAXIMA = 90          # segundos numa única espera
+
+
+def _espera(resposta: httpx.Response | None, tentativa: int) -> float:
+    """Usa o Retry-After do PNCP quando vier; senão, espera crescente (2, 4, 8... s)."""
+    if resposta is not None:
+        pedido = resposta.headers.get("retry-after", "")
+        if pedido.isdigit():
+            return min(int(pedido), ESPERA_MAXIMA)
+    return min(2 ** (tentativa + 1), ESPERA_MAXIMA)
+
+
+def _pagina(cliente: httpx.Client, params: dict, tentativas: int = 7, dormir=time.sleep) -> dict:
     for tentativa in range(tentativas):
+        resposta = None
         try:
-            r = cliente.get(URL_PNCP, params=params)
-            if r.status_code == 204:
+            resposta = cliente.get(URL_PNCP, params=params)
+            if resposta.status_code == 204:
                 return {"data": [], "totalPaginas": 0}
-            r.raise_for_status()
-            return r.json()
+            resposta.raise_for_status()
+            return resposta.json()
         except (httpx.HTTPError, ValueError) as erro:
-            espera = 2 ** tentativa
-            log.warning("PNCP falhou (%s), tentando de novo em %ss", erro, espera)
-            time.sleep(espera)
-    raise RuntimeError("PNCP indisponível depois de várias tentativas")
+            espera = _espera(resposta, tentativa)
+            log.warning("PNCP falhou (%s), tentando de novo em %ss", type(erro).__name__, espera)
+            dormir(espera)
+    raise PncpFalhou(f"PNCP não respondeu à página {params.get('pagina')} depois de {tentativas} tentativas")
 
 
-def coletar(caminho_banco: str, dias: int = 3, max_paginas: int = 100) -> int:
+def coletar(caminho_banco: str, dias: int = 3, max_paginas: int = 100, dormir=time.sleep,
+            cliente: httpx.Client | None = None) -> int:
+    """Coleta todas as modalidades. Uma página que falhe é pulada (e registrada), sem
+    perder o resto; só falha de vez se nada for coletado."""
     banco.preparar(caminho_banco)
     conexao = banco.conectar(caminho_banco)
     fim = date.today()
     inicio = fim - timedelta(days=dias)
-    total = 0
-    with httpx.Client(timeout=60, headers={"User-Agent": "radar-de-editais/0.1"}) as cliente:
+    total, falhas = 0, 0
+    dono = cliente is None
+    cliente = cliente or httpx.Client(timeout=60, headers={"User-Agent": "radar-de-editais/0.1"})
+    try:
         for modalidade in MODALIDADES:
             pagina, total_paginas = 1, 1
             while pagina <= min(total_paginas, max_paginas):
-                dados = _pagina(cliente, {
-                    "dataInicial": inicio.strftime("%Y%m%d"), "dataFinal": fim.strftime("%Y%m%d"),
-                    "codigoModalidadeContratacao": modalidade, "pagina": pagina,
-                    "tamanhoPagina": TAMANHO_PAGINA,
-                })
+                try:
+                    dados = _pagina(cliente, {
+                        "dataInicial": inicio.strftime("%Y%m%d"), "dataFinal": fim.strftime("%Y%m%d"),
+                        "codigoModalidadeContratacao": modalidade, "pagina": pagina,
+                        "tamanhoPagina": TAMANHO_PAGINA,
+                    }, dormir=dormir)
+                except PncpFalhou as erro:
+                    falhas += 1
+                    log.error("%s (modalidade %s). Pulando.", erro, modalidade)
+                    if pagina == 1:
+                        break  # sem a 1ª página não sabemos quantas existem
+                    pagina += 1
+                    continue
                 total_paginas = int(dados.get("totalPaginas") or 0)
                 linhas = [l for l in (converter(b, modalidade) for b in dados.get("data") or []) if l]
                 total += gravar(conexao, linhas)
                 log.info("modalidade %s, página %s/%s: %s editais", modalidade, pagina, total_paginas, len(linhas))
                 pagina += 1
-    conexao.close()
+                dormir(PAUSA_ENTRE_PAGINAS)
+    finally:
+        conexao.close()
+        if dono:
+            cliente.close()
+    if total == 0 and falhas:
+        raise PncpFalhou("Nenhum edital coletado: o PNCP não respondeu.")
+    if falhas:
+        log.warning("Coleta terminou com %s página(s) puladas.", falhas)
     return total
 
 
