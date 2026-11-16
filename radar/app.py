@@ -23,7 +23,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import banco, classificador, detalhes
+import hashlib
+import hmac
+import os
+import secrets
+
+from . import banco, classificador, detalhes, notificacoes
 from .config import Config
 from .seguranca import auditoria, dispositivos, rede, senhas, sessoes, validacao
 from .seguranca.limite import JanelaDeslizante
@@ -106,6 +111,25 @@ STATUS_FUNIL = {
 }
 
 
+class PreferenciasAlerta(BaseModel):
+    novos_editais: bool
+    processos: bool
+    atas_ramo: bool
+    atas_processos: bool
+
+
+class NovoTelefone(BaseModel):
+    telefone: str = Field(max_length=30)
+    consentimento: bool
+
+
+class CodigoTelefone(BaseModel):
+    codigo: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$")
+
+
+PALAVRAS_SAIR = {"sair", "parar", "pare", "stop", "cancelar", "descadastrar"}
+
+
 class Acompanhamento(BaseModel):
     id: str = Field(max_length=60)
     status: Literal["interesse", "preparando", "enviada", "ganhou", "perdeu"]
@@ -123,7 +147,7 @@ def _ics_texto(texto: str) -> str:
     return texto.replace("\r", "").replace("\n", "\\n")
 
 
-def criar_app(config: Config) -> FastAPI:
+def criar_app(config: Config, notificador: notificacoes.Notificador | None = None) -> FastAPI:
     app = FastAPI(title="Radar de Editais", docs_url=None, redoc_url=None, openapi_url=None)
     banco.preparar(config.banco)
     proxies = set(config.proxies_confiaveis)
@@ -139,6 +163,9 @@ def criar_app(config: Config) -> FastAPI:
     falhas_confirmacao = JanelaDeslizante(limite=5, janela=QUINZE_MINUTOS)
     # Consultas de itens/documentos vão ao PNCP: limite por usuário.
     limite_detalhes = JanelaDeslizante(limite=60, janela=60)
+    # Códigos de verificação do WhatsApp: no máximo 3 envios por hora por usuário.
+    limite_codigos = JanelaDeslizante(limite=3, janela=60 * 60)
+    notificador = notificador or notificacoes.do_ambiente()
     app.state.limites = {
         "ip_login": limite_ip_login, "ip_cadastro": limite_ip_cadastro,
         "email_ip": falhas_email_ip, "email": falhas_email, "confirmacao": falhas_confirmacao,
@@ -330,6 +357,9 @@ def criar_app(config: Config) -> FastAPI:
         dados = {k: usuario[k] for k in usuario.keys() if k != "senha_hash"}
         for campo in ("ramos", "ufs", "palavras_chave"):
             dados[campo] = json.loads(dados[campo])
+        alerta = conexao.execute("SELECT * FROM alertas_config WHERE usuario_id = ?", (usuario["id"],)).fetchone()
+        dados["alertas"] = ({k: alerta[k] for k in alerta.keys() if k not in ("codigo_hash", "codigo_expira")}
+                            if alerta else None)
         return dados
 
     @app.delete("/eu")
@@ -524,6 +554,159 @@ def criar_app(config: Config) -> FastAPI:
         )
         return {"ok": True}
 
+    # ---------------------------------------------------------------- alertas
+
+    def _hash_codigo(usuario_id: int, codigo: str) -> str:
+        return hmac.new(config.segredo.encode(), f"codigo|{usuario_id}|{codigo}".encode(), hashlib.sha256).hexdigest()
+
+    def _config_alerta(conexao, usuario_id: int):
+        conexao.execute("INSERT OR IGNORE INTO alertas_config (usuario_id) VALUES (?)", (usuario_id,))
+        return conexao.execute("SELECT * FROM alertas_config WHERE usuario_id = ?", (usuario_id,)).fetchone()
+
+    @app.get("/alertas/config")
+    def ver_alertas(usuario=Depends(usuario_atual), conexao=Depends(db)):
+        c = _config_alerta(conexao, usuario["id"])
+        nao_lidos = conexao.execute("SELECT COUNT(*) FROM eventos WHERE usuario_id = ? AND lido = 0",
+                                    (usuario["id"],)).fetchone()[0]
+        return {
+            "canal": notificador.nome,
+            "telefone": notificacoes.mascarar_telefone(c["telefone"]),
+            "verificado": bool(c["telefone_verificado"]),
+            "aguardando_codigo": bool(c["codigo_hash"]) and not c["telefone_verificado"],
+            "preferencias": {k: bool(c[k]) for k in ("novos_editais", "processos", "atas_ramo", "atas_processos")},
+            "nao_lidos": nao_lidos,
+        }
+
+    @app.put("/alertas/preferencias")
+    def salvar_preferencias(dados: PreferenciasAlerta, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        _config_alerta(conexao, usuario["id"])
+        conexao.execute(
+            "UPDATE alertas_config SET novos_editais = ?, processos = ?, atas_ramo = ?, atas_processos = ? "
+            "WHERE usuario_id = ?",
+            (int(dados.novos_editais), int(dados.processos), int(dados.atas_ramo), int(dados.atas_processos),
+             usuario["id"]))
+        return {"ok": True}
+
+    @app.post("/alertas/telefone")
+    def cadastrar_telefone(dados: NovoTelefone, request: Request, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        if not dados.consentimento:
+            raise HTTPException(422, "É preciso autorizar o envio de alertas pelo WhatsApp.")
+        telefone = notificacoes.normalizar_telefone(dados.telefone)
+        if telefone is None:
+            raise HTTPException(422, "Informe um celular com DDD, ex.: (11) 98765-4321.")
+        if not limite_codigos.permitir(str(usuario["id"])):
+            raise HTTPException(429, "Muitos códigos pedidos. Tente de novo em uma hora.")
+        codigo = f"{secrets.randbelow(10**6):06d}"
+        expira = (datetime.now(timezone.utc) + timedelta(minutes=10)).isoformat(timespec="seconds")
+        _config_alerta(conexao, usuario["id"])
+        conexao.execute(
+            "UPDATE alertas_config SET telefone = ?, telefone_verificado = 0, codigo_hash = ?, codigo_expira = ?, "
+            "codigo_tentativas = 0 WHERE usuario_id = ?",
+            (telefone, _hash_codigo(usuario["id"], codigo), expira, usuario["id"]))
+        try:
+            situacao = notificador.enviar_codigo(conexao, usuario["id"], telefone, codigo)
+        except notificacoes.FalhaEnvio:
+            raise HTTPException(502, "Não conseguimos enviar o código pelo WhatsApp agora. Tente mais tarde.") from None
+        auditar(conexao, "whatsapp_codigo_enviado", request, usuario_id=usuario["id"])
+        resposta = {"ok": True, "telefone": notificacoes.mascarar_telefone(telefone)}
+        if situacao == "simulado":
+            # Modo de teste (sem conta na Meta): nada é enviado, então mostramos o código.
+            resposta["codigo_teste"] = codigo
+        return resposta
+
+    @app.post("/alertas/telefone/confirmar")
+    def confirmar_telefone(dados: CodigoTelefone, request: Request, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        c = _config_alerta(conexao, usuario["id"])
+        if not c["codigo_hash"] or not c["codigo_expira"]:
+            raise HTTPException(422, "Peça um código primeiro.")
+        if datetime.now(timezone.utc) > datetime.fromisoformat(c["codigo_expira"]):
+            raise HTTPException(422, "O código expirou. Peça outro.")
+        if c["codigo_tentativas"] >= 5:
+            raise HTTPException(429, "Muitas tentativas. Peça um novo código.")
+        if not hmac.compare_digest(c["codigo_hash"], _hash_codigo(usuario["id"], dados.codigo)):
+            conexao.execute("UPDATE alertas_config SET codigo_tentativas = codigo_tentativas + 1 WHERE usuario_id = ?",
+                            (usuario["id"],))
+            raise HTTPException(422, "Código incorreto.")
+        try:
+            conexao.execute(
+                "UPDATE alertas_config SET telefone_verificado = 1, consentimento_em = ?, codigo_hash = NULL, "
+                "codigo_expira = NULL, codigo_tentativas = 0 WHERE usuario_id = ?",
+                (datetime.now(timezone.utc).isoformat(timespec="seconds"), usuario["id"]))
+        except sqlite3.IntegrityError:
+            raise HTTPException(409, "Este número já está em uso em outra conta.") from None
+        auditar(conexao, "whatsapp_confirmado", request, usuario_id=usuario["id"])
+        return {"ok": True}
+
+    @app.delete("/alertas/telefone")
+    def remover_telefone(request: Request, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        conexao.execute(
+            "UPDATE alertas_config SET telefone = NULL, telefone_verificado = 0, consentimento_em = NULL, "
+            "codigo_hash = NULL, codigo_expira = NULL WHERE usuario_id = ?", (usuario["id"],))
+        conexao.execute("DELETE FROM mensagens_simuladas WHERE usuario_id = ?", (usuario["id"],))
+        auditar(conexao, "whatsapp_removido", request, usuario_id=usuario["id"])
+        return {"ok": True}
+
+    @app.get("/alertas/eventos")
+    def meus_eventos(usuario=Depends(usuario_atual), conexao=Depends(db)):
+        linhas = conexao.execute(
+            "SELECT id, tipo, edital_id, titulo, texto, link, criado, lido, whatsapp FROM eventos "
+            "WHERE usuario_id = ? ORDER BY id DESC LIMIT 100", (usuario["id"],)).fetchall()
+        return {"eventos": [dict(l) for l in linhas]}
+
+    @app.post("/alertas/eventos/lidos")
+    def marcar_lidos(usuario=Depends(usuario_atual), conexao=Depends(db)):
+        conexao.execute("UPDATE eventos SET lido = 1 WHERE usuario_id = ?", (usuario["id"],))
+        return {"ok": True}
+
+    @app.get("/alertas/simuladas")
+    def mensagens_de_teste(usuario=Depends(usuario_atual), conexao=Depends(db)):
+        """Modo de teste: mostra as mensagens que teriam ido para o WhatsApp do usuário."""
+        if notificador.nome != "simulado":
+            return {"mensagens": []}
+        linhas = conexao.execute(
+            "SELECT conteudo, criado FROM mensagens_simuladas WHERE usuario_id = ? ORDER BY id DESC LIMIT 30",
+            (usuario["id"],)).fetchall()
+        return {"mensagens": [dict(l) for l in linhas]}
+
+    # Webhook da Meta: confirmação do endereço e mensagens recebidas ("SAIR").
+    @app.get("/webhook/whatsapp")
+    def webhook_verificar(request: Request):
+        token = os.environ.get("WHATSAPP_VERIFY_TOKEN", "")
+        params = request.query_params
+        if (token and params.get("hub.mode") == "subscribe"
+                and hmac.compare_digest(params.get("hub.verify_token", ""), token)):
+            return RespostaBruta(params.get("hub.challenge", "")[:100], media_type="text/plain")
+        raise HTTPException(403, "Token inválido.")
+
+    @app.post("/webhook/whatsapp")
+    async def webhook_mensagem(request: Request):
+        corpo = await request.body()
+        if not notificacoes.assinatura_valida(os.environ.get("WHATSAPP_APP_SECRET", ""), corpo,
+                                              request.headers.get("x-hub-signature-256")):
+            raise HTTPException(403, "Assinatura inválida.")
+        try:
+            dados = json.loads(corpo)
+        except ValueError:
+            raise HTTPException(400, "JSON inválido.") from None
+        saidas = []
+        for entrada in dados.get("entry", []) if isinstance(dados, dict) else []:
+            for mudanca in entrada.get("changes", []):
+                for msg in (mudanca.get("value") or {}).get("messages", []) or []:
+                    texto = ((msg.get("text") or {}).get("body") or "").strip().lower()
+                    if texto in PALAVRAS_SAIR:
+                        saidas.append(notificacoes.normalizar_telefone(str(msg.get("from", ""))))
+        if saidas:
+            conexao = banco.conectar(config.banco)
+            try:
+                for telefone in filter(None, saidas):
+                    conexao.execute(
+                        "UPDATE alertas_config SET telefone_verificado = 0, consentimento_em = NULL "
+                        "WHERE telefone = ?", (telefone,))
+                    auditar(conexao, "whatsapp_sair", request, detalhe="pediu para sair pelo WhatsApp")
+            finally:
+                conexao.close()
+        return {"ok": True}
+
     # ------------------------------------------------------------------ site
 
     def pagina(nome: str):
@@ -535,7 +718,8 @@ def criar_app(config: Config) -> FastAPI:
         return servir
 
     for caminho, nome in (("/", "index"), ("/cadastro", "cadastro"), ("/entrar", "entrar"),
-                          ("/painel", "painel"), ("/ver", "edital"), ("/acompanhar", "funil")):
+                          ("/painel", "painel"), ("/ver", "edital"), ("/acompanhar", "funil"),
+                          ("/alertas", "alertas")):
         app.add_api_route(caminho, pagina(nome), methods=["GET"], include_in_schema=False)
     app.mount("/static", StaticFiles(directory=PASTA_SITE / "static"), name="static")
 

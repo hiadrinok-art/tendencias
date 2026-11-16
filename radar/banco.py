@@ -77,6 +77,66 @@ CREATE TABLE IF NOT EXISTS detalhes_pncp (
     buscado_em TEXT NOT NULL,
     PRIMARY KEY (edital_id, tipo)
 );
+CREATE TABLE IF NOT EXISTS alertas_config (
+    usuario_id INTEGER PRIMARY KEY REFERENCES usuarios(id) ON DELETE CASCADE,
+    telefone TEXT,                     -- E.164 sem "+", ex.: 5511987654321
+    telefone_verificado INTEGER NOT NULL DEFAULT 0,
+    consentimento_em TEXT,             -- quando aceitou receber no WhatsApp
+    codigo_hash TEXT,
+    codigo_expira TEXT,
+    codigo_tentativas INTEGER NOT NULL DEFAULT 0,
+    novos_editais INTEGER NOT NULL DEFAULT 1,
+    processos INTEGER NOT NULL DEFAULT 1,
+    atas_ramo INTEGER NOT NULL DEFAULT 1,
+    atas_processos INTEGER NOT NULL DEFAULT 1,
+    ultimo_resumo TEXT
+);
+CREATE UNIQUE INDEX IF NOT EXISTS alertas_telefone ON alertas_config(telefone) WHERE telefone_verificado = 1;
+CREATE TABLE IF NOT EXISTS eventos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    chave TEXT NOT NULL,               -- evita alerta repetido
+    tipo TEXT NOT NULL,                -- prazo, situacao, documento, resultado, ata_processo, atas_ramo, novos_editais
+    edital_id TEXT,
+    titulo TEXT NOT NULL,
+    texto TEXT NOT NULL,
+    link TEXT,
+    criado TEXT NOT NULL,
+    lido INTEGER NOT NULL DEFAULT 0,
+    whatsapp TEXT,                     -- NULL = não enviar; pendente, enviado, erro, limite, simulado
+    whatsapp_em TEXT,
+    UNIQUE (usuario_id, chave)
+);
+CREATE INDEX IF NOT EXISTS eventos_usuario ON eventos(usuario_id, criado);
+CREATE TABLE IF NOT EXISTS processos_estado (
+    edital_id TEXT PRIMARY KEY,
+    situacao TEXT,
+    encerramento TEXT,
+    documentos TEXT NOT NULL DEFAULT '[]',
+    tem_resultado INTEGER NOT NULL DEFAULT 0,
+    verificado_em TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS atas (
+    id TEXT PRIMARY KEY,               -- número de controle PNCP da ata
+    compra_id TEXT NOT NULL,
+    numero TEXT,
+    orgao TEXT NOT NULL,
+    orgao_cnpj TEXT NOT NULL,
+    objeto TEXT NOT NULL,
+    vigencia_inicio TEXT,
+    vigencia_fim TEXT,
+    publicado TEXT,
+    ramos TEXT NOT NULL DEFAULT '[]',
+    coletado_em TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS atas_compra ON atas(compra_id);
+CREATE TABLE IF NOT EXISTS mensagens_simuladas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER REFERENCES usuarios(id) ON DELETE CASCADE,  -- some com a conta (LGPD)
+    telefone TEXT NOT NULL,
+    conteudo TEXT NOT NULL,
+    criado TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS auditoria (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     quando TEXT NOT NULL,

@@ -18,3 +18,15 @@ services:
         value: "*"               # IP real vem do proxy do Render
       - key: RADAR_HTTPS
         value: "1"
+      # WhatsApp (opcional). Sem estas variáveis, os alertas ficam em modo de teste.
+      # Preencha no painel do Render (Environment); veja docs/WHATSAPP.md.
+      - key: WHATSAPP_TOKEN
+        sync: false
+      - key: WHATSAPP_PHONE_ID
+        sync: false
+      - key: WHATSAPP_APP_SECRET
+        sync: false
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: RADAR_SITE
+        sync: false              # endereço público do site, ex.: https://radar-de-editais.onrender.com

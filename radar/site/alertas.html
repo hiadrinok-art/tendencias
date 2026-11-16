@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alertas — Radar de Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="/static/icone.svg" type="image/svg+xml">
+<script src="/static/app.js" defer></script>
+<script src="/static/alertas.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="/painel">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="App">
+      <a href="/painel">Editais</a>
+      <a href="/acompanhar">Acompanhando</a>
+      <a href="/alertas" aria-current="page">Alertas</a>
+      <button id="sair" class="botao-texto" type="button">Sair</button>
+    </nav>
+  </div>
+</header>
+
+<main class="envoltorio pagina-app">
+  <div>
+    <h1 class="titulo-3">Alertas no WhatsApp</h1>
+    <p class="apoio">Saiba na hora quando um processo que você acompanha muda: prazo, situação, documento novo, resultado e ata assinada.</p>
+  </div>
+  <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+  <p id="modo-teste" class="aviso aviso--ok oculto">Modo de teste: o WhatsApp ainda não está conectado, então nenhuma mensagem sai do Radar. As mensagens aparecem no fim desta página.</p>
+
+  <div class="duas-colunas">
+    <div class="duas-colunas__principal">
+      <section class="cartao secao-cartao" aria-labelledby="h-historico">
+        <div class="linha-titulo">
+          <h2 id="h-historico">Últimos alertas</h2>
+          <button id="marcar-lidos" class="botao botao--contorno botao--pequeno" type="button">Marcar como lidos</button>
+        </div>
+        <ul id="eventos" class="lista-eventos"><li class="carregando">Carregando…</li></ul>
+      </section>
+      <section id="sec-simuladas" class="cartao secao-cartao oculto" aria-labelledby="h-simuladas">
+        <h2 id="h-simuladas">Mensagens que iriam para o seu WhatsApp</h2>
+        <ul id="simuladas" class="lista-eventos"></ul>
+      </section>
+    </div>
+
+    <aside class="duas-colunas__lado">
+      <section class="cartao secao-cartao" aria-labelledby="h-whats">
+        <h2 id="h-whats">Seu WhatsApp</h2>
+        <div id="whats-ok" class="oculto">
+          <p>Alertas vão para <strong id="numero"></strong>.</p>
+          <p class="miudo">Para parar, clique abaixo ou responda SAIR em qualquer mensagem.</p>
+          <button id="remover" class="botao botao--contorno" type="button">Parar de receber</button>
+        </div>
+        <form id="form-numero" class="pilha" novalidate>
+          <label class="campo">Celular com DDD
+            <input id="telefone" inputmode="tel" autocomplete="tel" placeholder="(11) 98765-4321" maxlength="20">
+          </label>
+          <label class="aceite"><input id="consentimento" type="checkbox">
+            <span>Autorizo o Radar a me enviar alertas de editais pelo WhatsApp. Posso parar quando quiser.</span>
+          </label>
+          <button class="botao botao--escuro" type="submit">Enviar código</button>
+        </form>
+        <form id="form-codigo" class="pilha oculto" novalidate>
+          <p id="codigo-info" class="miudo"></p>
+          <label class="campo">Código de 6 números
+            <input id="codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
+          </label>
+          <button class="botao botao--teal" type="submit">Confirmar</button>
+        </form>
+        <p id="whats-msg" class="miudo" aria-live="polite"></p>
+      </section>
+
+      <section class="cartao secao-cartao" aria-labelledby="h-prefs">
+        <h2 id="h-prefs">O que avisar</h2>
+        <form id="form-prefs" class="pilha">
+          <label class="aceite"><input type="checkbox" name="processos"> <span><strong>Mudanças nos processos que acompanho</strong>: prazo, situação, documentos e resultado</span></label>
+          <label class="aceite"><input type="checkbox" name="atas_processos"> <span><strong>Ata assinada</strong> de um processo que acompanho</span></label>
+          <label class="aceite"><input type="checkbox" name="atas_ramo"> <span><strong>Resumo das atas novas do meu ramo</strong>: quem ganhou e por quanto</span></label>
+          <label class="aceite"><input type="checkbox" name="novos_editais"> <span><strong>Resumo diário</strong> dos editais novos do meu ramo</span></label>
+          <button class="botao botao--contorno" type="submit">Salvar preferências</button>
+          <p id="prefs-msg" class="miudo" aria-live="polite"></p>
+        </form>
+      </section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

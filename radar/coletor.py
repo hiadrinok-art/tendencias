@@ -138,11 +138,11 @@ def _espera(resposta: httpx.Response | None, tentativa: int) -> float:
     return min(2 ** (tentativa + 1), ESPERA_MAXIMA)
 
 
-def _pagina(cliente: httpx.Client, params: dict, tentativas: int = 7, dormir=time.sleep) -> dict:
+def _pagina(cliente: httpx.Client, params: dict, tentativas: int = 7, dormir=time.sleep, url: str = URL_PNCP) -> dict:
     for tentativa in range(tentativas):
         resposta = None
         try:
-            resposta = cliente.get(URL_PNCP, params=params)
+            resposta = cliente.get(url, params=params)
             if resposta.status_code == 204:
                 return {"data": [], "totalPaginas": 0}
             resposta.raise_for_status()
