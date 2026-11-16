@@ -18,10 +18,3 @@ services:
         value: "*"               # IP real vem do proxy do Render
       - key: RADAR_HTTPS
         value: "1"
-
-  # Mapa de votos de Eduardo Moura (PE 2026): página estática, sem build.
-  - type: web
-    name: mapa-eduardo-moura
-    runtime: static
-    buildCommand: ""
-    staticPublishPath: ./mapa-eduardo-moura
