@@ -1,0 +1,140 @@
+{
+ "titulo": "Pernambuco — Cena 1: A terra antes do nome",
+ "dur_prov": 30.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#mapa-pe",
+   "#mapa-pe",
+   0.38
+  ],
+  [
+   "@1+1.2",
+   "#mapa-pe",
+   "#mapa-pe",
+   0.46
+  ],
+  [
+   "@2-0.3",
+   "#nome-caetes",
+   "#nome-caetes",
+   0.8
+  ],
+  [
+   "@2.2+0.6",
+   "#nome-tabajaras",
+   "#nome-potiguaras+120",
+   0.7
+  ],
+  [
+   "@3-0.2",
+   "#mapa-pe+1500",
+   "#mapa-pe",
+   0.62
+  ],
+  [
+   "@4-0.6",
+   "#mapa-pe-1500",
+   "#mapa-pe",
+   0.6
+  ],
+  [
+   "@4+0.6",
+   "#foto-catimbau",
+   "#foto-catimbau",
+   0.82
+  ],
+  [
+   "@5+0.2",
+   "#pedra",
+   "#pedra",
+   0.9
+  ],
+  [
+   "@6+0.6",
+   "#pedra",
+   "#pedra",
+   0.82
+  ],
+  [
+   "@fim",
+   "#pedra-120",
+   "#pedra",
+   0.62
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "gente",
+   "t_prov": 3.2,
+   "acao": "congelar",
+   "alvo": "pe-silhueta",
+   "foco": "mapa-pe"
+  },
+  {
+   "id": 2,
+   "gatilho": "Caetés",
+   "t_prov": 6.5,
+   "acao": "datilografar",
+   "alvo": "nome-caetes",
+   "som": "pena",
+   "foco": "mapa-pe"
+  },
+  {
+   "id": 2.1,
+   "gatilho": "Potiguaras",
+   "t_prov": 7.3,
+   "acao": "datilografar",
+   "alvo": "nome-potiguaras",
+   "som": "pena",
+   "foco": "mapa-pe"
+  },
+  {
+   "id": 2.2,
+   "gatilho": "Tabajaras",
+   "t_prov": 8.2,
+   "acao": "datilografar",
+   "alvo": "nome-tabajaras",
+   "som": "pena",
+   "foco": "mapa-pe"
+  },
+  {
+   "id": 3,
+   "gatilho": "litoral",
+   "t_prov": 10.5,
+   "acao": "congelar",
+   "alvo": "pe-cores",
+   "foco": "mapa-pe",
+   "som": "ondas"
+  },
+  {
+   "id": 4,
+   "gatilho": "Catimbau",
+   "t_prov": 17.5,
+   "acao": "cair",
+   "alvo": "foto-catimbau",
+   "som": "papel"
+  },
+  {
+   "id": 5,
+   "gatilho": "memória",
+   "t_prov": 22.5,
+   "acao": "desenhar",
+   "alvo": "figuras",
+   "som": "pena",
+   "foco": "pedra"
+  },
+  {
+   "id": 6,
+   "gatilho": "papel",
+   "t_prov": 26.5,
+   "acao": "apagar",
+   "alvo": "foto-catimbau",
+   "foco": "pedra"
+  }
+ ],
+ "sons_extras": []
+}

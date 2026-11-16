@@ -8,6 +8,8 @@
 
   const B = {
     ESTRELA,
+    // CSS específico da cena (o empacotador do HyperFrames remove <style id> do modelo)
+    css(texto) { const st = document.createElement("style"); st.textContent = texto; document.head.appendChild(st); },
     mundo(w, h, html, classe) {
       const m = document.getElementById("mundo");
       m.style.width = w + "px"; m.style.height = h + "px";
@@ -53,7 +55,8 @@
     mapa({ id, x, y, w, h, estados, recorte, margem = 0.08, fundo = "", foco = false, extraSvg = "" }) {
       const vbId = `vb-${id}`;
       const paths = estados.map((e) => `<path ${e.id ? `id="${e.id}"` : ""} class="${e.classe || ""}" data-uf="${e.uf}" d="${GEO.estados[e.uf].d}" fill="${e.fill || "rgba(160,60,40,.18)"}" stroke="${e.stroke || "#5a2a1a"}" stroke-width="${e.sw || 1.2}" stroke-linejoin="round" vector-effect="non-scaling-stroke" style="stroke-width:${e.swpx || 6}px"/>`).join("");
-      B._pendentes.push({ id: vbId, recorte: recorte || estados.map((e) => e.uf), margem });
+      const rec = recorte || estados.map((e) => e.uf);
+      if (rec.length) B._pendentes.push({ id: vbId, recorte: rec, margem });
       return `<div ${id ? `id="${id}"` : ""} class="peca mapa ${fundo}${foco ? " foco" : ""}" style="${estilo({ left: x, top: y, width: w, height: h })}"><svg id="${vbId}" viewBox="${GEO.viewBox}" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">${paths}${extraSvg}</svg></div>`;
     },
     _pendentes: [],
@@ -66,6 +69,7 @@
           if (!p.recorte.includes(el.dataset.uf)) return;
           const bb = el.getBBox(); x0 = Math.min(x0, bb.x); y0 = Math.min(y0, bb.y); x1 = Math.max(x1, bb.x + bb.width); y1 = Math.max(y1, bb.y + bb.height);
         });
+        if (x1 < x0) continue;   // nada encontrado: mantém o viewBox original
         const mx = (x1 - x0) * p.margem, my = (y1 - y0) * p.margem;
         svg.setAttribute("viewBox", `${x0 - mx} ${y0 - my} ${x1 - x0 + 2 * mx} ${y1 - y0 + 2 * my}`);
         svg.dataset.bbox = JSON.stringify([x0, y0, x1, y1]);

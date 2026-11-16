@@ -84,6 +84,9 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - **Câmera (piloto Pernambuco):** a spline Catmull-Rom passava do ponto quando uma viagem longa vinha logo depois de um trecho parado, mostrando a borda preta do mundo. O motor agora usa PCHIP (cúbica monotônica), que nunca passa do keyframe.
 - **Wikimedia:** a API e o upload.wikimedia.org dão 429 em IP compartilhado. Tente de novo depois de alguns minutos e use uma silhueta provisória enquanto isso.
 - **Direito autoral de pinturas:** confira a data de morte do artista (no Brasil, 70 anos). Ex.: Parreiras (1937) é domínio público; Murillo La Greca (1985) não.
+- **Foco em elementos aninhados:** nunca dê foco a um filho de um elemento que já foi aceso (ex.: nomes dentro de um mapa). Apagar o pai apaga o filho junto. Use `"foco": "<id do pai>"` nesses beats.
+- **HyperFrames remove `<style id>` do modelo**: injete CSS da cena por código (`B.css(...)`).
+- **Rode `hyperframes validate`** em toda cena: ele acusa erros de JavaScript e imagens faltando (ex.: um 429 do Wikimedia salvo como `.jpg`).
 - Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16 em **duas passadas lineares**. A de uma passada comprime e desfaz o envelope.
 - Para medir música × voz, use as pausas reais da narração (`silencedetect`), não os tempos do Whisper: as palavras podem estar adiantadas.
 - `data-duration` do `#root` e do `<audio>` precisa ser igual a `duracao` do plano, senão o render sai com tela preta no fim.
