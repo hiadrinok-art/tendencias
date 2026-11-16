@@ -33,6 +33,33 @@ CREATE TABLE IF NOT EXISTS sessoes (
     expira TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS sessoes_usuario ON sessoes(usuario_id);
+CREATE TABLE IF NOT EXISTS editais (
+    id TEXT PRIMARY KEY,               -- número de controle do PNCP
+    orgao TEXT NOT NULL,
+    orgao_cnpj TEXT NOT NULL,
+    unidade TEXT,
+    municipio TEXT,
+    uf TEXT NOT NULL,
+    modalidade TEXT,
+    objeto TEXT NOT NULL,
+    valor_estimado REAL,
+    abertura TEXT,
+    encerramento TEXT,
+    publicado TEXT,
+    link_origem TEXT,
+    link_pncp TEXT NOT NULL,
+    ramos TEXT NOT NULL DEFAULT '[]',
+    coletado_em TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS editais_encerramento ON editais(encerramento);
+CREATE INDEX IF NOT EXISTS editais_uf ON editais(uf);
+CREATE TABLE IF NOT EXISTS avaliacoes (
+    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    edital_id TEXT NOT NULL REFERENCES editais(id) ON DELETE CASCADE,
+    serve INTEGER NOT NULL,
+    quando TEXT NOT NULL,
+    PRIMARY KEY (usuario_id, edital_id)
+);
 CREATE TABLE IF NOT EXISTS auditoria (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     quando TEXT NOT NULL,

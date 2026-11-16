@@ -12,14 +12,18 @@ import sqlite3
 from datetime import datetime, timezone
 from typing import Literal
 
-from fastapi import Depends, FastAPI, HTTPException, Request, Response
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import banco
+from . import banco, classificador
 from .config import Config
 from .seguranca import auditoria, dispositivos, rede, senhas, sessoes, validacao
 from .seguranca.limite import JanelaDeslizante
@@ -32,6 +36,16 @@ UF = Literal[
 ]
 
 ERRO_LOGIN = "E-mail ou senha incorretos."
+# Datas do PNCP vêm no horário de Brasília, sem fuso.
+FUSO_BRASILIA = ZoneInfo("America/Sao_Paulo")
+PASTA_SITE = Path(__file__).parent / "site"
+# Páginas do site: só scripts e estilos do próprio domínio (nada inline) e as
+# fontes do Google. Dados do PNCP entram na página só como texto.
+CSP_PAGINAS = (
+    "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; "
+    "font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; "
+    "form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+)
 QUINZE_MINUTOS = 15 * 60
 
 
@@ -76,6 +90,11 @@ class TrocaSenha(BaseModel):
 
 class Confirmacao(BaseModel):
     senha: str = Field(max_length=validacao.TAMANHO_MAX_SENHA)
+
+
+class Avaliacao(BaseModel):
+    id: str = Field(max_length=60)
+    serve: bool
 
 
 def criar_app(config: Config) -> FastAPI:
@@ -296,6 +315,103 @@ def criar_app(config: Config) -> FastAPI:
         resposta.delete_cookie(config.nome_cookie, path="/")
         resposta.delete_cookie(dispositivos.NOME_COOKIE, path="/")
         return {"ok": True}
+
+    # ---------------------------------------------------------------- editais
+
+    def _edital_publico(linha, agora: datetime) -> dict:
+        encerramento = linha["encerramento"]
+        dias = None
+        if encerramento:
+            fim = datetime.fromisoformat(encerramento).replace(tzinfo=FUSO_BRASILIA)
+            dias = max(0, (fim.date() - agora.astimezone(FUSO_BRASILIA).date()).days)
+        return {
+            "id": linha["id"], "orgao": linha["orgao"], "unidade": linha["unidade"],
+            "municipio": linha["municipio"], "uf": linha["uf"], "modalidade": linha["modalidade"],
+            "objeto": linha["objeto"], "valor_estimado": linha["valor_estimado"],
+            "abertura": linha["abertura"], "encerramento": encerramento, "dias_restantes": dias,
+            "publicado": linha["publicado"], "link_origem": linha["link_origem"],
+            "link_pncp": linha["link_pncp"],
+            "ramos": [classificador.RAMOS[r] for r in json.loads(linha["ramos"]) if r in classificador.RAMOS],
+        }
+
+    @app.get("/ramos")
+    def listar_ramos():
+        return [{"id": k, "nome": v} for k, v in classificador.RAMOS.items()]
+
+    @app.get("/editais")
+    def meus_editais(filtro: Literal["todos", "prazo", "grandes"] = "todos",
+                     usuario=Depends(usuario_atual), conexao=Depends(db)):
+        """Editais com propostas abertas no ramo, nas UFs e nas palavras-chave do usuário."""
+        ramos = set(json.loads(usuario["ramos"]))
+        ufs = json.loads(usuario["ufs"])
+        palavras = json.loads(usuario["palavras_chave"])
+        agora = datetime.now(timezone.utc)
+        agora_local = agora.astimezone(FUSO_BRASILIA).replace(tzinfo=None).isoformat(timespec="seconds")
+        marcadores = ",".join("?" * len(ufs))
+        linhas = conexao.execute(
+            f"SELECT * FROM editais WHERE encerramento > ? AND uf IN ({marcadores}) "
+            "ORDER BY encerramento LIMIT 5000", (agora_local, *ufs),
+        ).fetchall()
+        escolhidos = [
+            l for l in linhas
+            if ramos & set(json.loads(l["ramos"])) or (palavras and classificador.casa_palavras(l["objeto"], palavras))
+        ]
+        todos = [_edital_publico(l, agora) for l in escolhidos]
+        if filtro == "prazo":
+            visiveis = [e for e in todos if e["dias_restantes"] is not None and e["dias_restantes"] <= 10]
+        elif filtro == "grandes":
+            visiveis = [e for e in todos if (e["valor_estimado"] or 0) >= 100_000]
+        else:
+            visiveis = todos
+        return {
+            "resumo": {
+                "total": len(todos),
+                "valor_somado": round(sum(e["valor_estimado"] or 0 for e in todos), 2),
+                "proximo_prazo": todos[0]["encerramento"] if todos else None,
+                "proximo_em_dias": todos[0]["dias_restantes"] if todos else None,
+                "prazo_10_dias": sum(1 for e in todos if (e["dias_restantes"] or 99) <= 10),
+                "acima_100_mil": sum(1 for e in todos if (e["valor_estimado"] or 0) >= 100_000),
+            },
+            "editais": visiveis[:200],
+        }
+
+    @app.get("/edital")
+    def ver_edital(id: str = Query(max_length=60), usuario=Depends(usuario_atual), conexao=Depends(db)):
+        linha = conexao.execute("SELECT * FROM editais WHERE id = ?", (id,)).fetchone()
+        if linha is None:
+            raise HTTPException(404, "Edital não encontrado.")
+        avaliacao = conexao.execute(
+            "SELECT serve FROM avaliacoes WHERE usuario_id = ? AND edital_id = ?", (usuario["id"], id)
+        ).fetchone()
+        dados = _edital_publico(linha, datetime.now(timezone.utc))
+        dados["avaliacao"] = None if avaliacao is None else bool(avaliacao["serve"])
+        return dados
+
+    @app.post("/edital/avaliacao")
+    def avaliar(dados: Avaliacao, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        if conexao.execute("SELECT 1 FROM editais WHERE id = ?", (dados.id,)).fetchone() is None:
+            raise HTTPException(404, "Edital não encontrado.")
+        conexao.execute(
+            "INSERT INTO avaliacoes (usuario_id, edital_id, serve, quando) VALUES (?, ?, ?, ?) "
+            "ON CONFLICT(usuario_id, edital_id) DO UPDATE SET serve = excluded.serve, quando = excluded.quando",
+            (usuario["id"], dados.id, int(dados.serve), datetime.now(timezone.utc).isoformat(timespec="seconds")),
+        )
+        return {"ok": True}
+
+    # ------------------------------------------------------------------ site
+
+    def pagina(nome: str):
+        def servir():
+            resposta = FileResponse(PASTA_SITE / f"{nome}.html", media_type="text/html; charset=utf-8")
+            resposta.headers["Content-Security-Policy"] = CSP_PAGINAS
+            resposta.headers["Cache-Control"] = "no-cache"
+            return resposta
+        return servir
+
+    for caminho, nome in (("/", "index"), ("/cadastro", "cadastro"), ("/entrar", "entrar"),
+                          ("/painel", "painel"), ("/ver", "edital")):
+        app.add_api_route(caminho, pagina(nome), methods=["GET"], include_in_schema=False)
+    app.mount("/static", StaticFiles(directory=PASTA_SITE / "static"), name="static")
 
     return app
 

@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import json
+from urllib.parse import urlparse
 
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
@@ -94,8 +95,12 @@ class ProtecaoHTTP(BaseHTTPMiddleware):
 
     async def dispatch(self, request, call_next):
         if request.method not in METODOS_SEGUROS and self.nome_cookie in request.cookies:
-            origem = request.headers.get("origin") or ""
-            if origem.rstrip("/") not in self.origens:
+            origem = (request.headers.get("origin") or "").rstrip("/")
+            # Aceita origens listadas e a própria origem do site (o navegador
+            # da vítima manda o Host do Radar e a Origin do site atacante, que
+            # não batem). Compara só o host: atrás de proxy o esquema muda.
+            mesma_origem = bool(origem) and urlparse(origem).netloc == request.headers.get("host")
+            if origem not in self.origens and not mesma_origem:
                 return self._com_cabecalhos(JSONResponse({"erro": "Origem não autorizada."}, 403))
         resposta = await call_next(request)
         return self._com_cabecalhos(resposta)
