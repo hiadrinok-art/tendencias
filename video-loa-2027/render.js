@@ -5,7 +5,7 @@ const OUT=process.env.OUT||'build';fs.mkdirSync(OUT,{recursive:true});
 async function worker(id,f0,f1){
   const b=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
   const p=await b.newPage({viewport:{width:1080,height:1920}});
-  await p.goto('file://'+path.resolve('index.html'));await p.evaluate(()=>document.fonts.ready);
+  await p.goto('file://'+path.resolve(process.env.PAGE||'index.html'));await p.evaluate(()=>document.fonts.ready);
   const ff=spawn('ffmpeg',['-loglevel','error','-y','-f','image2pipe','-framerate',String(FPS),'-c:v','mjpeg','-i','-',
     '-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-r',String(FPS),`${OUT}/seg_${id}.mp4`],{stdio:['pipe','inherit','inherit']});
   for(let f=f0;f<f1;f++){await p.evaluate(t=>renderAt(t),f/FPS);
