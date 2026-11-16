@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acompanhando — Radar de Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="/static/icone.svg" type="image/svg+xml">
+<script src="/static/app.js" defer></script>
+<script src="/static/funil.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="/painel">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="App">
+      <a href="/painel">Editais</a>
+      <a href="/acompanhar" aria-current="page">Acompanhando</a>
+      <button id="sair" class="botao-texto" type="button">Sair</button>
+    </nav>
+  </div>
+</header>
+<main class="envoltorio pagina-app">
+  <div>
+    <h1 class="titulo-3">Editais que você acompanha</h1>
+    <p class="apoio">Mude a etapa de cada edital conforme avança. Para incluir um edital, abra-o e use "Acompanhar".</p>
+  </div>
+  <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+  <div id="funil" class="funil"><p class="carregando">Carregando…</p></div>
+</main>
+</body>
+</html>

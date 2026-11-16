@@ -97,7 +97,7 @@ def test_detalhe_e_avaliacao(cliente, caminho_banco, consultar):
 
 
 def test_paginas_do_site_com_csp_restrita(cliente):
-    for caminho in ["/", "/cadastro", "/entrar", "/painel", "/ver"]:
+    for caminho in ["/", "/cadastro", "/entrar", "/painel", "/ver", "/acompanhar"]:
         r = cliente.get(caminho)
         assert r.status_code == 200 and "text/html" in r.headers["content-type"], caminho
         csp = r.headers["content-security-policy"]

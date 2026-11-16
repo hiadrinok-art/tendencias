@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="App">
       <a href="/painel" aria-current="page">Editais</a>
+      <a href="/acompanhar">Acompanhando</a>
       <button id="sair" class="botao-texto" type="button">Sair</button>
     </nav>
   </div>
@@ -46,6 +47,16 @@
           <p class="miudo">Texto oficial do PNCP. O resumo em linguagem simples, feito com IA, chega na próxima versão.</p>
         </section>
 
+        <section class="cartao secao-cartao" aria-labelledby="h-itens">
+          <h2 id="h-itens">Itens</h2>
+          <div id="itens" class="tabela-rolavel"><p class="carregando">Buscando itens no PNCP…</p></div>
+        </section>
+
+        <section class="cartao secao-cartao" aria-labelledby="h-docs">
+          <h2 id="h-docs">Documentos do edital</h2>
+          <ul id="documentos" class="lista-docs"><li class="carregando">Buscando documentos no PNCP…</li></ul>
+        </section>
+
         <section class="cartao secao-cartao" aria-labelledby="h-conferir">
           <h2 id="h-conferir">Antes de entrar, confira</h2>
           <ul class="checklist">
@@ -66,6 +77,24 @@
 
       <aside class="duas-colunas__lado">
         <div class="valor-escuro"><span>Valor estimado</span><strong id="valor"></strong></div>
+        <section class="cartao secao-cartao" aria-labelledby="h-acomp">
+          <h2 id="h-acomp">Acompanhar</h2>
+          <label class="campo">Etapa
+            <select id="status">
+              <option value="">Não estou acompanhando</option>
+              <option value="interesse">Tenho interesse</option>
+              <option value="preparando">Preparando proposta</option>
+              <option value="enviada">Proposta enviada</option>
+              <option value="ganhou">Ganhou</option>
+              <option value="perdeu">Não ganhou</option>
+            </select>
+          </label>
+          <label class="campo">Anotações
+            <textarea id="nota" rows="3" maxlength="1000" placeholder="Ex.: pedir atestado ao cliente X"></textarea>
+          </label>
+          <button id="salvar-acomp" class="botao botao--escuro" type="button">Salvar</button>
+          <p id="acomp-msg" class="miudo" aria-live="polite"></p>
+        </section>
         <section class="cartao secao-cartao" aria-labelledby="h-prazos">
           <h2 id="h-prazos">Prazos</h2>
           <ol class="linha-tempo">
@@ -77,6 +106,7 @@
         <div class="acoes acoes--coluna">
           <a id="link-origem" class="botao botao--teal oculto" rel="noopener noreferrer" target="_blank">Abrir no sistema de compras</a>
           <a id="link-pncp" class="botao botao--contorno" rel="noopener noreferrer" target="_blank">Ver no PNCP</a>
+          <a id="link-agenda" class="botao botao--contorno">Adicionar prazo à agenda</a>
           <p id="controle" class="miudo centro"></p>
         </div>
       </aside>

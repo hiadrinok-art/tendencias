@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Literal
 
 from pathlib import Path
@@ -18,12 +18,12 @@ from zoneinfo import ZoneInfo
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response as RespostaBruta
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import banco, classificador
+from . import banco, classificador, detalhes
 from .config import Config
 from .seguranca import auditoria, dispositivos, rede, senhas, sessoes, validacao
 from .seguranca.limite import JanelaDeslizante
@@ -97,6 +97,32 @@ class Avaliacao(BaseModel):
     serve: bool
 
 
+STATUS_FUNIL = {
+    "interesse": "Tenho interesse",
+    "preparando": "Preparando proposta",
+    "enviada": "Proposta enviada",
+    "ganhou": "Ganhou",
+    "perdeu": "Não ganhou",
+}
+
+
+class Acompanhamento(BaseModel):
+    id: str = Field(max_length=60)
+    status: Literal["interesse", "preparando", "enviada", "ganhou", "perdeu"]
+    nota: str = Field(default="", max_length=1000)
+
+    @field_validator("nota")
+    @classmethod
+    def _nota(cls, v: str) -> str:
+        return validacao.limpar_texto_multilinha(v, 1000)
+
+
+def _ics_texto(texto: str) -> str:
+    """Escapa texto para o formato iCalendar (RFC 5545), sem quebras de linha soltas."""
+    texto = texto.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+    return texto.replace("\r", "").replace("\n", "\\n")
+
+
 def criar_app(config: Config) -> FastAPI:
     app = FastAPI(title="Radar de Editais", docs_url=None, redoc_url=None, openapi_url=None)
     banco.preparar(config.banco)
@@ -111,6 +137,8 @@ def criar_app(config: Config) -> FastAPI:
     falhas_email = JanelaDeslizante(limite=20, janela=QUINZE_MINUTOS)
     # Senha pedida de novo para trocar senha ou excluir conta.
     falhas_confirmacao = JanelaDeslizante(limite=5, janela=QUINZE_MINUTOS)
+    # Consultas de itens/documentos vão ao PNCP: limite por usuário.
+    limite_detalhes = JanelaDeslizante(limite=60, janela=60)
     app.state.limites = {
         "ip_login": limite_ip_login, "ip_cadastro": limite_ip_cadastro,
         "email_ip": falhas_email_ip, "email": falhas_email, "confirmacao": falhas_confirmacao,
@@ -340,8 +368,12 @@ def criar_app(config: Config) -> FastAPI:
 
     @app.get("/editais")
     def meus_editais(filtro: Literal["todos", "prazo", "grandes"] = "todos",
+                     q: str = Query(default="", max_length=100),
                      usuario=Depends(usuario_atual), conexao=Depends(db)):
-        """Editais com propostas abertas no ramo, nas UFs e nas palavras-chave do usuário."""
+        """Editais com propostas abertas no ramo, nas UFs e nas palavras-chave do usuário.
+
+        Com ``q``, vira busca livre: todos os editais abertos nas UFs do usuário
+        cujo objeto ou órgão contenha todas as palavras buscadas, de qualquer ramo."""
         ramos = set(json.loads(usuario["ramos"]))
         ufs = json.loads(usuario["ufs"])
         palavras = json.loads(usuario["palavras_chave"])
@@ -352,11 +384,24 @@ def criar_app(config: Config) -> FastAPI:
             f"SELECT * FROM editais WHERE encerramento > ? AND uf IN ({marcadores}) "
             "ORDER BY encerramento LIMIT 5000", (agora_local, *ufs),
         ).fetchall()
-        escolhidos = [
-            l for l in linhas
-            if ramos & set(json.loads(l["ramos"])) or (palavras and classificador.casa_palavras(l["objeto"], palavras))
-        ]
+        termos = classificador.normalizar(validacao.limpar_texto(q, 100)).split()
+        if termos:
+            escolhidos = [
+                l for l in linhas
+                if all(t in classificador.normalizar(f"{l['objeto']} {l['orgao']} {l['municipio']}") for t in termos)
+            ]
+        else:
+            escolhidos = [
+                l for l in linhas
+                if ramos & set(json.loads(l["ramos"])) or (palavras and classificador.casa_palavras(l["objeto"], palavras))
+            ]
+        acompanhados = {
+            a["edital_id"]: a["status"] for a in conexao.execute(
+                "SELECT edital_id, status FROM acompanhamentos WHERE usuario_id = ?", (usuario["id"],))
+        }
         todos = [_edital_publico(l, agora) for l in escolhidos]
+        for e in todos:
+            e["acompanhamento"] = acompanhados.get(e["id"])
         if filtro == "prazo":
             visiveis = [e for e in todos if e["dias_restantes"] is not None and e["dias_restantes"] <= 10]
         elif filtro == "grandes":
@@ -383,9 +428,90 @@ def criar_app(config: Config) -> FastAPI:
         avaliacao = conexao.execute(
             "SELECT serve FROM avaliacoes WHERE usuario_id = ? AND edital_id = ?", (usuario["id"], id)
         ).fetchone()
+        acompanhamento = conexao.execute(
+            "SELECT status, nota FROM acompanhamentos WHERE usuario_id = ? AND edital_id = ?", (usuario["id"], id)
+        ).fetchone()
         dados = _edital_publico(linha, datetime.now(timezone.utc))
         dados["avaliacao"] = None if avaliacao is None else bool(avaliacao["serve"])
+        dados["acompanhamento"] = dict(acompanhamento) if acompanhamento else None
         return dados
+
+    @app.get("/edital/detalhes")
+    def detalhes_edital(id: str = Query(max_length=60), tipo: Literal["itens", "arquivos"] = "itens",
+                        usuario=Depends(usuario_atual), conexao=Depends(db)):
+        """Itens ou documentos do edital, direto do PNCP (com cache de 6 h)."""
+        linha = conexao.execute("SELECT * FROM editais WHERE id = ?", (id,)).fetchone()
+        if linha is None:
+            raise HTTPException(404, "Edital não encontrado.")
+        if not limite_detalhes.permitir(str(usuario["id"])):
+            raise HTTPException(429, "Muitas consultas seguidas. Aguarde um minuto.")
+        try:
+            return {"tipo": tipo, "lista": detalhes.obter(conexao, linha, tipo)}
+        except detalhes.PncpIndisponivel:
+            raise HTTPException(503, "O PNCP não respondeu agora. Tente de novo em instantes.") from None
+
+    @app.get("/edital/agenda.ics")
+    def agenda(id: str = Query(max_length=60), usuario=Depends(usuario_atual), conexao=Depends(db)):
+        """Evento de calendário com o fim do prazo de propostas (alarme 1 dia antes)."""
+        linha = conexao.execute("SELECT * FROM editais WHERE id = ?", (id,)).fetchone()
+        if linha is None or not linha["encerramento"]:
+            raise HTTPException(404, "Edital sem data de encerramento.")
+        fim = datetime.fromisoformat(linha["encerramento"]).replace(tzinfo=FUSO_BRASILIA).astimezone(timezone.utc)
+        carimbo = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        objeto = linha["objeto"][:120]
+        uid = "".join(c for c in linha["id"] if c.isalnum()) + "@radar-de-editais"
+        linhas = [
+            "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Radar de Editais//PT-BR", "CALSCALE:GREGORIAN",
+            "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{carimbo}",
+            f"DTSTART:{fim.strftime('%Y%m%dT%H%M%SZ')}",
+            f"DTEND:{(fim + timedelta(minutes=30)).strftime('%Y%m%dT%H%M%SZ')}",
+            f"SUMMARY:{_ics_texto('Fim das propostas: ' + objeto)}",
+            f"DESCRIPTION:{_ics_texto(linha['orgao'] + ' - ' + linha['objeto'][:500] + ' - Nº PNCP ' + linha['id'])}",
+            f"URL:{linha['link_pncp']}",
+            "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:-P1D", "DESCRIPTION:Prazo do edital amanhã", "END:VALARM",
+            "END:VEVENT", "END:VCALENDAR",
+        ]
+        return RespostaBruta(
+            "\r\n".join(linhas) + "\r\n", media_type="text/calendar; charset=utf-8",
+            headers={"Content-Disposition": 'attachment; filename="prazo-edital.ics"'})
+
+    @app.get("/funil")
+    def meu_funil(usuario=Depends(usuario_atual), conexao=Depends(db)):
+        linhas = conexao.execute(
+            "SELECT e.*, a.status, a.nota, a.atualizado FROM acompanhamentos a "
+            "JOIN editais e ON e.id = a.edital_id WHERE a.usuario_id = ? ORDER BY e.encerramento",
+            (usuario["id"],)).fetchall()
+        agora = datetime.now(timezone.utc)
+        etapas = []
+        for status, nome in STATUS_FUNIL.items():
+            itens = []
+            for l in linhas:
+                if l["status"] == status:
+                    e = _edital_publico(l, agora)
+                    e.update(status=l["status"], nota=l["nota"], atualizado=l["atualizado"])
+                    itens.append(e)
+            etapas.append({"status": status, "nome": nome, "editais": itens})
+        return {"etapas": etapas}
+
+    @app.put("/funil")
+    def acompanhar(dados: Acompanhamento, usuario=Depends(usuario_atual), conexao=Depends(db)):
+        if conexao.execute("SELECT 1 FROM editais WHERE id = ?", (dados.id,)).fetchone() is None:
+            raise HTTPException(404, "Edital não encontrado.")
+        total = conexao.execute("SELECT COUNT(*) FROM acompanhamentos WHERE usuario_id = ?",
+                                (usuario["id"],)).fetchone()[0]
+        if total >= 1000:
+            raise HTTPException(422, "Limite de 1.000 editais acompanhados.")
+        conexao.execute(
+            "INSERT INTO acompanhamentos (usuario_id, edital_id, status, nota, atualizado) VALUES (?, ?, ?, ?, ?) "
+            "ON CONFLICT(usuario_id, edital_id) DO UPDATE SET status = excluded.status, nota = excluded.nota, "
+            "atualizado = excluded.atualizado",
+            (usuario["id"], dados.id, dados.status, dados.nota, datetime.now(timezone.utc).isoformat(timespec="seconds")))
+        return {"ok": True}
+
+    @app.delete("/funil")
+    def deixar_de_acompanhar(id: str = Query(max_length=60), usuario=Depends(usuario_atual), conexao=Depends(db)):
+        conexao.execute("DELETE FROM acompanhamentos WHERE usuario_id = ? AND edital_id = ?", (usuario["id"], id))
+        return {"ok": True}
 
     @app.post("/edital/avaliacao")
     def avaliar(dados: Avaliacao, usuario=Depends(usuario_atual), conexao=Depends(db)):
@@ -409,7 +535,7 @@ def criar_app(config: Config) -> FastAPI:
         return servir
 
     for caminho, nome in (("/", "index"), ("/cadastro", "cadastro"), ("/entrar", "entrar"),
-                          ("/painel", "painel"), ("/ver", "edital")):
+                          ("/painel", "painel"), ("/ver", "edital"), ("/acompanhar", "funil")):
         app.add_api_route(caminho, pagina(nome), methods=["GET"], include_in_schema=False)
     app.mount("/static", StaticFiles(directory=PASTA_SITE / "static"), name="static")
 

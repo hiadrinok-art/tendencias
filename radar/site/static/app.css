@@ -196,3 +196,26 @@ legend { padding: 0 0 12px; font-size: 18px; font-weight: 700; }
 .centro { text-align: center; word-break: break-all; }
 .botao-texto { color: inherit; }
 .nav .botao--escuro, .nav .botao--escuro:hover { color: #fff; }
+
+/* Fase 1: busca, itens, documentos, funil */
+.busca { display: flex; flex-wrap: wrap; gap: 8px; }
+.busca input { flex: 1 1 320px; min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--borda); background: var(--branco); color: var(--texto); font: inherit; }
+.campo textarea, .campo select { min-height: 48px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--borda); background: var(--branco); color: var(--texto); font: inherit; font-weight: 400; font-size: 16px; }
+.tabela-rolavel { overflow-x: auto; }
+.tabela-itens { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.tabela-itens th { text-align: left; font-size: 13px; color: var(--texto-3); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--linha); }
+.tabela-itens td { padding: 10px; border-top: 1px solid var(--linha-2); vertical-align: top; }
+.tabela-itens .num { text-align: right; white-space: nowrap; }
+.selo-me { display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: var(--tinta); color: var(--teal-escuro); font-size: 12px; font-weight: 600; }
+.lista-docs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.lista-docs li { padding: 10px 0; border-top: 1px solid var(--linha-2); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lista-docs li:first-child { border-top: 0; }
+.selo-acomp { display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: #EAF0F5; color: #33506B; font-size: 12px; font-weight: 600; }
+.funil { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: start; }
+.etapa { background: #EAF0F5; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 120px; }
+.etapa h2 { font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; }
+.cartao-funil { background: var(--branco); border: 1px solid var(--linha); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.cartao-funil a { color: var(--texto); font-weight: 600; text-decoration: none; line-height: 1.35; }
+.cartao-funil a:hover { text-decoration: underline; }
+.cartao-funil .nota { color: var(--texto-2); white-space: pre-line; font-size: 13px; }
+.cartao-funil select { min-height: 40px; border-radius: 8px; border: 1px solid var(--borda); font: inherit; font-size: 13px; padding: 0 8px; background: var(--branco); }
