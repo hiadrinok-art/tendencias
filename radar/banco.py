@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS editais (
     link_origem TEXT,
     link_pncp TEXT NOT NULL,
     ramos TEXT NOT NULL DEFAULT '[]',
-    coletado_em TEXT NOT NULL
+    coletado_em TEXT NOT NULL,
+    ano INTEGER,
+    sequencial INTEGER
 );
 CREATE INDEX IF NOT EXISTS editais_encerramento ON editais(encerramento);
 CREATE INDEX IF NOT EXISTS editais_uf ON editais(uf);
@@ -59,6 +61,21 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
     serve INTEGER NOT NULL,
     quando TEXT NOT NULL,
     PRIMARY KEY (usuario_id, edital_id)
+);
+CREATE TABLE IF NOT EXISTS acompanhamentos (
+    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    edital_id TEXT NOT NULL REFERENCES editais(id) ON DELETE CASCADE,
+    status TEXT NOT NULL,
+    nota TEXT NOT NULL DEFAULT '',
+    atualizado TEXT NOT NULL,
+    PRIMARY KEY (usuario_id, edital_id)
+);
+CREATE TABLE IF NOT EXISTS detalhes_pncp (
+    edital_id TEXT NOT NULL,
+    tipo TEXT NOT NULL,               -- 'itens' ou 'arquivos'
+    conteudo TEXT NOT NULL,           -- JSON já limpo
+    buscado_em TEXT NOT NULL,
+    PRIMARY KEY (edital_id, tipo)
 );
 CREATE TABLE IF NOT EXISTS auditoria (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,8 +105,17 @@ def preparar(caminho: str) -> None:
     try:
         conexao.execute("PRAGMA journal_mode = WAL")
         conexao.executescript(ESQUEMA)
+        _migrar(conexao)
     finally:
         conexao.close()
+
+
+def _migrar(conexao: sqlite3.Connection) -> None:
+    """Acrescenta colunas novas em bancos criados por versões anteriores."""
+    existentes = {linha["name"] for linha in conexao.execute("PRAGMA table_info(editais)")}
+    for coluna, tipo in (("ano", "INTEGER"), ("sequencial", "INTEGER")):
+        if coluna not in existentes:
+            conexao.execute(f"ALTER TABLE editais ADD COLUMN {coluna} {tipo}")
 
 
 @contextmanager
