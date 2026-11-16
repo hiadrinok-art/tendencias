@@ -1,0 +1,25 @@
+/* cordel.css — estilo XILOGRAVURA DE CORDEL, aplicado só dentro de .zona-cordel
+   (pode ser o #mundo inteiro ou um folheto aberto sobre a mesa). */
+.zona-cordel { --tinta: #15120f; --papel: #f1e7d0; --papel2: #e6d8b8; --verm: #b3201c; }
+.zona-cordel.fundo-cordel, #mundo.zona-cordel { background:
+    radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.18), transparent 70%),
+    repeating-linear-gradient(17deg, rgba(90,70,40,.06) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-71deg, rgba(90,70,40,.05) 0 1px, transparent 1px 13px),
+    #e6d8b8 !important; }
+.zona-cordel .peca { box-shadow: 16px 16px 0 #15120f !important; }
+.zona-cordel .papel { background: #f1e7d0 !important; color: #15120f !important; border: 10px solid #15120f;
+  background-image: repeating-linear-gradient(0deg, rgba(21,18,15,.045) 0 2px, transparent 2px 7px) !important; }
+.zona-cordel .datil, .zona-cordel .serif, .zona-cordel .madeira { font-family: "Madeira", sans-serif !important; color: #15120f;
+  text-transform: uppercase; letter-spacing: 2px; font-style: normal !important; }
+.zona-cordel .datil, .zona-cordel .serif, .zona-cordel .madeira, .zona-cordel .carimbo, .zona-cordel .gravura { filter: url(#aspero); }
+.zona-cordel .verm { color: #b3201c !important; }
+.zona-cordel .carimbo { background: #b3201c; color: #f1e7d0 !important; border: none !important; border-radius: 4px !important;
+  mix-blend-mode: normal !important; font-family: "Madeira", sans-serif !important; box-shadow: 10px 10px 0 #15120f; }
+.zona-cordel .foto { background: #f1e7d0 !important; border: 10px solid #15120f; box-shadow: 16px 16px 0 #15120f !important; }
+.zona-cordel .foto img { filter: url(#aspero) grayscale(1) brightness(1.6) contrast(1.9) !important; mix-blend-mode: multiply; }
+.zona-cordel .foto .legenda { font-family: "Madeira", sans-serif; text-transform: uppercase; }
+.zona-cordel .rotulo { font-family: "Madeira", sans-serif !important; color: #15120f !important; }
+/* desenhos de xilogravura: tinta preta chapada + vermelho */
+.zona-cordel .xilo { stroke: #15120f; fill: #15120f; }
+.zona-cordel .xilo .branco { fill: #f1e7d0; }
+.zona-cordel .xilo .vermelho { fill: #b3201c; }

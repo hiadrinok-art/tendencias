@@ -82,7 +82,17 @@
     const acesos = [];   // elementos que já apareceram
 
     // ---- câmera
-    const ks = P.camera;
+    // Keyframes podem mirar elementos: x/y = "#id" ou "#id+120" / "#id-80" (centro do elemento no mundo).
+    const mundoRect = $("mundo").getBoundingClientRect();
+    function coord(v, eixo) {
+      if (typeof v !== "string") return v;
+      const m = v.match(/^#([\w-]+?)\s*([+-]\s*\d+(?:\.\d+)?)?$/);
+      if (!m) throw new Error("coordenada de câmera inválida: " + v);
+      const el = $(m[1]); if (!el) throw new Error("câmera mira elemento inexistente: #" + m[1]);
+      const r = el.getBoundingClientRect(), d = parseFloat((m[2] || "0").replace(/\s/g, ""));
+      return (eixo === "x" ? r.left - mundoRect.left + r.width / 2 : r.top - mundoRect.top + r.height / 2) + d;
+    }
+    const ks = P.camera.map((k) => [k[0], coord(k[1], "x"), coord(k[2], "y"), k[3]]);
     const ts = ks.map((k) => k[0] + off);
     const xs = ks.map((k) => k[1]), ys = ks.map((k) => k[2]), zs = ks.map((k) => Math.log(k[3]));
     const mundo = $("mundo");
@@ -181,15 +191,17 @@
     });
 
     // ---- grão e cintilação (determinísticos)
+    // fades de entrada/saída configuráveis (filme em várias cenas: use valores curtos, ex. 0.4)
+    const fi = P.fade_ini ?? 0.6, ff = P.fade_fim ?? 0.8;
     const rnd = semente(7);
     for (let t = 0; t < P.duracao; t += 1 / 12) {
       tl.set("#grao", { x: Math.floor(rnd() * 200 - 100), y: Math.floor(rnd() * 200 - 100) }, t);
       const f = rnd();
-      if (t > 0.65 && t < P.duracao - 0.85) tl.set("#pisca", { opacity: 0.02 + f * 0.05 }, t);
+      if (t > fi + 0.05 && t < P.duracao - ff - 0.05) tl.set("#pisca", { opacity: 0.02 + f * 0.05 }, t);
     }
     // fade de entrada e saída
-    tl.fromTo("#pisca", { opacity: 1 }, { opacity: 0.04, duration: 0.6, ease: "sine.out" }, 0);
-    tl.to("#pisca", { opacity: 1, duration: 0.8, ease: "sine.in" }, P.duracao - 0.8);
+    if (fi > 0) tl.fromTo("#pisca", { opacity: 1 }, { opacity: 0.04, duration: fi, ease: "sine.out" }, 0);
+    if (ff > 0) tl.to("#pisca", { opacity: 1, duration: ff, ease: "sine.in" }, P.duracao - ff);
 
     window.__timelines = window.__timelines || {};
     window.__timelines["root"] = tl;

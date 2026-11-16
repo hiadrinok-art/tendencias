@@ -1,0 +1,157 @@
+{
+ "titulo": "Pernambuco — Abertura",
+ "dur_prov": 26.0,
+ "fade_ini": 0.8,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#folha-data",
+   "#folha-data",
+   1.35
+  ],
+  [
+   "@1+1.4",
+   "#folha-data",
+   "#folha-data",
+   1.05
+  ],
+  [
+   "@2-0.6",
+   "#pino-recife-90",
+   "#pino-recife",
+   2.2
+  ],
+  [
+   "@2+1.6",
+   "#pino-recife-60",
+   "#pino-recife",
+   2.0
+  ],
+  [
+   "@3-0.2",
+   "#mapa-br",
+   "#mapa-br-250",
+   0.44
+  ],
+  [
+   "@3+1.8",
+   "#mapa-br",
+   "#mapa-br-250",
+   0.42
+  ],
+  [
+   "@4-0.5",
+   "#faixa-tempo",
+   "#faixa-tempo",
+   1.0
+  ],
+  [
+   "@4+1.6",
+   "#faixa-tempo",
+   "#faixa-tempo",
+   0.95
+  ],
+  [
+   "@5-0.4",
+   "#carimbo-rep",
+   "#carimbo-rep",
+   1.0
+  ],
+  [
+   "@5+0.15",
+   "#carimbo-rep",
+   "#carimbo-rep",
+   1.12
+  ],
+  [
+   "@5+1.5",
+   "#carimbo-rep",
+   "#carimbo-rep",
+   0.9
+  ],
+  [
+   "@6",
+   "#titulo",
+   "#titulo",
+   0.36
+  ],
+  [
+   "@fim",
+   "#titulo",
+   "#titulo",
+   0.42
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "6",
+   "t_prov": 0.9,
+   "acao": "datilografar",
+   "alvo": "data1817",
+   "som": "maquina"
+  },
+  {
+   "id": 2,
+   "gatilho": "Recife",
+   "t_prov": 3.4,
+   "acao": "alfinete",
+   "alvo": "pino-recife",
+   "som": "alfinete"
+  },
+  {
+   "id": 3,
+   "gatilho": "Coroa",
+   "t_prov": 7.6,
+   "acao": "desenhar",
+   "alvo": "coroa",
+   "som": "pena"
+  },
+  {
+   "id": 4,
+   "gatilho": "cinco",
+   "t_prov": 11.2,
+   "acao": "desenhar",
+   "alvo": "faixa-tracos",
+   "foco": "faixa-tempo",
+   "som": "pena"
+  },
+  {
+   "id": 4.1,
+   "gatilho": "depois",
+   "t_prov": 12.4,
+   "acao": "datilografar",
+   "alvo": "anos-txt",
+   "foco": "faixa-tempo",
+   "som": "maquina"
+  },
+  {
+   "id": 5,
+   "gatilho": "república",
+   "t_prov": 17.0,
+   "acao": "carimbar",
+   "alvo": "carimbo-rep",
+   "som": "carimbo"
+  },
+  {
+   "id": 6,
+   "gatilho": "antes",
+   "t_prov": 22.0,
+   "acao": "cair",
+   "alvo": "titulo",
+   "som": "papel"
+  },
+  {
+   "id": 6.1,
+   "gatilho": "antes",
+   "t_prov": 22.6,
+   "desloc": 0.7,
+   "acao": "datilografar",
+   "alvo": "subtitulo",
+   "foco": "titulo",
+   "som": "maquina"
+  }
+ ],
+ "sons_extras": []
+}
