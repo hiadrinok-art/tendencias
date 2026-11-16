@@ -13,6 +13,67 @@ function marcarVoto(serve) {
   if (serve !== null) texto("h-voto", "Obrigado! Isso vai afinar os próximos editais que mostramos.");
 }
 
+function iniciarAcompanhamento(e) {
+  const status = document.getElementById("status");
+  const nota = document.getElementById("nota");
+  const msg = document.getElementById("acomp-msg");
+  if (e.acompanhamento) {
+    status.value = e.acompanhamento.status;
+    nota.value = e.acompanhamento.nota;
+  }
+  document.getElementById("salvar-acomp").addEventListener("click", async () => {
+    msg.textContent = "Salvando…";
+    try {
+      if (status.value) {
+        await Radar.api("/funil", { metodo: "PUT", corpo: { id: e.id, status: status.value, nota: nota.value } });
+        msg.textContent = "Salvo. Veja em Acompanhando.";
+      } else {
+        await Radar.api("/funil?id=" + encodeURIComponent(e.id), { metodo: "DELETE" });
+        msg.textContent = "Você deixou de acompanhar este edital.";
+      }
+    } catch (falha) {
+      msg.textContent = falha.message;
+    }
+  });
+}
+
+async function carregarItens(id) {
+  const caixa = document.getElementById("itens");
+  try {
+    const { lista } = await Radar.api("/edital/detalhes?tipo=itens&id=" + encodeURIComponent(id));
+    if (!lista.length) { caixa.replaceChildren(Radar.el("p", { class: "miudo" }, "O PNCP não traz itens para este edital.")); return; }
+    const { el } = Radar;
+    const qtd = n => n === null ? "—" : n.toLocaleString("pt-BR");
+    caixa.replaceChildren(el("table", { class: "tabela-itens" },
+      el("thead", {}, el("tr", {}, el("th", {}, "Nº"), el("th", {}, "Descrição"), el("th", { class: "num" }, "Qtd."),
+        el("th", { class: "num" }, "Valor unitário"), el("th", { class: "num" }, "Total"))),
+      el("tbody", {}, lista.map(i => el("tr", {},
+        el("td", {}, i.numero ?? ""),
+        el("td", {}, Radar.legivel(i.descricao), i.exclusivo_me_epp ? el("div", {}, el("span", { class: "selo-me" }, "Exclusivo ME/EPP")) : null),
+        el("td", { class: "num" }, `${qtd(i.quantidade)} ${i.unidade}`.trim()),
+        el("td", { class: "num" }, Radar.dinheiro(i.valor_unitario)),
+        el("td", { class: "num" }, Radar.dinheiro(i.valor_total)))))));
+  } catch (falha) {
+    caixa.replaceChildren(Radar.el("p", { class: "miudo" }, falha.message));
+  }
+}
+
+async function carregarDocumentos(id) {
+  const lista = document.getElementById("documentos");
+  try {
+    const { lista: docs } = await Radar.api("/edital/detalhes?tipo=arquivos&id=" + encodeURIComponent(id));
+    if (!docs.length) { lista.replaceChildren(Radar.el("li", { class: "miudo" }, "Nenhum documento publicado no PNCP.")); return; }
+    lista.replaceChildren(...docs.map(d => {
+      const url = linkSeguro(d.url);
+      return Radar.el("li", {},
+        url ? Radar.el("a", { href: url, target: "_blank", rel: "noopener noreferrer" }, d.titulo) : d.titulo,
+        Radar.el("span", { class: "miudo" }, d.tipo));
+    }));
+  } catch (falha) {
+    lista.replaceChildren(Radar.el("li", { class: "miudo" }, falha.message));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   Radar.ligarSair();
   const erro = document.getElementById("erro");
@@ -34,7 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const objeto = Radar.legivel(e.objeto);
   const titulo = objeto.length > 140 ? objeto.slice(0, 137).trimEnd() + "…" : objeto;
   texto("titulo", titulo);
-  texto("orgao", [Radar.legivel(e.orgao), e.unidade && e.unidade !== e.orgao && e.unidade !== "Unidade Única" ? Radar.legivel(e.unidade) : null, [e.municipio, e.uf].filter(Boolean).join(", ")]
+  const simples = t => (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const unidadeDiferente = e.unidade && simples(e.unidade) !== "unidade unica" && !simples(e.orgao).includes(simples(e.unidade));
+  texto("orgao", [Radar.legivel(e.orgao), unidadeDiferente ? Radar.legivel(e.unidade) : null, [e.municipio, e.uf].filter(Boolean).join(", ")]
     .filter(Boolean).join(" · "));
   texto("objeto", objeto);
   texto("valor", Radar.dinheiro(e.valor_estimado));
@@ -53,6 +116,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (pncp) document.getElementById("link-pncp").href = pncp;
 
   marcarVoto(e.avaliacao);
+  document.getElementById("link-agenda").href = "/edital/agenda.ics?id=" + encodeURIComponent(e.id);
+  iniciarAcompanhamento(e);
+  carregarItens(e.id);
+  carregarDocumentos(e.id);
   for (const [botao, serve] of [["voto-sim", true], ["voto-nao", false]]) {
     document.getElementById(botao).addEventListener("click", async () => {
       try {

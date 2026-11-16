@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="App">
       <a href="/painel" aria-current="page">Editais</a>
+      <a href="/acompanhar">Acompanhando</a>
       <button id="sair" class="botao-texto" type="button">Sair</button>
     </nav>
   </div>
@@ -42,6 +43,13 @@
     <div class="indicador"><span>Valor estimado somado</span><strong id="ind-valor">—</strong></div>
     <div class="indicador indicador--alerta"><span>Próximo prazo</span><strong id="ind-prazo">—</strong></div>
   </div>
+
+  <form id="busca" class="busca" role="search">
+    <label class="sr" for="q">Buscar em todos os editais abertos</label>
+    <input id="q" type="search" maxlength="100" placeholder="Buscar em todos os editais abertos: ex. uniformes, ambulância, Campinas">
+    <button class="botao botao--escuro" type="submit">Buscar</button>
+    <button id="limpar-busca" class="botao botao--contorno oculto" type="button">Limpar busca</button>
+  </form>
 
   <div class="abas" role="tablist" aria-label="Filtrar editais">
     <button class="aba" role="tab" aria-selected="true" data-filtro="todos">Todos</button>

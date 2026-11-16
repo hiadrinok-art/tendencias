@@ -67,3 +67,17 @@ def test_banco_antigo_ganha_colunas_novas(tmp_path):
     banco.preparar(caminho)
     colunas = {l[1] for l in sqlite3.connect(caminho).execute("PRAGMA table_info(editais)")}
     assert {"ano", "sequencial"} <= colunas
+
+
+def test_limite_de_tempo_para_e_fica_com_o_que_coletou(tmp_path):
+    t, chamadas = transporte({
+        (6, 1): [pagina(bruto(), total=50)],
+        (6, 2): [pagina(bruto(numeroControlePNCP="B-2", sequencialCompra=2), total=50)],
+    })
+    agora = [0.0]
+
+    def dormir(s):
+        agora[0] += 100  # cada pausa "custa" 100 s
+    n = coletor.coletar(str(tmp_path / "t.db"), dormir=dormir, cliente=httpx.Client(transport=t),
+                        limite_segundos=150, relogio=lambda: agora[0])
+    assert n == 2 and len(chamadas) == 2  # parou depois de 2 páginas, sem erro

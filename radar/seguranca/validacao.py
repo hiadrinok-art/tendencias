@@ -75,6 +75,12 @@ def limpar_texto(texto: str, tamanho_max: int) -> str:
     return texto[:tamanho_max]
 
 
+def limpar_texto_multilinha(texto: str, tamanho_max: int) -> str:
+    """Como limpar_texto, mas mantém quebras de linha (anotações do usuário)."""
+    linhas = [limpar_texto(l, tamanho_max) for l in (texto or "").replace("\r", "").split("\n")]
+    return "\n".join(linhas).strip()[:tamanho_max]
+
+
 def limpar_palavras_chave(palavras: list[str], maximo: int = 10, tamanho: int = 40) -> list[str]:
     vistas: list[str] = []
     for p in palavras:
