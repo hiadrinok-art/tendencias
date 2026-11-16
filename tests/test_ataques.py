@@ -163,3 +163,9 @@ def test_erros_no_formato_proprio(cliente):
     r = cliente.post("/sessao", json={"email": "a@b.com", "senha": "x"})
     assert r.status_code == 401
     assert r.json() == {"erro": "E-mail ou senha incorretos."}
+
+
+def test_modo_hospedagem_usa_o_ip_visto_pelo_proxy():
+    # Com RADAR_PROXIES="*", vale o último IP: o cliente não consegue forjar.
+    assert rede.ip_real("10.1.2.3", "1.1.1.1, 203.0.113.7", {"*"}) == "203.0.113.7"
+    assert rede.ip_real("10.1.2.3", None, {"*"}) == "10.1.2.3"

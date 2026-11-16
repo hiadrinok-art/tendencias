@@ -1,0 +1,20 @@
+# Configuração para publicar no Render (https://render.com): New > Blueprint > este repositório.
+services:
+  - type: web
+    name: radar-de-editais
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash scripts/iniciar.sh
+    healthCheckPath: /saude
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: RADAR_SEGREDO
+        generateValue: true      # o Render cria um segredo aleatório
+      - key: RADAR_BANCO
+        value: dados/radar.db
+      - key: RADAR_PROXIES
+        value: "*"               # IP real vem do proxy do Render
+      - key: RADAR_HTTPS
+        value: "1"

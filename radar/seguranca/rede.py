@@ -14,6 +14,12 @@ import ipaddress
 
 
 def ip_real(ip_conexao: str, x_forwarded_for: str | None, proxies_confiaveis: set[str]) -> str:
+    entradas = [p.strip() for p in (x_forwarded_for or "").split(",") if p.strip()]
+    if "*" in proxies_confiaveis:
+        # Hospedagens como o Render: o app só é alcançável pelo proxy da
+        # plataforma, cujos IPs mudam. Vale o último IP da lista, que é o que
+        # o proxy viu; o que o cliente escreveu fica à esquerda e é ignorado.
+        return entradas[-1] if entradas else ip_conexao
     if ip_conexao not in proxies_confiaveis or not x_forwarded_for:
         return ip_conexao
     # Lê da direita para a esquerda: cada proxy acrescenta o IP de quem o chamou.
