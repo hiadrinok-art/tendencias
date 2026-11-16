@@ -95,7 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const objeto = Radar.legivel(e.objeto);
   const titulo = objeto.length > 140 ? objeto.slice(0, 137).trimEnd() + "…" : objeto;
   texto("titulo", titulo);
-  texto("orgao", [Radar.legivel(e.orgao), e.unidade && e.unidade !== e.orgao && e.unidade !== "Unidade Única" ? Radar.legivel(e.unidade) : null, [e.municipio, e.uf].filter(Boolean).join(", ")]
+  const simples = t => (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const unidadeDiferente = e.unidade && simples(e.unidade) !== "unidade unica" && !simples(e.orgao).includes(simples(e.unidade));
+  texto("orgao", [Radar.legivel(e.orgao), unidadeDiferente ? Radar.legivel(e.unidade) : null, [e.municipio, e.uf].filter(Boolean).join(", ")]
     .filter(Boolean).join(" · "));
   texto("objeto", objeto);
   texto("valor", Radar.dinheiro(e.valor_estimado));
