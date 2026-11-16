@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>LOA 2027 Recife — Eduardo Moura</title>
+<style>
+  :root{
+    --navy:#030817; --deep:#071433; --blue:#1E6BFF; --sky:#55B8FF;
+    --orange:#FF7A1A; --amber:#FFB25E; --white:#F4F8FF; --mute:#B9CCF2;
+  }
+  html,body{margin:0;padding:0;background:var(--navy);}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;
+    font-family:'Inter',sans-serif;color:var(--white);
+    background:
+      radial-gradient(1200px 900px at 50% 38%, rgba(30,107,255,.30), transparent 60%),
+      radial-gradient(900px 700px at 50% 105%, rgba(255,122,26,.22), transparent 60%),
+      linear-gradient(180deg,#040B22 0%, #030817 55%, #050A1A 100%);}
+  #glow{position:absolute;inset:0;pointer-events:none;}
+  canvas{position:absolute;inset:0;}
+  #ov{position:absolute;inset:0;}
+  .beat{text-shadow:0 4px 28px rgba(0,0,0,.75);position:absolute;left:540px;width:960px;text-align:center;opacity:0;transform-origin:50% 50%;}
+  .anc{width:auto;white-space:nowrap;}
+  .h1{font-family:'Inter Display','Inter';font-weight:900;font-size:92px;line-height:1.02;letter-spacing:-2px;text-transform:uppercase;}
+  .h2{font-family:'Inter Display','Inter';font-weight:800;font-size:62px;line-height:1.1;letter-spacing:-1px;}
+  .p{font-weight:600;font-size:48px;line-height:1.25;color:var(--mute);}
+  .p b{color:var(--white);}
+  .mega{font-family:'Inter Display','Inter';font-weight:900;font-size:168px;line-height:1;letter-spacing:-5px;color:var(--orange);
+        text-shadow:0 0 40px rgba(255,122,26,.55),0 6px 0 #8a3500;}
+  .mega.blue{color:var(--sky);text-shadow:0 0 40px rgba(85,184,255,.55),0 6px 0 #0b3a8a;}
+  .unit{font-family:'Inter Display','Inter';font-weight:900;font-size:70px;letter-spacing:6px;color:var(--white);text-transform:uppercase;}
+  .hl{color:var(--orange);} .hb{color:var(--sky);}
+  .kicker{display:inline-block;font-weight:900;font-size:30px;letter-spacing:7px;text-transform:uppercase;
+          color:#fff;background:linear-gradient(90deg,var(--orange),#ff9a3d);padding:14px 28px;border-radius:999px;
+          box-shadow:0 0 30px rgba(255,122,26,.45);}
+  .kicker.blue{background:linear-gradient(90deg,#1E6BFF,#3d8bff);box-shadow:0 0 30px rgba(30,107,255,.5);}
+  .card{display:inline-block;background:linear-gradient(180deg,rgba(18,48,120,.72),rgba(8,22,60,.72));
+        border:2px solid rgba(85,184,255,.55);border-radius:30px;padding:34px 44px;box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 40px rgba(30,107,255,.18);}
+  .card.warn{border-color:rgba(255,122,26,.8);box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 40px rgba(255,122,26,.18);}
+  .badge{font-weight:900;font-size:30px;letter-spacing:5px;text-transform:uppercase;margin-bottom:14px;}
+  .chips{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
+  .chip{font-weight:800;font-size:40px;padding:16px 30px;border-radius:20px;border:2px solid var(--sky);color:var(--white);background:rgba(30,107,255,.22);}
+  .chip.o{border-color:var(--orange);background:rgba(255,122,26,.2);}
+  .lab{text-align:center;}
+  .lab .y{font-weight:800;font-size:34px;letter-spacing:4px;color:var(--mute);}
+  .lab .v{font-family:'Inter Display','Inter';font-weight:900;font-size:56px;letter-spacing:-1px;}
+  .lab .s{font-weight:700;font-size:30px;color:var(--mute);}
+  .tiny{font-weight:600;font-size:24px;color:rgba(185,204,242,.6);letter-spacing:1px;}
+  /* persistent HUD */
+  #hud-top{position:absolute;left:60px;right:60px;top:70px;display:flex;justify-content:space-between;align-items:center;}
+  #hud-top .t{font-weight:900;font-size:28px;letter-spacing:6px;color:var(--white);}
+  #hud-top .t span{color:var(--orange);}
+  #hud-top .n{font-weight:800;font-size:28px;letter-spacing:4px;color:var(--mute);}
+  #prog{position:absolute;left:60px;right:60px;top:128px;height:6px;border-radius:6px;background:rgba(85,184,255,.18);overflow:hidden;}
+  #prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));}
+  #sig{position:absolute;left:0;right:0;bottom:70px;display:flex;flex-direction:column;align-items:center;}
+  #sig .bar{width:90px;height:7px;border-radius:7px;background:var(--orange);margin-bottom:16px;box-shadow:0 0 20px rgba(255,122,26,.7);}
+  #sig .name{font-family:'Inter Display','Inter';font-weight:900;font-size:46px;letter-spacing:12px;}
+  #sig .name b{color:var(--orange);font-weight:900;}
+  #sig .role{font-weight:700;font-size:22px;letter-spacing:6px;color:var(--mute);margin-top:6px;}
+  #sweep{position:absolute;top:-400px;left:-600px;width:500px;height:3000px;opacity:0;
+         background:linear-gradient(90deg,transparent,rgba(255,122,26,.0) 20%,rgba(255,150,60,.85) 50%,rgba(85,184,255,.0) 80%,transparent);
+         transform:rotate(18deg);filter:blur(6px);}
+  #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
+  /* final logo */
+  .logo .em{font-family:'Inter Display','Inter';font-weight:900;font-size:120px;letter-spacing:10px;line-height:.95;}
+  .logo .em b{color:var(--orange);}
+  .logo .line{width:520px;height:10px;margin:30px auto;border-radius:10px;background:linear-gradient(90deg,var(--blue),var(--orange));box-shadow:0 0 30px rgba(255,122,26,.6);}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <div id="ov"></div>
+  <div id="hud-top"><div class="t">LOA <span>2027</span> · RECIFE</div><div class="n" id="scn">01 / 10</div></div>
+  <div id="prog"><i></i></div>
+  <div id="sig"><div class="bar"></div><div class="name">EDUARDO <b>MOURA</b></div><div class="role">ANÁLISE DO ORÇAMENTO PÚBLICO</div></div>
+  <div id="sweep"></div>
+  <div id="flash"></div>
+</div>
+<script src="node_modules/three/build/three.min.js"></script>
+<script>
+const W=1080,H=1920,DUR=240;
+THREE.ColorManagement.legacyMode=false;
+const SC=[0,15,35,60,90,120,140,165,195,225,240];
+const C={blue:0x1E6BFF,sky:0x55B8FF,orange:0xFF7A1A,amber:0xFFB25E,navy:0x071433,white:0xF4F8FF};
+
+// ---------- math helpers ----------
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,3);
+const eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eBack=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const lerp=(a,b,k)=>a+(b-a)*k;
+function rnd(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+const fmt=(v,d)=>v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+// ---------- three setup ----------
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);renderer.setSize(W,H,false);
+renderer.outputEncoding=THREE.sRGBEncoding;
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x030817,18,46);
+const camera=new THREE.PerspectiveCamera(42,W/H,0.1,200);
+scene.add(new THREE.AmbientLight(0x6f86c9,0.55));
+const dl=new THREE.DirectionalLight(0xffffff,1.1);dl.position.set(3,8,10);scene.add(dl);
+const pB=new THREE.PointLight(C.sky,2.2,40);pB.position.set(-7,2,6);scene.add(pB);
+const pO=new THREE.PointLight(C.orange,2.4,40);pO.position.set(7,-1,6);scene.add(pO);
+
+const FLOOR=-3.6;
+const grid=new THREE.GridHelper(80,80,C.sky,C.blue);
+grid.material.transparent=true;grid.material.opacity=.22;grid.position.y=FLOOR;scene.add(grid);
+// floor glow disk
+const disk=new THREE.Mesh(new THREE.CircleGeometry(6,64),new THREE.MeshBasicMaterial({color:C.blue,transparent:true,opacity:.12}));
+disk.rotation.x=-Math.PI/2;disk.position.y=FLOOR+0.01;scene.add(disk);
+
+// particles
+const NP=700,pr=rnd(7),pPos=new Float32Array(NP*3),pCol=new Float32Array(NP*3),pBase=[];
+for(let i=0;i<NP;i++){pBase.push([ (pr()-.5)*30,(pr()-.5)*26,-pr()*30+6, pr()*6.28, .2+pr()*.6]);
+  const c=new THREE.Color(pr()<.7?C.sky:C.orange);pCol.set([c.r,c.g,c.b],i*3);}
+const pGeo=new THREE.BufferGeometry();pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));pGeo.setAttribute('color',new THREE.BufferAttribute(pCol,3));
+const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({size:.07,vertexColors:true,transparent:true,opacity:.8,blending:THREE.AdditiveBlending,depthWrite:false}));
+scene.add(pts);
+
+// ---------- materials & factories ----------
+const M=(color,em=0.10,metal=0.35,rough=0.32)=>new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:em,metalness:metal,roughness:rough});
+const mBlue=()=>M(C.blue,.25),mSky=()=>M(C.sky,.25),mOr=()=>M(C.orange,.3),mAm=()=>M(C.amber,.3);
+function edges(mesh,color){const l=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,20),new THREE.LineBasicMaterial({color,transparent:true,opacity:.9}));mesh.add(l);return mesh;}
+function bar(color,w=1.1,d=1.1){
+  const g=new THREE.BoxGeometry(w,1,d);g.translate(0,.5,0);
+  const m=edges(new THREE.Mesh(g,M(color,.14)),0xffffff);
+  const grp=new THREE.Group();grp.add(m);grp.userData.m=m;return grp;
+}
+function setBarH(b,h){b.userData.m.scale.y=Math.max(h,0.0001);b.userData.h=h;}
+function barTop(b,dy=0){const v=new THREE.Vector3(0,(b.userData.h||0)+dy,0);return b.localToWorld(v);}
+function pie(fracs,colors,r=1.7,h=.5){
+  const g=new THREE.Group();let a=0;g.userData.sl=[];
+  fracs.forEach((f,i)=>{const th=f*Math.PI*2;
+    const geo=new THREE.CylinderGeometry(r,r,h,96,1,false,a,th);
+    const m=new THREE.Mesh(geo,M(colors[i],.28));m.userData.mid=a+th/2;g.add(m);g.userData.sl.push(m);a+=th;});
+  return g;
+}
+function sliceDir(m){return new THREE.Vector3(Math.sin(m.userData.mid),0,Math.cos(m.userData.mid));}
+function coin(){const g=new THREE.CylinderGeometry(.42,.42,.09,40);const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:C.orange,emissive:C.orange,emissiveIntensity:.25,metalness:.6,roughness:.28}));
+  const rim=new THREE.Mesh(new THREE.TorusGeometry(.42,.03,8,40),new THREE.MeshStandardMaterial({color:C.amber,emissive:C.amber,emissiveIntensity:.4,metalness:.6,roughness:.3}));rim.rotation.x=Math.PI/2;m.add(rim);return m;}
+function canvasTex(draw,w=512,h=680){const cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(cv);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+function docTex(title,sub){return canvasTex((x,w,h)=>{
+  const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#F4F8FF');g.addColorStop(1,'#D9E6FF');x.fillStyle=g;x.fillRect(0,0,w,h);
+  x.fillStyle='#1E6BFF';x.fillRect(0,0,w,90);x.fillStyle='#FF7A1A';x.fillRect(0,90,w,10);
+  x.fillStyle='#fff';x.font='900 46px Inter';x.textAlign='center';x.fillText(title,w/2,62);
+  x.fillStyle='#071433';let fs=40;do{x.font='800 '+fs+'px Inter';fs-=2;}while(x.measureText(sub).width>w-60);x.fillText(sub,w/2,170);
+  for(let i=0;i<11;i++){x.fillStyle=i%4==3?'#FF7A1A':'#9fb6e6';const lw=(i%3==2?.6:.85)*(w-100);x.fillRect(50,220+i*38,lw,14);}
+  x.fillStyle='#1E6BFF';x.fillRect(50,h-80,180,10);});}
+function doc(title,sub,s=1){const m=new THREE.Mesh(new THREE.BoxGeometry(2.2*s,2.9*s,.05*s),[M(0xdfe8ff,.05),M(0xdfe8ff,.05),M(0xdfe8ff,.05),M(0xdfe8ff,.05),
+  new THREE.MeshStandardMaterial({map:docTex(title,sub),roughness:.6,metalness:0,emissive:0xffffff,emissiveMap:docTex(title,sub),emissiveIntensity:.35}),M(0xbfd0f5,.05)]);return m;}
+function note(){const tex=canvasTex((x,w,h)=>{x.fillStyle='#1E6BFF';x.fillRect(0,0,w,h);x.strokeStyle='#55B8FF';x.lineWidth=10;x.strokeRect(14,14,w-28,h-28);
+  x.fillStyle='#FF7A1A';x.beginPath();x.arc(w/2,h/2,h*.28,0,7);x.fill();x.fillStyle='#fff';x.font='900 64px Inter';x.textAlign='center';x.fillText('R$',w/2,h/2+22);
+  x.font='900 44px Inter';x.textAlign='left';x.fillText('100',30,70);},420,200);
+  return new THREE.Mesh(new THREE.BoxGeometry(1.5,.72,.01),new THREE.MeshStandardMaterial({map:tex,emissive:0xffffff,emissiveMap:tex,emissiveIntensity:.35,roughness:.5,side:THREE.DoubleSide}));}
+
+// ---------- 3D scene objects (each with window + update) ----------
+const OBJ=[];
+function add(o,t0,t1,upd,base=1){o.visible=false;scene.add(o);OBJ.push({o,t0,t1,upd,base});return o;}
+function k01(t,t0,t1,i=.8,o=.5){return Math.min(eOut(prog(t,t0,t0+i)),1-eIO(prog(t,t1-o,t1)));}
+
+// S1 — coin & banknote rain + floating budget docs
+const rain=new THREE.Group();const rr=rnd(11);const RA=[];
+for(let i=0;i<30;i++){const m=i%3==0?note():coin();m.userData={x:(rr()-.5)*12,z:-3-rr()*7,sp:1.2+rr()*1.6,off:rr()*14,rx:rr()*6,ry:rr()*6,vr:.6+rr()*2};rain.add(m);RA.push(m);}
+add(rain,0,14.8,(t,k)=>{const boost=1+1.4*eOut(prog(t,4,5));RA.forEach(m=>{const u=m.userData;const y=7-((t*u.sp*boost*.8+u.off)%14);m.position.set(u.x,y,u.z);m.rotation.set(u.rx+t*u.vr,u.ry+t*u.vr*.7,0);});});
+const docs1=new THREE.Group();[[-2.3,-1.4,.6,-.3],[2.4,-1.9,.2,.35],[0,-2.4,1.4,0]].forEach(([x,y,z,r],i)=>{const d=doc('LOA 2027',['RECEITAS','DESPESAS','ORÇAMENTO'][i],.75);d.position.set(x,y,z);d.userData={r,i};docs1.add(d);});
+add(docs1,0.2,14.8,(t,k)=>{docs1.children.forEach(d=>{d.rotation.set(-.15,d.userData.r+Math.sin(t*.8+d.userData.i)*.25,Math.sin(t*.6+d.userData.i)*.08);d.position.y+=Math.sin(t*1.3+d.userData.i)*.002;});});
+
+// S2 — LOA document then bars 2026 vs 2027
+const loaDoc=doc('LOA','LEI ORÇAMENTÁRIA ANUAL',1.05);loaDoc.position.set(0,-1.9,0);
+add(loaDoc,15.3,22,(t)=>{loaDoc.rotation.set(-.12,Math.sin((t-15)*.7)*.45,0);loaDoc.position.y=-1.9+Math.sin(t*1.2)*.08;});
+const g2=new THREE.Group();const b26=bar(C.blue,1.3,1.3),b27=bar(C.orange,1.3,1.3);b26.position.set(-1.1,FLOOR,0);b27.position.set(1.1,FLOOR,0);g2.add(b26,b27);
+add(g2,22,34.8,(t)=>{const s=3.2/11.135;setBarH(b26,10.555*s*eOut(prog(t,22.3,24)));setBarH(b27,11.135*s*eOut(prog(t,23,25)));g2.rotation.y=Math.sin(t*.35)*.28;});
+
+// S3 — receitas vs despesas (fora de escala) + coin column for loans
+const g3=new THREE.Group();const bRec=bar(C.blue,1.3,1.3),bDes=bar(C.orange,1.3,1.3);bRec.position.set(-1.1,FLOOR,0);bDes.position.set(1.1,FLOOR,0);
+const gap=new THREE.Mesh(new THREE.BoxGeometry(1.36,1,1.36),new THREE.MeshBasicMaterial({color:C.orange,transparent:true,opacity:.25,depthWrite:false}));
+edges(gap,C.orange);gap.position.set(-1.1,0,0);g3.add(bRec,bDes,gap);
+add(g3,41,54,(t)=>{const hr=2.6*eOut(prog(t,41.3,43)),hd=3.2*eOut(prog(t,41.8,43.5));setBarH(bRec,hr);setBarH(bDes,hd);
+  const gk=eOut(prog(t,43.6,44.6));gap.scale.set(1,Math.max(.001,(3.2-2.6)*gk),1);gap.position.y=FLOOR+2.6+(3.2-2.6)*gk/2;gap.material.opacity=.18+.14*Math.sin(t*6);gap.visible=gk>0;
+  g3.rotation.y=Math.sin(t*.35)*.25;});
+const col=new THREE.Group();const COLN=26;for(let i=0;i<COLN;i++){const c=coin();c.scale.set(2.1,1.6,2.1);col.add(c);}col.position.set(0,FLOOR,0);
+add(col,54,59.8,(t)=>{col.children.forEach((c,i)=>{const k=eOut(prog(t,54.2+i*.07,54.6+i*.07));c.position.set(Math.sin(i*1.7)*.05,.08+i*.15+(1-k)*6,Math.cos(i*1.3)*.05);c.visible=k>0;c.rotation.y=i*.4;});col.rotation.y=t*.5;});
+
+// S4 — saúde: cross, then pie 97,25 / 2,75
+const cross=new THREE.Group();const cb1=edges(new THREE.Mesh(new THREE.BoxGeometry(2.6,.85,.85),mBlue()),C.sky),cb2=edges(new THREE.Mesh(new THREE.BoxGeometry(.85,2.6,.85),mBlue()),C.sky);
+cross.add(cb1,cb2);const crossRing=new THREE.Mesh(new THREE.TorusGeometry(2.1,.06,12,120),new THREE.MeshBasicMaterial({color:C.orange}));cross.add(crossRing);cross.position.set(0,-1.6,0);
+add(cross,60.3,69,(t)=>{cross.rotation.set(Math.sin(t*.6)*.25,t*.8,0);crossRing.rotation.set(Math.PI/2+Math.sin(t)*.3,0,0);});
+const pie4=pie([.9725,.0275],[C.blue,C.orange],1.75,.55);pie4.position.set(0,-1.9,0);
+add(pie4,69,87.4,(t)=>{pie4.rotation.set(.95,2.38+Math.sin(t*.3)*.15,0);const s=pie4.userData.sl[1];const pk=eBack(prog(t,71,72.2));s.position.copy(sliceDir(s).multiplyScalar(.75*pk));s.position.y=.35*pk;
+  const dim=(t>78&&t<82.5)?.6:1;pie4.userData.sl[0].material.emissiveIntensity=.28*dim;});
+function sliceWorld(p,i,extra=0){const s=p.userData.sl[i];const v=sliceDir(s).multiplyScalar(1.75*.7+extra).add(s.position);v.y+=.3;return p.localToWorld(v);}
+
+// S5 — educação: books, ring 5,22%, +/- bars
+const books=new THREE.Group();[[C.blue,0],[C.orange,.62],[C.sky,1.24]].forEach(([c,y],i)=>{const b=edges(new THREE.Mesh(new THREE.BoxGeometry(2.6-i*.25,.5,1.8-i*.15),M(c,.28)),0xffffff);b.position.set(i*.12-.1,y,0);b.rotation.y=i*.2-.2;books.add(b);});
+books.position.set(0,-2.4,0);add(books,90.3,96,(t)=>{books.rotation.y=Math.sin(t*.7)*.5;books.position.y=-2.4+Math.sin(t*1.4)*.06;});
+const ring=new THREE.Group();const rA=new THREE.Mesh(new THREE.TorusGeometry(1.6,.32,24,160,Math.PI*2*(1-.0522)),M(C.blue,.25));
+const rB=new THREE.Mesh(new THREE.TorusGeometry(1.6,.36,24,40,Math.PI*2*.0522),M(C.orange,.45));rB.rotation.z=-Math.PI*2*.0522;ring.add(rA,rB);ring.position.set(0,-1.7,0);
+add(ring,96,102,(t)=>{ring.rotation.set(-.45+Math.sin(t*.5)*.1,Math.sin(t*.6)*.35,Math.PI/2+.2);rB.scale.setScalar(1+.06*Math.sin(t*5));});
+const g5=new THREE.Group();const ZERO=-1.4;const bPes=bar(C.sky,1.3,1.3),bOut=bar(C.orange,1.3,1.3);bPes.position.set(-1.1,ZERO,0);bOut.position.set(1.1,ZERO,0);
+const zl=new THREE.Mesh(new THREE.BoxGeometry(4.8,.04,.04),new THREE.MeshBasicMaterial({color:0xffffff}));zl.position.y=ZERO;g5.add(bPes,bOut,zl);
+add(g5,102,111,(t)=>{const s=2.1/488.5;setBarH(bOut,488.5*s*eOut(prog(t,103,104.8)));const hp=209.8*s*eOut(prog(t,102.4,104));bPes.userData.m.scale.y=-Math.max(hp,.0001);bPes.userData.h=-hp;g5.rotation.y=Math.sin(t*.35)*.25;});
+
+// S6 — segurança: shield, bars 28,6 / 50,2
+const sh=new THREE.Shape();sh.moveTo(0,1.6);sh.quadraticCurveTo(.9,1.25,1.45,1.35);sh.quadraticCurveTo(1.5,-.4,0,-1.6);sh.quadraticCurveTo(-1.5,-.4,-1.45,1.35);sh.quadraticCurveTo(-.9,1.25,0,1.6);
+const shield=edges(new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.35,bevelEnabled:true,bevelSize:.06,bevelThickness:.06,bevelSegments:3}),mBlue()),C.orange);
+const star=new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.2,5),mOr());star.rotation.x=Math.PI/2;star.position.z=.45;shield.add(star);shield.position.set(0,-1.7,0);
+add(shield,120.3,124,(t)=>{shield.rotation.set(0,Math.sin(t*.9)*.6,0);});
+const g6=new THREE.Group();const s26=bar(C.blue,1.3,1.3),s27=bar(C.orange,1.3,1.3);s26.position.set(-1.1,FLOOR,0);s27.position.set(1.1,FLOOR,0);g6.add(s26,s27);
+add(g6,124,139.8,(t)=>{const s=3.1/50.2;setBarH(s26,28.6*s*eOut(prog(t,124.3,126)));setBarH(s27,50.2*s*eOut(prog(t,125,127.2)));g6.rotation.y=Math.sin(t*.35)*.28;});
+
+// S7 — empréstimos pie 690 / 175
+const pie7=pie([515/690,175/690],[C.blue,C.orange],1.75,.6);pie7.position.set(0,-1.9,0);
+add(pie7,140.3,158,(t)=>{pie7.rotation.set(.95,3.09+Math.sin(t*.3)*.15,0);const s=pie7.userData.sl[1];const pk=eBack(prog(t,145.8,147));s.position.copy(sliceDir(s).multiplyScalar(.7*pk));s.position.y=.4*pk;});
+// road + trees (manutenção) — miniature
+const road=new THREE.Group();const asph=new THREE.Mesh(new THREE.BoxGeometry(5,.12,1.6),M(0x1a2a55,.1,.1,.8));road.add(asph);
+for(let i=0;i<6;i++){const dash=new THREE.Mesh(new THREE.BoxGeometry(.45,.02,.08),new THREE.MeshBasicMaterial({color:C.amber}));dash.position.set(-2+i*.8,.07,0);road.add(dash);}
+for(let i=0;i<5;i++){const tr=new THREE.Group();const tk=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,.5),M(0x8a5a2b,.1));tk.position.y=.25;const cr=new THREE.Mesh(new THREE.IcosahedronGeometry(.36,0),M(0x2fbf71,.25,.1,.6));cr.position.y=.7;tr.add(tk,cr);tr.position.set(-2+i,.06,-1.1);road.add(tr);}
+road.position.set(0,-2.4,0);
+add(road,153,158,(t)=>{road.rotation.set(.35,Math.sin(t*.5)*.4,0);});
+// S7 end — three pillars
+const g7=new THREE.Group();[[-1.7,C.blue],[0,C.orange],[1.7,C.sky]].forEach(([x,c],i)=>{const b=bar(c,.9,.9);b.position.set(x,FLOOR,0);g7.add(b);});
+add(g7,158,164.8,(t)=>{g7.children.forEach((b,i)=>setBarH(b,2.4*eBack(prog(t,162.2+i*.25,163+i*.25))));g7.rotation.y=Math.sin(t*.4)*.2;});
+
+// S8 — comunicação bars, then Art. 6º document
+const g8=new THREE.Group();const c26=bar(C.blue,1.3,1.3),c27=bar(C.orange,1.3,1.3);c26.position.set(-1.1,FLOOR,0);c27.position.set(1.1,FLOOR,0);g8.add(c26,c27);
+add(g8,165.3,181,(t)=>{const s=3.1/85.8;setBarH(c26,85.8*s*eOut(prog(t,165.6,167.3)));setBarH(c27,lerp(85.8,35.6,eIO(prog(t,168,169.6)))*s*eOut(prog(t,166.3,168)));g8.rotation.y=Math.sin(t*.35)*.28;});
+const art6=doc('ART. 6º','CRÉDITOS SUPLEMENTARES',1.05);art6.position.set(0,-1.9,0);
+const lock=new THREE.Group();const lb=edges(new THREE.Mesh(new THREE.BoxGeometry(1,0.8,.35),mOr()),0xffffff);const ls=new THREE.Mesh(new THREE.TorusGeometry(.32,.08,12,40,Math.PI),M(0xdfe8ff,.2,.8,.2));ls.position.y=.4;lock.add(lb,ls);lock.position.set(1.2,-2.9,.8);
+add(art6,181,194.8,(t)=>{art6.rotation.set(-.1,Math.sin((t-181)*.6)*.4,Math.sin(t*.5)*.04);art6.position.y=-1.9+Math.sin(t*1.1)*.07;});
+add(lock,188,194.8,(t)=>{lock.rotation.y=Math.sin(t*1.2)*.5;});
+
+// S9 — stacked blocks 10/10/5/6 = 31
+const g9=new THREE.Group();const blocks=[];const H9=3.4/31;[[10,C.blue],[10,C.sky],[5,C.amber],[6,C.orange]].forEach(([v,c],i)=>{const g=new THREE.BoxGeometry(1.6,v*H9,1.6);g.translate(0,v*H9/2,0);
+  const m=edges(new THREE.Mesh(g,M(c,.3)),0xffffff);g9.add(m);blocks.push({m,v});});g9.position.set(-1.35,FLOOR,0);
+add(g9,199.5,214,(t)=>{let y=0;blocks.forEach((b,i)=>{const k=eOut(prog(t,200.6+i*2,201.3+i*2));b.m.position.y=y+(1-k)*5;b.m.visible=k>0;b.m.userData.top=y+b.v*H9/2;y+=b.v*H9;});g9.rotation.y=-.35+Math.sin(t*.4)*.15;});
+function blockMid(i){return g9.localToWorld(new THREE.Vector3(1.15,blocks[i].m.userData.top||0,.8));}
+const scale9=new THREE.Group();// balance for "regras"
+const beam=new THREE.Mesh(new THREE.BoxGeometry(3.6,.12,.2),mSky());beam.position.y=.9;const post=new THREE.Mesh(new THREE.CylinderGeometry(.08,.12,2.2),mBlue());
+const baseS=new THREE.Mesh(new THREE.CylinderGeometry(.8,.9,.2,40),mBlue());baseS.position.y=-1.1;scale9.add(beam,post,baseS);
+[-1.6,1.6].forEach(x=>{const pan=new THREE.Mesh(new THREE.CylinderGeometry(.6,.5,.12,40),mOr());pan.position.set(x,.1,0);scale9.add(pan);});
+scale9.position.set(0,-2.1,0);add(scale9,214,224.8,(t)=>{scale9.rotation.y=Math.sin(t*.6)*.6;beam.rotation.z=Math.sin(t*1.3)*.04;});
+
+// S10 — ring + orbiting coins
+const g10=new THREE.Group();const big=new THREE.Mesh(new THREE.TorusGeometry(2.1,.12,20,160),new THREE.MeshBasicMaterial({color:C.orange}));
+const big2=new THREE.Mesh(new THREE.TorusGeometry(2.5,.04,12,160),new THREE.MeshBasicMaterial({color:C.sky}));g10.add(big,big2);
+const orb=[];for(let i=0;i<18;i++){const c=coin();c.scale.setScalar(.8);g10.add(c);orb.push(c);}g10.position.set(0,-1.5,0);
+add(g10,225,237.6,(t)=>{big.rotation.set(1.2+Math.sin(t*.4)*.2,t*.3,0);big2.rotation.set(1.3,-t*.2,.2);orb.forEach((c,i)=>{const a=i/18*Math.PI*2+t*.6;c.position.set(Math.cos(a)*2.3,Math.sin(a*2)*.25,Math.sin(a)*2.3*.45);c.rotation.set(t+i,t*.7,0);});});
+
+// ---------- DOM beats ----------
+const ov=document.getElementById('ov');const BEATS=[];
+function B(t0,t1,y,html,opt={}){const el=document.createElement('div');el.className='beat'+(opt.anchor?' anc':'');el.innerHTML=html;if(!opt.anchor)el.style.top=y+'px';ov.appendChild(el);
+  const b={el,t0,t1,y,anchor:opt.anchor,mode:opt.left?'left':opt.below?'below':opt.mid?'mid':'top',nums:[...el.querySelectorAll('[data-to]')],stag:[...el.querySelectorAll('.st')],fx:opt.fx||'up'};BEATS.push(b);return b;}
+const N=(to,d,dur=1.6,delay=.2,from=0)=>`<span data-to="${to}" data-d="${d}" data-dur="${dur}" data-delay="${delay}" data-from="${from}">${fmt(to,d)}</span>`;
+const K=(txt,blue)=>`<div class="kicker${blue?' blue':''}">${txt}</div>`;
+const LAB=(y,v,s,col)=>`<div class="lab"><div class="y">${y}</div><div class="v" style="color:${col||'#fff'}">${v}</div>${s?`<div class="s">${s}</div>`:''}</div>`;
+const KY=225; // kicker y
+
+// CENA 1
+B(.3,14.7,KY,K('Orçamento do Recife'));
+B(.5,4.2,420,`<div class="h2">Você sabe quanto a <span class="hl">Prefeitura do Recife</span> pretende gastar em <span class="hb">2027</span>?</div>`);
+B(4.2,9.6,360,`<div class="p">Mais de</div><div class="mega">R$ ${N(11.135,3,2.2,.15)}</div><div class="unit">bilhões</div>`,{fx:'zoom'});
+B(9.6,12.6,360,`<div class="h1">Para onde vai <span class="hl">todo esse dinheiro?</span></div><div class="chips"><span class="chip st">Saúde</span><span class="chip st o">Educação</span><span class="chip st">Segurança</span></div>`);
+B(12.6,14.75,380,`<div class="mega blue" style="font-size:150px">LOA 2027</div><div class="p" style="margin-top:20px">Eu analisei os números do orçamento.<br><b>Veja o que merece atenção.</b></div>`,{fx:'zoom'});
+// CENA 2
+B(15.3,34.7,KY,K('Entenda',true));
+B(15.5,22,340,`<div class="h1">O que é a <span class="hl">LOA</span>?</div><div class="p" style="margin-top:26px"><b>Lei Orçamentária Anual.</b> Define quanto a Prefeitura espera <span class="hb">arrecadar</span> e onde está autorizada a <span class="hl">gastar</span>.</div>`);
+B(22,30.4,350,`<div class="h2">Orçamento total</div><div class="mega" style="font-size:150px;margin-top:10px">+${N(5.5,1,1.4,1.6)}%</div><div class="p">de 2026 para 2027</div>`);
+B(23.4,34.6,0,LAB('2026','R$ 10,555 bi','',`#55B8FF`),{anchor:()=>barTop(b26,.25)});
+B(24.2,34.6,0,LAB('2027','R$ 11,135 bi','','#FF7A1A'),{anchor:()=>barTop(b27,.25)});
+B(30.4,34.7,330,`<div class="h2">O problema não é só <span class="hl">quanto</span> dinheiro existe.</div><div class="h2" style="margin-top:20px">É <span class="hl">como</span> ele será distribuído.</div>`);
+// CENA 3
+B(35.3,59.7,KY,K('⚠ Alerta 1 · Déficit'));
+B(35.5,41,330,`<div class="p">Mesmo com orçamento maior, a Prefeitura prevê</div><div class="unit" style="margin-top:14px">déficit primário de</div><div class="mega">R$ ${N(675.6,1,1.8,.6)}</div><div class="unit">milhões</div>`,{fx:'zoom'});
+B(41,49,330,`<div class="p">Nas contas primárias, as <span class="hb">receitas previstas</span> não serão suficientes para cobrir as <span class="hl">despesas</span>.</div>`);
+B(42.2,53.7,0,LAB('RECEITAS','','',''),{anchor:()=>bRec.localToWorld(new THREE.Vector3(0,1.3,.7)),mid:true});
+B(42.6,53.7,0,LAB('DESPESAS','','',''),{anchor:()=>bDes.localToWorld(new THREE.Vector3(0,1.3,.7)),mid:true});
+B(44.4,53.7,0,`<div class="lab"><div class="v" style="color:#FF7A1A;font-size:50px">−R$ 675,6 mi</div></div>`,{anchor:()=>g3.localToWorld(new THREE.Vector3(-1.1,FLOOR+3.35,0))});
+B(42.5,53.7,1590,`<div class="tiny">*gráfico ilustrativo, fora de escala</div>`);
+B(49,54,330,`<div class="h2">O déficit é menor que o previsto em 2026.</div><div class="h2 hl" style="margin-top:22px">Mas o desequilíbrio continua.</div>`);
+B(54,59.7,300,`<div class="p">E o Recife ainda prevê contratar</div><div class="mega">R$ ${N(690,0,1.6,.4)}</div><div class="unit">milhões</div><div class="p">em <b>empréstimos</b></div>`,{fx:'zoom'});
+// CENA 4
+B(60.3,89.7,KY,K('Saúde',true));
+B(60.5,66,330,`<div class="p">Previsão para a saúde</div><div class="mega blue">R$ ${N(2.217,3,1.8,.4)}</div><div class="unit">bilhões</div>`,{fx:'zoom'});
+B(66,69,400,`<div class="h1">Parece muito,<br><span class="hl">não é?</span></div>`);
+B(69,73.2,320,`<div class="p">Quanto disso vai para <span class="hl"><b style="color:#FF7A1A">investimentos</b></span> — obras e equipamentos?</div>`);
+B(70,82.4,0,`<div class="lab"><div class="v" style="font-size:64px">97,25%</div><div class="s" style="color:#fff">Despesas correntes</div></div>`,{anchor:()=>pie4.localToWorld(new THREE.Vector3(-.5,.3,-.3)),mid:true});
+B(72,87.3,0,`<div class="lab"><div class="v" style="color:#FF7A1A;font-size:84px">2,75%</div><div class="s">Investimentos</div></div>`,{anchor:()=>sliceWorld(pie4,1,.35)});
+B(73.2,78,340,`<div class="h1">Apenas <span class="hl">2,75%</span></div><div class="p" style="margin-top:14px">vão para investimentos</div>`);
+B(78,82.4,320,`<div class="card"><div class="badge hb">✓ É preciso reconhecer</div><div class="h2">O investimento <span class="hl">mais do que dobrou</span> em relação a 2026.</div></div>`);
+B(82.4,87.4,300,`<div class="p">Construção, reforma e ampliação de <b>unidades de atenção básica</b>:</div><div class="mega" style="font-size:140px">R$ ${N(3.6,1,1.2,.4)} mi</div>`,{fx:'zoom'});
+B(87.4,89.7,560,`<div class="h1">Precisamos olhar <span class="hl">além do valor total.</span></div>`);
+// CENA 5
+B(90.3,119.7,KY,K('Educação'));
+B(90.5,96,330,`<div class="p">Secretaria de Educação</div><div class="mega blue">R$ ${N(2.248,3,1.8,.4)}</div><div class="unit">bilhões</div>`,{fx:'zoom'});
+B(96,102,330,`<div class="p">Mas apenas</div><div class="mega">${N(5.22,2,1.4,.3)}%</div><div class="unit" style="font-size:56px">são investimentos</div>`,{fx:'zoom'});
+B(102,111,320,`<div class="p">Variação nas despesas da Secretaria</div>`);
+B(103.2,110.7,0,`<div class="lab"><div class="y">PESSOAL</div><div class="v" style="color:#55B8FF">−R$ 209,8 mi</div></div>`,{anchor:()=>bPes.localToWorld(new THREE.Vector3(0,(bPes.userData.h||0)-.15,0)),below:true});
+B(104.4,110.7,0,`<div class="lab"><div class="y">OUTRAS DESPESAS<br>CORRENTES</div><div class="v" style="color:#FF7A1A">+R$ 488,5 mi</div></div>`,{anchor:()=>barTop(bOut,.2)});
+B(111,116,330,`<div class="h1">Mudança na classificação?</div><div class="h1 hl" style="margin-top:24px">Mais terceirização?</div>`);
+B(116,119.7,560,`<div class="h1">A Prefeitura precisa <span class="hl">explicar.</span></div>`);
+// CENA 6
+B(120.3,139.7,KY,K('Segurança urbana',true));
+B(120.5,124,340,`<div class="card"><div class="badge hb">✓ Avanço</div><div class="h2">Um avanço que precisa ser <span class="hl">reconhecido</span>.</div></div>`);
+B(124,132,320,`<div class="p">Investimento da Secretaria de <b>Ordem Pública e Segurança</b></div><div class="mega" style="font-size:140px;margin-top:6px">+${N(75,0,1.2,2.6)}%</div>`);
+B(125.2,139.6,0,LAB('2026','R$ 28,6 mi','','#55B8FF'),{anchor:()=>barTop(s26,.25)});
+B(126,139.6,0,LAB('2027','R$ 50,2 mi','','#FF7A1A'),{anchor:()=>barTop(s27,.25)});
+B(132,136.5,300,`<div class="card warn"><div class="badge hl">⚠ Alerta</div><div class="h2">Recursos para <span class="hl">equipamentos de controle urbano</span> diminuem.</div></div>`);
+B(136.5,139.7,300,`<div class="h2">Quais equipamentos serão comprados?</div><div class="h2 hl" style="margin-top:20px">Quando chegam às ruas?</div>`);
+// CENA 7
+B(140.3,164.7,KY,K('⚠ Alerta · Empréstimos'));
+B(140.5,145.6,330,`<div class="p">Empréstimos previstos</div><div class="mega blue">R$ ${N(690,0,1.5,.3)}</div><div class="unit">milhões</div>`,{fx:'zoom'});
+B(145.6,153,330,`<div class="p">Deste total,</div><div class="mega">R$ ${N(175,0,1.2,.3)} mi</div><div class="unit" style="font-size:56px">para a EMLURB</div>`,{fx:'zoom'});
+B(147.2,152.8,1555,`<div class="lab"><div class="v" style="color:#FF7A1A">EMLURB <span style="color:#fff">≈ 25%</span></div><div class="s">dos empréstimos previstos</div></div>`);
+B(153,158,330,`<div class="p">Boa parte em <span class="hl"><b style="color:#FF7A1A">manutenção de vias e áreas verdes</b></span> — embora classificada como <b>investimento</b>.</div>`);
+B(158,162,320,`<div class="h2">Vale contratar dívida para serviços cujo benefício pode durar <span class="hl">menos que o prazo de pagamento</span>?</div>`);
+B(162,164.7,330,`<div class="h2">Empréstimo precisa de</div><div class="chips"><span class="chip st">Planejamento</span><span class="chip st o">Transparência</span><span class="chip st">Resultado</span></div>`);
+// CENA 8
+B(165.3,194.7,KY,K('Publicidade e decretos',true));
+B(165.5,173,320,`<div class="p">Dotações de comunicação analisadas</div><div class="mega" style="font-size:140px;margin-top:6px">−${N(58.5,1,1.4,2.6)}%</div>`);
+B(166.6,180.7,0,LAB('2026','R$ 85,8 mi','','#55B8FF'),{anchor:()=>barTop(c26,.25)});
+B(169.6,180.7,0,LAB('PROPOSTA 2027','R$ 35,6 mi','','#FF7A1A'),{anchor:()=>barTop(c27,.25)});
+B(173,178,320,`<div class="p">Mas a maior parte do valor previsto é para</div><div class="h1 hl" style="margin:14px 0">pessoal</div><div class="p">e não para compra de mídia.</div>`);
+B(178,181,420,`<div class="h1">Vai permanecer <span class="hl">assim?</span></div>`);
+B(181,188,330,`<div class="kicker blue" style="margin-bottom:26px">Artigo 6º</div><div class="h2">Créditos suplementares <span class="hl">por decreto</span></div><div class="p" style="margin-top:16px">dentro das regras e limites da própria lei</div>`);
+B(188,192,320,`<div class="h2">É preciso impedir aumentos e remanejamentos <span class="hl">sem transparência</span>.</div>`);
+B(192,194.7,330,`<div class="h2">O orçamento aprovado pela <span class="hl">Câmara</span> precisa ser respeitado.</div>`);
+// CENA 9
+B(195.3,224.7,KY,K('O que pode ser feito'));
+B(195.5,199.5,480,`<div class="h1">A fiscalização não pode parar na <span class="hl">crítica.</span></div>`);
+B(199.5,214,300,`<div class="p">Propostas de emendas para redirecionar</div><div class="mega" style="font-size:150px">R$ ${N(31,0,1.2,.2)} mi</div><div class="p">a áreas importantes</div>`,{fx:'zoom'});
+const L9=[['Atenção básica de saúde','+R$ 10 mi','#1E6BFF'],['Creches','+R$ 10 mi','#55B8FF'],['Tecnologia nas escolas','+R$ 5 mi','#FFB25E'],['Segurança e controle urbano','+R$ 6 mi','#FF7A1A']];
+L9.forEach(([a,v,c],i)=>{const b=B(201+i*2,213.8,0,`<div style="text-align:left;padding-left:30px"><div style="font-family:'Inter Display';font-weight:900;font-size:54px;color:${c}">${v}</div><div style="font-weight:700;font-size:32px;color:#dfe8ff">${a}</div></div>`,{anchor:()=>blockMid(i),left:true});});
+B(214,220,300,`<div class="h2">+ Regras para fiscalizar</div><div class="chips"><span class="chip st">Terceirização</span><span class="chip st o">Empréstimos</span><span class="chip st">Alterações no orçamento</span></div>`);
+B(220,224.7,330,`<div class="card"><div class="badge hb">Atenção</div><div class="p">Essas propostas ainda precisam passar pela <b>análise e votação legislativa</b>.</div></div>`);
+// CENA 10
+B(225.4,229.2,340,`<div class="mega" style="font-size:190px">R$ 11 BI</div><div class="unit">sob análise</div>`,{fx:'zoom'});
+B(229.2,232.6,320,`<div class="h2">Não adianta anunciar bilhões se a população não <span class="hl">enxerga o resultado</span>.</div>`);
+B(232.6,236,300,`<div class="h2">Qual deve ser a <span class="hl">prioridade do Recife?</span></div><div class="chips"><span class="chip o st">Comente aqui ↓</span></div>`);
+B(236,240.5,250,`<div class="h2" style="font-size:54px">O dinheiro é público.<br><span class="hb">A fiscalização tem que ser permanente.</span></div>`);
+B(237.2,240.5,560,`<div class="mega" style="font-size:132px;letter-spacing:-3px">A FOLGA<br>ACABOU!</div>`,{fx:'zoom'});
+B(238.2,240.5,1300,`<div class="logo"><div class="line"></div><div class="em" style="font-size:84px;letter-spacing:6px;white-space:nowrap">EDUARDO <b>MOURA</b></div><div class="tiny" style="margin-top:18px;letter-spacing:8px;font-size:26px;color:#B9CCF2">ANÁLISE DO ORÇAMENTO PÚBLICO</div></div>`,{fx:'zoom'});
+
+// ---------- per-frame ----------
+const prg=document.querySelector('#prog i'),scn=document.getElementById('scn'),sweep=document.getElementById('sweep'),flash=document.getElementById('flash'),sig=document.getElementById('sig');
+const CAM=[ // per-scene camera [x,y,z, lookY]
+ [0,.4,14,-.6],[0,.2,13,-.6],[.4,.2,13,-.6],[0,0,12.6,-.8],[-.3,.2,13,-.7],[0,.3,13,-.6],[.3,.2,12.8,-.8],[0,.2,13,-.6],[0,.3,13.2,-.6],[0,.6,14,-.4]];
+function sceneIdx(t){for(let i=SC.length-2;i>=0;i--)if(t>=SC[i])return i;return 0;}
+const vtmp=new THREE.Vector3();
+function renderAt(t){
+  const si=sceneIdx(t);
+  // camera
+  const prev=CAM[Math.max(0,si-1)],cur=CAM[si];const ck=eIO(prog(t,SC[si],SC[si]+1.2));
+  const cx=lerp(prev[0],cur[0],ck)+Math.sin(t*.21)*.55,cy=lerp(prev[1],cur[1],ck)+Math.sin(t*.17)*.25,cz=lerp(prev[2],cur[2],ck)-Math.sin(t*.11)*.3;
+  // little push-in at each scene start
+  const push=(1-eOut(prog(t,SC[si],SC[si]+2)))*1.6;
+  camera.position.set(cx,cy,cz+push);camera.lookAt(0,lerp(prev[3],cur[3],ck),0);
+  // world
+  grid.position.z=(t*1.2)%1;
+  pO.intensity=2.2+Math.sin(t*1.7)*.4;pB.intensity=2+Math.cos(t*1.3)*.4;
+  for(let i=0;i<NP;i++){const b=pBase[i];pPos[i*3]=b[0]+Math.sin(t*b[4]+b[3])*.6;pPos[i*3+1]=((b[1]+t*b[4]*.4+13)%26)-13;pPos[i*3+2]=b[2];}
+  pGeo.attributes.position.needsUpdate=true;
+  OBJ.forEach(O=>{const k=k01(t,O.t0,O.t1);O.o.visible=k>0.002;if(O.o.visible){O.upd(t,k);const s=O.base*(.001+k);O.o.scale.setScalar(s);}});
+  scene.updateMatrixWorld(true);
+  renderer.render(scene,camera);
+  // beats
+  BEATS.forEach(b=>{
+    const a=prog(t,b.t0,b.t0+.6),o=prog(t,b.t1-.4,b.t1);
+    if(t<b.t0||t>b.t1){b.el.style.opacity=0;b.el.style.display='none';return;}
+    b.el.style.display='block';
+    const ka=eOut(a),ko=eIO(o);const op=Math.min(ka,1-ko);
+    let tr='';
+    if(b.fx==='zoom'){tr=`perspective(1000px) translateZ(${(1-ka)*-500+ko*300}px) rotateX(${(1-ka)*25}deg)`;}
+    else{tr=`perspective(1000px) translateY(${(1-ka)*70-ko*50}px) rotateX(${(1-ka)*35}deg)`;}
+    if(b.anchor){vtmp.copy(b.anchor()).project(camera);const x=(vtmp.x+1)/2*W,y=(1-vtmp.y)/2*H;b.el.style.left=x+'px';b.el.style.top=y+'px';
+      b.el.style.transform=({left:'translate(0,-50%) ',below:'translate(-50%,0) ',mid:'translate(-50%,-50%) ',top:'translate(-50%,-100%) '})[b.mode]+tr;}
+    else b.el.style.transform=`translateX(-50%) `+tr;
+    b.el.style.opacity=op;b.el.style.filter=ko>0?`blur(${ko*10}px)`:'none';
+    b.nums.forEach(n=>{const d=+n.dataset.d,dl=+n.dataset.delay,du=+n.dataset.dur,to=+n.dataset.to,fr=+n.dataset.from;
+      n.textContent=fmt(lerp(fr,to,eOut(prog(t,b.t0+dl,b.t0+dl+du))),d);});
+    b.stag.forEach((s,i)=>{const k=eBack(prog(t,b.t0+.35+i*.22,b.t0+.85+i*.22));s.style.opacity=clamp(k);s.style.transform=`translateY(${(1-k)*40}px) scale(${.7+.3*k})`;});
+  });
+  // HUD
+  prg.style.width=(clamp(t/DUR)*100)+'%';scn.textContent=String(si+1).padStart(2,'0')+' / 10';
+  const sk=Math.min(eOut(prog(t,.3,1.2)),1-eIO(prog(t,237.6,238.3)));sig.style.opacity=sk;
+  // transitions: orange light sweep + soft flash
+  let sw=-1;for(let i=1;i<SC.length-1;i++){if(Math.abs(t-SC[i])<.6)sw=(t-SC[i]+.6)/1.2;}
+  if(sw>=0){sweep.style.opacity=Math.sin(sw*Math.PI)*.9;sweep.style.left=(-700+sw*2600)+'px';}else sweep.style.opacity=0;
+  let fl=0;[4.2,225.4,237.2].forEach(x=>{fl=Math.max(fl,(1-prog(t,x,x+.5))*(t>=x?1:0)*.35);});
+  for(let i=1;i<SC.length-1;i++)if(t>=SC[i])fl=Math.max(fl,(1-prog(t,SC[i],SC[i]+.35))*.12);
+  flash.style.opacity=fl;
+  return true;
+}
+window.renderAt=renderAt;window.DUR=DUR;
+renderAt(0);
+</script>
+</body>
+</html>
