@@ -26,7 +26,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Baixar o código
         uses: actions/checkout@v4
@@ -39,7 +39,8 @@ jobs:
       - name: Rodar os testes
         run: python -m pytest -q
       - name: Coletar editais e gerar o site
-        run: python scripts/gerar_demo.py --saida _site --dias 4
+        # O PNCP desacelera pedidos seguidos; após 25 min publica o que já coletou.
+        run: python scripts/gerar_demo.py --saida _site --dias 4 --limite-minutos 25
       - name: Preparar o Pages
         uses: actions/configure-pages@v5
       - name: Empacotar o site

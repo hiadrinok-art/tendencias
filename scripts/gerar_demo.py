@@ -104,11 +104,14 @@ def main() -> None:
     p.add_argument("--saida", default="_site")
     p.add_argument("--banco", help="banco já coletado; sem isso, coleta agora no PNCP")
     p.add_argument("--dias", type=int, default=4)
+    p.add_argument("--limite-minutos", type=float, default=None,
+                   help="para a coleta neste tempo e publica o que já tiver")
     args = p.parse_args()
     caminho = args.banco
     if not caminho:
         caminho = str(Path(tempfile.mkdtemp()) / "radar.db")
-        coletor.coletar(caminho, dias=args.dias)
+        limite = args.limite_minutos * 60 if args.limite_minutos else None
+        coletor.coletar(caminho, dias=args.dias, limite_segundos=limite)
     n = gerar(Path(args.saida), caminho)
     print(f"Demonstração gerada em {args.saida} com {n} editais abertos.")
 

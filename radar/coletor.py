@@ -155,9 +155,13 @@ def _pagina(cliente: httpx.Client, params: dict, tentativas: int = 7, dormir=tim
 
 
 def coletar(caminho_banco: str, dias: int = 3, max_paginas: int = 100, dormir=time.sleep,
-            cliente: httpx.Client | None = None) -> int:
+            cliente: httpx.Client | None = None, limite_segundos: float | None = None,
+            relogio=time.monotonic) -> int:
     """Coleta todas as modalidades. Uma página que falhe é pulada (e registrada), sem
-    perder o resto; só falha de vez se nada for coletado."""
+    perder o resto; só falha de vez se nada for coletado. Com ``limite_segundos``,
+    para ao atingir o tempo e fica com o que já coletou (as modalidades mais
+    importantes vêm primeiro em MODALIDADES)."""
+    inicio_relogio = relogio()
     banco.preparar(caminho_banco)
     conexao = banco.conectar(caminho_banco)
     fim = date.today()
@@ -169,6 +173,9 @@ def coletar(caminho_banco: str, dias: int = 3, max_paginas: int = 100, dormir=ti
         for modalidade in MODALIDADES:
             pagina, total_paginas = 1, 1
             while pagina <= min(total_paginas, max_paginas):
+                if limite_segundos is not None and relogio() - inicio_relogio > limite_segundos:
+                    log.warning("Limite de tempo atingido: parando com %s editais.", total)
+                    return _encerrar(total, falhas)
                 try:
                     dados = _pagina(cliente, {
                         "dataInicial": inicio.strftime("%Y%m%d"), "dataFinal": fim.strftime("%Y%m%d"),
@@ -192,6 +199,10 @@ def coletar(caminho_banco: str, dias: int = 3, max_paginas: int = 100, dormir=ti
         conexao.close()
         if dono:
             cliente.close()
+    return _encerrar(total, falhas)
+
+
+def _encerrar(total: int, falhas: int) -> int:
     if total == 0 and falhas:
         raise PncpFalhou("Nenhum edital coletado: o PNCP não respondeu.")
     if falhas:
