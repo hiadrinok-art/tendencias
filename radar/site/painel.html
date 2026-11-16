@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meus editais — Radar de Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;family=JetBrains+Mono:wght@600&amp;display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="/static/icone.svg" type="image/svg+xml">
+<script src="/static/app.js" defer></script>
+<script src="/static/painel.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="/painel">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="App">
+      <a href="/painel" aria-current="page">Editais</a>
+      <button id="sair" class="botao-texto" type="button">Sair</button>
+    </nav>
+  </div>
+</header>
+
+<main class="envoltorio pagina-app">
+  <div class="cabeca-painel">
+    <div>
+      <p id="perfil" class="sobretitulo">Carregando…</p>
+      <h1 class="titulo-3">Editais abertos no seu ramo</h1>
+    </div>
+    <p class="miudo">Dados do PNCP, com propostas ainda abertas</p>
+  </div>
+
+  <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+
+  <div class="indicadores">
+    <div class="indicador"><span>Editais abertos</span><strong id="ind-total">—</strong></div>
+    <div class="indicador"><span>Valor estimado somado</span><strong id="ind-valor">—</strong></div>
+    <div class="indicador indicador--alerta"><span>Próximo prazo</span><strong id="ind-prazo">—</strong></div>
+  </div>
+
+  <div class="abas" role="tablist" aria-label="Filtrar editais">
+    <button class="aba" role="tab" aria-selected="true" data-filtro="todos">Todos</button>
+    <button class="aba" role="tab" aria-selected="false" data-filtro="prazo">Prazo em até 10 dias</button>
+    <button class="aba" role="tab" aria-selected="false" data-filtro="grandes">Acima de R$ 100 mil</button>
+  </div>
+
+  <div id="lista" class="tabela-editais" aria-live="polite">
+    <p class="carregando vazio">Buscando editais…</p>
+  </div>
+  <p id="rodape-lista" class="miudo"></p>
+</main>
+</body>
+</html>

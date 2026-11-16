@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastre seu ramo — Radar de Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;family=JetBrains+Mono:wght@600&amp;display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="/static/icone.svg" type="image/svg+xml">
+<script src="/static/app.js" defer></script>
+<script src="/static/cadastro.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="/">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="Conta"><a href="/entrar">Já tenho conta</a></nav>
+  </div>
+</header>
+
+<main class="envoltorio pagina-app">
+  <div class="duas-colunas">
+    <form id="form" class="duas-colunas__principal" novalidate>
+      <div>
+        <h1 class="titulo-3">O que a sua empresa vende?</h1>
+        <p class="apoio">Com isso o Radar separa só os editais que fazem sentido para você. Dá para mudar depois.</p>
+      </div>
+
+      <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+
+      <div class="cartao secao-cartao">
+        <h2>Sua empresa</h2>
+        <label class="campo">CNPJ
+          <input id="cnpj" name="cnpj" inputmode="numeric" autocomplete="off" placeholder="00.000.000/0000-00" required maxlength="18">
+          <span id="cnpj-msg" class="dica">Usado só para identificar a empresa.</span>
+        </label>
+        <label class="campo">E-mail para entrar e receber alertas
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com.br" required maxlength="254">
+        </label>
+        <label class="campo">Senha
+          <input id="senha" name="senha" type="password" autocomplete="new-password" required minlength="10" maxlength="128">
+          <span class="dica">Pelo menos 10 caracteres. Evite senhas óbvias.</span>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend>Ramos de atuação</legend>
+        <div id="ramos" class="opcoes"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Onde você atende</legend>
+        <div class="acoes">
+          <button type="button" id="todas-ufs" class="botao botao--contorno botao--pequeno">Marcar todo o Brasil</button>
+          <button type="button" id="nenhuma-uf" class="botao botao--contorno botao--pequeno">Limpar</button>
+        </div>
+        <div id="ufs" class="opcoes"></div>
+      </fieldset>
+
+      <label class="campo">Palavras-chave extras (opcional)
+        <input id="palavras" name="palavras" placeholder="ex.: backup, licenças, uniformes" maxlength="400">
+        <span class="dica">Separe por vírgula. Editais com essas palavras entram mesmo fora do ramo.</span>
+      </label>
+
+      <label class="aceite"><input id="aceite" type="checkbox" required>
+        <span>Li e aceito os termos de uso e a política de privacidade. Meus dados são usados só para enviar editais, e posso baixá-los ou apagá-los a qualquer momento.</span>
+      </label>
+
+      <div class="acoes">
+        <button id="enviar" class="botao botao--teal botao--grande" type="submit">Ver meus editais</button>
+      </div>
+    </form>
+
+    <aside class="duas-colunas__lado">
+      <div class="cartao secao-cartao">
+        <p class="sobretitulo">Como fica</p>
+        <p class="texto-2">Depois do cadastro você vê na hora os editais com propostas abertas no seu ramo e nos estados escolhidos, os mais urgentes primeiro.</p>
+        <p class="miudo">Os dados vêm do Portal Nacional de Contratações Públicas (PNCP) e são atualizados todos os dias.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

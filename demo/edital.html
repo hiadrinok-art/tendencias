@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Edital — Radar de Editais (demonstração)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;display=swap">
+<link rel="stylesheet" href="static/app.css">
+<link rel="icon" href="static/icone.svg" type="image/svg+xml">
+<script src="static/app.js" defer></script>
+<script src="static/demo.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="./">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="Demonstração"><a href="painel.html" aria-current="page">Editais</a></nav>
+  </div>
+</header>
+
+<main class="envoltorio pagina-app">
+  <a class="voltar" href="painel.html">← Voltar aos editais</a>
+  <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+  <p id="carregando" class="carregando">Carregando edital…</p>
+
+  <div id="conteudo" class="oculto">
+    <div class="cabeca-edital">
+      <div id="etiquetas" class="etiquetas"></div>
+      <h1 id="titulo" class="titulo-3"></h1>
+      <p id="orgao" class="apoio"></p>
+    </div>
+
+    <div class="duas-colunas">
+      <div class="duas-colunas__principal">
+        <section class="cartao secao-cartao" aria-labelledby="h-objeto">
+          <h2 id="h-objeto">O que está sendo comprado</h2>
+          <p id="objeto" class="texto-objeto"></p>
+          <p class="miudo">Texto oficial do PNCP. O resumo em linguagem simples, feito com IA, chega na próxima versão.</p>
+        </section>
+        <section class="cartao secao-cartao" aria-labelledby="h-conferir">
+          <h2 id="h-conferir">Antes de entrar, confira</h2>
+          <ul class="checklist">
+            <li><label class="aceite"><input type="checkbox"> Cadastro no Compras.gov.br (SICAF) em dia</label></li>
+            <li><label class="aceite"><input type="checkbox"> Documentos de habilitação pedidos no edital completo</label></li>
+            <li><label class="aceite"><input type="checkbox"> Capacidade de entregar no local e no prazo pedidos</label></li>
+          </ul>
+        </section>
+      </div>
+      <aside class="duas-colunas__lado">
+        <div class="valor-escuro"><span>Valor estimado</span><strong id="valor"></strong></div>
+        <section class="cartao secao-cartao" aria-labelledby="h-prazos">
+          <h2 id="h-prazos">Prazos</h2>
+          <ol class="linha-tempo">
+            <li><i></i><div><strong id="publicado"></strong><span>Publicado no PNCP</span></div></li>
+            <li><i></i><div><strong id="abertura"></strong><span>Início do envio de propostas</span></div></li>
+            <li class="fim"><i></i><div><strong id="encerramento"></strong><span>Fim das propostas e sessão pública</span></div></li>
+          </ol>
+        </section>
+        <div class="acoes acoes--coluna">
+          <a id="link-origem" class="botao botao--teal oculto" rel="noopener noreferrer" target="_blank">Abrir no sistema de compras</a>
+          <a id="link-pncp" class="botao botao--contorno" rel="noopener noreferrer" target="_blank">Ver no PNCP</a>
+          <p id="controle" class="miudo centro"></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+</body>
+</html>

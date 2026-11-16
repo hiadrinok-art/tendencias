@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar — Radar de Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Inter+Tight:wght@700;800&amp;display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="/static/icone.svg" type="image/svg+xml">
+<script src="/static/app.js" defer></script>
+<script src="/static/entrar.js" defer></script>
+</head>
+<body>
+<header class="topo topo--app">
+  <div class="envoltorio">
+    <a class="marca" href="/">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#47668B" stroke-width="1.5"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#47668B" stroke-width="1.5"/><line x1="16" y1="16" x2="26" y2="7" stroke="#82D2E0" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="7" r="2.6" fill="#82D2E0"/></svg>
+      Radar de Editais
+    </a>
+    <nav class="nav" aria-label="Conta"><a href="/cadastro">Criar conta</a></nav>
+  </div>
+</header>
+
+<main class="envoltorio pagina-app">
+  <form id="form" class="cartao cartao-form" novalidate>
+    <h1 class="titulo-3">Entrar</h1>
+    <div id="erro" class="aviso aviso--erro oculto" role="alert" tabindex="-1"></div>
+    <label class="campo">E-mail
+      <input id="email" type="email" autocomplete="username" required maxlength="254">
+    </label>
+    <label class="campo">Senha
+      <input id="senha" type="password" autocomplete="current-password" required maxlength="128">
+    </label>
+    <button id="enviar" class="botao botao--escuro botao--grande" type="submit">Entrar</button>
+    <p class="miudo">Ainda não tem conta? <a href="/cadastro">Cadastre seu ramo</a>.</p>
+  </form>
+</main>
+</body>
+</html>

@@ -1,43 +1,51 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Publica a demonstração do Radar de Editais no GitHub Pages.
+# Publica SÓ a pasta gerada (_site), nunca o repositório inteiro.
+# Roda a cada push no main, todo dia às 06:17 (Brasília) para atualizar os
+# editais, e quando disparado à mão pela aba Actions.
+name: Publicar demonstração no Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  schedule:
+    - cron: "17 9 * * *"
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
+  publicar:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - name: Checkout
+      - name: Baixar o código
         uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+      - name: Rodar os testes
+        run: python -m pytest -q
+      - name: Coletar editais e gerar o site
+        run: python scripts/gerar_demo.py --saida _site --dias 4
+      - name: Preparar o Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: Empacotar o site
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
+          path: _site
+      - name: Publicar
         id: deployment
         uses: actions/deploy-pages@v5
