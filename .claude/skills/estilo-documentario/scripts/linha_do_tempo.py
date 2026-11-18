@@ -50,8 +50,14 @@ quadro = lambda t: round(t * FPS) / FPS
 # 1) narração total
 pedacos, inicio_audio, t = [], {}, LEAD_IN
 total = [np.zeros(int(LEAD_IN * SR), np.float32)]
+provisorias = []
 for c in ordem:
-    x = aparar(ler(base / "narracao" / f"{c}.mp3"))
+    arq = base / "narracao" / f"{c}.mp3"
+    if arq.exists():
+        x = aparar(ler(arq))
+    else:   # ainda sem narração: silêncio com a duração provisória do plano (a cena usa t_prov)
+        plano = json.loads((base / "cenas" / c / "plano.json").read_text(encoding="utf-8"))
+        x = np.zeros(int((plano.get("dur_prov", 30) - ANTES_DA_FALA - pausa + 0.7) * SR), np.float32); provisorias.append(c)
     t = quadro(t)                       # cada narração começa num quadro exato
     inicio_audio[c] = t
     falta = int(round(t * SR)) - sum(len(p) for p in total)
@@ -70,16 +76,17 @@ cenas = {}
 for i, c in enumerate(ordem):
     ini, fim = lim[i], lim[i + 1]
     cenas[c] = {"ini": ini, "fim": fim, "dur": round(fim - ini, 6), "quadros": int(round((fim - ini) * FPS)),
-                "audio_ini": inicio_audio[c], "estilo": T.get("estilo", {}).get(c, "mesa")}
+                "audio_ini": inicio_audio[c], "estilo": T.get("estilo", {}).get(c, "mesa"), "provisoria": c in provisorias}
 
 # 3) transcrição + refino
 from faster_whisper import WhisperModel
 modelo = WhisperModel(sys.argv[2] if len(sys.argv) > 2 else "small", device="cpu", compute_type="int8")
 palavras = []
 for c, x in pedacos:
+    if c in provisorias: continue
     x16 = np.interp(np.arange(0, len(x), SR / 16000), np.arange(len(x)), x).astype(np.float32)
-    segs, _ = modelo.transcribe(x16, language="pt", word_timestamps=True, beam_size=5,
-                                initial_prompt=T["texto"][c][:200])
+    # sem initial_prompt: com o texto como "dica" o Whisper pula o trecho que já está na dica
+    segs, _ = modelo.transcribe(x16, language="pt", word_timestamps=True, beam_size=5)
     e = env_db(x); med = np.median(e[e > -45]) if np.any(e > -45) else -30
     for s in segs:
         for w in s.words:
@@ -91,7 +98,10 @@ for c, x in pedacos:
                 if e[j] < med - 12:                     # há um vale claro antes da palavra
                     k = j
                     while k + 1 < len(e) and e[k + 1] < e[j] + 6 and (k - j) < 15: k += 1
-                    refinado = (k + 1) * 0.01
+                    cand = (k + 1) * 0.01
+                    # conservador: no máximo 120 ms de ajuste e nunca atrasar mais que 40 ms
+                    # (efeito alguns ms adiantado não se percebe; atrasado, sim)
+                    if abs(cand - ini) <= 0.12 and cand - ini <= 0.04: refinado = cand
             palavras.append({"cena": c, "w": w.word.strip(), "ini_whisper": round(inicio_audio[c] + ini, 3),
                              "ini": round(inicio_audio[c] + refinado, 3), "fim": round(inicio_audio[c] + float(w.end), 3)})
     print(f"{c}: {sum(1 for p in palavras if p['cena'] == c)} palavras, cena {cenas[c]['ini']:.2f}–{cenas[c]['fim']:.2f} s")
@@ -99,4 +109,5 @@ for c, x in pedacos:
 (base / "palavras.json").write_text(json.dumps(palavras, ensure_ascii=False, indent=0), encoding="utf-8")
 (base / "cenas.json").write_text(json.dumps(cenas, ensure_ascii=False, indent=1), encoding="utf-8")
 d = [abs(p["ini"] - p["ini_whisper"]) for p in palavras]
+if provisorias: print("SEM NARRAÇÃO (tempos provisórios):", ", ".join(provisorias))
 print(f"total {lim[-1]:.2f} s; refino mexeu em {sum(1 for v in d if v > 0.02)} de {len(d)} palavras (máx {max(d)*1000:.0f} ms)")

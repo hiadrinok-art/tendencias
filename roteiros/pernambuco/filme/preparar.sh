@@ -13,7 +13,8 @@ import json,glob,os
 from PIL import Image
 d={os.path.basename(f):list(Image.open(f).size) for f in glob.glob('$D/img/*.jpg')}
 open('$D/imagens.js','w').write('window.IMG = '+json.dumps(d)+';\\n')"
-if [ -f "$B/palavras.json" ]; then python3 "$S/resolver_tempos.py" "$B" "$c"; DUR=$(python3 -c "import json;print(json.load(open('$B/cenas.json'))['$c']['dur'])")
+TEM=$( [ -f "$B/cenas.json" ] && python3 -c "import json;print(0 if json.load(open('$B/cenas.json')).get('$c',{}).get('provisoria',True) else 1)" || echo 0)
+if [ "$TEM" = 1 ]; then python3 "$S/resolver_tempos.py" "$B" "$c"; DUR=$(python3 -c "import json;print(json.load(open('$B/cenas.json'))['$c']['dur'])")
 else python3 "$B/provisorio.py" "$B" "$c"; DUR=$(python3 -c "import json;print(json.load(open('$D/plano.resolvido.json'))['duracao'])"); fi
 TIT=$(python3 -c "import json;print(json.load(open('$D/plano.json')).get('titulo','$c'))")
 sed -e "s|{{DUR}}|$DUR|" -e "s|{{TITULO}}|$TIT|" "$B/comum/index.tpl.html" > "$D/index.html"

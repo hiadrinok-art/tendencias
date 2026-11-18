@@ -7,7 +7,7 @@ Lê <projeto>/cenas/<cena>/plano.json, <projeto>/palavras.json e <projeto>/cenas
 <projeto>/cenas/<cena>/plano.js com tempos LOCAIS da cena (0 = início da cena).
 
 No plano:
-  beats[].gatilho       palavra falada (acentos/pontuação ignorados; aceita grafia próxima)
+  beats[].gatilho       palavra falada (acentos/pontuação ignorados; aceita grafia próxima; alternativas com "|", ex.: "setenta|75")
   beats[].n             qual ocorrência dessa palavra na cena (1 = primeira; padrão 1)
   beats[].desloc        ajuste fino em s (ex.: -0.1 para o impacto cair um pouco antes)
   camera[i][0]          número (s locais) ou texto "@<id>", "@<id>+0.4", "@<id>-0.6", "@fim-1.5", "@ini+0.2"
@@ -27,9 +27,13 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", "".join(ch for ch in s if unicodedata.category(ch) != "Mn"))
 
 def achar(gatilho, n):
-    alvo = norm(gatilho)
-    hits = [w for w in W if norm(w["w"]) == alvo] or \
-           [w for w in W if difflib.SequenceMatcher(None, norm(w["w"]), alvo).ratio() >= 0.75]
+    # alternativas com "|": a transcrição pode escrever números por extenso ou em algarismos ("setenta|75")
+    hits = []
+    for alt in gatilho.split("|"):
+        alvo = norm(alt)
+        hits = [w for w in W if norm(w["w"]) == alvo] or \
+               [w for w in W if difflib.SequenceMatcher(None, norm(w["w"]), alvo).ratio() >= 0.75]
+        if len(hits) >= n: break
     if len(hits) < n:
         raise SystemExit(f"[{cena}] gatilho '{gatilho}' (ocorrência {n}) não encontrado. Palavras da cena: "
                          + " ".join(w["w"] for w in W))

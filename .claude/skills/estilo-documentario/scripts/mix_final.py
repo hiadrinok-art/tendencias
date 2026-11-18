@@ -44,7 +44,9 @@ mix = np.zeros((N, 2), np.float32); mix += voz[:, None]
 ev = env_db(voz); nivel_voz = float(np.mean(ev[ev > -45]))
 
 # ---- trilhas (niveladas sob a voz, com envelope de desvio)
-for tr in json.loads((proj / "trilhas.json").read_text(encoding="utf-8")):
+trilhas = json.loads((proj / "trilhas.json").read_text(encoding="utf-8")) if (proj / "trilhas.json").exists() else []
+avisos = []
+for tr in trilhas:
     x = ler(proj / tr["arquivo"]); ini = tglobal(tr["ini"]); fim = tglobal(tr["fim"])
     x = x[: int((fim - ini) * SR)]
     t = np.arange(len(x)) / SR
@@ -62,21 +64,38 @@ for tr in json.loads((proj / "trilhas.json").read_text(encoding="utf-8")):
 cache, linhas = {}, []
 def efeito(nome):
     if nome in cache: return cache[nome]
-    arq = next((proj / "efeitos").glob(nome + ".*"))
+    arq = next((proj / "efeitos").glob(nome + ".*"), None)
+    if arq is None: avisos.append(f"efeito '{nome}' não existe em efeitos/ (ignorado)"); cache[nome] = None; return None
     x = ler(arq); amp = np.abs(x).max(axis=1); pico = amp.max()
     ataque = int(np.argmax(amp > pico * 10 ** (-30 / 20)))
-    cache[nome] = (x[ataque:], ataque / SR); return cache[nome]
+    if nome in IMPACTO:
+        # sons de impacto: o que deve cair no destaque é o PICO (o "tapa"), não o começo do som.
+        # Devolve o som desde o ataque e o deslocamento do pico, para posicionar o pico no tempo do destaque.
+        env = np.convolve(amp, np.ones(240) / 240, mode="same"); pico_i = int(np.argmax(env))
+        cache[nome] = (x[ataque:], ataque / SR, (pico_i - ataque) / SR)
+    else:
+        cache[nome] = (x[ataque:], ataque / SR, 0.0)
+    return cache[nome]
+IMPACTO = {"carimbo", "papel", "alfinete", "tambor", "canhao", "salva", "prensa", "argila", "gota"}
 GANHO = {"carimbo": 1.0, "papel": 0.55, "maquina": 0.45, "pena": 0.5}
+efx = np.zeros_like(mix)     # trilha só de efeitos (para conferir sincronia com o vídeo)
 for c in ordem:
-    P = json.loads((proj / "cenas" / c / "plano.resolvido.json").read_text(encoding="utf-8"))
+    arqp = proj / "cenas" / c / "plano.resolvido.json"
+    if not arqp.exists(): avisos.append(f"cena {c} sem plano resolvido (ignorada)"); continue
+    P = json.loads(arqp.read_text(encoding="utf-8"))
     eventos = [(b["t"], b["som"], f"beat {b['id']} '{b['gatilho']}'", b["acao"]) for b in P["beats"] if b.get("som")]
     eventos += [(t, s, "extra", "") for t, s in P.get("sons_extras", [])]
     for t, som, rot, acao in eventos:
-        x, corte = efeito(som); tg = C[c]["ini"] + t
-        a = int(round(tg * SR)); b = min(N, a + len(x))
-        if a < N: mix[a:b] += x[: b - a] * GANHO.get(som, 0.6)
-        linhas.append(f"{c:8s} {rot:34s} {som:10s} destaque {tg:8.3f}s  ataque do som {tg:8.3f}s  (silêncio inicial removido: {corte*1000:4.0f} ms)")
+        e = efeito(som)
+        if e is None: continue
+        x, corte, ate_pico = e; tg = C[c]["ini"] + t
+        a = int(round((tg - ate_pico) * SR)); b = min(N, a + len(x))
+        if a < N: mix[a:b] += x[: b - a] * GANHO.get(som, 0.6); efx[a:b] += x[: b - a]
+        modo = f"PICO em {tg:8.3f}s (som começa {ate_pico*1000:3.0f} ms antes)" if ate_pico else f"início em {tg:8.3f}s"
+        linhas.append(f"{c:8s} {rot:34s} {som:10s} destaque {tg:8.3f}s  {modo}  (silêncio inicial removido: {corte*1000:4.0f} ms)")
 
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-i", "-", str(proj / "efeitos_stem.wav")],
+               input=efx.astype(np.float32).tobytes(), check=True)
 bruto = proj / "_mix_bruto.wav"
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-i", "-", str(bruto)],
                input=mix.astype(np.float32).tobytes(), check=True)
@@ -89,4 +108,5 @@ seg = (f"loudnorm={alvo}:linear=true:measured_I={m['input_i']}:measured_TP={m['i
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(bruto), "-af", seg + ",aresample=48000", "-ar", "48000", str(proj / "mix.wav")], check=True)
 bruto.unlink()
 (proj / "sincronia.txt").write_text("\n".join(linhas) + "\n", encoding="utf-8")
+for a in sorted(set(avisos)): print("AVISO:", a)
 print(f"mix.wav pronto ({N/SR:.2f} s); {len(linhas)} efeitos posicionados; relatório em sincronia.txt")

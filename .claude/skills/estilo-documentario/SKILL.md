@@ -91,6 +91,10 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - **Câmera precisa de PARADAS:** para cada destaque, um keyframe de chegada (`@id-0.3`) e um de permanência antes de viajar ao próximo (`@prox-1.0`). Sem a parada a câmera sai assim que chega.
 - **Fotos com altura conhecida:** a câmera mede antes de a imagem carregar. O `preparar.sh` grava as dimensões em `imagens.js` e `B.foto` já cria a moldura no tamanho certo.
 - **Traço direto na madeira escura:** use cor clara (creme `#e9dcc0`), não marrom.
+- **Sons de impacto se alinham pelo PICO, não pelo começo:** o arquivo de papel caindo tinha 631 ms de silêncio e o "tapa" vinha 400 ms depois do início. O `mix_final.py` mede e posiciona o pico no destaque (carimbo, papel, alfinete, tambor, canhão...).
+- **Whisper sem `initial_prompt`:** com o texto como dica ele pula trechos. Números saem em algarismos ("75"): use gatilhos com alternativas (`"setenta|75"`).
+- **Escolha de versões da narração:** `escolher_versao` compara a transcrição com o texto; uma versão leu "à coroa" como "acorou".
+- **`conferir_av.py`** grava tiras de quadros de cada impacto com o quadro do som marcado. Revise olhando: movimento de câmera engana o detector automático.
 - Narração do ElevenLabs sai baixa na mixagem (cerca de -28 LUFS); o `montar.py` normaliza para -16 em **duas passadas lineares**. A de uma passada comprime e desfaz o envelope.
 - Para medir música × voz, use as pausas reais da narração (`silencedetect`), não os tempos do Whisper: as palavras podem estar adiantadas.
 - `data-duration` do `#root` e do `<audio>` precisa ser igual a `duracao` do plano, senão o render sai com tela preta no fim.
