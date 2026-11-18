@@ -95,7 +95,13 @@
       }
       // posição de LAYOUT (offsetLeft/Top somados até o #mundo): não depende da escala da página nem de transforms
       let x = el.offsetWidth / 2, y = el.offsetHeight / 2, n = el;
-      if (el instanceof SVGElement) { const bb = el.getBBox(); x = bb.x + bb.width / 2; y = bb.y + bb.height / 2; n = el.ownerSVGElement.parentNode; }
+      if (el instanceof SVGElement) {
+        // coordenadas do desenho -> pixels da div que contém o <svg> (viewBox + preserveAspectRatio "meet")
+        const svg = el.ownerSVGElement || el, bb = el.getBBox(), cont = svg.parentNode;
+        const vb = (svg.getAttribute("viewBox") || `0 0 ${cont.offsetWidth} ${cont.offsetHeight}`).split(/[ ,]+/).map(Number);
+        const W = cont.offsetWidth, H = cont.offsetHeight, k = Math.min(W / vb[2], H / vb[3]);
+        x = (W - vb[2] * k) / 2 + (bb.x + bb.width / 2 - vb[0]) * k; y = (H - vb[3] * k) / 2 + (bb.y + bb.height / 2 - vb[1]) * k; n = cont;
+      }
       while (n && n.id !== "mundo") { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
       return (eixo === "x" ? x : y) + d;
     }
@@ -111,9 +117,13 @@
     }
 
     // ---- foco: um destaque aceso por vez
+    let focoAtual = null;
     function focar(el, t) {
       acesos.filter((o) => o !== el).forEach((o) => tl.to(o, { opacity: OPACIDADE_APAGADO, duration: 0.45, ease: "sine.out" }, t));
+      // um destaque que JÁ foi aceso e depois apagado volta a 100% quando recebe o foco de novo
+      if (acesos.includes(el) && focoAtual !== el) tl.to(el, { opacity: 1, duration: 0.45, ease: "sine.out" }, t);
       if (!acesos.includes(el)) acesos.push(el);
+      focoAtual = el;
       eventos.push({ t: +t.toFixed(3), tipo: "foco", alvo: el.id });
     }
 

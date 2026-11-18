@@ -1,1 +1,241 @@
-{"titulo": "c7", "dur_prov": 62, "camera": [], "beats": []}
+{
+ "titulo": "Pernambuco — Cena 7: Do mar ao sertão",
+ "dur_prov": 52.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#mapa-c7",
+   "#mapa-c7+1750",
+   0.17
+  ],
+  [
+   "@1+1.8",
+   "#mapa-c7",
+   "#mapa-c7+1750",
+   0.18
+  ],
+  [
+   "@2-0.4",
+   "#ondas",
+   "#ondas",
+   0.55
+  ],
+  [
+   "@3-0.6",
+   "#ondas",
+   "#ondas",
+   0.52
+  ],
+  [
+   "@3-0.1",
+   "#folha-recife",
+   "#folha-recife",
+   0.8
+  ],
+  [
+   "@4-1.1",
+   "#folha-recife",
+   "#folha-recife",
+   0.78
+  ],
+  [
+   "@4-0.2",
+   "#foto-noronha",
+   "#foto-noronha",
+   0.62
+  ],
+  [
+   "@5-1.0",
+   "#foto-noronha",
+   "#foto-noronha",
+   0.6
+  ],
+  [
+   "@5-0.2",
+   "#canavial",
+   "#canavial",
+   0.62
+  ],
+  [
+   "@6-1.0",
+   "#canavial",
+   "#canavial",
+   0.6
+  ],
+  [
+   "@6-0.2",
+   "#feira",
+   "#feira",
+   0.62
+  ],
+  [
+   "@7-1.0",
+   "#feira",
+   "#feira",
+   0.6
+  ],
+  [
+   "@7-0.2",
+   "#caatinga",
+   "#caatinga",
+   0.6
+  ],
+  [
+   "@8-1.0",
+   "#caatinga",
+   "#caatinga",
+   0.58
+  ],
+  [
+   "@8-0.2",
+   "#rio",
+   "#rio",
+   0.6
+  ],
+  [
+   "@9-1.0",
+   "#rio",
+   "#rio",
+   0.58
+  ],
+  [
+   "@9-0.2",
+   "#petrolina",
+   "#petrolina",
+   0.6
+  ],
+  [
+   "@10-1.0",
+   "#petrolina",
+   "#petrolina",
+   0.58
+  ],
+  [
+   "@10-0.2",
+   "#mapa-c7",
+   "#mapa-c7+1750",
+   0.17
+  ],
+  [
+   "@fim",
+   "#mapa-c7",
+   "#mapa-c7+1750",
+   0.165
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "faixa",
+   "t_prov": 3.0,
+   "acao": "desenhar",
+   "alvo": "pe-xilo",
+   "foco": "mapa-c7",
+   "som": "goiva"
+  },
+  {
+   "id": 2,
+   "gatilho": "arrecifes",
+   "t_prov": 9.0,
+   "acao": "desenhar",
+   "alvo": "ondas",
+   "foco": "mapa-c7",
+   "som": "ondas"
+  },
+  {
+   "id": 3,
+   "gatilho": "nome",
+   "t_prov": 10.5,
+   "acao": "cair",
+   "alvo": "folha-recife",
+   "som": "papel"
+  },
+  {
+   "id": 3.1,
+   "gatilho": "deles",
+   "t_prov": 12.0,
+   "acao": "apagar",
+   "alvo": "letras-ar",
+   "foco": "folha-recife",
+   "duracao": 0.6
+  },
+  {
+   "id": 3.2,
+   "gatilho": "deles",
+   "t_prov": 12.0,
+   "acao": "apagar",
+   "alvo": "letra-s",
+   "foco": "folha-recife",
+   "duracao": 0.6,
+   "som": "prensa"
+  },
+  {
+   "id": 4,
+   "gatilho": "Noronha",
+   "t_prov": 15.5,
+   "acao": "cair",
+   "alvo": "foto-noronha",
+   "som": "papel"
+  },
+  {
+   "id": 5,
+   "gatilho": "canaviais",
+   "t_prov": 22.5,
+   "acao": "desenhar",
+   "alvo": "canavial",
+   "som": "folhas"
+  },
+  {
+   "id": 6,
+   "gatilho": "feiras",
+   "t_prov": 26.0,
+   "acao": "desenhar",
+   "alvo": "feira",
+   "som": "feira"
+  },
+  {
+   "id": 7,
+   "gatilho": "Caatinga",
+   "t_prov": 30.0,
+   "acao": "desenhar",
+   "alvo": "caatinga",
+   "som": "cigarras"
+  },
+  {
+   "id": 8,
+   "gatilho": "Francisco",
+   "t_prov": 37.0,
+   "acao": "desenhar",
+   "alvo": "rio",
+   "som": "agua"
+  },
+  {
+   "id": 9,
+   "gatilho": "uvas",
+   "t_prov": 41.5,
+   "acao": "desenhar",
+   "alvo": "petrolina",
+   "som": "pena"
+  },
+  {
+   "id": 10,
+   "gatilho": "setecentos|700",
+   "t_prov": 47.0,
+   "acao": "congelar",
+   "alvo": "pe-cores7",
+   "foco": "mapa-c7"
+  },
+  {
+   "id": 10.1,
+   "gatilho": "contrastes",
+   "t_prov": 49.0,
+   "acao": "datilografar",
+   "alvo": "km700",
+   "foco": "mapa-c7",
+   "som": "prensa"
+  }
+ ],
+ "sons_extras": []
+}
