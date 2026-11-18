@@ -1,1 +1,128 @@
-{"titulo": "c8", "dur_prov": 36, "camera": [], "beats": []}
+{
+ "titulo": "Pernambuco — Cena 8: O próximo capítulo",
+ "dur_prov": 35.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#folha-desafios",
+   "#folha-desafios",
+   0.75
+  ],
+  [
+   "@2-1.0",
+   "#folha-desafios",
+   "#folha-desafios",
+   0.72
+  ],
+  [
+   "@2-0.2",
+   "#casas",
+   "#casas+170",
+   0.558
+  ],
+  [
+   "@3-1.0",
+   "#casas",
+   "#casas+170",
+   0.54
+  ],
+  [
+   "@3-0.2",
+   "#cisterna",
+   "#cisterna+170",
+   0.54
+  ],
+  [
+   "@4-1.0",
+   "#cisterna",
+   "#cisterna+170",
+   0.522
+  ],
+  [
+   "@4-0.2",
+   "#sinagoga-traco",
+   "#sinagoga-traco",
+   0.62
+  ],
+  [
+   "@4.1-0.6",
+   "#bairro",
+   "#bairro",
+   0.45
+  ],
+  [
+   "@5-1.0",
+   "#bairro",
+   "#bairro",
+   0.44
+  ],
+  [
+   "@5-0.2",
+   "#pena",
+   "#pena+170",
+   0.54
+  ],
+  [
+   "@fim",
+   "#pena",
+   "#pena+170",
+   0.504
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "desafios",
+   "t_prov": 2.5,
+   "acao": "datilografar",
+   "alvo": "txt-desafios",
+   "foco": "folha-desafios",
+   "som": "prensa"
+  },
+  {
+   "id": 2,
+   "gatilho": "desigualdade",
+   "t_prov": 5.0,
+   "acao": "desenhar",
+   "alvo": "casas",
+   "som": "goiva"
+  },
+  {
+   "id": 3,
+   "gatilho": "água",
+   "t_prov": 11.5,
+   "acao": "desenhar",
+   "alvo": "cisterna",
+   "som": "gota"
+  },
+  {
+   "id": 4,
+   "gatilho": "sinagoga",
+   "t_prov": 19.0,
+   "acao": "desenhar",
+   "alvo": "sinagoga-traco",
+   "foco": "bairro",
+   "som": "pena"
+  },
+  {
+   "id": 4.1,
+   "gatilho": "Digital",
+   "t_prov": 22.5,
+   "acao": "desenhar",
+   "alvo": "porto",
+   "foco": "bairro",
+   "som": "teclado"
+  },
+  {
+   "id": 5,
+   "gatilho": "capítulo",
+   "t_prov": 31.5,
+   "acao": "desenhar",
+   "alvo": "pena",
+   "som": "pena"
+  }
+ ],
+ "sons_extras": []
+}

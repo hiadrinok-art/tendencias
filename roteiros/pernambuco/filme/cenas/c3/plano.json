@@ -1,28 +1,132 @@
 {
-  "titulo": "Pernambuco — Cena 3: Palmares",
-  "dur_prov": 28.0,
-  "fade_ini": 0.45,
-  "fade_fim": 0.45,
-  "camera": [
-    ["@ini", "#mapa-c3", "#mapa-c3", 0.42],
-    ["@2-1.0", "#mapa-c3", "#mapa-c3", 0.46],
-    ["@2-0.2", "#foto-serra", "#foto-serra", 0.72],
-    ["@3-1.0", "#foto-serra", "#foto-serra", 0.68],
-    ["@3-0.2", "#palicada", "#palicada", 0.7],
-    ["@4-1.0", "#palicada", "#palicada", 0.66],
-    ["@4-0.2", "#folha-zumbi", "#folha-zumbi", 0.75],
-    ["@5-1.0", "#folha-zumbi", "#folha-zumbi", 0.72],
-    ["@5-0.2", "#folha-consc", "#folha-consc", 0.78],
-    ["@fim", "#folha-consc", "#folha-consc", 0.7]
+ "titulo": "Pernambuco — Cena 3: Palmares",
+ "dur_prov": 28.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#mapa-c3",
+   "#mapa-c3",
+   0.42
   ],
-  "beats": [
-    {"id": 1, "gatilho": "resistência", "t_prov": 2.2, "acao": "desenhar", "alvo": "linha-resist", "foco": "mapa-c3", "som": "pena"},
-    {"id": 2, "gatilho": "Palmares", "t_prov": 8.0, "acao": "cair", "alvo": "foto-serra", "som": "papel"},
-    {"id": 3, "gatilho": "resistiu", "t_prov": 12.5, "acao": "desenhar", "alvo": "palicada", "som": "tambor"},
-    {"id": 4, "gatilho": "Zumbi", "t_prov": 17.5, "acao": "datilografar", "alvo": "nome-zumbi", "foco": "folha-zumbi", "som": "maquina"},
-    {"id": 4.1, "gatilho": "1695", "t_prov": 20.5, "acao": "datilografar", "alvo": "data-zumbi", "foco": "folha-zumbi", "som": "maquina"},
-    {"id": 5, "gatilho": "data", "t_prov": 24.0, "acao": "carimbar", "alvo": "carimbo-nov", "foco": "folha-consc", "som": "carimbo"},
-    {"id": 5.1, "gatilho": "Consciência", "t_prov": 25.6, "acao": "datilografar", "alvo": "txt-consc", "foco": "folha-consc", "som": "maquina"}
+  [
+   "@2-1.0",
+   "#mapa-c3",
+   "#mapa-c3",
+   0.46
   ],
-  "sons_extras": []
+  [
+   "@2-0.2",
+   "#foto-serra",
+   "#foto-serra+60",
+   0.56
+  ],
+  [
+   "@3-1.0",
+   "#foto-serra",
+   "#foto-serra+60",
+   0.56
+  ],
+  [
+   "@3-0.2",
+   "#palicada",
+   "#palicada",
+   0.7
+  ],
+  [
+   "@4-1.0",
+   "#palicada",
+   "#palicada",
+   0.66
+  ],
+  [
+   "@4-0.2",
+   "#folha-zumbi",
+   "#folha-zumbi",
+   0.75
+  ],
+  [
+   "@5-1.0",
+   "#folha-zumbi",
+   "#folha-zumbi",
+   0.72
+  ],
+  [
+   "@5-0.2",
+   "#folha-consc",
+   "#folha-consc",
+   0.78
+  ],
+  [
+   "@fim",
+   "#folha-consc",
+   "#folha-consc",
+   0.7
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "resistência",
+   "t_prov": 2.2,
+   "acao": "desenhar",
+   "alvo": "linha-resist",
+   "foco": "mapa-c3",
+   "som": "pena"
+  },
+  {
+   "id": 2,
+   "gatilho": "Palmares",
+   "t_prov": 8.0,
+   "acao": "cair",
+   "alvo": "foto-serra",
+   "som": "papel"
+  },
+  {
+   "id": 3,
+   "gatilho": "resistiu",
+   "t_prov": 12.5,
+   "acao": "desenhar",
+   "alvo": "palicada",
+   "som": "tambor"
+  },
+  {
+   "id": 4,
+   "gatilho": "Zumbi",
+   "t_prov": 17.5,
+   "acao": "datilografar",
+   "alvo": "nome-zumbi",
+   "foco": "folha-zumbi",
+   "som": "maquina"
+  },
+  {
+   "id": 4.1,
+   "gatilho": "1695",
+   "t_prov": 20.5,
+   "acao": "datilografar",
+   "alvo": "data-zumbi",
+   "foco": "folha-zumbi",
+   "som": "maquina"
+  },
+  {
+   "id": 5,
+   "gatilho": "data",
+   "t_prov": 24.0,
+   "acao": "carimbar",
+   "alvo": "carimbo-nov",
+   "foco": "folha-consc",
+   "som": "carimbo"
+  },
+  {
+   "id": 5.1,
+   "gatilho": "Consciência",
+   "t_prov": 25.6,
+   "acao": "datilografar",
+   "alvo": "txt-consc",
+   "foco": "folha-consc",
+   "som": "maquina"
+  }
+ ],
+ "sons_extras": []
 }
