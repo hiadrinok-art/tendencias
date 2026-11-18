@@ -1,1 +1,218 @@
-{"titulo": "final", "dur_prov": 42, "camera": [], "beats": []}
+{
+ "titulo": "Pernambuco — Final",
+ "dur_prov": 40.0,
+ "fade_ini": 0.45,
+ "fade_fim": 1.6,
+ "camera": [
+  [
+   "@ini",
+   "#capa-final",
+   "#capa-final",
+   0.54
+  ],
+  [
+   "@2-1.0",
+   "#capa-final",
+   "#capa-final",
+   0.504
+  ],
+  [
+   "@2-0.2",
+   "#folha-datas",
+   "#folha-datas",
+   0.55
+  ],
+  [
+   "@3-1.0",
+   "#folha-datas",
+   "#folha-datas",
+   0.53
+  ],
+  [
+   "@3-0.2",
+   "#folha-rep",
+   "#folha-rep",
+   0.6
+  ],
+  [
+   "@4-0.9",
+   "#folha-rep",
+   "#folha-rep",
+   0.58
+  ],
+  [
+   "@4-0.1",
+   "#foto-serra2",
+   "#foto-serra2+60",
+   0.5
+  ],
+  [
+   "@5-0.7",
+   "#foto-serra2",
+   "#foto-serra2+60",
+   0.48
+  ],
+  [
+   "@5-0.1",
+   "#trio",
+   "#trio+120",
+   0.38
+  ],
+  [
+   "@5.2+0.9",
+   "#trio",
+   "#trio+120",
+   0.37
+  ],
+  [
+   "@6-0.2",
+   "#folha-dor",
+   "#folha-dor",
+   0.62
+  ],
+  [
+   "@7-1.0",
+   "#folha-dor",
+   "#folha-dor",
+   0.6
+  ],
+  [
+   "@7-0.2",
+   "#mapa-br2",
+   "#mapa-br2",
+   0.42
+  ],
+  [
+   "@8-1.4",
+   "#mapa-br2",
+   "#mapa-br2",
+   0.4
+  ],
+  [
+   "@8-0.4",
+   "#bandeira-pe",
+   "#bandeira-pe+420",
+   0.34
+  ],
+  [
+   "@8+1.2",
+   "#bandeira-pe",
+   "#bandeira-pe+420",
+   0.31
+  ],
+  [
+   "@fim-1.2",
+   "#folheto",
+   "#folheto+300",
+   0.135
+  ],
+  [
+   "@fim",
+   "#folheto",
+   "#folheto+300",
+   0.13
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "singular",
+   "t_prov": 2.5,
+   "acao": "datilografar",
+   "alvo": "txt-capa",
+   "foco": "capa-final",
+   "som": "prensa"
+  },
+  {
+   "id": 2,
+   "gatilho": "datas",
+   "t_prov": 4.5,
+   "acao": "datilografar",
+   "alvo": "txt-datas",
+   "foco": "folha-datas",
+   "som": "maquina"
+  },
+  {
+   "id": 3,
+   "gatilho": "república",
+   "t_prov": 7.5,
+   "acao": "carimbar",
+   "alvo": "carimbo-rep2",
+   "foco": "folha-rep",
+   "som": "carimbo"
+  },
+  {
+   "id": 4,
+   "gatilho": "Palmares",
+   "t_prov": 10.0,
+   "acao": "cair",
+   "alvo": "foto-serra2",
+   "som": "tambor"
+  },
+  {
+   "id": 5,
+   "gatilho": "frevo",
+   "t_prov": 12.0,
+   "acao": "cair",
+   "alvo": "somb2",
+   "foco": "trio",
+   "som": "metais"
+  },
+  {
+   "id": 5.1,
+   "gatilho": "maracatu",
+   "t_prov": 13.5,
+   "acao": "cair",
+   "alvo": "alfaia2",
+   "foco": "trio",
+   "som": "alfaia"
+  },
+  {
+   "id": 5.2,
+   "gatilho": "forró",
+   "t_prov": 15.3,
+   "acao": "cair",
+   "alvo": "sanfona2",
+   "foco": "trio",
+   "som": "sanfona"
+  },
+  {
+   "id": 6,
+   "gatilho": "música",
+   "t_prov": 20.5,
+   "acao": "datilografar",
+   "alvo": "txt-dor",
+   "foco": "folha-dor",
+   "som": "maquina"
+  },
+  {
+   "id": 7,
+   "gatilho": "Pernambuco",
+   "n": 2,
+   "t_prov": 26.5,
+   "acao": "congelar",
+   "alvo": "pe-acesa",
+   "foco": "mapa-br2",
+   "panoramica": true
+  },
+  {
+   "id": 8,
+   "gatilho": "povo",
+   "t_prov": 33.0,
+   "acao": "cair",
+   "alvo": "bandeira-pe",
+   "som": "tecido"
+  },
+  {
+   "id": 8.1,
+   "gatilho": "povo",
+   "t_prov": 33.0,
+   "desloc": 1.2,
+   "acao": "datilografar",
+   "alvo": "txt-povo",
+   "foco": "bandeira-pe",
+   "som": "maquina"
+  }
+ ],
+ "sons_extras": []
+}
