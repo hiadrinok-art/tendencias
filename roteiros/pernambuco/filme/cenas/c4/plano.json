@@ -1,0 +1,386 @@
+{
+ "titulo": "Pernambuco — Cena 4: Disputado por impérios",
+ "dur_prov": 70.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#folha-1630",
+   "#folha-1630",
+   1.1
+  ],
+  [
+   "@1.1-0.9",
+   "#folha-1630",
+   "#folha-1630",
+   1.0
+  ],
+  [
+   "@1.1-0.1",
+   "#frota",
+   "#frota",
+   0.9
+  ],
+  [
+   "@2-1.0",
+   "#frota",
+   "#frota",
+   0.85
+  ],
+  [
+   "@2-0.2",
+   "#costa-zoom",
+   "#costa-zoom",
+   1.0
+  ],
+  [
+   "@3-1.2",
+   "#costa-zoom",
+   "#costa-zoom",
+   0.95
+  ],
+  [
+   "@3-0.4",
+   "#foto-olinda",
+   "#foto-olinda",
+   0.72
+  ],
+  [
+   "@4-1.0",
+   "#foto-olinda",
+   "#foto-olinda",
+   0.7
+  ],
+  [
+   "@4-0.2",
+   "#mapa1647",
+   "#mapa1647",
+   0.6
+  ],
+  [
+   "@5-1.0",
+   "#mapa1647",
+   "#mapa1647",
+   0.58
+  ],
+  [
+   "@5-0.2",
+   "#retrato-nassau",
+   "#retrato-nassau",
+   0.7
+  ],
+  [
+   "@6-1.0",
+   "#retrato-nassau",
+   "#retrato-nassau",
+   0.68
+  ],
+  [
+   "@6-0.2",
+   "#icones",
+   "#icones",
+   0.85
+  ],
+  [
+   "@7-1.0",
+   "#icones",
+   "#icones",
+   0.82
+  ],
+  [
+   "@7-0.2",
+   "#ponte",
+   "#ponte",
+   0.85
+  ],
+  [
+   "@8-1.2",
+   "#ponte",
+   "#ponte",
+   0.8
+  ],
+  [
+   "@8-0.2",
+   "#foto-sinagoga",
+   "#foto-sinagoga",
+   0.7
+  ],
+  [
+   "@9-1.0",
+   "#foto-sinagoga",
+   "#foto-sinagoga",
+   0.68
+  ],
+  [
+   "@9-0.2",
+   "#folha-escr",
+   "#folha-escr",
+   0.85
+  ],
+  [
+   "@10-1.0",
+   "#folha-escr",
+   "#folha-escr",
+   0.82
+  ],
+  [
+   "@10-0.2",
+   "#folha-1645",
+   "#folha-1645",
+   0.82
+  ],
+  [
+   "@11-1.0",
+   "#folha-1645",
+   "#folha-1645",
+   0.8
+  ],
+  [
+   "@11-0.2",
+   "#silhuetas",
+   "#silhuetas",
+   0.75
+  ],
+  [
+   "@12-1.0",
+   "#silhuetas",
+   "#silhuetas",
+   0.72
+  ],
+  [
+   "@12-0.2",
+   "#folha-nomes",
+   "#folha-nomes",
+   0.8
+  ],
+  [
+   "@13-1.0",
+   "#folha-nomes",
+   "#folha-nomes",
+   0.78
+  ],
+  [
+   "@13-0.2",
+   "#foto-guararapes",
+   "#foto-guararapes",
+   0.5
+  ],
+  [
+   "@13+2.2",
+   "#foto-guararapes-500",
+   "#foto-guararapes",
+   0.62
+  ],
+  [
+   "@13.1-0.2",
+   "#nota-guar-500",
+   "#nota-guar-300",
+   0.55
+  ],
+  [
+   "@14-1.0",
+   "#foto-guararapes",
+   "#foto-guararapes",
+   0.5
+  ],
+  [
+   "@14-0.2",
+   "#folha-1654",
+   "#folha-1654",
+   0.85
+  ],
+  [
+   "@15-1.2",
+   "#folha-1654",
+   "#folha-1654",
+   0.82
+  ],
+  [
+   "@15-0.2",
+   "#foto-guararapes",
+   "#foto-guararapes",
+   0.48
+  ],
+  [
+   "@fim",
+   "#foto-guararapes",
+   "#foto-guararapes",
+   0.44
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "1630",
+   "t_prov": 1.0,
+   "acao": "datilografar",
+   "alvo": "data1630",
+   "foco": "folha-1630",
+   "som": "maquina"
+  },
+  {
+   "id": 1.1,
+   "gatilho": "frota",
+   "t_prov": 3.5,
+   "acao": "desenhar",
+   "alvo": "frota",
+   "som": "mar"
+  },
+  {
+   "id": 2,
+   "gatilho": "toma",
+   "t_prov": 6.5,
+   "acao": "desenhar",
+   "alvo": "setas-wic",
+   "foco": "mapa-c4",
+   "som": "canhao"
+  },
+  {
+   "id": 3,
+   "gatilho": "Olinda",
+   "n": 2,
+   "t_prov": 9.0,
+   "acao": "cair",
+   "alvo": "foto-olinda",
+   "som": "papel"
+  },
+  {
+   "id": 3.1,
+   "gatilho": "incendiada",
+   "t_prov": 10.0,
+   "acao": "congelar",
+   "alvo": "queima",
+   "foco": "foto-olinda",
+   "som": "fogo"
+  },
+  {
+   "id": 4,
+   "gatilho": "centro",
+   "t_prov": 13.0,
+   "acao": "cair",
+   "alvo": "mapa1647",
+   "som": "papel"
+  },
+  {
+   "id": 5,
+   "gatilho": "Nassau",
+   "t_prov": 16.5,
+   "acao": "cair",
+   "alvo": "retrato-nassau",
+   "som": "papel"
+  },
+  {
+   "id": 6,
+   "gatilho": "pintores",
+   "t_prov": 19.0,
+   "acao": "desenhar",
+   "alvo": "icones",
+   "som": "pena"
+  },
+  {
+   "id": 7,
+   "gatilho": "pontes",
+   "t_prov": 22.0,
+   "acao": "desenhar",
+   "alvo": "ponte",
+   "som": "pena"
+  },
+  {
+   "id": 8,
+   "gatilho": "sinagoga",
+   "t_prov": 29.0,
+   "acao": "cair",
+   "alvo": "foto-sinagoga",
+   "som": "papel"
+  },
+  {
+   "id": 9,
+   "gatilho": "escravizado",
+   "t_prov": 34.0,
+   "acao": "circular",
+   "alvo": "folha-escr",
+   "circulo": "sub-escr4",
+   "foco": "folha-escr",
+   "som": "pena"
+  },
+  {
+   "id": 10,
+   "gatilho": "1645",
+   "t_prov": 36.5,
+   "acao": "datilografar",
+   "alvo": "data1645",
+   "foco": "folha-1645",
+   "som": "maquina"
+  },
+  {
+   "id": 10.1,
+   "gatilho": "Insurreição",
+   "t_prov": 38.0,
+   "acao": "carimbar",
+   "alvo": "carimbo-insur",
+   "foco": "folha-1645",
+   "som": "carimbo"
+  },
+  {
+   "id": 11,
+   "gatilho": "lado",
+   "t_prov": 42.5,
+   "acao": "desenhar",
+   "alvo": "silhuetas",
+   "som": "passos"
+  },
+  {
+   "id": 12,
+   "gatilho": "Henrique",
+   "t_prov": 45.0,
+   "acao": "datilografar",
+   "alvo": "nome-hd",
+   "foco": "folha-nomes",
+   "som": "maquina"
+  },
+  {
+   "id": 12.1,
+   "gatilho": "Camarão",
+   "t_prov": 46.5,
+   "acao": "datilografar",
+   "alvo": "nome-fc",
+   "foco": "folha-nomes",
+   "som": "maquina"
+  },
+  {
+   "id": 13,
+   "gatilho": "Guararapes",
+   "t_prov": 50.5,
+   "acao": "cair",
+   "alvo": "foto-guararapes",
+   "som": "papel"
+  },
+  {
+   "id": 13.1,
+   "gatilho": "decisivas",
+   "t_prov": 55.5,
+   "acao": "datilografar",
+   "alvo": "anos-guar",
+   "foco": "foto-guararapes",
+   "som": "tambor"
+  },
+  {
+   "id": 14,
+   "gatilho": "rendem",
+   "t_prov": 59.5,
+   "acao": "carimbar",
+   "alvo": "carimbo-1654",
+   "foco": "folha-1654",
+   "som": "carimbo"
+  },
+  {
+   "id": 15,
+   "gatilho": "origem",
+   "t_prov": 66.0,
+   "acao": "reacender",
+   "alvo": "foto-guararapes"
+  }
+ ],
+ "sons_extras": []
+}
