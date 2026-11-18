@@ -1,1 +1,297 @@
-{"titulo": "c6", "dur_prov": 75, "camera": [], "beats": []}
+{
+ "titulo": "Pernambuco — Cena 6: A cultura que ferve",
+ "dur_prov": 67.0,
+ "fade_ini": 0.45,
+ "fade_fim": 0.45,
+ "camera": [
+  [
+   "@ini",
+   "#folheto",
+   "#folheto",
+   0.17
+  ],
+  [
+   "@1-0.4",
+   "#folheto",
+   "#folheto",
+   0.19
+  ],
+  [
+   "@1+1.2",
+   "#folheto",
+   "#folheto",
+   0.24
+  ],
+  [
+   "@1.1-0.3",
+   "#folha-frevo",
+   "#folha-frevo",
+   0.9
+  ],
+  [
+   "@3-1.0",
+   "#folha-frevo",
+   "#folha-frevo",
+   0.85
+  ],
+  [
+   "@3-0.2",
+   "#folha-ferver",
+   "#folha-ferver",
+   0.95
+  ],
+  [
+   "@4-1.0",
+   "#folha-ferver",
+   "#folha-ferver",
+   0.9
+  ],
+  [
+   "@4-0.2",
+   "#sombrinha",
+   "#sombrinha",
+   0.62
+  ],
+  [
+   "@5-1.0",
+   "#sombrinha",
+   "#sombrinha",
+   0.6
+  ],
+  [
+   "@5-0.2",
+   "#folha-unesco",
+   "#folha-unesco",
+   0.85
+  ],
+  [
+   "@6-1.0",
+   "#folha-unesco",
+   "#folha-unesco",
+   0.82
+  ],
+  [
+   "@6-0.2",
+   "#cortejo",
+   "#cortejo",
+   0.6
+  ],
+  [
+   "@6.1-0.9",
+   "#cortejo",
+   "#cortejo",
+   0.58
+  ],
+  [
+   "@6.1-0.1",
+   "#alfaia",
+   "#alfaia",
+   0.65
+  ],
+  [
+   "@7-1.0",
+   "#alfaia",
+   "#alfaia",
+   0.62
+  ],
+  [
+   "@7-0.2",
+   "#saojoao",
+   "#saojoao",
+   0.6
+  ],
+  [
+   "@8-1.0",
+   "#saojoao",
+   "#saojoao",
+   0.58
+  ],
+  [
+   "@8-0.2",
+   "#barro",
+   "#barro",
+   0.62
+  ],
+  [
+   "@9-1.0",
+   "#barro",
+   "#barro",
+   0.6
+  ],
+  [
+   "@9-0.2",
+   "#gonzaga",
+   "#gonzaga",
+   0.6
+  ],
+  [
+   "@10-1.0",
+   "#gonzaga",
+   "#gonzaga",
+   0.58
+  ],
+  [
+   "@10-0.2",
+   "#mangue",
+   "#mangue",
+   0.6
+  ],
+  [
+   "@11-1.0",
+   "#mangue",
+   "#mangue",
+   0.58
+  ],
+  [
+   "@11-0.2",
+   "#museu",
+   "#museu",
+   0.62
+  ],
+  [
+   "@12-0.9",
+   "#museu",
+   "#museu",
+   0.6
+  ],
+  [
+   "@12-0.1",
+   "#sombrinha",
+   "#sombrinha",
+   0.5
+  ],
+  [
+   "@fim",
+   "#folheto",
+   "#folheto",
+   0.26
+  ]
+ ],
+ "beats": [
+  {
+   "id": 1,
+   "gatilho": "guerras",
+   "t_prov": 2.2,
+   "acao": "mover",
+   "alvo": "capa",
+   "foco": "capa",
+   "para": {
+    "x": -9000,
+    "y": 300,
+    "rotation": -10
+   },
+   "duracao": 1.6,
+   "som": "pagina",
+   "panoramica": true
+  },
+  {
+   "id": 1.1,
+   "gatilho": "1907",
+   "t_prov": 5.0,
+   "acao": "datilografar",
+   "alvo": "data1907",
+   "foco": "folha-frevo",
+   "som": "maquina"
+  },
+  {
+   "id": 2,
+   "gatilho": "frevo",
+   "t_prov": 7.0,
+   "acao": "carimbar",
+   "alvo": "bloco-frevo",
+   "foco": "folha-frevo",
+   "som": "prensa"
+  },
+  {
+   "id": 3,
+   "gatilho": "ferver",
+   "t_prov": 10.5,
+   "acao": "datilografar",
+   "alvo": "txt-ferver",
+   "foco": "folha-ferver",
+   "som": "metais"
+  },
+  {
+   "id": 4,
+   "gatilho": "carnaval",
+   "t_prov": 16.5,
+   "acao": "cair",
+   "alvo": "sombrinha",
+   "som": "multidao"
+  },
+  {
+   "id": 5,
+   "gatilho": "UNESCO",
+   "t_prov": 19.8,
+   "acao": "carimbar",
+   "alvo": "selo-unesco",
+   "foco": "folha-unesco",
+   "som": "carimbo"
+  },
+  {
+   "id": 6,
+   "gatilho": "maracatu",
+   "t_prov": 26.0,
+   "acao": "desenhar",
+   "alvo": "cortejo",
+   "som": "alfaia"
+  },
+  {
+   "id": 6.1,
+   "gatilho": "alfaias",
+   "t_prov": 29.7,
+   "acao": "cair",
+   "alvo": "alfaia",
+   "som": "tambor"
+  },
+  {
+   "id": 7,
+   "gatilho": "João",
+   "t_prov": 34.6,
+   "acao": "desenhar",
+   "alvo": "saojoao",
+   "som": "sanfona"
+  },
+  {
+   "id": 8,
+   "gatilho": "barro",
+   "t_prov": 41.0,
+   "acao": "cair",
+   "alvo": "barro",
+   "som": "argila"
+  },
+  {
+   "id": 9,
+   "gatilho": "Gonzaga",
+   "t_prov": 48.5,
+   "acao": "desenhar",
+   "alvo": "gonzaga",
+   "som": "sanfona"
+  },
+  {
+   "id": 10,
+   "gatilho": "manguebeat|mangue",
+   "t_prov": 55.5,
+   "acao": "desenhar",
+   "alvo": "mangue",
+   "som": "guitarra"
+  },
+  {
+   "id": 11,
+   "gatilho": "museu",
+   "t_prov": 60.5,
+   "acao": "desenhar",
+   "alvo": "museu",
+   "som": "pena"
+  },
+  {
+   "id": 12,
+   "gatilho": "viva",
+   "t_prov": 63.2,
+   "acao": "reacender",
+   "alvo": "sombrinha",
+   "som": "tambor"
+  }
+ ],
+ "sons_extras": []
+}

@@ -23,6 +23,11 @@ const { chromium } = require('playwright');
       if (el && el.getBoundingClientRect().width * el.getBoundingClientRect().height < 100)
         el = [...el.querySelectorAll("*")].find((c) => c.getBoundingClientRect().width * c.getBoundingClientRect().height >= 100) || el;
       return el; };
+    // foco aninhado: um destaque DENTRO de outro que já acendeu faz o de fora apagar levando o de dentro junto
+    const acesos = [];
+    beats.forEach((bt) => { const f = document.getElementById(bt.foco || bt.alvo); if (!f || ["circular", "apagar"].includes(bt.acao) && !bt.foco) return;
+      for (const a of acesos) if (a !== f && a.contains(f)) out.push(`beat ${bt.id} '${bt.gatilho}': FOCO ANINHADO — #${f.id} está dentro de #${a.id}, que já acendeu (use "foco": "${a.id}" ou outro elemento)`);
+      if (!acesos.includes(f)) acesos.push(f); });
     beats.forEach((bt, i) => {
       const el = peca(bt), id = el ? (el.id || bt.alvo) : bt.alvo; if (!el) { out.push(`beat ${bt.id}: elemento de ${bt.alvo} não existe`); return; }
       const prox = i + 1 < beats.length ? beats[i + 1].t : P.duracao;
