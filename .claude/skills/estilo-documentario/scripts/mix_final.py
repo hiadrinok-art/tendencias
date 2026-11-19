@@ -46,6 +46,7 @@ ev = env_db(voz); nivel_voz = float(np.mean(ev[ev > -45]))
 # ---- trilhas (niveladas sob a voz, com envelope de desvio)
 trilhas = json.loads((proj / "trilhas.json").read_text(encoding="utf-8")) if (proj / "trilhas.json").exists() else []
 avisos = []
+mus = np.zeros_like(mix)   # só as trilhas (para conferir se cortes e subidas caem no tempo)
 for tr in trilhas:
     x = ler(proj / tr["arquivo"]); ini = tglobal(tr["ini"]); fim = tglobal(tr["fim"])
     x = x[: int((fim - ini) * SR)]
@@ -58,7 +59,7 @@ for tr in trilhas:
     g = 10 ** (g_db / 20)
     fi, fo = tr.get("fade_in", 1.0), tr.get("fade_out", 2.0)
     g *= np.clip(t / max(fi, 1e-3), 0, 1) * np.clip((t[-1] - t) / max(fo, 1e-3), 0, 1)
-    a = int(ini * SR); b = min(N, a + len(x)); mix[a:b] += (x[: b - a] * g[: b - a, None])
+    a = int(ini * SR); b = min(N, a + len(x)); mix[a:b] += (x[: b - a] * g[: b - a, None]); mus[a:b] += (x[: b - a] * g[: b - a, None])
 
 # ---- efeitos de todas as cenas
 cache, linhas = {}, []
@@ -74,9 +75,13 @@ def efeito(nome):
         env = np.convolve(amp, np.ones(240) / 240, mode="same"); pico_i = int(np.argmax(env))
         cache[nome] = (x[ataque:], ataque / SR, (pico_i - ataque) / SR)
     else:
-        cache[nome] = (x[ataque:], ataque / SR, 0.0)
+        # demais sons: o que cai no destaque é o primeiro ATAQUE FORTE (a -6 dB do pico, em janelas de 10 ms),
+        # não o primeiro ruído. Ex.: a sanfona tinha um estalo e a frase só vinha 300 ms depois.
+        j = 480; env = np.array([np.sqrt(np.mean(amp[i:i + j] ** 2)) for i in range(0, max(1, len(amp) - j), j)])
+        forte = int(np.argmax(env > env.max() * 10 ** (-6 / 20))) * j
+        cache[nome] = (x[ataque:], ataque / SR, max(0, forte - ataque) / SR)
     return cache[nome]
-IMPACTO = {"carimbo", "papel", "alfinete", "tambor", "canhao", "salva", "prensa", "argila", "gota", "alfaia"}
+IMPACTO = {"carimbo", "papel", "alfinete", "tambor", "canhao", "salva", "prensa", "argila", "gota", "tecido"}
 GANHO = {"carimbo": 1.0, "papel": 0.55, "maquina": 0.45, "pena": 0.5}
 efx = np.zeros_like(mix)     # trilha só de efeitos (para conferir sincronia com o vídeo)
 for c in ordem:
@@ -91,9 +96,12 @@ for c in ordem:
         x, corte, ate_pico = e; tg = C[c]["ini"] + t
         a = int(round((tg - ate_pico) * SR)); b = min(N, a + len(x))
         if a < N: mix[a:b] += x[: b - a] * GANHO.get(som, 0.6); efx[a:b] += x[: b - a]
-        modo = f"PICO em {tg:8.3f}s (som começa {ate_pico*1000:3.0f} ms antes)" if ate_pico else f"início em {tg:8.3f}s"
+        modo = (f"PICO em {tg:8.3f}s (som começa {ate_pico*1000:3.0f} ms antes)" if som in IMPACTO else
+                f"ATAQUE em {tg:8.3f}s (som começa {ate_pico*1000:3.0f} ms antes)") if ate_pico else f"início em {tg:8.3f}s"
         linhas.append(f"{c:8s} {rot:34s} {som:10s} destaque {tg:8.3f}s  {modo}  (silêncio inicial removido: {corte*1000:4.0f} ms)")
 
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-i", "-", str(proj / "trilhas_stem.wav")],
+               input=mus.astype(np.float32).tobytes(), check=True)
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-i", "-", str(proj / "efeitos_stem.wav")],
                input=efx.astype(np.float32).tobytes(), check=True)
 bruto = proj / "_mix_bruto.wav"
