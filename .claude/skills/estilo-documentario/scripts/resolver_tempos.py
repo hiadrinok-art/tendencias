@@ -8,7 +8,8 @@ Lê <projeto>/cenas/<cena>/plano.json, <projeto>/palavras.json e <projeto>/cenas
 
 No plano:
   beats[].gatilho       palavra falada (acentos/pontuação ignorados; aceita grafia próxima; alternativas com "|", ex.: "setenta|75")
-  beats[].n             qual ocorrência dessa palavra na cena (1 = primeira; padrão 1)
+  beats[].n             qual ocorrência dessa palavra na cena (1 = primeira). Sem "n", vale a 1ª ocorrência
+                        DEPOIS do beat anterior (na ordem dos ids), então palavras repetidas não roubam o beat
   beats[].desloc        ajuste fino em s (ex.: -0.1 para o impacto cair um pouco antes)
   camera[i][0]          número (s locais) ou texto "@<id>", "@<id>+0.4", "@<id>-0.6", "@fim-1.5", "@ini+0.2"
   audio.trilha_envelope e sons_extras aceitam o mesmo formato de tempo.
@@ -26,7 +27,7 @@ def norm(s):
     s = unicodedata.normalize("NFD", s.lower())
     return re.sub(r"[^a-z0-9]", "", "".join(ch for ch in s if unicodedata.category(ch) != "Mn"))
 
-def achar(gatilho, n):
+def achar(gatilho, n, depois=None):
     # alternativas com "|": a transcrição pode escrever números por extenso ou em algarismos ("setenta|75")
     hits = []
     for alt in gatilho.split("|"):
@@ -34,14 +35,18 @@ def achar(gatilho, n):
         hits = [w for w in W if norm(w["w"]) == alvo] or \
                [w for w in W if difflib.SequenceMatcher(None, norm(w["w"]), alvo).ratio() >= 0.75]
         if len(hits) >= n: break
+    # sem "n" explícito: a 1ª ocorrência DEPOIS do beat anterior (uma palavra repetida antes não rouba o beat)
+    if depois is not None:
+        hits = [w for w in hits if w["ini"] - C["ini"] >= depois - 0.05] or hits
     if len(hits) < n:
         raise SystemExit(f"[{cena}] gatilho '{gatilho}' (ocorrência {n}) não encontrado. Palavras da cena: "
                          + " ".join(w["w"] for w in W))
     return hits[n - 1]["ini"] - C["ini"]
 
-tempos = {}
-for b in P["beats"]:
-    b["t"] = round(achar(b["gatilho"], b.get("n", 1)) + b.get("desloc", 0.0), 3)
+tempos = {}; ant = 0.0
+for b in sorted(P["beats"], key=lambda b: float(b["id"])):   # beats na ordem da fala (id 10.1 vem antes de 11)
+    bruto = achar(b["gatilho"], b.get("n", 1), None if "n" in b else ant)
+    b["t"] = round(bruto + b.get("desloc", 0.0), 3); ant = bruto
     tempos[str(b["id"])] = b["t"]
 
 def tempo(v):

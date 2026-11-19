@@ -34,7 +34,7 @@
     ${B.foto({ id: "retrato-nassau", src: "img/nassau.jpg", x: 300, y: 2400, w: 1500, rot: 2, legenda: "Maurício de Nassau · Jan de Baen" })}
     ${B.svg({ id: "icones", x: 2300, y: 2550, w: 2100, h: 1050, vb: "0 0 1900 900", html: icones })}
     ${B.svg({ id: "ponte", x: 2300, y: 3750, w: 2100, h: 800, vb: "0 0 1800 680", html: ponte })}
-    ${B.foto({ id: "foto-sinagoga", src: "img/sinagoga.jpg", x: 4800, y: 2450, w: 1900, rot: -1.5, legenda: "Kahal Zur Israel · Recife" })}
+    ${B.foto({ id: "foto-sinagoga", src: "img/sinagoga.jpg", x: 5000, y: 2450, w: 1400, rot: -1.5, legenda: "Kahal Zur Israel · Recife" })}
     ${B.folha({ id: "folha-escr", x: 7100, y: 2600, w: 2300, h: 800, rot: 1, html: B.texto({ html:
         `os engenhos continuavam movidos pelo trabalho <span id="marca-escr4" class="sub">escravizado<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path id="sub-escr4" class="traco" d="M2,6 C30,3 70,8 98,4" stroke="#b0161e" stroke-width="2.2" stroke-linecap="round"/></svg></span>`,
         size: 88, top: 170, classe: "serif", extra: { "font-style": "italic", padding: "0 120px", "line-height": "1.5" } }) })}

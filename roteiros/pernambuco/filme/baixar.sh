@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # uso: baixar.sh destino.jpg "Nome_do_Arquivo.jpg" [largura]
-dest="$1"; n="$2"; w="${3:-2000}"
+dest="$1"; n="${2// /_}"; w="${3:-1280}"   # larguras PADRÃO (960, 1280, 1920): as outras dão 429
 h=$(printf %s "$n" | md5sum | cut -c1-32)
 enc=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$n")
 for url in "https://upload.wikimedia.org/wikipedia/commons/thumb/${h:0:1}/${h:0:2}/$enc/${w}px-$enc" "https://upload.wikimedia.org/wikipedia/commons/${h:0:1}/${h:0:2}/$enc"; do

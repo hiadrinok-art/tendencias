@@ -11,7 +11,7 @@
    0.75
   ],
   [
-   "@2-1.0",
+   "@2-0.7",
    "#folha-desafios",
    "#folha-desafios",
    0.72
@@ -74,7 +74,7 @@
  "beats": [
   {
    "id": 1,
-   "gatilho": "desafios",
+   "gatilho": "Pernambuco",
    "t_prov": 2.5,
    "acao": "datilografar",
    "alvo": "txt-desafios",

@@ -59,7 +59,7 @@
    0.38
   ],
   [
-   "@5.2+0.9",
+   "@6-0.9",
    "#trio",
    "#trio+120",
    0.37
@@ -143,7 +143,7 @@
   },
   {
    "id": 4,
-   "gatilho": "Palmares",
+   "gatilho": "resistência",
    "t_prov": 10.0,
    "acao": "cair",
    "alvo": "foto-serra2",

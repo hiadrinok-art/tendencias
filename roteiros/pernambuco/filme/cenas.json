@@ -1,0 +1,92 @@
+{
+ "abertura": {
+  "ini": 0.0,
+  "fim": 23.233333333333334,
+  "dur": 23.233333,
+  "quadros": 697,
+  "audio_ini": 1.0,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c1": {
+  "ini": 23.233333333333334,
+  "fim": 53.43333333333333,
+  "dur": 30.2,
+  "quadros": 906,
+  "audio_ini": 23.933333333333334,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c2": {
+  "ini": 53.43333333333333,
+  "fim": 97.23333333333333,
+  "dur": 43.8,
+  "quadros": 1314,
+  "audio_ini": 54.13333333333333,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c3": {
+  "ini": 97.23333333333333,
+  "fim": 124.8,
+  "dur": 27.566667,
+  "quadros": 827,
+  "audio_ini": 97.93333333333334,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c4": {
+  "ini": 124.8,
+  "fim": 205.63333333333333,
+  "dur": 80.833333,
+  "quadros": 2425,
+  "audio_ini": 125.5,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c5": {
+  "ini": 205.63333333333333,
+  "fim": 278.8666666666667,
+  "dur": 73.233333,
+  "quadros": 2197,
+  "audio_ini": 206.33333333333334,
+  "estilo": "mesa",
+  "provisoria": false
+ },
+ "c6": {
+  "ini": 278.8666666666667,
+  "fim": 342.6,
+  "dur": 63.733333,
+  "quadros": 1912,
+  "audio_ini": 279.56666666666666,
+  "estilo": "cordel",
+  "provisoria": false
+ },
+ "c7": {
+  "ini": 342.6,
+  "fim": 393.6,
+  "dur": 51.0,
+  "quadros": 1530,
+  "audio_ini": 343.3,
+  "estilo": "cordel",
+  "provisoria": false
+ },
+ "c8": {
+  "ini": 393.6,
+  "fim": 426.53333333333336,
+  "dur": 32.933333,
+  "quadros": 988,
+  "audio_ini": 394.3,
+  "estilo": "cordel",
+  "provisoria": false
+ },
+ "final": {
+  "ini": 426.53333333333336,
+  "fim": 460.43333333333334,
+  "dur": 33.9,
+  "quadros": 1017,
+  "audio_ini": 427.23333333333335,
+  "estilo": "cordel",
+  "provisoria": false
+ }
+}

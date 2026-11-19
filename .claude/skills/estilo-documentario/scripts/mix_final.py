@@ -76,7 +76,7 @@ def efeito(nome):
     else:
         cache[nome] = (x[ataque:], ataque / SR, 0.0)
     return cache[nome]
-IMPACTO = {"carimbo", "papel", "alfinete", "tambor", "canhao", "salva", "prensa", "argila", "gota"}
+IMPACTO = {"carimbo", "papel", "alfinete", "tambor", "canhao", "salva", "prensa", "argila", "gota", "alfaia"}
 GANHO = {"carimbo": 1.0, "papel": 0.55, "maquina": 0.45, "pena": 0.5}
 efx = np.zeros_like(mix)     # trilha só de efeitos (para conferir sincronia com o vídeo)
 for c in ordem:

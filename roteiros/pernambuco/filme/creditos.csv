@@ -1,0 +1,15 @@
+arquivo,obra,autor,licenca,fonte
+imagens/olinda.jpg,View of Olinda,Frans Post,domínio público,https://commons.wikimedia.org/wiki/File:Frans_Post_-_View_of_Olinda,_Brazil_-_WGA18188.jpg
+imagens/engenho.jpg,Engenho de Pernambuco,Frans Post,domínio público,https://commons.wikimedia.org/wiki/File:Frans_Post_-_Engenho_de_Pernambuco.jpg
+imagens/serra_barriga.jpg,Serra da Barriga - AL,Renato Alves da Costa,CC BY 2.0,https://commons.wikimedia.org/wiki/File:Serra_da_Barriga_-_AL.jpg
+imagens/caneca.jpg,Estudo para Frei Caneca,Antônio Parreiras (1860-1937),domínio público,https://commons.wikimedia.org/wiki/File:Ant%C3%B4nio_Parreiras_-_Estudo_para_Frei_Caneca.jpg
+imagens/guararapes.jpg,Batalha dos Guararapes (1879),Victor Meirelles,domínio público,"https://commons.wikimedia.org/wiki/File:Victor_Meirelles_-_'Battle_of_Guararapes',_1879,_oil_on_canvas,_Museu_Nacional_de_Belas_Artes,_Rio_de_Janeiro.JPG"
+imagens/nassau.jpg,O Príncipe Johan Maurits van Nassau-Siegen,Oficina de Jan de Baen,domínio público,https://commons.wikimedia.org/wiki/File:Jan_de_Baen_-_O_Pr%C3%ADncipe_Johan_Maurits_van_Nassau-Siegen.jpg
+imagens/mapa1647.jpg,Brasilia qua parte paret Belgis (1647),Georg Marcgrave,domínio público,https://commons.wikimedia.org/wiki/File:Brasilia_qua_parte_paret_Belgis.jpg
+imagens/sinagoga.jpg,"Sinagoga Kahal Zur Israel, Recife",Wilfredor,CC0,"https://commons.wikimedia.org/wiki/File:Sinagoga_Kahal_Zur_Israel,_Recife,_Pernambuco,_Brasil.jpg"
+imagens/catimbau.jpg,Pinturas Rupestres - Vale do Catimbau,correiarodrigo,CC BY-SA 2.0,https://commons.wikimedia.org/wiki/File:Pinturas_Rupestres_-_Vale_do_Catimbau_-_Pernambuco_-_Brasil.jpg
+imagens/noronha.jpg,Morro Dois Irmãos - Fernando de Noronha,Ricardo Polisel Alves,CC BY 2.0,https://commons.wikimedia.org/wiki/File:Morro_Dois_Irm%C3%A3os_-_Fernando_de_Noronha.jpg
+comum/geo.js,Contornos dos estados do Brasil,MapSVG (@svg-maps/brazil),CC BY 4.0,https://www.npmjs.com/package/@svg-maps/brazil
+narracao/*.mp3,Narração,voz sintética Harrison (Higgsfield / ElevenLabs),gerada para este projeto,Higgsfield text2speech_v2
+trilhas/*.mp3,Trilhas,ElevenLabs Music,gerada para este projeto,Higgsfield / ElevenLabs
+efeitos/*.mp3,Efeitos sonoros,ElevenLabs SFX e Mirelo,gerado para este projeto,ElevenLabs / Higgsfield

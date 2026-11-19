@@ -167,7 +167,13 @@
    0.44
   ],
   [
-   "@13+2.2",
+   "@13+1.5",
+   "#foto-guararapes",
+   "#foto-guararapes+150",
+   0.44
+  ],
+  [
+   "@13+3.2",
    "#foto-guararapes-500",
    "#foto-guararapes",
    0.62
@@ -264,7 +270,7 @@
   },
   {
    "id": 5,
-   "gatilho": "Nassau",
+   "gatilho": "Conde",
    "t_prov": 16.5,
    "acao": "cair",
    "alvo": "retrato-nassau",
@@ -296,7 +302,7 @@
   },
   {
    "id": 9,
-   "gatilho": "escravizado",
+   "gatilho": "trabalho",
    "t_prov": 34.0,
    "acao": "circular",
    "alvo": "folha-escr",
@@ -324,7 +330,7 @@
   },
   {
    "id": 11,
-   "gatilho": "lado",
+   "gatilho": "Senhores",
    "t_prov": 42.5,
    "acao": "desenhar",
    "alvo": "silhuetas",

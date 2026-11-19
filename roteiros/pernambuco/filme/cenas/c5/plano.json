@@ -261,7 +261,7 @@
   },
   {
    "id": 4,
-   "gatilho": "republicano",
+   "gatilho": "governo",
    "acao": "carimbar",
    "alvo": "carimbo-gov",
    "som": "carimbo"
@@ -324,7 +324,7 @@
   },
   {
    "id": 11,
-   "gatilho": "Confederação",
+   "gatilho": "nasce",
    "acao": "datilografar",
    "alvo": "confed",
    "som": "maquina"

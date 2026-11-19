@@ -99,3 +99,7 @@ Hosts que a rede precisa liberar: `upload.wikimedia.org` e `commons.wikimedia.or
 - Para medir música × voz, use as pausas reais da narração (`silencedetect`), não os tempos do Whisper: as palavras podem estar adiantadas.
 - `data-duration` do `#root` e do `<audio>` precisa ser igual a `duracao` do plano, senão o render sai com tela preta no fim.
 - Piloto de 80 s: ~1,5 h no total; render de 6,5 min.
+- **Sem créditos no ElevenLabs:** o Higgsfield serve de alternativa. Narração com `text2speech_v2` (variant `elevenlabs`, voz preset; a escolhida aqui foi "Harrison"), trilhas com `elevenlabs_music_v2_5` (instrumental, duração em s) e efeitos com `mirelo_text_to_audio`. Custo do filme de 7,5 min: ~20 créditos de voz, ~60 de música e ~18 de efeitos. O áudio vem de `d8j0ntlcm91z4.cloudfront.net`, que precisa estar liberado na rede. Lotes grandes dão 429: reenvie só os itens que falharam.
+- **Trocar a voz muda o ritmo:** depois de nova narração, rode de novo `linha_do_tempo.py` e `checar_enquadramento.js` em TODAS as cenas. Destaques que ficaram a menos de ~1,5 s um do outro precisam de um gatilho mais cedo (ex.: "Conde" em vez de "Nassau").
+- **Gatilho repetido:** sem `n`, o `resolver_tempos.py` usa a 1ª ocorrência DEPOIS do beat anterior (na ordem dos ids). Antes, "lado" casava com "ao lado do Recife" em vez de "do mesmo lado", e "povo" casava com a primeira vez que a palavra aparecia.
+- **Trilha mais curta que o trecho:** estique com `atempo` (até ~7% não se percebe em música orquestral).

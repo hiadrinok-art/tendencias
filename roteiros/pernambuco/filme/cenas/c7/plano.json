@@ -142,7 +142,8 @@
    "acao": "desenhar",
    "alvo": "ondas",
    "foco": "mapa-c7",
-   "som": "ondas"
+   "som": "ondas",
+   "desloc": -0.7
   },
   {
    "id": 3,

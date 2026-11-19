@@ -1,0 +1,6904 @@
+[
+{
+"cena": "abertura",
+"w": "6",
+"ini_whisper": 1.0,
+"ini": 1.0,
+"fim": 1.18
+},
+{
+"cena": "abertura",
+"w": "de",
+"ini_whisper": 1.18,
+"ini": 1.18,
+"fim": 1.44
+},
+{
+"cena": "abertura",
+"w": "março",
+"ini_whisper": 1.44,
+"ini": 1.33,
+"fim": 1.84
+},
+{
+"cena": "abertura",
+"w": "de",
+"ini_whisper": 1.84,
+"ini": 1.78,
+"fim": 2.04
+},
+{
+"cena": "abertura",
+"w": "1817.",
+"ini_whisper": 2.04,
+"ini": 2.04,
+"fim": 3.4
+},
+{
+"cena": "abertura",
+"w": "No",
+"ini_whisper": 4.18,
+"ini": 4.18,
+"fim": 4.36
+},
+{
+"cena": "abertura",
+"w": "Recife,",
+"ini_whisper": 4.36,
+"ini": 4.26,
+"fim": 4.86
+},
+{
+"cena": "abertura",
+"w": "um",
+"ini_whisper": 5.22,
+"ini": 5.19,
+"fim": 5.32
+},
+{
+"cena": "abertura",
+"w": "grupo",
+"ini_whisper": 5.32,
+"ini": 5.32,
+"fim": 5.56
+},
+{
+"cena": "abertura",
+"w": "de",
+"ini_whisper": 5.56,
+"ini": 5.56,
+"fim": 5.74
+},
+{
+"cena": "abertura",
+"w": "revolucionários",
+"ini_whisper": 5.74,
+"ini": 5.74,
+"fim": 6.56
+},
+{
+"cena": "abertura",
+"w": "toma",
+"ini_whisper": 6.56,
+"ini": 6.56,
+"fim": 6.84
+},
+{
+"cena": "abertura",
+"w": "o",
+"ini_whisper": 6.84,
+"ini": 6.84,
+"fim": 6.98
+},
+{
+"cena": "abertura",
+"w": "poder.",
+"ini_whisper": 6.98,
+"ini": 7.01,
+"fim": 7.3
+},
+{
+"cena": "abertura",
+"w": "O",
+"ini_whisper": 7.76,
+"ini": 7.78,
+"fim": 7.88
+},
+{
+"cena": "abertura",
+"w": "Brasil",
+"ini_whisper": 7.88,
+"ini": 7.78,
+"fim": 8.18
+},
+{
+"cena": "abertura",
+"w": "ainda",
+"ini_whisper": 8.18,
+"ini": 8.18,
+"fim": 8.46
+},
+{
+"cena": "abertura",
+"w": "pertencia",
+"ini_whisper": 8.46,
+"ini": 8.46,
+"fim": 9.2
+},
+{
+"cena": "abertura",
+"w": "à",
+"ini_whisper": 9.2,
+"ini": 9.2,
+"fim": 9.36
+},
+{
+"cena": "abertura",
+"w": "coroa",
+"ini_whisper": 9.36,
+"ini": 9.36,
+"fim": 9.68
+},
+{
+"cena": "abertura",
+"w": "portuguesa.",
+"ini_whisper": 9.68,
+"ini": 9.68,
+"fim": 10.44
+},
+{
+"cena": "abertura",
+"w": "A",
+"ini_whisper": 11.0,
+"ini": 11.01,
+"fim": 11.12
+},
+{
+"cena": "abertura",
+"w": "independência",
+"ini_whisper": 11.12,
+"ini": 11.01,
+"fim": 11.84
+},
+{
+"cena": "abertura",
+"w": "só",
+"ini_whisper": 11.84,
+"ini": 11.84,
+"fim": 12.04
+},
+{
+"cena": "abertura",
+"w": "viria",
+"ini_whisper": 12.04,
+"ini": 12.04,
+"fim": 12.36
+},
+{
+"cena": "abertura",
+"w": "cinco",
+"ini_whisper": 12.36,
+"ini": 12.36,
+"fim": 12.64
+},
+{
+"cena": "abertura",
+"w": "anos",
+"ini_whisper": 12.64,
+"ini": 12.62,
+"fim": 12.92
+},
+{
+"cena": "abertura",
+"w": "depois,",
+"ini_whisper": 12.92,
+"ini": 12.92,
+"fim": 13.24
+},
+{
+"cena": "abertura",
+"w": "mas,",
+"ini_whisper": 13.88,
+"ini": 13.88,
+"fim": 14.16
+},
+{
+"cena": "abertura",
+"w": "naquele",
+"ini_whisper": 14.4,
+"ini": 14.35,
+"fim": 14.7
+},
+{
+"cena": "abertura",
+"w": "dia,",
+"ini_whisper": 14.7,
+"ini": 14.7,
+"fim": 15.04
+},
+{
+"cena": "abertura",
+"w": "um",
+"ini_whisper": 15.48,
+"ini": 15.46,
+"fim": 15.58
+},
+{
+"cena": "abertura",
+"w": "pedaço",
+"ini_whisper": 15.58,
+"ini": 15.46,
+"fim": 16.06
+},
+{
+"cena": "abertura",
+"w": "do",
+"ini_whisper": 16.06,
+"ini": 16.06,
+"fim": 16.18
+},
+{
+"cena": "abertura",
+"w": "Brasil",
+"ini_whisper": 16.18,
+"ini": 16.18,
+"fim": 16.52
+},
+{
+"cena": "abertura",
+"w": "se",
+"ini_whisper": 16.52,
+"ini": 16.52,
+"fim": 16.72
+},
+{
+"cena": "abertura",
+"w": "declarou",
+"ini_whisper": 16.72,
+"ini": 16.72,
+"fim": 17.2
+},
+{
+"cena": "abertura",
+"w": "república.",
+"ini_whisper": 17.2,
+"ini": 17.2,
+"fim": 17.76
+},
+{
+"cena": "abertura",
+"w": "Para",
+"ini_whisper": 18.52,
+"ini": 18.48,
+"fim": 18.7
+},
+{
+"cena": "abertura",
+"w": "entender",
+"ini_whisper": 18.7,
+"ini": 18.7,
+"fim": 19.02
+},
+{
+"cena": "abertura",
+"w": "como",
+"ini_whisper": 19.02,
+"ini": 19.02,
+"fim": 19.34
+},
+{
+"cena": "abertura",
+"w": "isso",
+"ini_whisper": 19.34,
+"ini": 19.34,
+"fim": 19.58
+},
+{
+"cena": "abertura",
+"w": "foi",
+"ini_whisper": 19.58,
+"ini": 19.58,
+"fim": 19.78
+},
+{
+"cena": "abertura",
+"w": "possível,",
+"ini_whisper": 19.78,
+"ini": 19.78,
+"fim": 20.28
+},
+{
+"cena": "abertura",
+"w": "é",
+"ini_whisper": 20.62,
+"ini": 20.62,
+"fim": 20.7
+},
+{
+"cena": "abertura",
+"w": "preciso",
+"ini_whisper": 20.7,
+"ini": 20.62,
+"fim": 21.0
+},
+{
+"cena": "abertura",
+"w": "voltar",
+"ini_whisper": 21.0,
+"ini": 21.0,
+"fim": 21.42
+},
+{
+"cena": "abertura",
+"w": "muito",
+"ini_whisper": 21.42,
+"ini": 21.36,
+"fim": 21.78
+},
+{
+"cena": "abertura",
+"w": "antes.",
+"ini_whisper": 21.78,
+"ini": 21.78,
+"fim": 22.26
+},
+{
+"cena": "c1",
+"w": "Muito",
+"ini_whisper": 23.933,
+"ini": 23.953,
+"fim": 24.193
+},
+{
+"cena": "c1",
+"w": "antes",
+"ini_whisper": 24.193,
+"ini": 24.193,
+"fim": 24.553
+},
+{
+"cena": "c1",
+"w": "de",
+"ini_whisper": 24.553,
+"ini": 24.513,
+"fim": 24.773
+},
+{
+"cena": "c1",
+"w": "existir",
+"ini_whisper": 24.773,
+"ini": 24.773,
+"fim": 25.133
+},
+{
+"cena": "c1",
+"w": "Brasil,",
+"ini_whisper": 25.133,
+"ini": 25.033,
+"fim": 25.513
+},
+{
+"cena": "c1",
+"w": "esta",
+"ini_whisper": 26.093,
+"ini": 26.053,
+"fim": 26.273
+},
+{
+"cena": "c1",
+"w": "terra",
+"ini_whisper": 26.273,
+"ini": 26.273,
+"fim": 26.593
+},
+{
+"cena": "c1",
+"w": "já",
+"ini_whisper": 26.593,
+"ini": 26.593,
+"fim": 26.793
+},
+{
+"cena": "c1",
+"w": "tinha",
+"ini_whisper": 26.793,
+"ini": 26.793,
+"fim": 26.993
+},
+{
+"cena": "c1",
+"w": "gente,",
+"ini_whisper": 26.993,
+"ini": 26.993,
+"fim": 27.393
+},
+{
+"cena": "c1",
+"w": "nomes",
+"ini_whisper": 27.833,
+"ini": 27.773,
+"fim": 28.433
+},
+{
+"cena": "c1",
+"w": "e",
+"ini_whisper": 28.433,
+"ini": 28.433,
+"fim": 28.733
+},
+{
+"cena": "c1",
+"w": "histórias.",
+"ini_whisper": 28.733,
+"ini": 28.633,
+"fim": 29.253
+},
+{
+"cena": "c1",
+"w": "Caetés,",
+"ini_whisper": 30.053,
+"ini": 30.013,
+"fim": 30.593
+},
+{
+"cena": "c1",
+"w": "Potiguaras,",
+"ini_whisper": 30.993,
+"ini": 30.943,
+"fim": 31.573
+},
+{
+"cena": "c1",
+"w": "Tabajaras",
+"ini_whisper": 32.073,
+"ini": 32.053,
+"fim": 32.633
+},
+{
+"cena": "c1",
+"w": "e",
+"ini_whisper": 32.633,
+"ini": 32.633,
+"fim": 33.133
+},
+{
+"cena": "c1",
+"w": "muitos",
+"ini_whisper": 33.133,
+"ini": 33.033,
+"fim": 33.513
+},
+{
+"cena": "c1",
+"w": "outros",
+"ini_whisper": 33.513,
+"ini": 33.483,
+"fim": 33.853
+},
+{
+"cena": "c1",
+"w": "povos",
+"ini_whisper": 33.853,
+"ini": 33.813,
+"fim": 34.373
+},
+{
+"cena": "c1",
+"w": "viviam",
+"ini_whisper": 34.373,
+"ini": 34.373,
+"fim": 34.753
+},
+{
+"cena": "c1",
+"w": "aqui.",
+"ini_whisper": 34.753,
+"ini": 34.753,
+"fim": 35.053
+},
+{
+"cena": "c1",
+"w": "Do",
+"ini_whisper": 35.593,
+"ini": 35.523,
+"fim": 35.693
+},
+{
+"cena": "c1",
+"w": "litoral",
+"ini_whisper": 35.693,
+"ini": 35.693,
+"fim": 36.153
+},
+{
+"cena": "c1",
+"w": "ao",
+"ini_whisper": 36.153,
+"ini": 36.153,
+"fim": 36.293
+},
+{
+"cena": "c1",
+"w": "sertão,",
+"ini_whisper": 36.293,
+"ini": 36.293,
+"fim": 36.753
+},
+{
+"cena": "c1",
+"w": "cada",
+"ini_whisper": 37.173,
+"ini": 37.163,
+"fim": 37.353
+},
+{
+"cena": "c1",
+"w": "um",
+"ini_whisper": 37.353,
+"ini": 37.353,
+"fim": 37.633
+},
+{
+"cena": "c1",
+"w": "com",
+"ini_whisper": 37.633,
+"ini": 37.633,
+"fim": 37.793
+},
+{
+"cena": "c1",
+"w": "sua",
+"ini_whisper": 37.793,
+"ini": 37.683,
+"fim": 37.993
+},
+{
+"cena": "c1",
+"w": "língua,",
+"ini_whisper": 37.993,
+"ini": 37.953,
+"fim": 38.453
+},
+{
+"cena": "c1",
+"w": "seus",
+"ini_whisper": 38.753,
+"ini": 38.703,
+"fim": 38.873
+},
+{
+"cena": "c1",
+"w": "rituais",
+"ini_whisper": 38.873,
+"ini": 38.873,
+"fim": 39.413
+},
+{
+"cena": "c1",
+"w": "e",
+"ini_whisper": 39.413,
+"ini": 39.413,
+"fim": 39.893
+},
+{
+"cena": "c1",
+"w": "seu",
+"ini_whisper": 39.893,
+"ini": 39.803,
+"fim": 40.073
+},
+{
+"cena": "c1",
+"w": "jeito",
+"ini_whisper": 40.073,
+"ini": 40.073,
+"fim": 40.393
+},
+{
+"cena": "c1",
+"w": "de",
+"ini_whisper": 40.393,
+"ini": 40.433,
+"fim": 40.633
+},
+{
+"cena": "c1",
+"w": "ler",
+"ini_whisper": 40.633,
+"ini": 40.633,
+"fim": 40.793
+},
+{
+"cena": "c1",
+"w": "a",
+"ini_whisper": 40.793,
+"ini": 40.793,
+"fim": 40.913
+},
+{
+"cena": "c1",
+"w": "natureza.",
+"ini_whisper": 40.913,
+"ini": 40.913,
+"fim": 41.453
+},
+{
+"cena": "c1",
+"w": "No",
+"ini_whisper": 42.153,
+"ini": 42.183,
+"fim": 42.293
+},
+{
+"cena": "c1",
+"w": "interior,",
+"ini_whisper": 42.293,
+"ini": 42.183,
+"fim": 42.653
+},
+{
+"cena": "c1",
+"w": "as",
+"ini_whisper": 43.173,
+"ini": 43.123,
+"fim": 43.293
+},
+{
+"cena": "c1",
+"w": "rochas",
+"ini_whisper": 43.293,
+"ini": 43.293,
+"fim": 43.593
+},
+{
+"cena": "c1",
+"w": "do",
+"ini_whisper": 43.593,
+"ini": 43.593,
+"fim": 43.833
+},
+{
+"cena": "c1",
+"w": "Vale",
+"ini_whisper": 43.833,
+"ini": 43.833,
+"fim": 44.073
+},
+{
+"cena": "c1",
+"w": "do",
+"ini_whisper": 44.073,
+"ini": 44.073,
+"fim": 44.233
+},
+{
+"cena": "c1",
+"w": "Catimbau",
+"ini_whisper": 44.233,
+"ini": 44.233,
+"fim": 44.813
+},
+{
+"cena": "c1",
+"w": "ainda",
+"ini_whisper": 44.813,
+"ini": 44.813,
+"fim": 45.293
+},
+{
+"cena": "c1",
+"w": "guardam",
+"ini_whisper": 45.293,
+"ini": 45.293,
+"fim": 45.773
+},
+{
+"cena": "c1",
+"w": "pinturas",
+"ini_whisper": 45.773,
+"ini": 45.773,
+"fim": 46.253
+},
+{
+"cena": "c1",
+"w": "feitas",
+"ini_whisper": 46.253,
+"ini": 46.253,
+"fim": 46.673
+},
+{
+"cena": "c1",
+"w": "há",
+"ini_whisper": 46.673,
+"ini": 46.613,
+"fim": 46.873
+},
+{
+"cena": "c1",
+"w": "milhares",
+"ini_whisper": 46.873,
+"ini": 46.873,
+"fim": 47.433
+},
+{
+"cena": "c1",
+"w": "de",
+"ini_whisper": 47.433,
+"ini": 47.433,
+"fim": 47.613
+},
+{
+"cena": "c1",
+"w": "anos.",
+"ini_whisper": 47.613,
+"ini": 47.523,
+"fim": 47.853
+},
+{
+"cena": "c1",
+"w": "É",
+"ini_whisper": 48.473,
+"ini": 48.493,
+"fim": 48.693
+},
+{
+"cena": "c1",
+"w": "a",
+"ini_whisper": 48.693,
+"ini": 48.593,
+"fim": 48.753
+},
+{
+"cena": "c1",
+"w": "memória",
+"ini_whisper": 48.753,
+"ini": 48.753,
+"fim": 49.073
+},
+{
+"cena": "c1",
+"w": "mais",
+"ini_whisper": 49.073,
+"ini": 49.073,
+"fim": 49.293
+},
+{
+"cena": "c1",
+"w": "antiga",
+"ini_whisper": 49.293,
+"ini": 49.293,
+"fim": 49.753
+},
+{
+"cena": "c1",
+"w": "de",
+"ini_whisper": 49.753,
+"ini": 49.753,
+"fim": 49.913
+},
+{
+"cena": "c1",
+"w": "Pernambuco.",
+"ini_whisper": 49.913,
+"ini": 49.913,
+"fim": 50.553
+},
+{
+"cena": "c1",
+"w": "E",
+"ini_whisper": 50.553,
+"ini": 50.443,
+"fim": 51.233
+},
+{
+"cena": "c1",
+"w": "ela",
+"ini_whisper": 51.233,
+"ini": 51.123,
+"fim": 51.353
+},
+{
+"cena": "c1",
+"w": "não",
+"ini_whisper": 51.353,
+"ini": 51.353,
+"fim": 51.513
+},
+{
+"cena": "c1",
+"w": "foi",
+"ini_whisper": 51.513,
+"ini": 51.513,
+"fim": 51.713
+},
+{
+"cena": "c1",
+"w": "escrita",
+"ini_whisper": 51.713,
+"ini": 51.623,
+"fim": 52.193
+},
+{
+"cena": "c1",
+"w": "em",
+"ini_whisper": 52.193,
+"ini": 52.143,
+"fim": 52.253
+},
+{
+"cena": "c1",
+"w": "papel.",
+"ini_whisper": 52.253,
+"ini": 52.143,
+"fim": 52.473
+},
+{
+"cena": "c2",
+"w": "Em",
+"ini_whisper": 54.133,
+"ini": 54.143,
+"fim": 54.293
+},
+{
+"cena": "c2",
+"w": "1535,",
+"ini_whisper": 54.293,
+"ini": 54.293,
+"fim": 55.473
+},
+{
+"cena": "c2",
+"w": "Duarte",
+"ini_whisper": 56.093,
+"ini": 56.033,
+"fim": 56.433
+},
+{
+"cena": "c2",
+"w": "Coelho",
+"ini_whisper": 56.433,
+"ini": 56.403,
+"fim": 56.953
+},
+{
+"cena": "c2",
+"w": "desembarca",
+"ini_whisper": 56.953,
+"ini": 56.953,
+"fim": 57.653
+},
+{
+"cena": "c2",
+"w": "para",
+"ini_whisper": 57.653,
+"ini": 57.603,
+"fim": 57.873
+},
+{
+"cena": "c2",
+"w": "tomar",
+"ini_whisper": 57.873,
+"ini": 57.763,
+"fim": 58.093
+},
+{
+"cena": "c2",
+"w": "posse",
+"ini_whisper": 58.093,
+"ini": 58.093,
+"fim": 58.633
+},
+{
+"cena": "c2",
+"w": "da",
+"ini_whisper": 58.633,
+"ini": 58.583,
+"fim": 58.733
+},
+{
+"cena": "c2",
+"w": "capitania",
+"ini_whisper": 58.733,
+"ini": 58.733,
+"fim": 59.253
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 59.253,
+"ini": 59.253,
+"fim": 59.433
+},
+{
+"cena": "c2",
+"w": "Pernambuco.",
+"ini_whisper": 59.433,
+"ini": 59.433,
+"fim": 60.073
+},
+{
+"cena": "c2",
+"w": "No",
+"ini_whisper": 60.813,
+"ini": 60.753,
+"fim": 61.013
+},
+{
+"cena": "c2",
+"w": "alto",
+"ini_whisper": 61.013,
+"ini": 61.013,
+"fim": 61.293
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 61.293,
+"ini": 61.273,
+"fim": 61.453
+},
+{
+"cena": "c2",
+"w": "uma",
+"ini_whisper": 61.453,
+"ini": 61.453,
+"fim": 61.573
+},
+{
+"cena": "c2",
+"w": "colina,",
+"ini_whisper": 61.573,
+"ini": 61.573,
+"fim": 62.013
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 62.413,
+"ini": 62.363,
+"fim": 62.513
+},
+{
+"cena": "c2",
+"w": "frente",
+"ini_whisper": 62.513,
+"ini": 62.513,
+"fim": 62.793
+},
+{
+"cena": "c2",
+"w": "para",
+"ini_whisper": 62.793,
+"ini": 62.793,
+"fim": 63.073
+},
+{
+"cena": "c2",
+"w": "o",
+"ini_whisper": 63.073,
+"ini": 62.973,
+"fim": 63.173
+},
+{
+"cena": "c2",
+"w": "mar,",
+"ini_whisper": 63.173,
+"ini": 63.173,
+"fim": 63.353
+},
+{
+"cena": "c2",
+"w": "ele",
+"ini_whisper": 63.833,
+"ini": 63.813,
+"fim": 63.993
+},
+{
+"cena": "c2",
+"w": "funda",
+"ini_whisper": 63.993,
+"ini": 63.993,
+"fim": 64.433
+},
+{
+"cena": "c2",
+"w": "Olinda",
+"ini_whisper": 64.433,
+"ini": 64.433,
+"fim": 64.973
+},
+{
+"cena": "c2",
+"w": "e",
+"ini_whisper": 64.973,
+"ini": 64.973,
+"fim": 65.933
+},
+{
+"cena": "c2",
+"w": "aposta",
+"ini_whisper": 65.933,
+"ini": 65.833,
+"fim": 66.353
+},
+{
+"cena": "c2",
+"w": "numa",
+"ini_whisper": 66.353,
+"ini": 66.353,
+"fim": 66.553
+},
+{
+"cena": "c2",
+"w": "planta",
+"ini_whisper": 66.553,
+"ini": 66.553,
+"fim": 66.993
+},
+{
+"cena": "c2",
+"w": "trazida",
+"ini_whisper": 66.993,
+"ini": 66.993,
+"fim": 67.433
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 67.433,
+"ini": 67.433,
+"fim": 67.553
+},
+{
+"cena": "c2",
+"w": "longe,",
+"ini_whisper": 67.553,
+"ini": 67.553,
+"fim": 67.873
+},
+{
+"cena": "c2",
+"w": "a",
+"ini_whisper": 68.493,
+"ini": 68.443,
+"fim": 68.573
+},
+{
+"cena": "c2",
+"w": "cana",
+"ini_whisper": 68.573,
+"ini": 68.573,
+"fim": 68.993
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 68.993,
+"ini": 68.993,
+"fim": 69.093
+},
+{
+"cena": "c2",
+"w": "açúcar.",
+"ini_whisper": 69.093,
+"ini": 69.093,
+"fim": 69.493
+},
+{
+"cena": "c2",
+"w": "Em",
+"ini_whisper": 70.273,
+"ini": 70.273,
+"fim": 70.413
+},
+{
+"cena": "c2",
+"w": "poucas",
+"ini_whisper": 70.413,
+"ini": 70.413,
+"fim": 70.753
+},
+{
+"cena": "c2",
+"w": "décadas,",
+"ini_whisper": 70.753,
+"ini": 70.653,
+"fim": 71.253
+},
+{
+"cena": "c2",
+"w": "os",
+"ini_whisper": 71.693,
+"ini": 71.633,
+"fim": 71.773
+},
+{
+"cena": "c2",
+"w": "engenhos",
+"ini_whisper": 71.773,
+"ini": 71.773,
+"fim": 72.213
+},
+{
+"cena": "c2",
+"w": "fazem",
+"ini_whisper": 72.213,
+"ini": 72.213,
+"fim": 72.513
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 72.513,
+"ini": 72.513,
+"fim": 72.733
+},
+{
+"cena": "c2",
+"w": "Pernambuco",
+"ini_whisper": 72.733,
+"ini": 72.733,
+"fim": 73.433
+},
+{
+"cena": "c2",
+"w": "a",
+"ini_whisper": 73.433,
+"ini": 73.333,
+"fim": 73.813
+},
+{
+"cena": "c2",
+"w": "região",
+"ini_whisper": 73.813,
+"ini": 73.813,
+"fim": 74.033
+},
+{
+"cena": "c2",
+"w": "mais",
+"ini_whisper": 74.033,
+"ini": 74.033,
+"fim": 74.433
+},
+{
+"cena": "c2",
+"w": "rica",
+"ini_whisper": 74.433,
+"ini": 74.433,
+"fim": 74.793
+},
+{
+"cena": "c2",
+"w": "da",
+"ini_whisper": 74.793,
+"ini": 74.753,
+"fim": 74.953
+},
+{
+"cena": "c2",
+"w": "América",
+"ini_whisper": 74.953,
+"ini": 74.953,
+"fim": 75.273
+},
+{
+"cena": "c2",
+"w": "portuguesa.",
+"ini_whisper": 75.273,
+"ini": 75.313,
+"fim": 76.173
+},
+{
+"cena": "c2",
+"w": "Mas",
+"ini_whisper": 76.533,
+"ini": 76.523,
+"fim": 76.813
+},
+{
+"cena": "c2",
+"w": "essa",
+"ini_whisper": 76.813,
+"ini": 76.813,
+"fim": 77.053
+},
+{
+"cena": "c2",
+"w": "riqueza",
+"ini_whisper": 77.053,
+"ini": 77.053,
+"fim": 77.553
+},
+{
+"cena": "c2",
+"w": "tinha",
+"ini_whisper": 77.553,
+"ini": 77.553,
+"fim": 77.773
+},
+{
+"cena": "c2",
+"w": "um",
+"ini_whisper": 77.773,
+"ini": 77.773,
+"fim": 77.953
+},
+{
+"cena": "c2",
+"w": "custo",
+"ini_whisper": 77.953,
+"ini": 77.953,
+"fim": 78.373
+},
+{
+"cena": "c2",
+"w": "que",
+"ini_whisper": 78.373,
+"ini": 78.283,
+"fim": 78.493
+},
+{
+"cena": "c2",
+"w": "o",
+"ini_whisper": 78.493,
+"ini": 78.473,
+"fim": 78.593
+},
+{
+"cena": "c2",
+"w": "açúcar",
+"ini_whisper": 78.593,
+"ini": 78.593,
+"fim": 78.973
+},
+{
+"cena": "c2",
+"w": "escondia.",
+"ini_whisper": 78.973,
+"ini": 78.933,
+"fim": 79.593
+},
+{
+"cena": "c2",
+"w": "Centenas",
+"ini_whisper": 79.593,
+"ini": 79.593,
+"fim": 80.853
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 80.853,
+"ini": 80.853,
+"fim": 81.033
+},
+{
+"cena": "c2",
+"w": "milhares",
+"ini_whisper": 81.033,
+"ini": 81.033,
+"fim": 81.513
+},
+{
+"cena": "c2",
+"w": "de",
+"ini_whisper": 81.513,
+"ini": 81.513,
+"fim": 81.613
+},
+{
+"cena": "c2",
+"w": "africanos",
+"ini_whisper": 81.613,
+"ini": 81.613,
+"fim": 82.173
+},
+{
+"cena": "c2",
+"w": "foram",
+"ini_whisper": 82.173,
+"ini": 82.173,
+"fim": 82.653
+},
+{
+"cena": "c2",
+"w": "trazidos",
+"ini_whisper": 82.653,
+"ini": 82.653,
+"fim": 83.173
+},
+{
+"cena": "c2",
+"w": "a",
+"ini_whisper": 83.173,
+"ini": 83.173,
+"fim": 83.333
+},
+{
+"cena": "c2",
+"w": "força",
+"ini_whisper": 83.333,
+"ini": 83.333,
+"fim": 83.673
+},
+{
+"cena": "c2",
+"w": "e",
+"ini_whisper": 83.673,
+"ini": 83.673,
+"fim": 84.073
+},
+{
+"cena": "c2",
+"w": "escravizados",
+"ini_whisper": 84.073,
+"ini": 83.973,
+"fim": 84.833
+},
+{
+"cena": "c2",
+"w": "nos",
+"ini_whisper": 84.833,
+"ini": 84.833,
+"fim": 85.013
+},
+{
+"cena": "c2",
+"w": "engenhos.",
+"ini_whisper": 85.013,
+"ini": 85.013,
+"fim": 85.633
+},
+{
+"cena": "c2",
+"w": "Povos",
+"ini_whisper": 86.213,
+"ini": 86.143,
+"fim": 86.533
+},
+{
+"cena": "c2",
+"w": "indígenas",
+"ini_whisper": 86.533,
+"ini": 86.533,
+"fim": 87.173
+},
+{
+"cena": "c2",
+"w": "perderam",
+"ini_whisper": 87.173,
+"ini": 87.173,
+"fim": 87.633
+},
+{
+"cena": "c2",
+"w": "suas",
+"ini_whisper": 87.633,
+"ini": 87.633,
+"fim": 87.833
+},
+{
+"cena": "c2",
+"w": "terras",
+"ini_whisper": 87.833,
+"ini": 87.833,
+"fim": 88.373
+},
+{
+"cena": "c2",
+"w": "e",
+"ini_whisper": 88.373,
+"ini": 88.373,
+"fim": 88.753
+},
+{
+"cena": "c2",
+"w": "muitos",
+"ini_whisper": 88.753,
+"ini": 88.663,
+"fim": 89.193
+},
+{
+"cena": "c2",
+"w": "suas",
+"ini_whisper": 89.193,
+"ini": 89.113,
+"fim": 89.753
+},
+{
+"cena": "c2",
+"w": "vidas.",
+"ini_whisper": 89.753,
+"ini": 89.753,
+"fim": 90.313
+},
+{
+"cena": "c2",
+"w": "O",
+"ini_whisper": 91.113,
+"ini": 91.063,
+"fim": 91.193
+},
+{
+"cena": "c2",
+"w": "açúcar",
+"ini_whisper": 91.193,
+"ini": 91.193,
+"fim": 91.653
+},
+{
+"cena": "c2",
+"w": "adoçou",
+"ini_whisper": 91.653,
+"ini": 91.583,
+"fim": 92.113
+},
+{
+"cena": "c2",
+"w": "a",
+"ini_whisper": 92.113,
+"ini": 92.113,
+"fim": 92.233
+},
+{
+"cena": "c2",
+"w": "Europa",
+"ini_whisper": 92.233,
+"ini": 92.233,
+"fim": 92.633
+},
+{
+"cena": "c2",
+"w": "e",
+"ini_whisper": 92.633,
+"ini": 92.603,
+"fim": 93.413
+},
+{
+"cena": "c2",
+"w": "deixou",
+"ini_whisper": 93.413,
+"ini": 93.333,
+"fim": 93.793
+},
+{
+"cena": "c2",
+"w": "em",
+"ini_whisper": 93.793,
+"ini": 93.793,
+"fim": 93.933
+},
+{
+"cena": "c2",
+"w": "Pernambuco",
+"ini_whisper": 93.933,
+"ini": 93.933,
+"fim": 94.573
+},
+{
+"cena": "c2",
+"w": "feridas",
+"ini_whisper": 94.573,
+"ini": 94.533,
+"fim": 95.053
+},
+{
+"cena": "c2",
+"w": "que",
+"ini_whisper": 95.053,
+"ini": 95.053,
+"fim": 95.273
+},
+{
+"cena": "c2",
+"w": "o",
+"ini_whisper": 95.273,
+"ini": 95.193,
+"fim": 95.393
+},
+{
+"cena": "c2",
+"w": "tempo",
+"ini_whisper": 95.393,
+"ini": 95.393,
+"fim": 95.633
+},
+{
+"cena": "c2",
+"w": "não",
+"ini_whisper": 95.633,
+"ini": 95.633,
+"fim": 95.933
+},
+{
+"cena": "c2",
+"w": "apagou.",
+"ini_whisper": 95.933,
+"ini": 95.933,
+"fim": 96.453
+},
+{
+"cena": "c3",
+"w": "Mas",
+"ini_whisper": 97.933,
+"ini": 97.973,
+"fim": 98.173
+},
+{
+"cena": "c3",
+"w": "onde",
+"ini_whisper": 98.173,
+"ini": 98.173,
+"fim": 98.453
+},
+{
+"cena": "c3",
+"w": "houve",
+"ini_whisper": 98.453,
+"ini": 98.453,
+"fim": 98.793
+},
+{
+"cena": "c3",
+"w": "escravidão?",
+"ini_whisper": 98.793,
+"ini": 98.793,
+"fim": 99.433
+},
+{
+"cena": "c3",
+"w": "Houve",
+"ini_whisper": 99.773,
+"ini": 99.713,
+"fim": 99.933
+},
+{
+"cena": "c3",
+"w": "resistência.",
+"ini_whisper": 99.933,
+"ini": 99.933,
+"fim": 100.753
+},
+{
+"cena": "c3",
+"w": "Na",
+"ini_whisper": 101.473,
+"ini": 101.503,
+"fim": 101.633
+},
+{
+"cena": "c3",
+"w": "Serra",
+"ini_whisper": 101.633,
+"ini": 101.633,
+"fim": 101.973
+},
+{
+"cena": "c3",
+"w": "da",
+"ini_whisper": 101.973,
+"ini": 101.973,
+"fim": 102.093
+},
+{
+"cena": "c3",
+"w": "Barriga,",
+"ini_whisper": 102.093,
+"ini": 102.093,
+"fim": 102.533
+},
+{
+"cena": "c3",
+"w": "então",
+"ini_whisper": 102.933,
+"ini": 102.943,
+"fim": 103.233
+},
+{
+"cena": "c3",
+"w": "território",
+"ini_whisper": 103.233,
+"ini": 103.143,
+"fim": 103.833
+},
+{
+"cena": "c3",
+"w": "pernambucano,",
+"ini_whisper": 103.833,
+"ini": 103.833,
+"fim": 104.633
+},
+{
+"cena": "c3",
+"w": "pessoas",
+"ini_whisper": 105.033,
+"ini": 105.043,
+"fim": 105.293
+},
+{
+"cena": "c3",
+"w": "que",
+"ini_whisper": 105.293,
+"ini": 105.293,
+"fim": 105.533
+},
+{
+"cena": "c3",
+"w": "fugiram",
+"ini_whisper": 105.533,
+"ini": 105.463,
+"fim": 106.073
+},
+{
+"cena": "c3",
+"w": "dos",
+"ini_whisper": 106.073,
+"ini": 106.073,
+"fim": 106.233
+},
+{
+"cena": "c3",
+"w": "engenhos",
+"ini_whisper": 106.233,
+"ini": 106.233,
+"fim": 106.813
+},
+{
+"cena": "c3",
+"w": "ergueram",
+"ini_whisper": 106.813,
+"ini": 106.813,
+"fim": 107.413
+},
+{
+"cena": "c3",
+"w": "palmares.",
+"ini_whisper": 107.413,
+"ini": 107.413,
+"fim": 107.933
+},
+{
+"cena": "c3",
+"w": "Por",
+"ini_whisper": 108.773,
+"ini": 108.773,
+"fim": 109.013
+},
+{
+"cena": "c3",
+"w": "quase",
+"ini_whisper": 109.013,
+"ini": 109.013,
+"fim": 109.293
+},
+{
+"cena": "c3",
+"w": "um",
+"ini_whisper": 109.293,
+"ini": 109.293,
+"fim": 109.453
+},
+{
+"cena": "c3",
+"w": "século,",
+"ini_whisper": 109.453,
+"ini": 109.453,
+"fim": 109.913
+},
+{
+"cena": "c3",
+"w": "o",
+"ini_whisper": 110.353,
+"ini": 110.303,
+"fim": 110.393
+},
+{
+"cena": "c3",
+"w": "quilombo",
+"ini_whisper": 110.393,
+"ini": 110.303,
+"fim": 110.753
+},
+{
+"cena": "c3",
+"w": "resistiu",
+"ini_whisper": 110.753,
+"ini": 110.753,
+"fim": 111.293
+},
+{
+"cena": "c3",
+"w": "às",
+"ini_whisper": 111.293,
+"ini": 111.293,
+"fim": 111.433
+},
+{
+"cena": "c3",
+"w": "expedições",
+"ini_whisper": 111.433,
+"ini": 111.433,
+"fim": 112.053
+},
+{
+"cena": "c3",
+"w": "que",
+"ini_whisper": 112.053,
+"ini": 112.053,
+"fim": 112.293
+},
+{
+"cena": "c3",
+"w": "tentavam",
+"ini_whisper": 112.293,
+"ini": 112.293,
+"fim": 112.753
+},
+{
+"cena": "c3",
+"w": "destruí",
+"ini_whisper": 112.753,
+"ini": 112.753,
+"fim": 113.353
+},
+{
+"cena": "c3",
+"w": "-lo.",
+"ini_whisper": 113.353,
+"ini": 113.353,
+"fim": 113.453
+},
+{
+"cena": "c3",
+"w": "Seu",
+"ini_whisper": 114.193,
+"ini": 114.193,
+"fim": 114.453
+},
+{
+"cena": "c3",
+"w": "líder",
+"ini_whisper": 114.453,
+"ini": 114.453,
+"fim": 114.633
+},
+{
+"cena": "c3",
+"w": "mais",
+"ini_whisper": 114.633,
+"ini": 114.633,
+"fim": 114.973
+},
+{
+"cena": "c3",
+"w": "conhecido,",
+"ini_whisper": 114.973,
+"ini": 114.973,
+"fim": 115.613
+},
+{
+"cena": "c3",
+"w": "Zumbi,",
+"ini_whisper": 115.973,
+"ini": 115.883,
+"fim": 116.373
+},
+{
+"cena": "c3",
+"w": "foi",
+"ini_whisper": 116.773,
+"ini": 116.753,
+"fim": 116.913
+},
+{
+"cena": "c3",
+"w": "morto",
+"ini_whisper": 116.913,
+"ini": 116.913,
+"fim": 117.333
+},
+{
+"cena": "c3",
+"w": "em",
+"ini_whisper": 117.333,
+"ini": 117.273,
+"fim": 117.453
+},
+{
+"cena": "c3",
+"w": "20",
+"ini_whisper": 117.453,
+"ini": 117.453,
+"fim": 117.773
+},
+{
+"cena": "c3",
+"w": "de",
+"ini_whisper": 117.773,
+"ini": 117.773,
+"fim": 117.993
+},
+{
+"cena": "c3",
+"w": "novembro",
+"ini_whisper": 117.993,
+"ini": 117.993,
+"fim": 118.473
+},
+{
+"cena": "c3",
+"w": "de",
+"ini_whisper": 118.473,
+"ini": 118.473,
+"fim": 118.673
+},
+{
+"cena": "c3",
+"w": "1695.",
+"ini_whisper": 118.673,
+"ini": 118.673,
+"fim": 119.973
+},
+{
+"cena": "c3",
+"w": "Hoje,",
+"ini_whisper": 121.133,
+"ini": 121.133,
+"fim": 121.473
+},
+{
+"cena": "c3",
+"w": "essa",
+"ini_whisper": 121.893,
+"ini": 121.873,
+"fim": 122.073
+},
+{
+"cena": "c3",
+"w": "data",
+"ini_whisper": 122.073,
+"ini": 122.073,
+"fim": 122.333
+},
+{
+"cena": "c3",
+"w": "é",
+"ini_whisper": 122.333,
+"ini": 122.333,
+"fim": 122.533
+},
+{
+"cena": "c3",
+"w": "o",
+"ini_whisper": 122.533,
+"ini": 122.533,
+"fim": 122.613
+},
+{
+"cena": "c3",
+"w": "dia",
+"ini_whisper": 122.613,
+"ini": 122.613,
+"fim": 122.853
+},
+{
+"cena": "c3",
+"w": "da",
+"ini_whisper": 122.853,
+"ini": 122.853,
+"fim": 123.013
+},
+{
+"cena": "c3",
+"w": "consciência",
+"ini_whisper": 123.013,
+"ini": 123.013,
+"fim": 123.593
+},
+{
+"cena": "c3",
+"w": "negra.",
+"ini_whisper": 123.593,
+"ini": 123.593,
+"fim": 123.993
+},
+{
+"cena": "c4",
+"w": "Em",
+"ini_whisper": 125.5,
+"ini": 125.53,
+"fim": 125.7
+},
+{
+"cena": "c4",
+"w": "1630,",
+"ini_whisper": 125.7,
+"ini": 125.7,
+"fim": 126.96
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 127.54,
+"ini": 127.52,
+"fim": 127.66
+},
+{
+"cena": "c4",
+"w": "riqueza",
+"ini_whisper": 127.66,
+"ini": 127.66,
+"fim": 128.1
+},
+{
+"cena": "c4",
+"w": "de",
+"ini_whisper": 128.1,
+"ini": 128.1,
+"fim": 128.28
+},
+{
+"cena": "c4",
+"w": "Pernambuco",
+"ini_whisper": 128.28,
+"ini": 128.28,
+"fim": 129.04
+},
+{
+"cena": "c4",
+"w": "atrai",
+"ini_whisper": 129.04,
+"ini": 129.04,
+"fim": 129.6
+},
+{
+"cena": "c4",
+"w": "uma",
+"ini_whisper": 129.6,
+"ini": 129.6,
+"fim": 129.76
+},
+{
+"cena": "c4",
+"w": "frota",
+"ini_whisper": 129.76,
+"ini": 129.76,
+"fim": 130.16
+},
+{
+"cena": "c4",
+"w": "estrangeira.",
+"ini_whisper": 130.16,
+"ini": 130.16,
+"fim": 130.84
+},
+{
+"cena": "c4",
+"w": "A",
+"ini_whisper": 131.5,
+"ini": 131.49,
+"fim": 131.6
+},
+{
+"cena": "c4",
+"w": "Complania",
+"ini_whisper": 131.6,
+"ini": 131.49,
+"fim": 132.06
+},
+{
+"cena": "c4",
+"w": "das",
+"ini_whisper": 132.06,
+"ini": 132.06,
+"fim": 132.26
+},
+{
+"cena": "c4",
+"w": "Índias",
+"ini_whisper": 132.26,
+"ini": 132.26,
+"fim": 132.58
+},
+{
+"cena": "c4",
+"w": "Ocidentais,",
+"ini_whisper": 132.58,
+"ini": 132.58,
+"fim": 133.36
+},
+{
+"cena": "c4",
+"w": "dos",
+"ini_whisper": 133.74,
+"ini": 133.68,
+"fim": 133.86
+},
+{
+"cena": "c4",
+"w": "Países",
+"ini_whisper": 133.86,
+"ini": 133.86,
+"fim": 134.36
+},
+{
+"cena": "c4",
+"w": "Baixos,",
+"ini_whisper": 134.36,
+"ini": 134.36,
+"fim": 134.82
+},
+{
+"cena": "c4",
+"w": "toma",
+"ini_whisper": 135.2,
+"ini": 135.21,
+"fim": 135.4
+},
+{
+"cena": "c4",
+"w": "Olinda",
+"ini_whisper": 135.4,
+"ini": 135.4,
+"fim": 135.84
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 135.84,
+"ini": 135.84,
+"fim": 136.0
+},
+{
+"cena": "c4",
+"w": "Recife.",
+"ini_whisper": 136.0,
+"ini": 136.0,
+"fim": 136.5
+},
+{
+"cena": "c4",
+"w": "Olinda",
+"ini_whisper": 137.06,
+"ini": 137.06,
+"fim": 137.58
+},
+{
+"cena": "c4",
+"w": "é",
+"ini_whisper": 137.58,
+"ini": 137.58,
+"fim": 137.74
+},
+{
+"cena": "c4",
+"w": "incendiada.",
+"ini_whisper": 137.74,
+"ini": 137.74,
+"fim": 138.38
+},
+{
+"cena": "c4",
+"w": "O",
+"ini_whisper": 138.96,
+"ini": 138.95,
+"fim": 139.08
+},
+{
+"cena": "c4",
+"w": "Recife",
+"ini_whisper": 139.08,
+"ini": 139.08,
+"fim": 139.52
+},
+{
+"cena": "c4",
+"w": "se",
+"ini_whisper": 139.52,
+"ini": 139.5,
+"fim": 139.7
+},
+{
+"cena": "c4",
+"w": "torna",
+"ini_whisper": 139.7,
+"ini": 139.7,
+"fim": 140.0
+},
+{
+"cena": "c4",
+"w": "o",
+"ini_whisper": 140.0,
+"ini": 140.0,
+"fim": 140.14
+},
+{
+"cena": "c4",
+"w": "centro",
+"ini_whisper": 140.14,
+"ini": 140.14,
+"fim": 140.44
+},
+{
+"cena": "c4",
+"w": "do",
+"ini_whisper": 140.44,
+"ini": 140.44,
+"fim": 140.66
+},
+{
+"cena": "c4",
+"w": "Brasil",
+"ini_whisper": 140.66,
+"ini": 140.66,
+"fim": 140.96
+},
+{
+"cena": "c4",
+"w": "holandês.",
+"ini_whisper": 140.96,
+"ini": 140.96,
+"fim": 141.48
+},
+{
+"cena": "c4",
+"w": "Em",
+"ini_whisper": 142.34,
+"ini": 142.33,
+"fim": 142.52
+},
+{
+"cena": "c4",
+"w": "1637,",
+"ini_whisper": 142.52,
+"ini": 142.52,
+"fim": 144.08
+},
+{
+"cena": "c4",
+"w": "chega",
+"ini_whisper": 144.56,
+"ini": 144.59,
+"fim": 144.8
+},
+{
+"cena": "c4",
+"w": "o",
+"ini_whisper": 144.8,
+"ini": 144.8,
+"fim": 145.0
+},
+{
+"cena": "c4",
+"w": "Conde",
+"ini_whisper": 145.0,
+"ini": 145.04,
+"fim": 145.22
+},
+{
+"cena": "c4",
+"w": "Maurício",
+"ini_whisper": 145.22,
+"ini": 145.22,
+"fim": 145.82
+},
+{
+"cena": "c4",
+"w": "de",
+"ini_whisper": 145.82,
+"ini": 145.82,
+"fim": 145.98
+},
+{
+"cena": "c4",
+"w": "Nassau.",
+"ini_whisper": 145.98,
+"ini": 145.98,
+"fim": 146.44
+},
+{
+"cena": "c4",
+"w": "Ele",
+"ini_whisper": 147.02,
+"ini": 147.05,
+"fim": 147.22
+},
+{
+"cena": "c4",
+"w": "traz",
+"ini_whisper": 147.22,
+"ini": 147.22,
+"fim": 147.42
+},
+{
+"cena": "c4",
+"w": "pintores,",
+"ini_whisper": 147.42,
+"ini": 147.42,
+"fim": 147.98
+},
+{
+"cena": "c4",
+"w": "cientistas",
+"ini_whisper": 148.42,
+"ini": 148.42,
+"fim": 148.92
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 148.92,
+"ini": 148.89,
+"fim": 149.28
+},
+{
+"cena": "c4",
+"w": "engenheiros.",
+"ini_whisper": 149.28,
+"ini": 149.17,
+"fim": 149.84
+},
+{
+"cena": "c4",
+"w": "Ergipontes,",
+"ini_whisper": 150.62,
+"ini": 150.56,
+"fim": 151.42
+},
+{
+"cena": "c4",
+"w": "palácios",
+"ini_whisper": 151.66,
+"ini": 151.65,
+"fim": 152.16
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 152.16,
+"ini": 152.16,
+"fim": 152.62
+},
+{
+"cena": "c4",
+"w": "uma",
+"ini_whisper": 152.62,
+"ini": 152.56,
+"fim": 152.78
+},
+{
+"cena": "c4",
+"w": "nova",
+"ini_whisper": 152.78,
+"ini": 152.78,
+"fim": 153.06
+},
+{
+"cena": "c4",
+"w": "cidade",
+"ini_whisper": 153.06,
+"ini": 153.06,
+"fim": 153.42
+},
+{
+"cena": "c4",
+"w": "ao",
+"ini_whisper": 153.42,
+"ini": 153.42,
+"fim": 153.74
+},
+{
+"cena": "c4",
+"w": "lado",
+"ini_whisper": 153.74,
+"ini": 153.74,
+"fim": 153.98
+},
+{
+"cena": "c4",
+"w": "do",
+"ini_whisper": 153.98,
+"ini": 153.98,
+"fim": 154.16
+},
+{
+"cena": "c4",
+"w": "Recife.",
+"ini_whisper": 154.16,
+"ini": 154.16,
+"fim": 154.66
+},
+{
+"cena": "c4",
+"w": "Na",
+"ini_whisper": 154.66,
+"ini": 154.66,
+"fim": 155.54
+},
+{
+"cena": "c4",
+"w": "mesma",
+"ini_whisper": 155.54,
+"ini": 155.42,
+"fim": 155.74
+},
+{
+"cena": "c4",
+"w": "época,",
+"ini_whisper": 155.74,
+"ini": 155.74,
+"fim": 156.18
+},
+{
+"cena": "c4",
+"w": "judeus",
+"ini_whisper": 156.58,
+"ini": 156.58,
+"fim": 157.12
+},
+{
+"cena": "c4",
+"w": "vindos",
+"ini_whisper": 157.12,
+"ini": 157.12,
+"fim": 157.48
+},
+{
+"cena": "c4",
+"w": "da",
+"ini_whisper": 157.48,
+"ini": 157.48,
+"fim": 157.64
+},
+{
+"cena": "c4",
+"w": "Holanda",
+"ini_whisper": 157.64,
+"ini": 157.64,
+"fim": 158.0
+},
+{
+"cena": "c4",
+"w": "fundam",
+"ini_whisper": 158.0,
+"ini": 158.0,
+"fim": 158.6
+},
+{
+"cena": "c4",
+"w": "ali",
+"ini_whisper": 158.6,
+"ini": 158.6,
+"fim": 158.92
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 158.92,
+"ini": 158.92,
+"fim": 159.18
+},
+{
+"cena": "c4",
+"w": "Carral",
+"ini_whisper": 159.18,
+"ini": 159.07,
+"fim": 159.64
+},
+{
+"cena": "c4",
+"w": "Zur",
+"ini_whisper": 159.64,
+"ini": 159.64,
+"fim": 159.88
+},
+{
+"cena": "c4",
+"w": "Israel,",
+"ini_whisper": 159.88,
+"ini": 159.88,
+"fim": 160.28
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 160.86,
+"ini": 160.83,
+"fim": 160.96
+},
+{
+"cena": "c4",
+"w": "primeira",
+"ini_whisper": 160.96,
+"ini": 160.96,
+"fim": 161.24
+},
+{
+"cena": "c4",
+"w": "sinagoga",
+"ini_whisper": 161.24,
+"ini": 161.24,
+"fim": 161.78
+},
+{
+"cena": "c4",
+"w": "das",
+"ini_whisper": 161.78,
+"ini": 161.78,
+"fim": 162.04
+},
+{
+"cena": "c4",
+"w": "Américas.",
+"ini_whisper": 162.04,
+"ini": 162.04,
+"fim": 162.66
+},
+{
+"cena": "c4",
+"w": "Mas",
+"ini_whisper": 163.36,
+"ini": 163.36,
+"fim": 163.64
+},
+{
+"cena": "c4",
+"w": "por",
+"ini_whisper": 163.64,
+"ini": 163.64,
+"fim": 163.84
+},
+{
+"cena": "c4",
+"w": "trás",
+"ini_whisper": 163.84,
+"ini": 163.73,
+"fim": 164.14
+},
+{
+"cena": "c4",
+"w": "da",
+"ini_whisper": 164.14,
+"ini": 164.14,
+"fim": 164.3
+},
+{
+"cena": "c4",
+"w": "vitrine,",
+"ini_whisper": 164.3,
+"ini": 164.3,
+"fim": 164.74
+},
+{
+"cena": "c4",
+"w": "os",
+"ini_whisper": 165.18,
+"ini": 165.12,
+"fim": 165.26
+},
+{
+"cena": "c4",
+"w": "engenhos",
+"ini_whisper": 165.26,
+"ini": 165.26,
+"fim": 165.66
+},
+{
+"cena": "c4",
+"w": "continuavam",
+"ini_whisper": 165.66,
+"ini": 165.66,
+"fim": 166.34
+},
+{
+"cena": "c4",
+"w": "movidos",
+"ini_whisper": 166.34,
+"ini": 166.34,
+"fim": 166.92
+},
+{
+"cena": "c4",
+"w": "pelo",
+"ini_whisper": 166.92,
+"ini": 166.92,
+"fim": 167.16
+},
+{
+"cena": "c4",
+"w": "trabalho",
+"ini_whisper": 167.16,
+"ini": 167.06,
+"fim": 167.66
+},
+{
+"cena": "c4",
+"w": "escravizado.",
+"ini_whisper": 167.66,
+"ini": 167.66,
+"fim": 168.38
+},
+{
+"cena": "c4",
+"w": "Em",
+"ini_whisper": 169.12,
+"ini": 169.12,
+"fim": 169.4
+},
+{
+"cena": "c4",
+"w": "1645,",
+"ini_whisper": 169.4,
+"ini": 169.4,
+"fim": 171.1
+},
+{
+"cena": "c4",
+"w": "começa",
+"ini_whisper": 171.58,
+"ini": 171.58,
+"fim": 171.94
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 171.94,
+"ini": 171.94,
+"fim": 172.26
+},
+{
+"cena": "c4",
+"w": "insurreição",
+"ini_whisper": 172.26,
+"ini": 172.26,
+"fim": 172.88
+},
+{
+"cena": "c4",
+"w": "pernambucana.",
+"ini_whisper": 172.88,
+"ini": 172.88,
+"fim": 173.68
+},
+{
+"cena": "c4",
+"w": "Senhores",
+"ini_whisper": 174.42,
+"ini": 174.45,
+"fim": 174.96
+},
+{
+"cena": "c4",
+"w": "de",
+"ini_whisper": 174.96,
+"ini": 174.96,
+"fim": 175.18
+},
+{
+"cena": "c4",
+"w": "Engenho,",
+"ini_whisper": 175.18,
+"ini": 175.08,
+"fim": 175.66
+},
+{
+"cena": "c4",
+"w": "Soldados,",
+"ini_whisper": 176.0,
+"ini": 175.88,
+"fim": 176.48
+},
+{
+"cena": "c4",
+"w": "Indígenas",
+"ini_whisper": 176.94,
+"ini": 176.88,
+"fim": 177.52
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 177.52,
+"ini": 177.52,
+"fim": 177.62
+},
+{
+"cena": "c4",
+"w": "Negros",
+"ini_whisper": 177.62,
+"ini": 177.62,
+"fim": 178.06
+},
+{
+"cena": "c4",
+"w": "lutam",
+"ini_whisper": 178.06,
+"ini": 178.06,
+"fim": 178.74
+},
+{
+"cena": "c4",
+"w": "do",
+"ini_whisper": 178.74,
+"ini": 178.65,
+"fim": 178.9
+},
+{
+"cena": "c4",
+"w": "mesmo",
+"ini_whisper": 178.9,
+"ini": 178.9,
+"fim": 179.1
+},
+{
+"cena": "c4",
+"w": "lado.",
+"ini_whisper": 179.1,
+"ini": 179.1,
+"fim": 179.56
+},
+{
+"cena": "c4",
+"w": "Nomes",
+"ini_whisper": 180.38,
+"ini": 180.38,
+"fim": 180.62
+},
+{
+"cena": "c4",
+"w": "como",
+"ini_whisper": 180.62,
+"ini": 180.62,
+"fim": 180.96
+},
+{
+"cena": "c4",
+"w": "Enrique",
+"ini_whisper": 180.96,
+"ini": 180.96,
+"fim": 181.48
+},
+{
+"cena": "c4",
+"w": "Dias",
+"ini_whisper": 181.48,
+"ini": 181.49,
+"fim": 182.0
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 182.0,
+"ini": 182.0,
+"fim": 182.38
+},
+{
+"cena": "c4",
+"w": "Felipe",
+"ini_whisper": 182.38,
+"ini": 182.38,
+"fim": 182.7
+},
+{
+"cena": "c4",
+"w": "Camarão",
+"ini_whisper": 182.7,
+"ini": 182.7,
+"fim": 183.32
+},
+{
+"cena": "c4",
+"w": "entram",
+"ini_whisper": 183.32,
+"ini": 183.32,
+"fim": 183.98
+},
+{
+"cena": "c4",
+"w": "para",
+"ini_whisper": 183.98,
+"ini": 183.88,
+"fim": 184.22
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 184.22,
+"ini": 184.22,
+"fim": 184.3
+},
+{
+"cena": "c4",
+"w": "história.",
+"ini_whisper": 184.3,
+"ini": 184.3,
+"fim": 184.64
+},
+{
+"cena": "c4",
+"w": "Nos",
+"ini_whisper": 185.18,
+"ini": 185.08,
+"fim": 185.64
+},
+{
+"cena": "c4",
+"w": "montes",
+"ini_whisper": 185.64,
+"ini": 185.52,
+"fim": 186.1
+},
+{
+"cena": "c4",
+"w": "Guararapes,",
+"ini_whisper": 186.1,
+"ini": 186.1,
+"fim": 186.88
+},
+{
+"cena": "c4",
+"w": "em",
+"ini_whisper": 187.1,
+"ini": 187.08,
+"fim": 187.24
+},
+{
+"cena": "c4",
+"w": "1648",
+"ini_whisper": 187.24,
+"ini": 187.24,
+"fim": 188.9
+},
+{
+"cena": "c4",
+"w": "e",
+"ini_whisper": 188.9,
+"ini": 188.9,
+"fim": 189.38
+},
+{
+"cena": "c4",
+"w": "1649,",
+"ini_whisper": 189.38,
+"ini": 189.27,
+"fim": 190.94
+},
+{
+"cena": "c4",
+"w": "as",
+"ini_whisper": 191.56,
+"ini": 191.54,
+"fim": 191.7
+},
+{
+"cena": "c4",
+"w": "tropas",
+"ini_whisper": 191.7,
+"ini": 191.7,
+"fim": 192.08
+},
+{
+"cena": "c4",
+"w": "locais",
+"ini_whisper": 192.08,
+"ini": 191.96,
+"fim": 192.6
+},
+{
+"cena": "c4",
+"w": "vencem",
+"ini_whisper": 192.6,
+"ini": 192.6,
+"fim": 192.92
+},
+{
+"cena": "c4",
+"w": "duas",
+"ini_whisper": 192.92,
+"ini": 192.92,
+"fim": 193.32
+},
+{
+"cena": "c4",
+"w": "batalhas",
+"ini_whisper": 193.32,
+"ini": 193.32,
+"fim": 193.88
+},
+{
+"cena": "c4",
+"w": "decisivas.",
+"ini_whisper": 193.88,
+"ini": 193.88,
+"fim": 194.6
+},
+{
+"cena": "c4",
+"w": "Em",
+"ini_whisper": 195.32,
+"ini": 195.29,
+"fim": 195.5
+},
+{
+"cena": "c4",
+"w": "1654,",
+"ini_whisper": 195.5,
+"ini": 195.5,
+"fim": 197.14
+},
+{
+"cena": "c4",
+"w": "os",
+"ini_whisper": 197.68,
+"ini": 197.66,
+"fim": 197.82
+},
+{
+"cena": "c4",
+"w": "holandeses",
+"ini_whisper": 197.82,
+"ini": 197.82,
+"fim": 198.34
+},
+{
+"cena": "c4",
+"w": "se",
+"ini_whisper": 198.34,
+"ini": 198.34,
+"fim": 198.56
+},
+{
+"cena": "c4",
+"w": "rendem.",
+"ini_whisper": 198.56,
+"ini": 198.56,
+"fim": 198.94
+},
+{
+"cena": "c4",
+"w": "O",
+"ini_whisper": 199.62,
+"ini": 199.59,
+"fim": 199.76
+},
+{
+"cena": "c4",
+"w": "exército",
+"ini_whisper": 199.76,
+"ini": 199.76,
+"fim": 200.28
+},
+{
+"cena": "c4",
+"w": "brasileiro",
+"ini_whisper": 200.28,
+"ini": 200.28,
+"fim": 200.92
+},
+{
+"cena": "c4",
+"w": "considera",
+"ini_whisper": 200.92,
+"ini": 200.92,
+"fim": 201.48
+},
+{
+"cena": "c4",
+"w": "a",
+"ini_whisper": 201.48,
+"ini": 201.48,
+"fim": 201.56
+},
+{
+"cena": "c4",
+"w": "primeira",
+"ini_whisper": 201.56,
+"ini": 201.56,
+"fim": 201.88
+},
+{
+"cena": "c4",
+"w": "batalha",
+"ini_whisper": 201.88,
+"ini": 201.88,
+"fim": 202.52
+},
+{
+"cena": "c4",
+"w": "dos",
+"ini_whisper": 202.52,
+"ini": 202.52,
+"fim": 202.64
+},
+{
+"cena": "c4",
+"w": "Guararapes",
+"ini_whisper": 202.64,
+"ini": 202.64,
+"fim": 203.48
+},
+{
+"cena": "c4",
+"w": "o",
+"ini_whisper": 203.48,
+"ini": 203.48,
+"fim": 203.76
+},
+{
+"cena": "c4",
+"w": "seu",
+"ini_whisper": 203.76,
+"ini": 203.68,
+"fim": 203.92
+},
+{
+"cena": "c4",
+"w": "marco",
+"ini_whisper": 203.92,
+"ini": 203.92,
+"fim": 204.38
+},
+{
+"cena": "c4",
+"w": "de",
+"ini_whisper": 204.38,
+"ini": 204.31,
+"fim": 204.48
+},
+{
+"cena": "c4",
+"w": "origem.",
+"ini_whisper": 204.48,
+"ini": 204.48,
+"fim": 204.88
+},
+{
+"cena": "c5",
+"w": "Mais",
+"ini_whisper": 206.333,
+"ini": 206.343,
+"fim": 206.613
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 206.613,
+"ini": 206.613,
+"fim": 206.813
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 206.813,
+"ini": 206.813,
+"fim": 206.913
+},
+{
+"cena": "c5",
+"w": "século",
+"ini_whisper": 206.913,
+"ini": 206.913,
+"fim": 207.333
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 207.333,
+"ini": 207.223,
+"fim": 207.473
+},
+{
+"cena": "c5",
+"w": "meio",
+"ini_whisper": 207.473,
+"ini": 207.473,
+"fim": 207.653
+},
+{
+"cena": "c5",
+"w": "depois,",
+"ini_whisper": 207.653,
+"ini": 207.653,
+"fim": 208.113
+},
+{
+"cena": "c5",
+"w": "voltamos",
+"ini_whisper": 208.593,
+"ini": 208.533,
+"fim": 208.993
+},
+{
+"cena": "c5",
+"w": "ao",
+"ini_whisper": 208.993,
+"ini": 208.993,
+"fim": 209.193
+},
+{
+"cena": "c5",
+"w": "dia",
+"ini_whisper": 209.193,
+"ini": 209.193,
+"fim": 209.433
+},
+{
+"cena": "c5",
+"w": "em",
+"ini_whisper": 209.433,
+"ini": 209.433,
+"fim": 209.593
+},
+{
+"cena": "c5",
+"w": "que",
+"ini_whisper": 209.593,
+"ini": 209.603,
+"fim": 209.693
+},
+{
+"cena": "c5",
+"w": "tudo",
+"ini_whisper": 209.693,
+"ini": 209.693,
+"fim": 210.053
+},
+{
+"cena": "c5",
+"w": "começou.",
+"ini_whisper": 210.053,
+"ini": 210.053,
+"fim": 210.533
+},
+{
+"cena": "c5",
+"w": "6",
+"ini_whisper": 211.213,
+"ini": 211.163,
+"fim": 211.453
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 211.453,
+"ini": 211.453,
+"fim": 211.673
+},
+{
+"cena": "c5",
+"w": "março",
+"ini_whisper": 211.673,
+"ini": 211.563,
+"fim": 212.013
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 212.013,
+"ini": 212.013,
+"fim": 212.173
+},
+{
+"cena": "c5",
+"w": "1817.",
+"ini_whisper": 212.173,
+"ini": 212.173,
+"fim": 213.653
+},
+{
+"cena": "c5",
+"w": "Revoltados",
+"ini_whisper": 214.273,
+"ini": 214.283,
+"fim": 214.873
+},
+{
+"cena": "c5",
+"w": "com",
+"ini_whisper": 214.873,
+"ini": 214.873,
+"fim": 215.093
+},
+{
+"cena": "c5",
+"w": "impostos,",
+"ini_whisper": 215.093,
+"ini": 215.023,
+"fim": 215.813
+},
+{
+"cena": "c5",
+"w": "privilégios",
+"ini_whisper": 216.073,
+"ini": 216.063,
+"fim": 216.713
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 216.713,
+"ini": 216.713,
+"fim": 216.853
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 216.853,
+"ini": 216.853,
+"fim": 216.933
+},
+{
+"cena": "c5",
+"w": "falta",
+"ini_whisper": 216.933,
+"ini": 216.933,
+"fim": 217.233
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 217.233,
+"ini": 217.263,
+"fim": 217.433
+},
+{
+"cena": "c5",
+"w": "autonomia,",
+"ini_whisper": 217.433,
+"ini": 217.433,
+"fim": 218.053
+},
+{
+"cena": "c5",
+"w": "comerciantes,",
+"ini_whisper": 218.513,
+"ini": 218.433,
+"fim": 219.113
+},
+{
+"cena": "c5",
+"w": "padres",
+"ini_whisper": 219.553,
+"ini": 219.533,
+"fim": 219.813
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 219.813,
+"ini": 219.813,
+"fim": 220.073
+},
+{
+"cena": "c5",
+"w": "militares",
+"ini_whisper": 220.073,
+"ini": 220.073,
+"fim": 220.633
+},
+{
+"cena": "c5",
+"w": "tomam",
+"ini_whisper": 220.633,
+"ini": 220.633,
+"fim": 221.273
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 221.273,
+"ini": 221.273,
+"fim": 221.433
+},
+{
+"cena": "c5",
+"w": "Recife.",
+"ini_whisper": 221.433,
+"ini": 221.433,
+"fim": 221.853
+},
+{
+"cena": "c5",
+"w": "Nasce",
+"ini_whisper": 222.473,
+"ini": 222.463,
+"fim": 222.813
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 222.813,
+"ini": 222.813,
+"fim": 222.913
+},
+{
+"cena": "c5",
+"w": "governo",
+"ini_whisper": 222.913,
+"ini": 222.913,
+"fim": 223.233
+},
+{
+"cena": "c5",
+"w": "provisório",
+"ini_whisper": 223.233,
+"ini": 223.233,
+"fim": 223.973
+},
+{
+"cena": "c5",
+"w": "republicano.",
+"ini_whisper": 223.973,
+"ini": 223.973,
+"fim": 224.673
+},
+{
+"cena": "c5",
+"w": "Ele",
+"ini_whisper": 225.253,
+"ini": 225.253,
+"fim": 225.373
+},
+{
+"cena": "c5",
+"w": "cria",
+"ini_whisper": 225.373,
+"ini": 225.373,
+"fim": 225.573
+},
+{
+"cena": "c5",
+"w": "uma",
+"ini_whisper": 225.573,
+"ini": 225.573,
+"fim": 225.753
+},
+{
+"cena": "c5",
+"w": "bandeira,",
+"ini_whisper": 225.753,
+"ini": 225.753,
+"fim": 226.213
+},
+{
+"cena": "c5",
+"w": "azul",
+"ini_whisper": 226.593,
+"ini": 226.593,
+"fim": 226.973
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 226.973,
+"ini": 226.973,
+"fim": 227.133
+},
+{
+"cena": "c5",
+"w": "branca,",
+"ini_whisper": 227.133,
+"ini": 227.133,
+"fim": 227.513
+},
+{
+"cena": "c5",
+"w": "com",
+"ini_whisper": 227.833,
+"ini": 227.833,
+"fim": 227.973
+},
+{
+"cena": "c5",
+"w": "arco",
+"ini_whisper": 227.973,
+"ini": 227.973,
+"fim": 228.253
+},
+{
+"cena": "c5",
+"w": "-íris,",
+"ini_whisper": 228.253,
+"ini": 228.173,
+"fim": 228.553
+},
+{
+"cena": "c5",
+"w": "sol",
+"ini_whisper": 229.053,
+"ini": 229.053,
+"fim": 229.173
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 229.173,
+"ini": 229.173,
+"fim": 229.373
+},
+{
+"cena": "c5",
+"w": "cruz.",
+"ini_whisper": 229.373,
+"ini": 229.383,
+"fim": 229.753
+},
+{
+"cena": "c5",
+"w": "A",
+"ini_whisper": 230.193,
+"ini": 230.133,
+"fim": 230.313
+},
+{
+"cena": "c5",
+"w": "República",
+"ini_whisper": 230.313,
+"ini": 230.313,
+"fim": 230.693
+},
+{
+"cena": "c5",
+"w": "durou",
+"ini_whisper": 230.693,
+"ini": 230.693,
+"fim": 231.153
+},
+{
+"cena": "c5",
+"w": "cerca",
+"ini_whisper": 231.153,
+"ini": 231.153,
+"fim": 231.433
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 231.433,
+"ini": 231.453,
+"fim": 231.673
+},
+{
+"cena": "c5",
+"w": "75",
+"ini_whisper": 231.673,
+"ini": 231.673,
+"fim": 232.393
+},
+{
+"cena": "c5",
+"w": "dias.",
+"ini_whisper": 232.393,
+"ini": 232.393,
+"fim": 232.833
+},
+{
+"cena": "c5",
+"w": "Seus",
+"ini_whisper": 233.333,
+"ini": 233.373,
+"fim": 233.713
+},
+{
+"cena": "c5",
+"w": "líderes",
+"ini_whisper": 233.713,
+"ini": 233.713,
+"fim": 234.153
+},
+{
+"cena": "c5",
+"w": "foram",
+"ini_whisper": 234.153,
+"ini": 234.153,
+"fim": 234.333
+},
+{
+"cena": "c5",
+"w": "presos",
+"ini_whisper": 234.333,
+"ini": 234.333,
+"fim": 234.813
+},
+{
+"cena": "c5",
+"w": "e",
+"ini_whisper": 234.813,
+"ini": 234.813,
+"fim": 235.273
+},
+{
+"cena": "c5",
+"w": "vários",
+"ini_whisper": 235.273,
+"ini": 235.163,
+"fim": 235.693
+},
+{
+"cena": "c5",
+"w": "executados.",
+"ini_whisper": 235.693,
+"ini": 235.693,
+"fim": 236.693
+},
+{
+"cena": "c5",
+"w": "Pouco",
+"ini_whisper": 237.253,
+"ini": 237.173,
+"fim": 237.533
+},
+{
+"cena": "c5",
+"w": "depois,",
+"ini_whisper": 237.533,
+"ini": 237.473,
+"fim": 237.893
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 238.453,
+"ini": 238.453,
+"fim": 238.453
+},
+{
+"cena": "c5",
+"w": "coroa",
+"ini_whisper": 238.453,
+"ini": 238.453,
+"fim": 238.773
+},
+{
+"cena": "c5",
+"w": "desmembrou",
+"ini_whisper": 238.773,
+"ini": 238.773,
+"fim": 239.293
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 239.293,
+"ini": 239.293,
+"fim": 239.433
+},
+{
+"cena": "c5",
+"w": "Pernambuco",
+"ini_whisper": 239.433,
+"ini": 239.433,
+"fim": 240.053
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 240.053,
+"ini": 240.023,
+"fim": 240.193
+},
+{
+"cena": "c5",
+"w": "comarca",
+"ini_whisper": 240.193,
+"ini": 240.203,
+"fim": 240.633
+},
+{
+"cena": "c5",
+"w": "das",
+"ini_whisper": 240.633,
+"ini": 240.573,
+"fim": 240.793
+},
+{
+"cena": "c5",
+"w": "Alagoas.",
+"ini_whisper": 240.793,
+"ini": 240.793,
+"fim": 241.373
+},
+{
+"cena": "c5",
+"w": "Sete",
+"ini_whisper": 242.013,
+"ini": 242.013,
+"fim": 242.373
+},
+{
+"cena": "c5",
+"w": "anos",
+"ini_whisper": 242.373,
+"ini": 242.343,
+"fim": 242.593
+},
+{
+"cena": "c5",
+"w": "mais",
+"ini_whisper": 242.593,
+"ini": 242.593,
+"fim": 242.813
+},
+{
+"cena": "c5",
+"w": "tarde,",
+"ini_whisper": 242.813,
+"ini": 242.813,
+"fim": 243.173
+},
+{
+"cena": "c5",
+"w": "Pernambuco",
+"ini_whisper": 243.633,
+"ini": 243.663,
+"fim": 244.113
+},
+{
+"cena": "c5",
+"w": "se",
+"ini_whisper": 244.113,
+"ini": 244.093,
+"fim": 244.293
+},
+{
+"cena": "c5",
+"w": "levanta",
+"ini_whisper": 244.293,
+"ini": 244.293,
+"fim": 244.673
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 244.673,
+"ini": 244.613,
+"fim": 244.793
+},
+{
+"cena": "c5",
+"w": "novo.",
+"ini_whisper": 244.793,
+"ini": 244.793,
+"fim": 245.073
+},
+{
+"cena": "c5",
+"w": "Em",
+"ini_whisper": 245.753,
+"ini": 245.773,
+"fim": 245.933
+},
+{
+"cena": "c5",
+"w": "1824,",
+"ini_whisper": 245.933,
+"ini": 245.933,
+"fim": 247.353
+},
+{
+"cena": "c5",
+"w": "contra",
+"ini_whisper": 248.013,
+"ini": 247.923,
+"fim": 248.213
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 248.213,
+"ini": 248.213,
+"fim": 248.413
+},
+{
+"cena": "c5",
+"w": "imperador",
+"ini_whisper": 248.413,
+"ini": 248.413,
+"fim": 248.953
+},
+{
+"cena": "c5",
+"w": "que",
+"ini_whisper": 248.953,
+"ini": 248.953,
+"fim": 249.113
+},
+{
+"cena": "c5",
+"w": "havia",
+"ini_whisper": 249.113,
+"ini": 249.063,
+"fim": 249.293
+},
+{
+"cena": "c5",
+"w": "fechado",
+"ini_whisper": 249.293,
+"ini": 249.293,
+"fim": 249.853
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 249.853,
+"ini": 249.853,
+"fim": 249.973
+},
+{
+"cena": "c5",
+"w": "Assembleia",
+"ini_whisper": 249.973,
+"ini": 249.973,
+"fim": 250.473
+},
+{
+"cena": "c5",
+"w": "Constituinte,",
+"ini_whisper": 250.473,
+"ini": 250.473,
+"fim": 251.173
+},
+{
+"cena": "c5",
+"w": "nasce",
+"ini_whisper": 251.673,
+"ini": 251.633,
+"fim": 251.973
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 251.973,
+"ini": 251.973,
+"fim": 252.073
+},
+{
+"cena": "c5",
+"w": "Confederação",
+"ini_whisper": 252.073,
+"ini": 252.093,
+"fim": 252.793
+},
+{
+"cena": "c5",
+"w": "do",
+"ini_whisper": 252.793,
+"ini": 252.793,
+"fim": 252.913
+},
+{
+"cena": "c5",
+"w": "Equador.",
+"ini_whisper": 252.913,
+"ini": 252.913,
+"fim": 253.313
+},
+{
+"cena": "c5",
+"w": "A",
+"ini_whisper": 253.873,
+"ini": 253.813,
+"fim": 253.993
+},
+{
+"cena": "c5",
+"w": "voz",
+"ini_whisper": 253.993,
+"ini": 253.993,
+"fim": 254.213
+},
+{
+"cena": "c5",
+"w": "mais",
+"ini_whisper": 254.213,
+"ini": 254.213,
+"fim": 254.573
+},
+{
+"cena": "c5",
+"w": "forte",
+"ini_whisper": 254.573,
+"ini": 254.573,
+"fim": 254.993
+},
+{
+"cena": "c5",
+"w": "do",
+"ini_whisper": 254.993,
+"ini": 254.993,
+"fim": 255.173
+},
+{
+"cena": "c5",
+"w": "movimento",
+"ini_whisper": 255.173,
+"ini": 255.173,
+"fim": 255.493
+},
+{
+"cena": "c5",
+"w": "é",
+"ini_whisper": 255.493,
+"ini": 255.493,
+"fim": 256.153
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 256.153,
+"ini": 256.063,
+"fim": 256.253
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 256.253,
+"ini": 256.253,
+"fim": 256.313
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 256.313,
+"ini": 256.313,
+"fim": 256.433
+},
+{
+"cena": "c5",
+"w": "frade,",
+"ini_whisper": 256.433,
+"ini": 256.433,
+"fim": 256.833
+},
+{
+"cena": "c5",
+"w": "Frey",
+"ini_whisper": 257.413,
+"ini": 257.383,
+"fim": 257.693
+},
+{
+"cena": "c5",
+"w": "Caneca.",
+"ini_whisper": 257.693,
+"ini": 257.683,
+"fim": 258.153
+},
+{
+"cena": "c5",
+"w": "Condenado",
+"ini_whisper": 258.793,
+"ini": 258.813,
+"fim": 259.313
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 259.313,
+"ini": 259.313,
+"fim": 259.413
+},
+{
+"cena": "c5",
+"w": "forca,",
+"ini_whisper": 259.413,
+"ini": 259.413,
+"fim": 259.873
+},
+{
+"cena": "c5",
+"w": "ele",
+"ini_whisper": 260.233,
+"ini": 260.173,
+"fim": 260.313
+},
+{
+"cena": "c5",
+"w": "não",
+"ini_whisper": 260.313,
+"ini": 260.313,
+"fim": 260.493
+},
+{
+"cena": "c5",
+"w": "encontrou",
+"ini_whisper": 260.493,
+"ini": 260.493,
+"fim": 260.993
+},
+{
+"cena": "c5",
+"w": "carrasco",
+"ini_whisper": 260.993,
+"ini": 260.993,
+"fim": 261.573
+},
+{
+"cena": "c5",
+"w": "que",
+"ini_whisper": 261.573,
+"ini": 261.523,
+"fim": 261.713
+},
+{
+"cena": "c5",
+"w": "aceitasse",
+"ini_whisper": 261.713,
+"ini": 261.713,
+"fim": 262.253
+},
+{
+"cena": "c5",
+"w": "enforcá",
+"ini_whisper": 262.253,
+"ini": 262.293,
+"fim": 262.793
+},
+{
+"cena": "c5",
+"w": "-lo.",
+"ini_whisper": 262.793,
+"ini": 262.793,
+"fim": 262.913
+},
+{
+"cena": "c5",
+"w": "Em",
+"ini_whisper": 263.473,
+"ini": 263.473,
+"fim": 263.613
+},
+{
+"cena": "c5",
+"w": "13",
+"ini_whisper": 263.613,
+"ini": 263.613,
+"fim": 263.953
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 263.953,
+"ini": 263.953,
+"fim": 264.193
+},
+{
+"cena": "c5",
+"w": "janeiro",
+"ini_whisper": 264.193,
+"ini": 264.193,
+"fim": 264.633
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 264.633,
+"ini": 264.633,
+"fim": 264.793
+},
+{
+"cena": "c5",
+"w": "1825,",
+"ini_whisper": 264.793,
+"ini": 264.793,
+"fim": 266.273
+},
+{
+"cena": "c5",
+"w": "Frey",
+"ini_whisper": 266.873,
+"ini": 266.803,
+"fim": 267.133
+},
+{
+"cena": "c5",
+"w": "Caneca",
+"ini_whisper": 267.133,
+"ini": 267.123,
+"fim": 267.533
+},
+{
+"cena": "c5",
+"w": "foi",
+"ini_whisper": 267.533,
+"ini": 267.493,
+"fim": 267.733
+},
+{
+"cena": "c5",
+"w": "fusilado.",
+"ini_whisper": 267.733,
+"ini": 267.663,
+"fim": 268.373
+},
+{
+"cena": "c5",
+"w": "Quase",
+"ini_whisper": 268.933,
+"ini": 268.833,
+"fim": 269.193
+},
+{
+"cena": "c5",
+"w": "um",
+"ini_whisper": 269.193,
+"ini": 269.193,
+"fim": 269.313
+},
+{
+"cena": "c5",
+"w": "século",
+"ini_whisper": 269.313,
+"ini": 269.313,
+"fim": 269.673
+},
+{
+"cena": "c5",
+"w": "depois,",
+"ini_whisper": 269.673,
+"ini": 269.583,
+"fim": 270.033
+},
+{
+"cena": "c5",
+"w": "em",
+"ini_whisper": 270.593,
+"ini": 270.553,
+"fim": 270.713
+},
+{
+"cena": "c5",
+"w": "1917,",
+"ini_whisper": 270.713,
+"ini": 270.713,
+"fim": 271.873
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 272.873,
+"ini": 272.833,
+"fim": 272.933
+},
+{
+"cena": "c5",
+"w": "bandeira",
+"ini_whisper": 272.933,
+"ini": 272.833,
+"fim": 273.393
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 273.393,
+"ini": 273.393,
+"fim": 273.553
+},
+{
+"cena": "c5",
+"w": "1817",
+"ini_whisper": 273.553,
+"ini": 273.553,
+"fim": 275.193
+},
+{
+"cena": "c5",
+"w": "se",
+"ini_whisper": 275.193,
+"ini": 275.213,
+"fim": 275.733
+},
+{
+"cena": "c5",
+"w": "tornou",
+"ini_whisper": 275.733,
+"ini": 275.733,
+"fim": 276.113
+},
+{
+"cena": "c5",
+"w": "a",
+"ini_whisper": 276.113,
+"ini": 276.113,
+"fim": 276.213
+},
+{
+"cena": "c5",
+"w": "bandeira",
+"ini_whisper": 276.213,
+"ini": 276.213,
+"fim": 276.593
+},
+{
+"cena": "c5",
+"w": "oficial",
+"ini_whisper": 276.593,
+"ini": 276.593,
+"fim": 277.193
+},
+{
+"cena": "c5",
+"w": "de",
+"ini_whisper": 277.193,
+"ini": 277.103,
+"fim": 277.413
+},
+{
+"cena": "c5",
+"w": "Pernambuco.",
+"ini_whisper": 277.413,
+"ini": 277.413,
+"fim": 278.053
+},
+{
+"cena": "c6",
+"w": "Mas",
+"ini_whisper": 279.567,
+"ini": 279.567,
+"fim": 279.827
+},
+{
+"cena": "c6",
+"w": "Pernambuco",
+"ini_whisper": 279.827,
+"ini": 279.827,
+"fim": 280.567
+},
+{
+"cena": "c6",
+"w": "não",
+"ini_whisper": 280.567,
+"ini": 280.497,
+"fim": 280.847
+},
+{
+"cena": "c6",
+"w": "se",
+"ini_whisper": 280.847,
+"ini": 280.847,
+"fim": 281.007
+},
+{
+"cena": "c6",
+"w": "explica",
+"ini_whisper": 281.007,
+"ini": 280.977,
+"fim": 281.447
+},
+{
+"cena": "c6",
+"w": "só",
+"ini_whisper": 281.447,
+"ini": 281.377,
+"fim": 281.747
+},
+{
+"cena": "c6",
+"w": "por",
+"ini_whisper": 281.747,
+"ini": 281.747,
+"fim": 281.967
+},
+{
+"cena": "c6",
+"w": "guerras.",
+"ini_whisper": 281.967,
+"ini": 281.967,
+"fim": 282.387
+},
+{
+"cena": "c6",
+"w": "Em",
+"ini_whisper": 283.007,
+"ini": 283.007,
+"fim": 283.287
+},
+{
+"cena": "c6",
+"w": "1907,",
+"ini_whisper": 283.287,
+"ini": 283.287,
+"fim": 284.407
+},
+{
+"cena": "c6",
+"w": "um",
+"ini_whisper": 285.047,
+"ini": 285.057,
+"fim": 285.167
+},
+{
+"cena": "c6",
+"w": "jornal",
+"ini_whisper": 285.167,
+"ini": 285.057,
+"fim": 285.547
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 285.547,
+"ini": 285.547,
+"fim": 285.667
+},
+{
+"cena": "c6",
+"w": "Recife",
+"ini_whisper": 285.667,
+"ini": 285.667,
+"fim": 286.187
+},
+{
+"cena": "c6",
+"w": "imprime",
+"ini_whisper": 286.187,
+"ini": 286.177,
+"fim": 286.747
+},
+{
+"cena": "c6",
+"w": "uma",
+"ini_whisper": 286.747,
+"ini": 286.747,
+"fim": 286.927
+},
+{
+"cena": "c6",
+"w": "palavra",
+"ini_whisper": 286.927,
+"ini": 286.927,
+"fim": 287.247
+},
+{
+"cena": "c6",
+"w": "nova,",
+"ini_whisper": 287.247,
+"ini": 287.247,
+"fim": 287.607
+},
+{
+"cena": "c6",
+"w": "frevo.",
+"ini_whisper": 288.187,
+"ini": 288.187,
+"fim": 288.667
+},
+{
+"cena": "c6",
+"w": "Vem",
+"ini_whisper": 289.447,
+"ini": 289.397,
+"fim": 289.647
+},
+{
+"cena": "c6",
+"w": "de",
+"ini_whisper": 289.647,
+"ini": 289.647,
+"fim": 289.807
+},
+{
+"cena": "c6",
+"w": "frever,",
+"ini_whisper": 289.807,
+"ini": 289.807,
+"fim": 290.367
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 290.787,
+"ini": 290.767,
+"fim": 290.887
+},
+{
+"cena": "c6",
+"w": "jeito",
+"ini_whisper": 290.887,
+"ini": 290.767,
+"fim": 291.087
+},
+{
+"cena": "c6",
+"w": "popular",
+"ini_whisper": 291.087,
+"ini": 291.087,
+"fim": 291.567
+},
+{
+"cena": "c6",
+"w": "de",
+"ini_whisper": 291.567,
+"ini": 291.567,
+"fim": 291.807
+},
+{
+"cena": "c6",
+"w": "dizer",
+"ini_whisper": 291.807,
+"ini": 291.807,
+"fim": 292.167
+},
+{
+"cena": "c6",
+"w": "ferver.",
+"ini_whisper": 292.167,
+"ini": 292.167,
+"fim": 292.707
+},
+{
+"cena": "c6",
+"w": "E",
+"ini_whisper": 293.427,
+"ini": 293.427,
+"fim": 293.607
+},
+{
+"cena": "c6",
+"w": "é",
+"ini_whisper": 293.607,
+"ini": 293.487,
+"fim": 293.707
+},
+{
+"cena": "c6",
+"w": "isso",
+"ini_whisper": 293.707,
+"ini": 293.707,
+"fim": 293.907
+},
+{
+"cena": "c6",
+"w": "que",
+"ini_whisper": 293.907,
+"ini": 293.907,
+"fim": 294.067
+},
+{
+"cena": "c6",
+"w": "acontece",
+"ini_whisper": 294.067,
+"ini": 294.067,
+"fim": 294.527
+},
+{
+"cena": "c6",
+"w": "nas",
+"ini_whisper": 294.527,
+"ini": 294.527,
+"fim": 294.807
+},
+{
+"cena": "c6",
+"w": "ladeiras",
+"ini_whisper": 294.807,
+"ini": 294.807,
+"fim": 295.247
+},
+{
+"cena": "c6",
+"w": "de",
+"ini_whisper": 295.247,
+"ini": 295.247,
+"fim": 295.407
+},
+{
+"cena": "c6",
+"w": "Olinda",
+"ini_whisper": 295.407,
+"ini": 295.407,
+"fim": 295.767
+},
+{
+"cena": "c6",
+"w": "e",
+"ini_whisper": 295.767,
+"ini": 295.767,
+"fim": 296.187
+},
+{
+"cena": "c6",
+"w": "nas",
+"ini_whisper": 296.187,
+"ini": 296.107,
+"fim": 296.347
+},
+{
+"cena": "c6",
+"w": "ruas",
+"ini_whisper": 296.347,
+"ini": 296.347,
+"fim": 296.647
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 296.647,
+"ini": 296.647,
+"fim": 296.767
+},
+{
+"cena": "c6",
+"w": "Recife",
+"ini_whisper": 296.767,
+"ini": 296.697,
+"fim": 297.227
+},
+{
+"cena": "c6",
+"w": "a",
+"ini_whisper": 297.227,
+"ini": 297.247,
+"fim": 297.427
+},
+{
+"cena": "c6",
+"w": "cada",
+"ini_whisper": 297.427,
+"ini": 297.457,
+"fim": 297.687
+},
+{
+"cena": "c6",
+"w": "carnaval.",
+"ini_whisper": 297.687,
+"ini": 297.687,
+"fim": 298.267
+},
+{
+"cena": "c6",
+"w": "Em",
+"ini_whisper": 298.987,
+"ini": 298.987,
+"fim": 299.267
+},
+{
+"cena": "c6",
+"w": "2012,",
+"ini_whisper": 299.267,
+"ini": 299.147,
+"fim": 299.907
+},
+{
+"cena": "c6",
+"w": "Alnesco",
+"ini_whisper": 300.387,
+"ini": 300.387,
+"fim": 301.047
+},
+{
+"cena": "c6",
+"w": "reconheceu",
+"ini_whisper": 301.047,
+"ini": 300.987,
+"fim": 301.607
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 301.607,
+"ini": 301.607,
+"fim": 301.747
+},
+{
+"cena": "c6",
+"w": "frevo",
+"ini_whisper": 301.747,
+"ini": 301.747,
+"fim": 302.127
+},
+{
+"cena": "c6",
+"w": "como",
+"ini_whisper": 302.127,
+"ini": 302.127,
+"fim": 302.327
+},
+{
+"cena": "c6",
+"w": "patrimônio",
+"ini_whisper": 302.327,
+"ini": 302.327,
+"fim": 303.027
+},
+{
+"cena": "c6",
+"w": "cultural",
+"ini_whisper": 303.027,
+"ini": 303.027,
+"fim": 303.447
+},
+{
+"cena": "c6",
+"w": "e",
+"ini_whisper": 303.447,
+"ini": 303.447,
+"fim": 303.827
+},
+{
+"cena": "c6",
+"w": "material",
+"ini_whisper": 303.827,
+"ini": 303.827,
+"fim": 304.267
+},
+{
+"cena": "c6",
+"w": "da",
+"ini_whisper": 304.267,
+"ini": 304.267,
+"fim": 304.407
+},
+{
+"cena": "c6",
+"w": "humanidade.",
+"ini_whisper": 304.407,
+"ini": 304.407,
+"fim": 305.027
+},
+{
+"cena": "c6",
+"w": "Nos",
+"ini_whisper": 305.607,
+"ini": 305.557,
+"fim": 305.967
+},
+{
+"cena": "c6",
+"w": "tambores",
+"ini_whisper": 305.967,
+"ini": 305.967,
+"fim": 306.427
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 306.427,
+"ini": 306.427,
+"fim": 306.607
+},
+{
+"cena": "c6",
+"w": "Maracatu,",
+"ini_whisper": 306.607,
+"ini": 306.607,
+"fim": 307.127
+},
+{
+"cena": "c6",
+"w": "a",
+"ini_whisper": 307.587,
+"ini": 307.587,
+"fim": 307.707
+},
+{
+"cena": "c6",
+"w": "herança",
+"ini_whisper": 307.707,
+"ini": 307.707,
+"fim": 307.967
+},
+{
+"cena": "c6",
+"w": "africana",
+"ini_whisper": 307.967,
+"ini": 307.967,
+"fim": 308.467
+},
+{
+"cena": "c6",
+"w": "desfila",
+"ini_whisper": 308.467,
+"ini": 308.467,
+"fim": 308.947
+},
+{
+"cena": "c6",
+"w": "com",
+"ini_whisper": 308.947,
+"ini": 308.947,
+"fim": 309.127
+},
+{
+"cena": "c6",
+"w": "reis,",
+"ini_whisper": 309.127,
+"ini": 309.027,
+"fim": 309.627
+},
+{
+"cena": "c6",
+"w": "rainhas",
+"ini_whisper": 309.927,
+"ini": 309.857,
+"fim": 310.447
+},
+{
+"cena": "c6",
+"w": "e",
+"ini_whisper": 310.447,
+"ini": 310.447,
+"fim": 310.827
+},
+{
+"cena": "c6",
+"w": "alfaias.",
+"ini_whisper": 310.827,
+"ini": 310.827,
+"fim": 311.407
+},
+{
+"cena": "c6",
+"w": "No",
+"ini_whisper": 311.967,
+"ini": 311.967,
+"fim": 312.207
+},
+{
+"cena": "c6",
+"w": "Agresti,",
+"ini_whisper": 312.207,
+"ini": 312.207,
+"fim": 312.947
+},
+{
+"cena": "c6",
+"w": "Karuaru",
+"ini_whisper": 313.107,
+"ini": 313.037,
+"fim": 313.447
+},
+{
+"cena": "c6",
+"w": "transforma",
+"ini_whisper": 313.447,
+"ini": 313.447,
+"fim": 314.167
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 314.167,
+"ini": 314.167,
+"fim": 314.287
+},
+{
+"cena": "c6",
+"w": "São",
+"ini_whisper": 314.287,
+"ini": 314.287,
+"fim": 314.447
+},
+{
+"cena": "c6",
+"w": "João",
+"ini_whisper": 314.447,
+"ini": 314.447,
+"fim": 314.707
+},
+{
+"cena": "c6",
+"w": "em",
+"ini_whisper": 314.707,
+"ini": 314.707,
+"fim": 315.187
+},
+{
+"cena": "c6",
+"w": "uma",
+"ini_whisper": 315.187,
+"ini": 315.067,
+"fim": 315.347
+},
+{
+"cena": "c6",
+"w": "das",
+"ini_whisper": 315.347,
+"ini": 315.347,
+"fim": 315.507
+},
+{
+"cena": "c6",
+"w": "maiores",
+"ini_whisper": 315.507,
+"ini": 315.507,
+"fim": 315.947
+},
+{
+"cena": "c6",
+"w": "festas",
+"ini_whisper": 315.947,
+"ini": 315.897,
+"fim": 316.447
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 316.447,
+"ini": 316.377,
+"fim": 316.627
+},
+{
+"cena": "c6",
+"w": "país.",
+"ini_whisper": 316.627,
+"ini": 316.627,
+"fim": 316.907
+},
+{
+"cena": "c6",
+"w": "Ali",
+"ini_whisper": 317.827,
+"ini": 317.837,
+"fim": 318.087
+},
+{
+"cena": "c6",
+"w": "perto,",
+"ini_whisper": 318.087,
+"ini": 318.087,
+"fim": 318.447
+},
+{
+"cena": "c6",
+"w": "no",
+"ini_whisper": 318.867,
+"ini": 318.817,
+"fim": 318.967
+},
+{
+"cena": "c6",
+"w": "Alto",
+"ini_whisper": 318.967,
+"ini": 318.967,
+"fim": 319.207
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 319.207,
+"ini": 319.207,
+"fim": 319.367
+},
+{
+"cena": "c6",
+"w": "Moura,",
+"ini_whisper": 319.367,
+"ini": 319.367,
+"fim": 319.747
+},
+{
+"cena": "c6",
+"w": "mestres",
+"ini_whisper": 320.147,
+"ini": 320.147,
+"fim": 320.567
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 320.567,
+"ini": 320.567,
+"fim": 320.727
+},
+{
+"cena": "c6",
+"w": "barro",
+"ini_whisper": 320.727,
+"ini": 320.727,
+"fim": 321.127
+},
+{
+"cena": "c6",
+"w": "moldam",
+"ini_whisper": 321.127,
+"ini": 321.127,
+"fim": 321.587
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 321.587,
+"ini": 321.587,
+"fim": 321.727
+},
+{
+"cena": "c6",
+"w": "cotidiano",
+"ini_whisper": 321.727,
+"ini": 321.727,
+"fim": 322.307
+},
+{
+"cena": "c6",
+"w": "do",
+"ini_whisper": 322.307,
+"ini": 322.307,
+"fim": 322.447
+},
+{
+"cena": "c6",
+"w": "sertanejo.",
+"ini_whisper": 322.447,
+"ini": 322.447,
+"fim": 323.107
+},
+{
+"cena": "c6",
+"w": "Do",
+"ini_whisper": 323.667,
+"ini": 323.677,
+"fim": 323.807
+},
+{
+"cena": "c6",
+"w": "sertão",
+"ini_whisper": 323.807,
+"ini": 323.807,
+"fim": 324.267
+},
+{
+"cena": "c6",
+"w": "veio",
+"ini_whisper": 324.267,
+"ini": 324.267,
+"fim": 324.487
+},
+{
+"cena": "c6",
+"w": "a",
+"ini_whisper": 324.487,
+"ini": 324.487,
+"fim": 324.647
+},
+{
+"cena": "c6",
+"w": "voz",
+"ini_whisper": 324.647,
+"ini": 324.647,
+"fim": 324.907
+},
+{
+"cena": "c6",
+"w": "que",
+"ini_whisper": 324.907,
+"ini": 324.907,
+"fim": 325.107
+},
+{
+"cena": "c6",
+"w": "levou",
+"ini_whisper": 325.107,
+"ini": 325.037,
+"fim": 325.427
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 325.427,
+"ini": 325.427,
+"fim": 325.567
+},
+{
+"cena": "c6",
+"w": "forró",
+"ini_whisper": 325.567,
+"ini": 325.567,
+"fim": 325.927
+},
+{
+"cena": "c6",
+"w": "ao",
+"ini_whisper": 325.927,
+"ini": 325.927,
+"fim": 326.187
+},
+{
+"cena": "c6",
+"w": "Brasil",
+"ini_whisper": 326.187,
+"ini": 326.187,
+"fim": 326.487
+},
+{
+"cena": "c6",
+"w": "inteiro,",
+"ini_whisper": 326.487,
+"ini": 326.487,
+"fim": 326.887
+},
+{
+"cena": "c6",
+"w": "Luiz",
+"ini_whisper": 327.467,
+"ini": 327.467,
+"fim": 327.867
+},
+{
+"cena": "c6",
+"w": "Gonzaga,",
+"ini_whisper": 327.867,
+"ini": 327.867,
+"fim": 328.387
+},
+{
+"cena": "c6",
+"w": "nascido",
+"ini_whisper": 328.727,
+"ini": 328.657,
+"fim": 329.207
+},
+{
+"cena": "c6",
+"w": "em",
+"ini_whisper": 329.207,
+"ini": 329.207,
+"fim": 329.347
+},
+{
+"cena": "c6",
+"w": "Echu.",
+"ini_whisper": 329.347,
+"ini": 329.347,
+"fim": 329.567
+},
+{
+"cena": "c6",
+"w": "E",
+"ini_whisper": 329.567,
+"ini": 329.567,
+"fim": 330.407
+},
+{
+"cena": "c6",
+"w": "nos",
+"ini_whisper": 330.407,
+"ini": 330.297,
+"fim": 330.587
+},
+{
+"cena": "c6",
+"w": "anos",
+"ini_whisper": 330.587,
+"ini": 330.587,
+"fim": 330.787
+},
+{
+"cena": "c6",
+"w": "90,",
+"ini_whisper": 330.787,
+"ini": 330.787,
+"fim": 331.287
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 331.747,
+"ini": 331.677,
+"fim": 331.787
+},
+{
+"cena": "c6",
+"w": "Recife",
+"ini_whisper": 331.787,
+"ini": 331.677,
+"fim": 332.147
+},
+{
+"cena": "c6",
+"w": "misturou",
+"ini_whisper": 332.147,
+"ini": 332.147,
+"fim": 332.607
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 332.607,
+"ini": 332.607,
+"fim": 332.667
+},
+{
+"cena": "c6",
+"w": "Maracatu",
+"ini_whisper": 332.667,
+"ini": 332.667,
+"fim": 333.167
+},
+{
+"cena": "c6",
+"w": "com",
+"ini_whisper": 333.167,
+"ini": 333.167,
+"fim": 333.327
+},
+{
+"cena": "c6",
+"w": "guitarra",
+"ini_whisper": 333.327,
+"ini": 333.227,
+"fim": 334.067
+},
+{
+"cena": "c6",
+"w": "e",
+"ini_whisper": 334.067,
+"ini": 334.097,
+"fim": 334.207
+},
+{
+"cena": "c6",
+"w": "criou",
+"ini_whisper": 334.207,
+"ini": 334.097,
+"fim": 334.567
+},
+{
+"cena": "c6",
+"w": "o",
+"ini_whisper": 334.567,
+"ini": 334.567,
+"fim": 334.727
+},
+{
+"cena": "c6",
+"w": "Mangebit.",
+"ini_whisper": 334.727,
+"ini": 334.637,
+"fim": 335.447
+},
+{
+"cena": "c6",
+"w": "Em",
+"ini_whisper": 336.067,
+"ini": 336.057,
+"fim": 336.347
+},
+{
+"cena": "c6",
+"w": "Pernambuco,",
+"ini_whisper": 336.347,
+"ini": 336.227,
+"fim": 337.047
+},
+{
+"cena": "c6",
+"w": "tradição",
+"ini_whisper": 337.307,
+"ini": 337.307,
+"fim": 337.847
+},
+{
+"cena": "c6",
+"w": "não",
+"ini_whisper": 337.847,
+"ini": 337.847,
+"fim": 338.067
+},
+{
+"cena": "c6",
+"w": "é",
+"ini_whisper": 338.067,
+"ini": 338.067,
+"fim": 338.247
+},
+{
+"cena": "c6",
+"w": "peça",
+"ini_whisper": 338.247,
+"ini": 338.247,
+"fim": 338.587
+},
+{
+"cena": "c6",
+"w": "de",
+"ini_whisper": 338.587,
+"ini": 338.587,
+"fim": 338.707
+},
+{
+"cena": "c6",
+"w": "museu.",
+"ini_whisper": 338.707,
+"ini": 338.707,
+"fim": 339.227
+},
+{
+"cena": "c6",
+"w": "É",
+"ini_whisper": 339.647,
+"ini": 339.647,
+"fim": 339.807
+},
+{
+"cena": "c6",
+"w": "coisa",
+"ini_whisper": 339.807,
+"ini": 339.697,
+"fim": 340.047
+},
+{
+"cena": "c6",
+"w": "viva",
+"ini_whisper": 340.047,
+"ini": 340.047,
+"fim": 340.567
+},
+{
+"cena": "c6",
+"w": "que",
+"ini_whisper": 340.567,
+"ini": 340.567,
+"fim": 340.927
+},
+{
+"cena": "c6",
+"w": "se",
+"ini_whisper": 340.927,
+"ini": 340.847,
+"fim": 341.087
+},
+{
+"cena": "c6",
+"w": "reinventa.",
+"ini_whisper": 341.087,
+"ini": 341.087,
+"fim": 341.787
+},
+{
+"cena": "c7",
+"w": "No",
+"ini_whisper": 343.3,
+"ini": 343.33,
+"fim": 343.48
+},
+{
+"cena": "c7",
+"w": "mapa,",
+"ini_whisper": 343.48,
+"ini": 343.48,
+"fim": 343.78
+},
+{
+"cena": "c7",
+"w": "Pernambuco",
+"ini_whisper": 344.28,
+"ini": 344.31,
+"fim": 344.86
+},
+{
+"cena": "c7",
+"w": "é",
+"ini_whisper": 344.86,
+"ini": 344.83,
+"fim": 344.96
+},
+{
+"cena": "c7",
+"w": "uma",
+"ini_whisper": 344.96,
+"ini": 344.96,
+"fim": 345.08
+},
+{
+"cena": "c7",
+"w": "faixa",
+"ini_whisper": 345.08,
+"ini": 345.08,
+"fim": 345.46
+},
+{
+"cena": "c7",
+"w": "estreita",
+"ini_whisper": 345.46,
+"ini": 345.46,
+"fim": 346.0
+},
+{
+"cena": "c7",
+"w": "e",
+"ini_whisper": 346.0,
+"ini": 345.97,
+"fim": 346.1
+},
+{
+"cena": "c7",
+"w": "comprida,",
+"ini_whisper": 346.1,
+"ini": 346.1,
+"fim": 346.58
+},
+{
+"cena": "c7",
+"w": "que",
+"ini_whisper": 346.94,
+"ini": 346.97,
+"fim": 347.06
+},
+{
+"cena": "c7",
+"w": "vai",
+"ini_whisper": 347.06,
+"ini": 346.97,
+"fim": 347.22
+},
+{
+"cena": "c7",
+"w": "do",
+"ini_whisper": 347.22,
+"ini": 347.22,
+"fim": 347.36
+},
+{
+"cena": "c7",
+"w": "mar",
+"ini_whisper": 347.36,
+"ini": 347.36,
+"fim": 347.62
+},
+{
+"cena": "c7",
+"w": "até",
+"ini_whisper": 347.62,
+"ini": 347.62,
+"fim": 347.98
+},
+{
+"cena": "c7",
+"w": "o",
+"ini_whisper": 347.98,
+"ini": 347.98,
+"fim": 348.14
+},
+{
+"cena": "c7",
+"w": "coração",
+"ini_whisper": 348.14,
+"ini": 348.12,
+"fim": 348.48
+},
+{
+"cena": "c7",
+"w": "do",
+"ini_whisper": 348.48,
+"ini": 348.48,
+"fim": 348.64
+},
+{
+"cena": "c7",
+"w": "Nordeste.",
+"ini_whisper": 348.64,
+"ini": 348.64,
+"fim": 349.18
+},
+{
+"cena": "c7",
+"w": "No",
+"ini_whisper": 349.88,
+"ini": 349.9,
+"fim": 350.06
+},
+{
+"cena": "c7",
+"w": "litoral,",
+"ini_whisper": 350.06,
+"ini": 350.06,
+"fim": 350.58
+},
+{
+"cena": "c7",
+"w": "o",
+"ini_whisper": 350.96,
+"ini": 350.96,
+"fim": 351.06
+},
+{
+"cena": "c7",
+"w": "Recife",
+"ini_whisper": 351.06,
+"ini": 350.96,
+"fim": 351.42
+},
+{
+"cena": "c7",
+"w": "nasce",
+"ini_whisper": 351.42,
+"ini": 351.42,
+"fim": 351.8
+},
+{
+"cena": "c7",
+"w": "entre",
+"ini_whisper": 351.8,
+"ini": 351.8,
+"fim": 352.0
+},
+{
+"cena": "c7",
+"w": "rios,",
+"ini_whisper": 352.0,
+"ini": 351.94,
+"fim": 352.38
+},
+{
+"cena": "c7",
+"w": "pontes",
+"ini_whisper": 352.74,
+"ini": 352.67,
+"fim": 353.22
+},
+{
+"cena": "c7",
+"w": "e",
+"ini_whisper": 353.22,
+"ini": 353.22,
+"fim": 353.52
+},
+{
+"cena": "c7",
+"w": "arrecifes.",
+"ini_whisper": 353.52,
+"ini": 353.43,
+"fim": 354.22
+},
+{
+"cena": "c7",
+"w": "O",
+"ini_whisper": 354.86,
+"ini": 354.85,
+"fim": 354.96
+},
+{
+"cena": "c7",
+"w": "nome",
+"ini_whisper": 354.96,
+"ini": 354.85,
+"fim": 355.2
+},
+{
+"cena": "c7",
+"w": "da",
+"ini_whisper": 355.2,
+"ini": 355.2,
+"fim": 355.36
+},
+{
+"cena": "c7",
+"w": "cidade",
+"ini_whisper": 355.36,
+"ini": 355.36,
+"fim": 355.7
+},
+{
+"cena": "c7",
+"w": "vem",
+"ini_whisper": 355.7,
+"ini": 355.7,
+"fim": 355.96
+},
+{
+"cena": "c7",
+"w": "deles.",
+"ini_whisper": 355.96,
+"ini": 355.96,
+"fim": 356.26
+},
+{
+"cena": "c7",
+"w": "A",
+"ini_whisper": 356.98,
+"ini": 356.98,
+"fim": 357.2
+},
+{
+"cena": "c7",
+"w": "mais",
+"ini_whisper": 357.2,
+"ini": 357.09,
+"fim": 357.38
+},
+{
+"cena": "c7",
+"w": "de",
+"ini_whisper": 357.38,
+"ini": 357.38,
+"fim": 357.54
+},
+{
+"cena": "c7",
+"w": "500",
+"ini_whisper": 357.54,
+"ini": 357.54,
+"fim": 357.94
+},
+{
+"cena": "c7",
+"w": "quilômetros",
+"ini_whisper": 357.94,
+"ini": 357.96,
+"fim": 358.62
+},
+{
+"cena": "c7",
+"w": "da",
+"ini_whisper": 358.62,
+"ini": 358.56,
+"fim": 358.86
+},
+{
+"cena": "c7",
+"w": "costa",
+"ini_whisper": 358.86,
+"ini": 358.86,
+"fim": 359.38
+},
+{
+"cena": "c7",
+"w": "fica",
+"ini_whisper": 359.38,
+"ini": 359.38,
+"fim": 359.82
+},
+{
+"cena": "c7",
+"w": "Fernando",
+"ini_whisper": 359.82,
+"ini": 359.8,
+"fim": 360.28
+},
+{
+"cena": "c7",
+"w": "de",
+"ini_whisper": 360.28,
+"ini": 360.28,
+"fim": 360.52
+},
+{
+"cena": "c7",
+"w": "Noronha,",
+"ini_whisper": 360.52,
+"ini": 360.52,
+"fim": 361.02
+},
+{
+"cena": "c7",
+"w": "patrimônio",
+"ini_whisper": 361.36,
+"ini": 361.36,
+"fim": 361.96
+},
+{
+"cena": "c7",
+"w": "natural",
+"ini_whisper": 361.96,
+"ini": 361.96,
+"fim": 362.42
+},
+{
+"cena": "c7",
+"w": "da",
+"ini_whisper": 362.42,
+"ini": 362.42,
+"fim": 362.6
+},
+{
+"cena": "c7",
+"w": "humanidade.",
+"ini_whisper": 362.6,
+"ini": 362.6,
+"fim": 363.18
+},
+{
+"cena": "c7",
+"w": "Rumo",
+"ini_whisper": 363.82,
+"ini": 363.82,
+"fim": 364.24
+},
+{
+"cena": "c7",
+"w": "ao",
+"ini_whisper": 364.24,
+"ini": 364.24,
+"fim": 364.32
+},
+{
+"cena": "c7",
+"w": "interior,",
+"ini_whisper": 364.32,
+"ini": 364.32,
+"fim": 364.64
+},
+{
+"cena": "c7",
+"w": "a",
+"ini_whisper": 365.24,
+"ini": 365.21,
+"fim": 365.32
+},
+{
+"cena": "c7",
+"w": "zona",
+"ini_whisper": 365.32,
+"ini": 365.21,
+"fim": 365.58
+},
+{
+"cena": "c7",
+"w": "da",
+"ini_whisper": 365.58,
+"ini": 365.58,
+"fim": 365.78
+},
+{
+"cena": "c7",
+"w": "mata",
+"ini_whisper": 365.78,
+"ini": 365.78,
+"fim": 366.06
+},
+{
+"cena": "c7",
+"w": "ainda",
+"ini_whisper": 366.06,
+"ini": 366.05,
+"fim": 366.3
+},
+{
+"cena": "c7",
+"w": "guarda",
+"ini_whisper": 366.3,
+"ini": 366.3,
+"fim": 366.74
+},
+{
+"cena": "c7",
+"w": "os",
+"ini_whisper": 366.74,
+"ini": 366.74,
+"fim": 366.86
+},
+{
+"cena": "c7",
+"w": "canaviais.",
+"ini_whisper": 366.86,
+"ini": 366.88,
+"fim": 367.42
+},
+{
+"cena": "c7",
+"w": "No",
+"ini_whisper": 368.1,
+"ini": 368.12,
+"fim": 368.28
+},
+{
+"cena": "c7",
+"w": "Agrest,",
+"ini_whisper": 368.28,
+"ini": 368.28,
+"fim": 368.62
+},
+{
+"cena": "c7",
+"w": "as",
+"ini_whisper": 369.02,
+"ini": 368.98,
+"fim": 369.34
+},
+{
+"cena": "c7",
+"w": "feiras",
+"ini_whisper": 369.34,
+"ini": 369.34,
+"fim": 369.6
+},
+{
+"cena": "c7",
+"w": "ditam",
+"ini_whisper": 369.6,
+"ini": 369.6,
+"fim": 370.04
+},
+{
+"cena": "c7",
+"w": "o",
+"ini_whisper": 370.04,
+"ini": 369.95,
+"fim": 370.2
+},
+{
+"cena": "c7",
+"w": "ritmo",
+"ini_whisper": 370.2,
+"ini": 370.2,
+"fim": 370.56
+},
+{
+"cena": "c7",
+"w": "das",
+"ini_whisper": 370.56,
+"ini": 370.56,
+"fim": 370.72
+},
+{
+"cena": "c7",
+"w": "cidades.",
+"ini_whisper": 370.72,
+"ini": 370.72,
+"fim": 371.16
+},
+{
+"cena": "c7",
+"w": "No",
+"ini_whisper": 371.78,
+"ini": 371.68,
+"fim": 372.12
+},
+{
+"cena": "c7",
+"w": "sertão,",
+"ini_whisper": 372.12,
+"ini": 372.12,
+"fim": 372.6
+},
+{
+"cena": "c7",
+"w": "a",
+"ini_whisper": 372.9,
+"ini": 372.85,
+"fim": 372.96
+},
+{
+"cena": "c7",
+"w": "Caatinga,",
+"ini_whisper": 372.96,
+"ini": 372.85,
+"fim": 373.6
+},
+{
+"cena": "c7",
+"w": "um",
+"ini_whisper": 374.0,
+"ini": 374.0,
+"fim": 374.16
+},
+{
+"cena": "c7",
+"w": "bioma",
+"ini_whisper": 374.16,
+"ini": 374.05,
+"fim": 374.5
+},
+{
+"cena": "c7",
+"w": "que",
+"ini_whisper": 374.5,
+"ini": 374.5,
+"fim": 374.68
+},
+{
+"cena": "c7",
+"w": "só",
+"ini_whisper": 374.68,
+"ini": 374.6,
+"fim": 374.86
+},
+{
+"cena": "c7",
+"w": "existe",
+"ini_whisper": 374.86,
+"ini": 374.79,
+"fim": 375.18
+},
+{
+"cena": "c7",
+"w": "no",
+"ini_whisper": 375.18,
+"ini": 375.18,
+"fim": 375.4
+},
+{
+"cena": "c7",
+"w": "Brasil,",
+"ini_whisper": 375.4,
+"ini": 375.4,
+"fim": 375.76
+},
+{
+"cena": "c7",
+"w": "resiste",
+"ini_whisper": 376.16,
+"ini": 376.14,
+"fim": 376.62
+},
+{
+"cena": "c7",
+"w": "ao",
+"ini_whisper": 376.62,
+"ini": 376.56,
+"fim": 376.7
+},
+{
+"cena": "c7",
+"w": "sol",
+"ini_whisper": 376.7,
+"ini": 376.7,
+"fim": 377.04
+},
+{
+"cena": "c7",
+"w": "e",
+"ini_whisper": 377.04,
+"ini": 377.04,
+"fim": 377.36
+},
+{
+"cena": "c7",
+"w": "a",
+"ini_whisper": 377.36,
+"ini": 377.25,
+"fim": 377.44
+},
+{
+"cena": "c7",
+"w": "seca.",
+"ini_whisper": 377.44,
+"ini": 377.44,
+"fim": 377.82
+},
+{
+"cena": "c7",
+"w": "No",
+"ini_whisper": 378.56,
+"ini": 378.54,
+"fim": 378.7
+},
+{
+"cena": "c7",
+"w": "extremoeste,",
+"ini_whisper": 378.7,
+"ini": 378.7,
+"fim": 379.48
+},
+{
+"cena": "c7",
+"w": "o",
+"ini_whisper": 379.9,
+"ini": 379.86,
+"fim": 379.98
+},
+{
+"cena": "c7",
+"w": "Rio",
+"ini_whisper": 379.98,
+"ini": 379.86,
+"fim": 380.12
+},
+{
+"cena": "c7",
+"w": "São",
+"ini_whisper": 380.12,
+"ini": 380.12,
+"fim": 380.3
+},
+{
+"cena": "c7",
+"w": "Francisco",
+"ini_whisper": 380.3,
+"ini": 380.3,
+"fim": 380.84
+},
+{
+"cena": "c7",
+"w": "muda",
+"ini_whisper": 380.84,
+"ini": 380.83,
+"fim": 381.28
+},
+{
+"cena": "c7",
+"w": "a",
+"ini_whisper": 381.28,
+"ini": 381.28,
+"fim": 381.38
+},
+{
+"cena": "c7",
+"w": "paisagem.",
+"ini_whisper": 381.38,
+"ini": 381.42,
+"fim": 381.96
+},
+{
+"cena": "c7",
+"w": "Em",
+"ini_whisper": 382.68,
+"ini": 382.71,
+"fim": 382.82
+},
+{
+"cena": "c7",
+"w": "Petrolina,",
+"ini_whisper": 382.82,
+"ini": 382.71,
+"fim": 383.44
+},
+{
+"cena": "c7",
+"w": "a",
+"ini_whisper": 383.84,
+"ini": 383.8,
+"fim": 383.92
+},
+{
+"cena": "c7",
+"w": "irrigação",
+"ini_whisper": 383.92,
+"ini": 383.8,
+"fim": 384.44
+},
+{
+"cena": "c7",
+"w": "faz",
+"ini_whisper": 384.44,
+"ini": 384.44,
+"fim": 384.68
+},
+{
+"cena": "c7",
+"w": "o",
+"ini_whisper": 384.68,
+"ini": 384.58,
+"fim": 384.8
+},
+{
+"cena": "c7",
+"w": "semiáreo",
+"ini_whisper": 384.8,
+"ini": 384.8,
+"fim": 385.38
+},
+{
+"cena": "c7",
+"w": "do",
+"ini_whisper": 385.38,
+"ini": 385.38,
+"fim": 385.44
+},
+{
+"cena": "c7",
+"w": "produzir",
+"ini_whisper": 385.44,
+"ini": 385.44,
+"fim": 385.96
+},
+{
+"cena": "c7",
+"w": "uvas,",
+"ini_whisper": 385.96,
+"ini": 385.96,
+"fim": 386.3
+},
+{
+"cena": "c7",
+"w": "mangas",
+"ini_whisper": 386.58,
+"ini": 386.56,
+"fim": 386.98
+},
+{
+"cena": "c7",
+"w": "e",
+"ini_whisper": 386.98,
+"ini": 386.98,
+"fim": 387.38
+},
+{
+"cena": "c7",
+"w": "até",
+"ini_whisper": 387.38,
+"ini": 387.38,
+"fim": 387.56
+},
+{
+"cena": "c7",
+"w": "vinho.",
+"ini_whisper": 387.56,
+"ini": 387.5,
+"fim": 387.94
+},
+{
+"cena": "c7",
+"w": "Do",
+"ini_whisper": 388.52,
+"ini": 388.51,
+"fim": 388.68
+},
+{
+"cena": "c7",
+"w": "azul",
+"ini_whisper": 388.68,
+"ini": 388.68,
+"fim": 389.0
+},
+{
+"cena": "c7",
+"w": "ao",
+"ini_whisper": 389.0,
+"ini": 389.0,
+"fim": 389.2
+},
+{
+"cena": "c7",
+"w": "dourado,",
+"ini_whisper": 389.2,
+"ini": 389.2,
+"fim": 389.76
+},
+{
+"cena": "c7",
+"w": "são",
+"ini_whisper": 390.1,
+"ini": 390.05,
+"fim": 390.22
+},
+{
+"cena": "c7",
+"w": "mais",
+"ini_whisper": 390.22,
+"ini": 390.22,
+"fim": 390.44
+},
+{
+"cena": "c7",
+"w": "de",
+"ini_whisper": 390.44,
+"ini": 390.44,
+"fim": 390.6
+},
+{
+"cena": "c7",
+"w": "700",
+"ini_whisper": 390.6,
+"ini": 390.6,
+"fim": 391.14
+},
+{
+"cena": "c7",
+"w": "quilômetros",
+"ini_whisper": 391.14,
+"ini": 391.14,
+"fim": 391.92
+},
+{
+"cena": "c7",
+"w": "de",
+"ini_whisper": 391.92,
+"ini": 391.84,
+"fim": 392.1
+},
+{
+"cena": "c7",
+"w": "contrastes.",
+"ini_whisper": 392.1,
+"ini": 392.1,
+"fim": 392.8
+},
+{
+"cena": "c8",
+"w": "A",
+"ini_whisper": 394.3,
+"ini": 394.32,
+"fim": 394.48
+},
+{
+"cena": "c8",
+"w": "Pernambuco",
+"ini_whisper": 394.48,
+"ini": 394.48,
+"fim": 395.08
+},
+{
+"cena": "c8",
+"w": "de",
+"ini_whisper": 395.08,
+"ini": 395.05,
+"fim": 395.28
+},
+{
+"cena": "c8",
+"w": "hoje",
+"ini_whisper": 395.28,
+"ini": 395.28,
+"fim": 395.58
+},
+{
+"cena": "c8",
+"w": "também",
+"ini_whisper": 395.58,
+"ini": 395.58,
+"fim": 396.24
+},
+{
+"cena": "c8",
+"w": "carrega",
+"ini_whisper": 396.24,
+"ini": 396.24,
+"fim": 396.8
+},
+{
+"cena": "c8",
+"w": "desafios",
+"ini_whisper": 396.8,
+"ini": 396.8,
+"fim": 397.34
+},
+{
+"cena": "c8",
+"w": "antigos.",
+"ini_whisper": 397.34,
+"ini": 397.34,
+"fim": 397.88
+},
+{
+"cena": "c8",
+"w": "A",
+"ini_whisper": 398.58,
+"ini": 398.59,
+"fim": 398.7
+},
+{
+"cena": "c8",
+"w": "desigualdade",
+"ini_whisper": 398.7,
+"ini": 398.59,
+"fim": 399.32
+},
+{
+"cena": "c8",
+"w": "que",
+"ini_whisper": 399.32,
+"ini": 399.32,
+"fim": 399.58
+},
+{
+"cena": "c8",
+"w": "nasceu",
+"ini_whisper": 399.58,
+"ini": 399.52,
+"fim": 399.92
+},
+{
+"cena": "c8",
+"w": "nos",
+"ini_whisper": 399.92,
+"ini": 399.92,
+"fim": 400.1
+},
+{
+"cena": "c8",
+"w": "engenhos",
+"ini_whisper": 400.1,
+"ini": 400.1,
+"fim": 400.72
+},
+{
+"cena": "c8",
+"w": "ainda",
+"ini_whisper": 400.72,
+"ini": 400.72,
+"fim": 401.28
+},
+{
+"cena": "c8",
+"w": "aparece",
+"ini_whisper": 401.28,
+"ini": 401.28,
+"fim": 401.7
+},
+{
+"cena": "c8",
+"w": "nas",
+"ini_whisper": 401.7,
+"ini": 401.7,
+"fim": 402.02
+},
+{
+"cena": "c8",
+"w": "cidades",
+"ini_whisper": 402.02,
+"ini": 402.02,
+"fim": 402.58
+},
+{
+"cena": "c8",
+"w": "e",
+"ini_whisper": 402.58,
+"ini": 402.58,
+"fim": 402.8
+},
+{
+"cena": "c8",
+"w": "no",
+"ini_whisper": 402.8,
+"ini": 402.8,
+"fim": 402.9
+},
+{
+"cena": "c8",
+"w": "campo.",
+"ini_whisper": 402.9,
+"ini": 402.9,
+"fim": 403.22
+},
+{
+"cena": "c8",
+"w": "No",
+"ini_whisper": 403.96,
+"ini": 403.94,
+"fim": 404.06
+},
+{
+"cena": "c8",
+"w": "sertão,",
+"ini_whisper": 404.06,
+"ini": 403.94,
+"fim": 404.52
+},
+{
+"cena": "c8",
+"w": "a",
+"ini_whisper": 405.02,
+"ini": 404.93,
+"fim": 405.06
+},
+{
+"cena": "c8",
+"w": "água",
+"ini_whisper": 405.06,
+"ini": 405.06,
+"fim": 405.26
+},
+{
+"cena": "c8",
+"w": "continua",
+"ini_whisper": 405.26,
+"ini": 405.26,
+"fim": 405.7
+},
+{
+"cena": "c8",
+"w": "sendo",
+"ini_whisper": 405.7,
+"ini": 405.7,
+"fim": 406.02
+},
+{
+"cena": "c8",
+"w": "uma",
+"ini_whisper": 406.02,
+"ini": 406.02,
+"fim": 406.26
+},
+{
+"cena": "c8",
+"w": "questão",
+"ini_whisper": 406.26,
+"ini": 406.26,
+"fim": 406.58
+},
+{
+"cena": "c8",
+"w": "de",
+"ini_whisper": 406.58,
+"ini": 406.51,
+"fim": 406.74
+},
+{
+"cena": "c8",
+"w": "sobrevivência.",
+"ini_whisper": 406.74,
+"ini": 406.74,
+"fim": 407.58
+},
+{
+"cena": "c8",
+"w": "Ao",
+"ini_whisper": 408.16,
+"ini": 408.16,
+"fim": 408.32
+},
+{
+"cena": "c8",
+"w": "mesmo",
+"ini_whisper": 408.32,
+"ini": 408.32,
+"fim": 408.5
+},
+{
+"cena": "c8",
+"w": "tempo,",
+"ini_whisper": 408.5,
+"ini": 408.5,
+"fim": 408.94
+},
+{
+"cena": "c8",
+"w": "no",
+"ini_whisper": 409.4,
+"ini": 409.35,
+"fim": 409.48
+},
+{
+"cena": "c8",
+"w": "bairro",
+"ini_whisper": 409.48,
+"ini": 409.48,
+"fim": 409.8
+},
+{
+"cena": "c8",
+"w": "onde",
+"ini_whisper": 409.8,
+"ini": 409.8,
+"fim": 409.96
+},
+{
+"cena": "c8",
+"w": "funcionou",
+"ini_whisper": 409.96,
+"ini": 409.96,
+"fim": 410.58
+},
+{
+"cena": "c8",
+"w": "a",
+"ini_whisper": 410.58,
+"ini": 410.58,
+"fim": 410.68
+},
+{
+"cena": "c8",
+"w": "primeira",
+"ini_whisper": 410.68,
+"ini": 410.68,
+"fim": 411.06
+},
+{
+"cena": "c8",
+"w": "sinagoga",
+"ini_whisper": 411.06,
+"ini": 411.06,
+"fim": 411.62
+},
+{
+"cena": "c8",
+"w": "das",
+"ini_whisper": 411.62,
+"ini": 411.62,
+"fim": 411.88
+},
+{
+"cena": "c8",
+"w": "Américas,",
+"ini_whisper": 411.88,
+"ini": 411.88,
+"fim": 412.56
+},
+{
+"cena": "c8",
+"w": "hoje",
+"ini_whisper": 412.9,
+"ini": 412.9,
+"fim": 413.14
+},
+{
+"cena": "c8",
+"w": "fica",
+"ini_whisper": 413.14,
+"ini": 413.14,
+"fim": 413.44
+},
+{
+"cena": "c8",
+"w": "o",
+"ini_whisper": 413.44,
+"ini": 413.41,
+"fim": 413.62
+},
+{
+"cena": "c8",
+"w": "Porto",
+"ini_whisper": 413.62,
+"ini": 413.66,
+"fim": 413.96
+},
+{
+"cena": "c8",
+"w": "Digital,",
+"ini_whisper": 413.96,
+"ini": 413.89,
+"fim": 414.32
+},
+{
+"cena": "c8",
+"w": "um",
+"ini_whisper": 414.86,
+"ini": 414.86,
+"fim": 415.04
+},
+{
+"cena": "c8",
+"w": "dos",
+"ini_whisper": 415.04,
+"ini": 415.04,
+"fim": 415.16
+},
+{
+"cena": "c8",
+"w": "maiores",
+"ini_whisper": 415.16,
+"ini": 415.16,
+"fim": 415.64
+},
+{
+"cena": "c8",
+"w": "parques",
+"ini_whisper": 415.64,
+"ini": 415.64,
+"fim": 416.12
+},
+{
+"cena": "c8",
+"w": "de",
+"ini_whisper": 416.12,
+"ini": 416.06,
+"fim": 416.32
+},
+{
+"cena": "c8",
+"w": "tecnologia",
+"ini_whisper": 416.32,
+"ini": 416.32,
+"fim": 416.86
+},
+{
+"cena": "c8",
+"w": "do",
+"ini_whisper": 416.86,
+"ini": 416.86,
+"fim": 417.14
+},
+{
+"cena": "c8",
+"w": "país.",
+"ini_whisper": 417.14,
+"ini": 417.14,
+"fim": 417.38
+},
+{
+"cena": "c8",
+"w": "Universidades,",
+"ini_whisper": 417.38,
+"ini": 417.38,
+"fim": 418.94
+},
+{
+"cena": "c8",
+"w": "artistas,",
+"ini_whisper": 419.34,
+"ini": 419.3,
+"fim": 420.08
+},
+{
+"cena": "c8",
+"w": "cientistas",
+"ini_whisper": 420.44,
+"ini": 420.44,
+"fim": 421.08
+},
+{
+"cena": "c8",
+"w": "e",
+"ini_whisper": 421.08,
+"ini": 420.99,
+"fim": 421.24
+},
+{
+"cena": "c8",
+"w": "agricultores",
+"ini_whisper": 421.24,
+"ini": 421.24,
+"fim": 422.04
+},
+{
+"cena": "c8",
+"w": "escrevem",
+"ini_whisper": 422.04,
+"ini": 422.04,
+"fim": 423.0
+},
+{
+"cena": "c8",
+"w": "todos",
+"ini_whisper": 423.0,
+"ini": 423.0,
+"fim": 423.5
+},
+{
+"cena": "c8",
+"w": "os",
+"ini_whisper": 423.5,
+"ini": 423.5,
+"fim": 423.88
+},
+{
+"cena": "c8",
+"w": "dias",
+"ini_whisper": 423.88,
+"ini": 423.88,
+"fim": 424.16
+},
+{
+"cena": "c8",
+"w": "o",
+"ini_whisper": 424.16,
+"ini": 424.16,
+"fim": 424.7
+},
+{
+"cena": "c8",
+"w": "próximo",
+"ini_whisper": 424.7,
+"ini": 424.59,
+"fim": 425.12
+},
+{
+"cena": "c8",
+"w": "capítulo.",
+"ini_whisper": 425.12,
+"ini": 425.12,
+"fim": 425.74
+},
+{
+"cena": "final",
+"w": "Então,",
+"ini_whisper": 427.233,
+"ini": 427.253,
+"fim": 427.593
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 427.993,
+"ini": 427.993,
+"fim": 428.173
+},
+{
+"cena": "final",
+"w": "que",
+"ini_whisper": 428.173,
+"ini": 428.173,
+"fim": 428.273
+},
+{
+"cena": "final",
+"w": "faz",
+"ini_whisper": 428.273,
+"ini": 428.163,
+"fim": 428.513
+},
+{
+"cena": "final",
+"w": "de",
+"ini_whisper": 428.513,
+"ini": 428.513,
+"fim": 428.693
+},
+{
+"cena": "final",
+"w": "Pernambuco",
+"ini_whisper": 428.693,
+"ini": 428.693,
+"fim": 429.333
+},
+{
+"cena": "final",
+"w": "um",
+"ini_whisper": 429.333,
+"ini": 429.283,
+"fim": 429.653
+},
+{
+"cena": "final",
+"w": "lugar",
+"ini_whisper": 429.653,
+"ini": 429.563,
+"fim": 429.893
+},
+{
+"cena": "final",
+"w": "tão",
+"ini_whisper": 429.893,
+"ini": 429.893,
+"fim": 430.193
+},
+{
+"cena": "final",
+"w": "singular?",
+"ini_whisper": 430.193,
+"ini": 430.083,
+"fim": 430.673
+},
+{
+"cena": "final",
+"w": "Não",
+"ini_whisper": 431.433,
+"ini": 431.423,
+"fim": 431.593
+},
+{
+"cena": "final",
+"w": "são",
+"ini_whisper": 431.593,
+"ini": 431.593,
+"fim": 431.793
+},
+{
+"cena": "final",
+"w": "só",
+"ini_whisper": 431.793,
+"ini": 431.793,
+"fim": 431.993
+},
+{
+"cena": "final",
+"w": "as",
+"ini_whisper": 431.993,
+"ini": 431.993,
+"fim": 432.153
+},
+{
+"cena": "final",
+"w": "datas,",
+"ini_whisper": 432.153,
+"ini": 432.153,
+"fim": 432.433
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 432.973,
+"ini": 432.953,
+"fim": 433.133
+},
+{
+"cena": "final",
+"w": "a",
+"ini_whisper": 433.133,
+"ini": 433.133,
+"fim": 433.233
+},
+{
+"cena": "final",
+"w": "coragem",
+"ini_whisper": 433.233,
+"ini": 433.233,
+"fim": 433.713
+},
+{
+"cena": "final",
+"w": "de",
+"ini_whisper": 433.713,
+"ini": 433.713,
+"fim": 433.893
+},
+{
+"cena": "final",
+"w": "quem",
+"ini_whisper": 433.893,
+"ini": 433.893,
+"fim": 434.053
+},
+{
+"cena": "final",
+"w": "disse",
+"ini_whisper": 434.053,
+"ini": 433.953,
+"fim": 434.373
+},
+{
+"cena": "final",
+"w": "República",
+"ini_whisper": 434.373,
+"ini": 434.373,
+"fim": 434.993
+},
+{
+"cena": "final",
+"w": "antes",
+"ini_whisper": 434.993,
+"ini": 434.993,
+"fim": 435.673
+},
+{
+"cena": "final",
+"w": "do",
+"ini_whisper": 435.673,
+"ini": 435.633,
+"fim": 435.893
+},
+{
+"cena": "final",
+"w": "Brasil,",
+"ini_whisper": 435.893,
+"ini": 435.893,
+"fim": 436.173
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 436.893,
+"ini": 436.893,
+"fim": 437.073
+},
+{
+"cena": "final",
+"w": "a",
+"ini_whisper": 437.073,
+"ini": 436.983,
+"fim": 437.133
+},
+{
+"cena": "final",
+"w": "resistência",
+"ini_whisper": 437.133,
+"ini": 437.133,
+"fim": 437.813
+},
+{
+"cena": "final",
+"w": "de",
+"ini_whisper": 437.813,
+"ini": 437.813,
+"fim": 437.973
+},
+{
+"cena": "final",
+"w": "Palmares,",
+"ini_whisper": 437.973,
+"ini": 437.973,
+"fim": 438.453
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 439.153,
+"ini": 439.153,
+"fim": 439.253
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 439.253,
+"ini": 439.153,
+"fim": 439.333
+},
+{
+"cena": "final",
+"w": "frevo",
+"ini_whisper": 439.333,
+"ini": 439.333,
+"fim": 439.693
+},
+{
+"cena": "final",
+"w": "que",
+"ini_whisper": 439.693,
+"ini": 439.693,
+"fim": 439.853
+},
+{
+"cena": "final",
+"w": "ferve,",
+"ini_whisper": 439.853,
+"ini": 439.773,
+"fim": 440.273
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 440.693,
+"ini": 440.653,
+"fim": 440.853
+},
+{
+"cena": "final",
+"w": "maracatuque",
+"ini_whisper": 440.853,
+"ini": 440.743,
+"fim": 441.553
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 441.553,
+"ini": 441.473,
+"fim": 441.693
+},
+{
+"cena": "final",
+"w": "coa",
+"ini_whisper": 441.693,
+"ini": 441.713,
+"fim": 442.033
+},
+{
+"cena": "final",
+"w": "e",
+"ini_whisper": 442.033,
+"ini": 442.033,
+"fim": 442.453
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 442.453,
+"ini": 442.453,
+"fim": 442.533
+},
+{
+"cena": "final",
+"w": "forró",
+"ini_whisper": 442.533,
+"ini": 442.533,
+"fim": 442.873
+},
+{
+"cena": "final",
+"w": "que",
+"ini_whisper": 442.873,
+"ini": 442.873,
+"fim": 443.033
+},
+{
+"cena": "final",
+"w": "atravessa",
+"ini_whisper": 443.033,
+"ini": 442.973,
+"fim": 443.573
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 443.573,
+"ini": 443.573,
+"fim": 443.693
+},
+{
+"cena": "final",
+"w": "sertão.",
+"ini_whisper": 443.693,
+"ini": 443.693,
+"fim": 444.093
+},
+{
+"cena": "final",
+"w": "É",
+"ini_whisper": 444.733,
+"ini": 444.733,
+"fim": 444.893
+},
+{
+"cena": "final",
+"w": "um",
+"ini_whisper": 444.893,
+"ini": 444.893,
+"fim": 445.033
+},
+{
+"cena": "final",
+"w": "povo",
+"ini_whisper": 445.033,
+"ini": 445.033,
+"fim": 445.233
+},
+{
+"cena": "final",
+"w": "que",
+"ini_whisper": 445.233,
+"ini": 445.233,
+"fim": 445.493
+},
+{
+"cena": "final",
+"w": "transformou",
+"ini_whisper": 445.493,
+"ini": 445.493,
+"fim": 446.073
+},
+{
+"cena": "final",
+"w": "dor",
+"ini_whisper": 446.073,
+"ini": 446.073,
+"fim": 446.353
+},
+{
+"cena": "final",
+"w": "em",
+"ini_whisper": 446.353,
+"ini": 446.353,
+"fim": 446.533
+},
+{
+"cena": "final",
+"w": "música",
+"ini_whisper": 446.533,
+"ini": 446.533,
+"fim": 447.013
+},
+{
+"cena": "final",
+"w": "e",
+"ini_whisper": 447.013,
+"ini": 446.943,
+"fim": 447.493
+},
+{
+"cena": "final",
+"w": "luta",
+"ini_whisper": 447.493,
+"ini": 447.393,
+"fim": 447.813
+},
+{
+"cena": "final",
+"w": "em",
+"ini_whisper": 447.813,
+"ini": 447.783,
+"fim": 447.993
+},
+{
+"cena": "final",
+"w": "memória.",
+"ini_whisper": 447.993,
+"ini": 447.993,
+"fim": 448.453
+},
+{
+"cena": "final",
+"w": "Para",
+"ini_whisper": 449.113,
+"ini": 449.143,
+"fim": 449.393
+},
+{
+"cena": "final",
+"w": "entender",
+"ini_whisper": 449.393,
+"ini": 449.393,
+"fim": 449.753
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 449.753,
+"ini": 449.753,
+"fim": 449.913
+},
+{
+"cena": "final",
+"w": "Brasil,",
+"ini_whisper": 449.913,
+"ini": 449.913,
+"fim": 450.233
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 450.573,
+"ini": 450.573,
+"fim": 450.773
+},
+{
+"cena": "final",
+"w": "preciso",
+"ini_whisper": 450.773,
+"ini": 450.663,
+"fim": 451.053
+},
+{
+"cena": "final",
+"w": "passar",
+"ini_whisper": 451.053,
+"ini": 451.053,
+"fim": 451.493
+},
+{
+"cena": "final",
+"w": "por",
+"ini_whisper": 451.493,
+"ini": 451.493,
+"fim": 451.813
+},
+{
+"cena": "final",
+"w": "Pernambuco,",
+"ini_whisper": 451.813,
+"ini": 451.813,
+"fim": 452.553
+},
+{
+"cena": "final",
+"w": "e",
+"ini_whisper": 452.833,
+"ini": 452.833,
+"fim": 453.073
+},
+{
+"cena": "final",
+"w": "para",
+"ini_whisper": 453.073,
+"ini": 453.073,
+"fim": 453.233
+},
+{
+"cena": "final",
+"w": "entender",
+"ini_whisper": 453.233,
+"ini": 453.123,
+"fim": 453.553
+},
+{
+"cena": "final",
+"w": "Pernambuco",
+"ini_whisper": 453.553,
+"ini": 453.553,
+"fim": 454.393
+},
+{
+"cena": "final",
+"w": "é",
+"ini_whisper": 454.393,
+"ini": 454.393,
+"fim": 454.773
+},
+{
+"cena": "final",
+"w": "preciso",
+"ini_whisper": 454.773,
+"ini": 454.683,
+"fim": 455.113
+},
+{
+"cena": "final",
+"w": "conhecer",
+"ini_whisper": 455.113,
+"ini": 455.113,
+"fim": 455.653
+},
+{
+"cena": "final",
+"w": "o",
+"ini_whisper": 455.653,
+"ini": 455.653,
+"fim": 455.793
+},
+{
+"cena": "final",
+"w": "seu",
+"ini_whisper": 455.793,
+"ini": 455.793,
+"fim": 455.913
+},
+{
+"cena": "final",
+"w": "povo.",
+"ini_whisper": 455.913,
+"ini": 455.913,
+"fim": 456.213
+}
+]
