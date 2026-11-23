@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Réu por um discurso — colagem</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Special+Elite&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kraft:#c9a477; --kraft2:#b98f5f; --news:#e9e4d6; --cream:#f4efe3;
+    --ink:#161412; --red:#d7261e; --blue:#1f3f8a; --yellow:#ffd83a; --green:#2f8a4a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#111}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--kraft)}
+  .scene{position:absolute;inset:0;visibility:hidden}
+  .bg{position:absolute;inset:-40px;}
+  .el{position:absolute;transform-origin:50% 50%;will-change:transform;visibility:hidden}
+  .shadow{filter:drop-shadow(6px 10px 0 rgba(0,0,0,.28)) drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+  .paper{background:var(--cream);}
+  .torn{clip-path:var(--clip)}
+  .tape{position:absolute;width:150px;height:44px;background:rgba(240,230,190,.78);
+        box-shadow:0 1px 2px rgba(0,0,0,.2);clip-path:polygon(3% 8%,10% 0,22% 10%,35% 2%,50% 9%,64% 0,78% 8%,90% 1%,100% 10%,97% 92%,88% 100%,75% 91%,60% 100%,45% 92%,30% 100%,15% 91%,0 98%)}
+  .anton{font-family:Anton,Impact,sans-serif;letter-spacing:.5px}
+  .archivo{font-family:'Archivo Black',sans-serif}
+  .type{font-family:'Special Elite','Courier New',monospace}
+  .marker{font-family:'Permanent Marker',cursive}
+  .serif{font-family:'Playfair Display',serif;font-weight:900}
+  .ransom span{display:inline-block;padding:4px 14px;margin:4px;line-height:1}
+  .stamp{border:8px solid var(--red);color:var(--red);padding:10px 26px;font-family:Anton,sans-serif;
+         text-transform:uppercase;mix-blend-mode:multiply;opacity:.92;
+         -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.6'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+         -webkit-mask-size:300px 300px}
+  .halftone{background-image:radial-gradient(var(--ink) 30%,transparent 32%);background-size:18px 18px;opacity:.18}
+  .lines{background:repeating-linear-gradient(transparent 0 46px,rgba(31,63,138,.25) 46px 48px)}
+  #grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.35;z-index:50}
+  #vign{position:absolute;inset:0;pointer-events:none;z-index:51;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(40,20,0,.45))}
+  /* legendas */
+  #cap{position:absolute;left:70px;right:150px;top:1395px;z-index:40;display:flex;justify-content:center}
+  #capbox{background:var(--cream);padding:18px 26px 20px;font-family:'Archivo Black',sans-serif;font-size:50px;line-height:1.18;
+          color:var(--ink);text-align:center;box-shadow:6px 8px 0 rgba(0,0,0,.35);clip-path:var(--clip)}
+  #capbox .w{display:inline;padding:0 3px}
+  #capbox .on{background:var(--yellow);box-shadow:0 0 0 4px var(--yellow)}
+  #capbox.hide{visibility:hidden}
+  #handle{position:absolute;left:0;right:0;top:60px;text-align:center;z-index:41;font-family:'Special Elite',monospace;font-size:30px;color:rgba(20,15,10,.55)}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- ============ CENA 1: GANCHO 0–5 ============ -->
+<section class="scene" data-start="0" data-end="5">
+  <div class="bg" style="background:var(--kraft)"></div>
+  <div class="el halftone" data-in="0" data-anim="fade" style="left:-120px;top:220px;width:700px;height:700px;border-radius:50%"></div>
+  <!-- microfone -->
+  <div class="el shadow" data-in="0.1" data-anim="slap" data-r="-8" style="left:640px;top:170px;width:330px;height:560px">
+    <svg viewBox="0 0 330 560" width="330" height="560"><g fill="#232323">
+      <rect x="95" y="20" width="140" height="230" rx="70"/><rect x="150" y="270" width="30" height="200"/>
+      <path d="M60 170 v40 a105 105 0 0 0 210 0 v-40 h-22 v40 a83 83 0 0 1 -166 0 v-40z"/>
+      <rect x="80" y="470" width="170" height="34" rx="8"/></g>
+      <g fill="#555"><rect x="110" y="50" width="110" height="10"/><rect x="110" y="80" width="110" height="10"/><rect x="110" y="110" width="110" height="10"/><rect x="110" y="140" width="110" height="10"/></g>
+    </svg>
+  </div>
+  <div class="el ransom anton" data-in="0.35" data-anim="slap" data-r="-4" style="left:70px;top:330px;font-size:250px">
+    <span style="background:#fff;color:var(--ink)">R</span><span style="background:var(--red);color:#fff;transform:rotate(5deg)">É</span><span style="background:var(--ink);color:var(--yellow);transform:rotate(-6deg)">U</span>
+  </div>
+  <div class="el type paper torn shadow" data-in="0.9" data-anim="slide-l" data-r="2" style="left:150px;top:690px;padding:18px 40px;font-size:76px;color:var(--ink)">por um</div>
+  <div class="el anton torn shadow" data-in="1.2" data-anim="slap" data-r="-3" style="left:40px;top:830px;width:1000px;padding:20px 30px;background:var(--red);color:#fff;font-size:190px;text-align:center">DISCURSO?</div>
+  <div class="tape el" data-in="1.25" data-anim="pop" data-r="-20" style="left:60px;top:830px"></div>
+  <div class="tape el" data-in="1.3" data-anim="pop" data-r="18" style="left:880px;top:1060px"></div>
+  <div class="el marker" data-in="2.3" data-anim="slide-r" data-r="-3" style="left:120px;top:1130px;font-size:60px;color:var(--ink)">na tribuna da Câmara</div>
+  <div class="el paper torn shadow archivo" data-in="3.2" data-anim="slap" data-r="4" style="left:560px;top:1230px;padding:16px 28px;font-size:46px;background:var(--yellow)">STF decide agora</div>
+</section>
+
+<!-- ============ CENA 2: O FATO 5–20 ============ -->
+<section class="scene" data-start="5" data-end="20">
+  <div class="bg torn" style="background:var(--news)"></div>
+  <div class="el" data-in="0" data-anim="fade" style="left:0;top:0;width:1080px;height:1400px;background:repeating-linear-gradient(90deg,transparent 0 260px,rgba(0,0,0,.05) 260px 262px)"></div>
+  <!-- Congresso (silhueta de papel) -->
+  <div class="el shadow" data-in="0.1" data-anim="drop" data-r="-2" style="left:90px;top:150px;width:900px;height:380px">
+    <svg viewBox="0 0 900 380" width="900" height="380">
+      <rect width="900" height="380" fill="#9fc3e8"/>
+      <circle cx="760" cy="80" r="44" fill="#ffd83a"/>
+      <g fill="#f4efe3">
+        <rect x="410" y="40" width="34" height="250"/><rect x="456" y="40" width="34" height="250"/><rect x="440" y="120" width="20" height="10"/>
+        <path d="M150 260 q120 -130 240 0z"/><path d="M560 210 q120 -10 240 0 q-120 90 -240 0z" transform="translate(0,40)"/>
+        <rect x="80" y="290" width="740" height="40"/>
+      </g>
+      <rect y="330" width="900" height="50" fill="#7a9a5b"/>
+    </svg>
+  </div>
+  <div class="el stamp" data-in="0.5" data-anim="stamp" data-r="-4" style="left:90px;top:548px;font-size:52px;background:rgba(255,255,255,.0)">AGO–DEZ / 2024 · CÂMARA</div>
+  <!-- cartões de nome -->
+  <div class="el paper torn shadow" data-in="2.2" data-anim="slide-l" data-r="-3" style="left:50px;top:670px;width:520px;padding:26px 30px;background:#fff">
+    <div class="type" style="font-size:30px;color:#555">deputado federal · NOVO</div>
+    <div class="anton" style="font-size:78px;line-height:1;color:var(--blue)">MARCEL<br>VAN HATTEM</div>
+  </div>
+  <div class="el paper torn shadow lines" data-in="4.6" data-anim="slide-r" data-r="4" style="left:540px;top:870px;width:490px;padding:26px 30px;background-color:#fffbe8">
+    <div class="type" style="font-size:30px;color:#555">delegado · Polícia Federal</div>
+    <div class="anton" style="font-size:78px;line-height:1;color:var(--ink)">FÁBIO<br>SHOR</div>
+  </div>
+  <div class="el" data-in="3.8" data-anim="draw" style="left:330px;top:880px;width:260px;height:200px">
+    <svg viewBox="0 0 260 200" width="260" height="200"><path class="draw" d="M20 30 C 90 40, 140 90, 200 150 M200 150 l-50 -6 M200 150 l-4 -50" fill="none" stroke="#d7261e" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="el marker" data-in="4.0" data-anim="pop" data-r="-12" style="left:150px;top:950px;font-size:58px;color:var(--red)">acusou</div>
+  <!-- recorte de citação -->
+  <div class="el torn shadow" data-in="6.0" data-anim="slap" data-r="-2" style="left:60px;top:1140px;width:960px;padding:20px 34px;background:#fff">
+    <div class="serif" style="font-size:66px;line-height:1.05;font-style:italic">“relatórios fraudulentos”</div>
+    <div class="type" style="font-size:30px;margin-top:8px;color:#333">para manter preso Filipe Martins, ex-assessor de Bolsonaro</div>
+  </div>
+  <div class="tape el" data-in="6.05" data-anim="pop" data-r="-14" style="left:40px;top:1125px"></div>
+  <!-- foto + redes -->
+  <div class="el shadow" data-in="10.4" data-anim="slap" data-r="8" style="left:790px;top:610px;width:230px;height:240px;background:#fff;padding:16px 16px 50px">
+    <div style="width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="36" r="20" fill="#777"/><path d="M14 100 q36 -60 72 0z" fill="#777"/></svg></div>
+    <div class="marker" style="position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:28px">mostrou a foto</div>
+  </div>
+  <div class="el shadow" data-in="12.2" data-anim="drop" data-r="-7" style="left:800px;top:250px;width:200px;height:330px">
+    <svg viewBox="0 0 200 330" width="200" height="330"><rect width="200" height="330" rx="28" fill="#1b1b1b"/><rect x="12" y="34" width="176" height="262" rx="8" fill="#fff"/>
+      <rect x="28" y="52" width="144" height="90" fill="#ddd"/><rect x="28" y="152" width="110" height="12" fill="#bbb"/><rect x="28" y="172" width="144" height="12" fill="#ddd"/>
+      <path d="M44 240 a14 14 0 0 1 28 0 c0 14 -14 22 -14 26 c0 -4 -14 -12 -14 -26z" fill="#d7261e" transform="translate(0,-12)"/>
+      <circle cx="110" cy="232" r="14" fill="none" stroke="#1f3f8a" stroke-width="6"/><path d="M140 222 l26 10 l-26 10z" fill="#1f3f8a"/></svg>
+  </div>
+  <div class="el paper torn shadow archivo" data-in="12.5" data-anim="slide-r" data-r="-4" style="left:560px;top:96px;padding:12px 22px;font-size:40px;background:var(--yellow)">postou nas redes</div>
+</section>
+
+<!-- ============ CENA 3: A ACUSAÇÃO 20–35 ============ -->
+<section class="scene" data-start="20" data-end="35">
+  <div class="bg torn" style="background:#3a4b6b"></div>
+  <div class="el halftone" data-in="0" data-anim="fade" style="left:500px;top:-100px;width:800px;height:800px;border-radius:50%;opacity:.3"></div>
+  <!-- documento -->
+  <div class="el shadow" data-in="0.1" data-anim="drop" data-r="-3" style="left:90px;top:150px;width:720px;height:960px;background:#fbf8f0;padding:50px 56px">
+    <div class="type" style="font-size:28px;color:#444">MINISTÉRIO PÚBLICO FEDERAL</div>
+    <div class="anton" style="font-size:110px;line-height:1.05;margin-top:12px">DENÚNCIA</div>
+    <div style="margin-top:30px">
+      <div style="height:22px;background:#d6d0c2;margin:22px 0;width:95%"></div><div style="height:22px;background:#161412;margin:22px 0;width:70%"></div>
+      <div style="height:22px;background:#d6d0c2;margin:22px 0;width:88%"></div><div style="height:22px;background:#d6d0c2;margin:22px 0;width:92%"></div>
+      <div style="height:22px;background:#161412;margin:22px 0;width:55%"></div><div style="height:22px;background:#d6d0c2;margin:22px 0;width:80%"></div>
+      <div style="height:22px;background:#d6d0c2;margin:22px 0;width:90%"></div><div style="height:22px;background:#d6d0c2;margin:22px 0;width:60%"></div>
+    </div>
+  </div>
+  <div class="tape el" data-in="0.2" data-anim="pop" data-r="-25" style="left:60px;top:160px"></div>
+  <div class="tape el" data-in="0.25" data-anim="pop" data-r="22" style="left:700px;top:150px"></div>
+  <div class="el paper torn shadow archivo" data-in="0.6" data-anim="slide-r" data-r="5" style="left:640px;top:330px;padding:18px 26px;font-size:46px;background:#fff">1. PF indicia</div>
+  <div class="el paper torn shadow archivo" data-in="2.0" data-anim="slide-r" data-r="-4" style="left:600px;top:450px;padding:18px 26px;font-size:46px;background:var(--yellow)">2. PGR denuncia</div>
+  <div class="el stamp" data-in="3.2" data-anim="stamp" data-r="-12" style="left:150px;top:640px;font-size:120px;background:rgba(255,255,255,.55)">CALÚNIA</div>
+  <div class="el stamp" data-in="3.9" data-anim="stamp" data-r="8" style="left:330px;top:820px;font-size:120px;background:rgba(255,255,255,.55)">+ INJÚRIA</div>
+  <div class="el marker torn shadow" data-in="6.4" data-anim="slap" data-r="-3" style="left:60px;top:1110px;width:960px;padding:20px 30px;background:var(--cream);font-size:54px;line-height:1.15">“foi além da crítica política”</div>
+  <div class="el type paper torn shadow" data-in="9.2" data-anim="slide-l" data-r="3" style="left:120px;top:1260px;padding:12px 24px;font-size:38px;background:#fff">acusou um servidor de crime + internet</div>
+</section>
+
+<!-- ============ CENA 4: A DEFESA 35–50 ============ -->
+<section class="scene" data-start="35" data-end="50">
+  <div class="bg torn" style="background:var(--kraft2)"></div>
+  <!-- página da Constituição -->
+  <div class="el shadow" data-in="0.1" data-anim="drop" data-r="2" style="left:70px;top:170px;width:940px;padding:50px 60px 60px;background:#f7f1df">
+    <div class="serif" style="font-size:44px;text-align:center;letter-spacing:4px">CONSTITUIÇÃO FEDERAL</div>
+    <div style="height:4px;background:var(--ink);margin:18px 0 30px"></div>
+    <div class="anton" style="font-size:96px;line-height:1">Art. 53.</div>
+    <div class="type" style="font-size:52px;line-height:1.35;margin-top:20px">Os Deputados e Senadores são invioláveis, civil e penalmente, por
+      <span class="hl" data-hl-in="5.2" style="background-image:linear-gradient(var(--yellow),var(--yellow));background-repeat:no-repeat;background-size:0% 80%;background-position:0 70%">quaisquer de suas opiniões, palavras e votos.</span></div>
+  </div>
+  <div class="tape el" data-in="0.2" data-anim="pop" data-r="-8" style="left:450px;top:150px"></div>
+  <div class="el anton torn shadow" data-in="1.2" data-anim="slap" data-r="-5" style="left:40px;top:860px;padding:18px 34px;background:var(--blue);color:#fff;font-size:92px">IMUNIDADE PARLAMENTAR</div>
+  <!-- escudo -->
+  <div class="el shadow" data-in="2.0" data-anim="pop" data-r="10" style="left:800px;top:960px;width:210px;height:250px">
+    <svg viewBox="0 0 210 250" width="210" height="250"><path d="M105 8 L196 40 V120 C196 182 152 222 105 242 C58 222 14 182 14 120 V40z" fill="#f4efe3" stroke="#1f3f8a" stroke-width="14"/><path d="M60 128 l32 32 l62 -70" fill="none" stroke="#2f8a4a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="el paper torn shadow" data-in="9.0" data-anim="slide-l" data-r="-2" style="left:60px;top:1080px;width:700px;padding:22px 28px;background:#fff">
+    <div class="type" style="font-size:30px;color:#555">a defesa lembra:</div>
+    <div class="archivo" style="font-size:46px;line-height:1.1">precedentes do STF protegeram discursos na tribuna</div>
+  </div>
+</section>
+
+<!-- ============ CENA 5: ONDE ESTÁ 50–70 ============ -->
+<section class="scene" data-start="50" data-end="70">
+  <div class="bg torn" style="background:var(--news)"></div>
+  <!-- colunata STF -->
+  <div class="el shadow" data-in="0.1" data-anim="drop" data-r="-1.5" style="left:60px;top:130px;width:620px;height:300px">
+    <svg viewBox="0 0 620 300" width="620" height="300"><rect width="620" height="300" fill="#2b2b2b"/>
+      <g fill="#f4efe3"><rect x="40" y="60" width="540" height="22"/><rect x="40" y="240" width="540" height="22"/>
+      <rect x="78" y="96" width="34" height="132"/><rect x="70" y="82" width="50" height="14"/><rect x="70" y="226" width="50" height="14"/><rect x="170" y="96" width="34" height="132"/><rect x="162" y="82" width="50" height="14"/><rect x="162" y="226" width="50" height="14"/><rect x="262" y="96" width="34" height="132"/><rect x="254" y="82" width="50" height="14"/><rect x="254" y="226" width="50" height="14"/><rect x="354" y="96" width="34" height="132"/><rect x="346" y="82" width="50" height="14"/><rect x="346" y="226" width="50" height="14"/><rect x="446" y="96" width="34" height="132"/><rect x="438" y="82" width="50" height="14"/><rect x="438" y="226" width="50" height="14"/><rect x="538" y="96" width="34" height="132"/><rect x="530" y="82" width="50" height="14"/><rect x="530" y="226" width="50" height="14"/></g>
+      <text x="310" y="48" text-anchor="middle" font-family="Anton" font-size="34" fill="#ffd83a" letter-spacing="6">STF · 1ª TURMA</text></svg>
+  </div>
+  <!-- calendário -->
+  <div class="el shadow" data-in="0.6" data-anim="slap" data-r="6" style="left:730px;top:150px;width:280px;background:#fff;text-align:center">
+    <div class="anton" style="background:var(--red);color:#fff;font-size:44px;padding:8px">SEX · NOV</div>
+    <div class="anton" style="font-size:170px;line-height:1.1">20</div>
+  </div>
+  <!-- placar de votos -->
+  <div class="el paper torn shadow" data-in="1.4" data-anim="slide-l" data-r="-3" style="left:50px;top:500px;width:480px;padding:22px 26px;background:#fff">
+    <div class="type" style="font-size:28px;color:#555">relator</div><div class="anton" style="font-size:64px;line-height:1">FLÁVIO DINO</div>
+    <div class="archivo" style="font-size:36px;color:var(--green)">✔ votou para tornar réu</div>
+  </div>
+  <div class="el marker" data-in="3.6" data-anim="pop" data-r="-4" style="left:70px;top:745px;font-size:40px;color:var(--red)">e rejeitou a imunidade</div>
+  <div class="el paper torn shadow" data-in="5.0" data-anim="slide-r" data-r="3" style="left:560px;top:520px;width:470px;padding:22px 26px;background:#fff">
+    <div class="type" style="font-size:28px;color:#555">antecipou o voto</div><div class="anton" style="font-size:64px;line-height:1">MORAES</div>
+    <div class="archivo" style="font-size:36px;color:var(--green)">✔ acompanhou</div>
+  </div>
+  <div class="el paper torn shadow" data-in="7.6" data-anim="slide-l" data-r="2" style="left:60px;top:840px;width:470px;padding:22px 26px;background:#fffbe8">
+    <div class="type" style="font-size:28px;color:#555">pediu destaque</div><div class="anton" style="font-size:64px;line-height:1">ZANIN</div>
+    <div class="archivo" style="font-size:36px;color:#777">? a votar</div>
+  </div>
+  <div class="el paper torn shadow" data-in="8.2" data-anim="slide-r" data-r="-3" style="left:560px;top:860px;width:470px;padding:22px 26px;background:#fffbe8">
+    <div class="type" style="font-size:28px;color:#555">ministra</div><div class="anton" style="font-size:64px;line-height:1">CÁRMEN LÚCIA</div>
+    <div class="archivo" style="font-size:36px;color:#777">? a votar</div>
+  </div>
+  <div class="el stamp" data-in="9.8" data-anim="stamp" data-r="-5" style="left:70px;top:1050px;font-size:54px;background:rgba(255,255,255,.6)">SESSÃO PRESENCIAL · SEM DATA</div>
+  <div class="el anton torn shadow" data-in="14.6" data-anim="slap" data-r="3" style="left:250px;top:1175px;padding:6px 34px;background:var(--ink);color:var(--yellow);font-size:120px">2 × 0</div>
+  <div class="el marker paper torn shadow" data-in="15.4" data-anim="slap" data-r="-6" style="left:680px;top:1235px;padding:10px 22px;background:var(--yellow);font-size:44px">falta 1 voto!</div>
+</section>
+
+<!-- ============ CENA 6: POR QUE IMPORTA 70–85 ============ -->
+<section class="scene" data-start="70" data-end="85">
+  <div class="bg torn" style="background:#e8d9bd"></div>
+  <div class="el paper torn shadow" data-in="0.2" data-anim="slide-l" data-r="-3" style="left:60px;top:160px;width:480px;padding:26px;background:#fff;text-align:center">
+    <div class="anton" style="font-size:96px;line-height:1;text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:12px">CULPA</div>
+    <div class="type" style="font-size:32px">não se decide agora</div>
+  </div>
+  <div class="el paper torn shadow" data-in="2.2" data-anim="slide-r" data-r="3" style="left:560px;top:220px;width:460px;padding:26px;background:var(--yellow);text-align:center">
+    <div class="anton" style="font-size:80px;line-height:1">DENÚNCIA</div>
+    <div class="type" style="font-size:32px">aceita ou não?</div>
+  </div>
+  <!-- balança -->
+  <div class="el shadow" data-in="4.0" data-anim="drop" data-r="0" data-swing="1" style="left:140px;top:500px;width:800px;height:560px">
+    <svg viewBox="0 0 800 560" width="800" height="560"><g fill="#232323">
+      <rect x="388" y="60" width="24" height="440"/><rect x="290" y="490" width="220" height="40" rx="8"/><circle cx="400" cy="60" r="26"/></g>
+      <g class="beam"><rect x="100" y="96" width="600" height="18" fill="#232323"/>
+        <path d="M130 105 L60 300 M130 105 L200 300" stroke="#232323" stroke-width="5"/><path d="M670 105 L600 300 M670 105 L740 300" stroke="#232323" stroke-width="5"/>
+        <path d="M40 300 h180 a90 40 0 0 1 -180 0z" fill="#1f3f8a"/><path d="M580 300 h180 a90 40 0 0 1 -180 0z" fill="#d7261e"/></g></svg>
+  </div>
+  <div class="el archivo paper torn shadow" data-in="5.2" data-anim="pop" data-r="-5" style="left:40px;top:860px;padding:14px 20px;font-size:40px;background:#fff;color:var(--blue);text-align:center;width:400px">LIBERDADE<br>NA TRIBUNA</div>
+  <div class="el archivo paper torn shadow" data-in="5.8" data-anim="pop" data-r="5" style="left:640px;top:860px;padding:14px 20px;font-size:40px;background:#fff;color:var(--red);text-align:center;width:400px">HONRA DE<br>UM SERVIDOR</div>
+  <div class="el anton torn shadow" data-in="10.4" data-anim="slap" data-r="-2" style="left:40px;top:1120px;width:1000px;padding:20px 30px;background:var(--ink);color:#fff;font-size:62px;text-align:center;line-height:1.1">vale para qualquer deputado,<br><span style="color:var(--yellow)">de qualquer partido</span></div>
+</section>
+
+<!-- ============ CENA 7: CTA 85–90 ============ -->
+<section class="scene" data-start="85" data-end="90">
+  <div class="bg torn" style="background:var(--red)"></div>
+  <div class="el halftone" data-in="0" data-anim="fade" style="left:-200px;top:900px;width:900px;height:900px;border-radius:50%;opacity:.25"></div>
+  <div class="el type paper torn shadow" data-in="0.1" data-anim="slide-l" data-r="-3" style="left:80px;top:230px;padding:14px 30px;font-size:56px">para você,</div>
+  <div class="el ransom anton" data-in="0.5" data-anim="slap" data-r="2" style="left:40px;top:360px;width:1000px;font-size:118px;text-align:center">
+    <span style="background:#fff">A</span><span style="background:var(--yellow);transform:rotate(-4deg)">TRIBUNA</span><span style="background:var(--ink);color:#fff;transform:rotate(3deg)">DEVE</span><span style="background:#fff;transform:rotate(-2deg)">TER</span><span style="background:var(--blue);color:#fff;transform:rotate(4deg)">PROTEÇÃO</span><span style="background:#fff;color:var(--red);transform:rotate(-3deg)">TOTAL?</span>
+  </div>
+  <div class="el marker" data-in="2.4" data-anim="pop" data-r="-6" style="left:240px;top:960px;font-size:96px;color:#fff">comenta aí ↓</div>
+  <div class="el archivo paper torn shadow" data-in="3.0" data-anim="slide-r" data-r="2" style="left:120px;top:1140px;width:840px;padding:20px 26px;font-size:42px;background:var(--cream);text-align:center">Siga para acompanhar o julgamento</div>
+  <div class="tape el" data-in="3.05" data-anim="pop" data-r="-12" style="left:90px;top:1125px"></div>
+</section>
+
+<div id="cap"><div id="capbox" class="hide"></div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="1"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .12  0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="vign"></div>
+</div>
+
+<script>
+// ---------- narração (texto de cada cena, para legendas) ----------
+const NARR = [
+ [0,5,"Um deputado pode ser processado pelo que fala na tribuna da Câmara? O STF está decidindo isso agora."],
+ [5,20,"Em 2024, em discursos no plenário e numa comissão da Câmara, o deputado Marcel van Hattem, do Novo, acusou o delegado da PF Fábio Shor de fazer relatórios fraudulentos para manter preso Filipe Martins, ex-assessor de Bolsonaro. Mostrou a foto do delegado e postou tudo nas redes."],
+ [20,35,"A PF indiciou o deputado, e a PGR o denunciou por calúnia e injúria. Para a acusação, ele foi além da crítica política: acusou um servidor de crime e espalhou isso na internet."],
+ [35,50,"A defesa cita a Constituição: deputados são invioláveis por quaisquer de suas opiniões, palavras e votos. E lembra precedentes do próprio STF que protegeram discursos feitos na tribuna."],
+ [50,70,"Na sexta, dia 20, o relator Flávio Dino votou para tornar o deputado réu, e rejeitou o argumento da imunidade. Alexandre de Moraes antecipou o voto e acompanhou. Zanin pediu destaque, e o julgamento vai para uma sessão presencial, ainda sem data. Falta um voto para a denúncia ser aceita."],
+ [70,85,"Nesta fase não se decide culpa, só se a denúncia é aceita. Mas o resultado vai mostrar até onde vai a liberdade de um parlamentar na tribuna. E isso vale para qualquer deputado, de qualquer partido."],
+ [85,90,"Para você, a tribuna deve ter proteção total? Comenta aí."]
+];
+// window.TIMING pode sobrescrever com tempos reais de narração: [{s,e,text}]
+function buildCaps(){
+  const caps=[];
+  for(const [s,e,txt] of NARR){
+    const words=txt.split(/\s+/); const chunks=[]; let cur=[];
+    for(const w of words){ cur.push(w); const len=cur.join(' ').length;
+      if(len>26 || /[.?!:]$/.test(w) || (/,$/.test(w)&&len>14)){chunks.push(cur);cur=[];} }
+    if(cur.length) chunks.push(cur);
+    const total=chunks.reduce((a,c)=>a+c.join(' ').length+6,0);
+    let t=s+0.15; const span=(e-s)-0.45;
+    for(const c of chunks){ const d=span*(c.join(' ').length+6)/total; caps.push({s:t,e:t+d,words:c}); t+=d; }
+  }
+  return caps;
+}
+const CAPS=buildCaps();
+
+// ---------- utilidades ----------
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function tornClip(seed,amp=1.2){const r=rng(seed);const pts=[];const n=18;
+  for(let i=0;i<=n;i++)pts.push(`${i/n*100}% ${r()*amp}%`);
+  for(let i=1;i<=n;i++)pts.push(`${100-r()*amp*0.8}% ${i/n*100}%`);
+  for(let i=n-1;i>=0;i--)pts.push(`${i/n*100}% ${100-r()*amp}%`);
+  for(let i=n-1;i>=1;i--)pts.push(`${r()*amp*0.8}% ${i/n*100}%`);
+  return `polygon(${pts.join(',')})`;}
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOutBack=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const easeOut=x=>1-Math.pow(1-x,3);
+
+// ---------- preparação ----------
+const scenes=[...document.querySelectorAll('.scene')];
+let seedN=10;
+document.querySelectorAll('.torn').forEach(el=>{el.style.setProperty('--clip',tornClip(seedN++, el.classList.contains('bg')?0.6:2.2));});
+document.getElementById('capbox').style.setProperty('--clip',tornClip(999,2.5));
+scenes.forEach((sc,i)=>{sc._start=+sc.dataset.start;sc._end=+sc.dataset.end;sc._els=[...sc.querySelectorAll('.el')];
+  sc._els.forEach((el,j)=>{el._in=+el.dataset.in||0;el._anim=el.dataset.anim||'fade';el._r=+(el.dataset.r||0);el._seed=i*100+j;
+    const p=el.querySelector('path.draw'); if(p){el._path=p;p._len=p.getTotalLength();p.style.strokeDasharray=p._len;}});
+  sc._hl=[...sc.querySelectorAll('.hl')];
+});
+// eventos de som (entradas)
+window.SFX=[]; scenes.forEach(sc=>{SFX.push({t:sc._start,k:'wipe'}); sc._els.forEach(el=>{const k={slap:'slap',stamp:'stamp',drop:'slap','slide-l':'swish','slide-r':'swish',pop:'pop',draw:'marker'}[el._anim]; if(k&&el._in>0.05) SFX.push({t:sc._start+el._in,k});});});
+
+// ---------- render(t) determinístico ----------
+window.render=function(t){
+  const frame=Math.floor(t*12); // "on twos": jitter muda 12x/s
+  document.getElementById('turb').setAttribute('seed',frame%7+1);
+  scenes.forEach((sc,i)=>{
+    const vis = t>=sc._start && (t<sc._end || (i<scenes.length-1 && t<scenes[i+1]._start+0.4) || i===scenes.length-1);
+    sc.style.visibility=vis?'visible':'hidden'; sc.style.zIndex=i+1;
+    if(!vis) return;
+    const tl=t-sc._start;
+    // entrada da cena: folha rasgada entra pela direita
+    const w=clamp(tl/0.4); const off=i===0?0:(1-easeOut(w))*1150;
+    sc.style.transform=`translateX(${off}px) rotate(${(1-w)*3}deg)`;
+    sc._els.forEach(el=>{
+      const p=tl-el._in; if(p<0){el.style.visibility='hidden';return;}
+      el.style.visibility='visible';
+      const r=rng(el._seed*1000+frame); const jr=(r()-.5)*0.9, jx=(r()-.5)*3, jy=(r()-.5)*3;
+      let tx=0,ty=0,s=1,rot=el._r,op=1;
+      const a=el._anim;
+      if(a==='slap'){const x=clamp(p/0.28);s=1.6-0.6*easeOutBack(x);rot+= (1-x)*-10; op=clamp(p/0.08);}
+      else if(a==='stamp'){const x=clamp(p/0.18);s=2.2-1.2*easeOut(x);op=clamp(p/0.05)*0.95;}
+      else if(a==='drop'){const x=clamp(p/0.35);ty=-(1-easeOutBack(x))*500;}
+      else if(a==='slide-l'){const x=clamp(p/0.3);tx=-(1-easeOutBack(x))*900;}
+      else if(a==='slide-r'){const x=clamp(p/0.3);tx=(1-easeOutBack(x))*900;}
+      else if(a==='pop'){const x=clamp(p/0.22);s=easeOutBack(x);}
+      else if(a==='fade'){op=clamp(p/0.3)*(+getComputedStyle(el).getPropertyValue('--o')||1);}
+      else if(a==='draw'){if(el._path){const x=clamp(p/0.5);el._path.style.strokeDashoffset=el._path._len*(1-x);}}
+      if(el.dataset.swing){const beam=el.querySelector('.beam');const sw=Math.sin(Math.max(0,p-0.3)*2.2)*6*Math.exp(-Math.max(0,p-0.3)*0.25);beam.setAttribute('transform',`rotate(${sw} 400 105)`);}
+      if(a!=='fade') el.style.opacity=op;
+      el.style.transform=`translate(${tx+jx}px,${ty+jy}px) rotate(${rot+jr}deg) scale(${s})`;
+    });
+    sc._hl.forEach(h=>{const x=clamp((tl-+h.dataset.hlIn)/1.4);h.style.backgroundSize=`${x*100}% 80%`;});
+  });
+  // legendas
+  const cb=document.getElementById('capbox');
+  const c=CAPS.find(c=>t>=c.s&&t<c.e);
+  if(!c){cb.className='hide';return;}
+  cb.className='';
+  const key=c.s.toFixed(3);
+  if(cb._key!==key){cb._key=key;cb.innerHTML=c.words.map(w=>`<span class="w">${w}</span>`).join(' ');}
+  const spans=cb.querySelectorAll('.w'); const tot=c.words.join('').length; let acc=0; const prog=(t-c.s)/(c.e-c.s)*tot;
+  spans.forEach((sp,k)=>{const L=c.words[k].length; sp.classList.toggle('on',prog>=acc&&(prog<acc+L||k===spans.length-1)); acc+=L;});
+  const jr=rng(5000+frame); cb.style.transform=`rotate(${(jr()-.5)*0.8}deg)`;
+};
+window.render(0.0);
+</script>
+</body>
+</html>
