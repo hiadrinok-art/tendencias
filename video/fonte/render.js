@@ -1,5 +1,5 @@
 const {chromium}=require('playwright');const fs=require('fs');
-const FPS=12,DUR=90,N=FPS*DUR,W=4,dir=process.argv[2];
+const FPS=12,DUR=+process.argv[3],N=FPS*DUR,W=4,dir=process.argv[2];
 (async()=>{const b=await chromium.launch();fs.mkdirSync(dir+'/frames',{recursive:true});
 const work=async(w)=>{const pg=await b.newPage({viewport:{width:1080,height:1920}});
  await pg.goto('file://'+dir+'/index.html');await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(800);

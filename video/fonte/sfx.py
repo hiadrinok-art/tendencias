@@ -1,6 +1,6 @@
 import json,sys,wave,numpy as np
-SR=44100;DUR=90;rng=np.random.default_rng(7)
-out=np.zeros(SR*DUR)
+SR=44100;DUR=float(sys.argv[3]);rng=np.random.default_rng(7)
+out=np.zeros(int(SR*DUR))
 def env(n,a=0.005,d=None):
     t=np.arange(n)/SR;e=np.minimum(1,t/a);return e*np.exp(-t/(d or 0.05))
 def lp(x,k):  # média móvel simples
