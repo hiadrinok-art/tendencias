@@ -343,12 +343,17 @@ const S=[
    inn('s8cta',lt,4.0);
  }},
 ];
+// Tempos das cartelas: padrão do roteiro (60s) ou window.TIMING (gerado pela narração).
+let TOTAL=60;
+function applyTiming(T){ if(!T)return; T.starts.forEach((a,i)=>{S[i].a=a; S[i].b=a+T.lens[i];}); TOTAL=T.total; }
+applyTiming(window.TIMING);
+window.applyTiming=applyTiming;
 function render(t){
-  $('prog').style.width=(cl(t/60)*1080)+'px';
-  const last=t>=54;
+  $('prog').style.width=(cl(t/TOTAL)*1080)+'px';
+  const last=t>=S[7].a;
   $('tag').style.color=last?'#0B1F3A':''; $('tag').querySelector('b').style.color=last?'#F5F1E8':'';
   $('src').style.color=last?'rgba(11,31,58,.7)':''; $('src').style.top=last?'1700px':'1640px';
-  S.forEach(s=>{const on=t>=s.a&&(t<s.b||(s.b===60&&t>=60)); $(s.id).style.display=on?'block':'none'; if(on)s.f(t-s.a);});
+  S.forEach(s=>{const on=t>=s.a&&(t<s.b||(s===S[7]&&t>=s.b)); $(s.id).style.display=on?'block':'none'; if(on)s.f(t-s.a);});
 }
 window.render=render;
 render(window.__T??2.9);

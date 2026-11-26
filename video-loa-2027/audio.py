@@ -1,5 +1,8 @@
 import numpy as np, wave
-SR=44100; DUR=60.0; N=int(SR*DUR)
+import json, os
+SR=44100
+T=json.load(open('timing.json')) if os.path.exists('timing.json') else {'starts':[0,6,15,23,31,39,47,54],'total':60.0,'lead':0}
+ST=T['starts']; DUR=T['total']; N=int(SR*DUR)
 mix=np.zeros(N); rng=np.random.default_rng(7)
 def add(sig,t,g=1.0):
     i=int(t*SR); j=min(N,i+len(sig)); 
@@ -43,8 +46,9 @@ def chime():
     for f in (523.25,659.25,783.99,1046.5): s=s+np.sin(2*np.pi*f*t)*np.exp(-t*1.6)
     return s*.25
 # --- music bed: 104 BPM investigative pulse
+sfx=mix; mix=np.zeros(N)
 bpm=104; beat=60/bpm; t=0.0; b=0
-while t<58.6:
+while t<DUR-1.4:
     if b%4 in (0,2) or (b%8==7): add(kick(),t,.55)
     if b%4 in (1,3): add(snare(),t,.18)
     add(hat(),t,.12); add(hat(),t+beat/2,.08)
@@ -53,30 +57,42 @@ while t<58.6:
     n=int(beat*.9*SR); tt=np.arange(n)/SR
     add(np.tanh(2*np.sin(2*np.pi*root*tt))*np.exp(-tt*4)*.22,t)
     t+=beat; b+=1
-# duck music fade at end; add final hit
-mix*=1.0
+music=mix; mix=sfx
 # --- SFX
-for c in (6,15,23,31,39,47,54): add(whoosh(),c-.3,.5)
+def at(k,o): return ST[k-1]+o
+for c in ST[1:]: add(whoosh(),c-.3,.5)
 for i in range(52):
     tt=.3+2.7*(1-(1-i/52)**1.6)
     add(tick(1400+i*25),tt,.35)
 add(boom(),3.0,.9)
 add(pop(),3.25,.5); add(whoosh(.35),4.3-.15,.25)
-add(pop(),6.6,.5); add(pop(),7.0,.5)
-add(whoosh(.4),9.4-.2,.3)
-for i in range(4): add(pop(),10.0+i*.45,.6)
-add(chaching(),11.6,.8)
-add(pop(),17.0,.5); add(pop(),18.0,.4); add(pop(),19.4,.5)
-add(whoosh(.3),24.0,.3); add(whoosh(.3),24.8,.3)
-add(pop(),25.6,.5); add(boom(),27.0,.5); add(pop(),27.0,.6); add(stamp(),28.0,1.0)
-for i in range(3): add(pop(),31.6+i*.25,.45)
-add(beep(880),33.9); add(beep(880),34.1)
-for i in range(3): add(pop(),35.2+i*.4,.4)
-add(stamp(),39.6,.8); add(stamp(),40.4,.8)
-for i in range(4): add(beep(660,.1),42.8+i*.34,.8)
-for i in range(3): add(whoosh(.3),47.35+i*1.8,.35); add(pop(),47.8+i*1.8,.6)
-add(whoosh(.6),53.9,.5); add(pop(),54.5,.5); add(pop(),55.1,.5); add(pop(),55.8,.5)
-add(stamp(),57.0,1.1); add(chime(),58.0,.7); add(boom(),58.0,.6)
+add(pop(),at(2,.6),.5); add(pop(),at(2,1.0),.5)
+add(whoosh(.4),at(2,3.2),.3)
+for i in range(4): add(pop(),at(2,4.0+i*.45),.6)
+add(chaching(),at(2,5.6),.8)
+add(pop(),at(3,2.0),.5); add(pop(),at(3,3.0),.4); add(pop(),at(3,4.4),.5)
+add(whoosh(.3),at(4,1.0),.3); add(whoosh(.3),at(4,1.8),.3)
+add(pop(),at(4,2.6),.5); add(boom(),at(4,4.0),.5); add(pop(),at(4,4.0),.6); add(stamp(),at(4,5.0),1.0)
+for i in range(3): add(pop(),at(5,.6+i*.25),.45)
+add(beep(880),at(5,2.9)); add(beep(880),at(5,3.1))
+for i in range(3): add(pop(),at(5,4.2+i*.4),.4)
+add(stamp(),at(6,.6),.8); add(stamp(),at(6,1.4),.8)
+for i in range(4): add(beep(660,.1),at(6,3.8+i*.34),.8)
+for i in range(3): add(whoosh(.3),at(7,.35+i*1.8),.35); add(pop(),at(7,.8+i*1.8),.6)
+add(whoosh(.6),at(8,-.1),.5); add(pop(),at(8,.45),.5); add(pop(),at(8,1.1),.5); add(pop(),at(8,1.8),.5)
+add(stamp(),at(8,3.0),1.1); add(chime(),at(8,4.0),.7); add(boom(),at(8,4.0),.6)
+# --- narração com ducking da trilha
+voice=np.zeros(N)
+if os.path.exists('voz_1.wav'):
+    for k in range(8):
+        with wave.open(f'voz_{k+1}.wav') as w:
+            v=np.frombuffer(w.readframes(w.getnframes()),dtype=np.int16)/32768.0
+        i=int((ST[k]+T['lead'])*SR); voice[i:i+len(v)]+=v[:N-i]
+    a=np.abs(voice); k=int(.25*SR)
+    envv=np.convolve(a,np.ones(k)/k,mode='same'); duck=1-0.55*np.clip(envv/0.02,0,1)
+    music=music*duck; mix=mix*np.where(voice!=0,0.75,1.0)
+    voice=voice/np.max(np.abs(voice))*0.9
+mix=music+mix*0.9+voice*1.15
 # fade out last 0.8s, normalize
 fo=int(.8*SR); mix[-fo:]*=np.linspace(1,0,fo)
 mix=np.tanh(mix*1.1); mix/=np.max(np.abs(mix))*1.12
