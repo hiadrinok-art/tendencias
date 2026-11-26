@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>LOA 2027 Recife — Cartelas</title>
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#14305A; --navy3:#1C3D6E;
+  --off:#F5F1E8; --red:#E63946; --red2:#B7202E; --orange:#F47B20; --gray:#8A97AB;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--navy)}
+body{font-family:'Inter',sans-serif;color:var(--off);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--navy)}
+.bggrid{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:60px 60px}
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute}
+.title{position:absolute;left:90px;top:290px;width:900px;font-weight:900;font-size:78px;line-height:1.02;letter-spacing:-1.5px;text-transform:uppercase}
+.title:before{content:"";position:absolute;left:-30px;top:8px;width:12px;height:calc(100% - 16px);background:var(--orange);border-radius:6px}
+.red{color:var(--red)} .org{color:var(--orange)}
+/* chrome */
+#prog{position:absolute;left:0;top:0;height:12px;background:var(--orange);z-index:50}
+#tag{position:absolute;left:90px;top:180px;font-weight:800;font-size:30px;letter-spacing:4px;color:var(--gray);z-index:50}
+#tag b{color:var(--orange)}
+#src{position:absolute;left:90px;top:1640px;font-size:24px;color:var(--gray);z-index:50;letter-spacing:.5px}
+/* s1 */
+#s1lab{left:90px;top:640px;font-size:40px;font-weight:700;letter-spacing:6px;color:var(--gray)}
+#s1rs{left:90px;top:720px;font-size:70px;font-weight:800;color:var(--orange)}
+#s1num{left:84px;top:795px;font-size:102px;font-weight:900;letter-spacing:-4px;transform-origin:left center;white-space:nowrap}
+#s1sub{left:90px;top:1010px;width:900px;font-size:66px;font-weight:900;line-height:1.05;color:var(--navy);background:var(--orange);padding:22px 30px;text-transform:uppercase}
+#s1q{left:90px;top:1300px;width:900px;font-size:58px;font-weight:700;line-height:1.15}
+#s1q span{border-bottom:8px solid var(--orange)}
+/* bars */
+.brow{position:absolute;left:90px;width:900px}
+.blab{display:flex;justify-content:space-between;align-items:flex-end;font-size:38px;font-weight:700;margin-bottom:16px}
+.blab b{font-size:58px;font-weight:900}
+.track{height:84px;background:rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+.fill{height:100%;border-radius:12px;display:flex;align-items:center;justify-content:flex-end;padding-right:20px;font-size:40px;font-weight:900;color:var(--navy)}
+#s2band{left:0;top:1080px;width:1080px;height:520px;background:var(--red);padding:40px 90px}
+#s2band h3{font-size:38px;font-weight:900;letter-spacing:2px;margin-bottom:28px}
+.badges{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.badge{background:var(--off);color:var(--red2);border-radius:18px;padding:22px 28px;height:162px}
+.badge .k{font-size:34px;font-weight:800;color:var(--navy)}
+.badge .v{font-size:66px;font-weight:900;line-height:1.1}
+/* s3 */
+#s3svg{left:240px;top:500px}
+#s3center{left:240px;top:500px;width:600px;height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#s3center .p{font-size:104px;font-weight:900;letter-spacing:-4px;color:var(--red)}
+#s3center .l{font-size:34px;font-weight:800;letter-spacing:3px;margin-top:-6px}
+#s3a{left:90px;top:1160px;width:900px}
+#s3a .h{font-size:46px;font-weight:900;color:var(--red)}
+#s3a .r{display:flex;gap:14px;margin-top:16px}
+#s3a .r div{flex:1;background:var(--navy2);border-radius:12px;padding:14px 16px;font-size:26px;font-weight:600;color:var(--gray)}
+#s3a .r div b{display:block;font-size:40px;font-weight:900;color:var(--off)}
+#s3b{left:90px;top:1440px;width:900px;font-size:46px;font-weight:900;color:var(--orange)}
+#s3b small{display:block;font-size:30px;font-weight:600;color:var(--off);margin-top:4px}
+/* s4 */
+#s4doc{left:110px;top:520px;width:860px;height:560px;background:#EDE8DC;border-radius:10px;padding:34px 36px;color:#3a3f4a;transform:rotate(-2deg);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+#s4doc .dh{font-size:22px;font-weight:800;letter-spacing:2px;color:#6b7180;border-bottom:3px solid #c9c2b2;padding-bottom:12px;margin-bottom:14px;display:flex;justify-content:space-between}
+.drow{position:relative;height:50px;display:flex;align-items:center;justify-content:space-between;font-size:24px;font-weight:600;border-bottom:1px solid #d8d1c2}
+.drow i{display:block;height:12px;background:#cfc8b8;border-radius:6px}
+.drow.hl{font-weight:800;color:#1b1f27;font-size:25px}
+.mark{position:absolute;left:-10px;top:6px;height:38px;background:rgba(230,57,70,.42);border-radius:4px;width:0}
+#s4eq{left:90px;top:1160px;width:900px;text-align:center;font-size:62px;font-weight:900}
+#s4tot{left:40px;top:1150px;width:1000px;white-space:nowrap;text-align:center;font-size:104px;font-weight:900;letter-spacing:-3px;color:var(--red)}
+#s4stamp{left:150px;top:1380px;width:780px;text-align:center;border:10px solid var(--red);color:var(--red);font-size:62px;font-weight:900;padding:18px 10px;border-radius:14px;letter-spacing:1px}
+/* s5 */
+.col{position:absolute;width:230px;bottom:calc(1920px - 1010px);border-radius:14px 14px 0 0;background:var(--off);overflow:hidden}
+.col .sl{position:absolute;left:0;bottom:0;width:100%;background:var(--orange)}
+.cval{position:absolute;width:230px;text-align:center;font-size:40px;white-space:nowrap;font-weight:900}
+.clab{position:absolute;width:230px;text-align:center;top:1028px;font-size:34px;font-weight:800;color:var(--gray)}
+#s5alert{left:90px;top:1100px;width:900px;background:var(--red);font-size:35px;font-weight:900;padding:18px 26px;border-radius:12px}
+.crow{position:absolute;left:90px;width:900px;height:96px}
+.crow .t{font-size:32px;font-weight:700;display:flex;justify-content:space-between}
+.crow .t b{font-weight:900}
+.crow .bar{height:34px;margin-top:10px;border-radius:8px}
+/* s6 */
+#s6post{left:526px;top:620px;width:28px;height:560px;background:var(--navy3);border-radius:14px}
+#s6base{left:360px;top:1160px;width:360px;height:36px;background:var(--navy3);border-radius:18px}
+#s6beam{left:190px;top:620px;width:700px;height:24px;background:var(--off);border-radius:12px;transform-origin:350px 12px}
+#s6piv{left:510px;top:600px;width:60px;height:60px;border-radius:50%;background:var(--orange)}
+.str{position:absolute;width:4px;background:var(--gray);transform-origin:top center}
+.pan{position:absolute;width:360px;border-radius:16px;padding:20px;text-align:center}
+.pan .v{font-size:52px;white-space:nowrap;font-weight:900;letter-spacing:-1px}
+.pan .k{font-size:26px;font-weight:800;letter-spacing:1px;margin-top:6px;line-height:1.2}
+#s6alert{left:90px;top:1300px;width:900px;border:8px solid var(--red);border-radius:16px;padding:22px 30px;text-align:center}
+#s6alert .k{font-size:36px;font-weight:800;letter-spacing:2px}
+#s6alert .v{font-size:110px;font-weight:900;color:var(--red);letter-spacing:-3px;line-height:1.05}
+/* s7 */
+.card{position:absolute;left:90px;width:900px;height:300px;background:var(--navy2);border-left:14px solid var(--red);border-radius:12px;padding:30px 36px;overflow:hidden}
+.card .lines{position:absolute;right:-40px;top:20px;width:420px;opacity:.10}
+.card .lines i{display:block;height:12px;background:var(--off);border-radius:6px;margin-bottom:16px}
+.card .v{position:relative;font-size:92px;font-weight:900;color:var(--red);letter-spacing:-2px;line-height:1}
+.card .k{position:relative;font-size:38px;font-weight:700;margin-top:16px;line-height:1.2}
+/* s8 */
+#s8bg{inset:0;background:var(--orange)}
+#s8a{left:90px;top:270px;width:900px;color:var(--navy)}
+#s8a .n{font-size:300px;font-weight:900;letter-spacing:-12px;line-height:.9}
+#s8a .k{font-size:64px;font-weight:900;line-height:1}
+#s8b{left:90px;top:680px;width:900px;color:var(--navy)}
+#s8b .v{font-size:92px;white-space:nowrap;font-weight:900;letter-spacing:-3px;line-height:1}
+#s8b .k{font-size:44px;font-weight:700;margin-top:6px}
+#s8c{left:90px;top:880px;width:900px;font-size:56px;font-weight:900;color:var(--off);background:var(--navy);padding:18px 26px;border-radius:12px}
+#s8sig{left:0;top:1060px;width:1080px;background:var(--navy);padding:40px 90px}
+#s8sig .n{font-size:84px;font-weight:900;letter-spacing:-1px}
+#s8sig .k{font-size:38px;font-weight:800;color:var(--orange);letter-spacing:2px;margin-top:4px}
+#s8cta{left:90px;top:1360px;width:900px;font-size:46px;font-weight:800;color:var(--navy);line-height:1.15}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="bggrid" id="grid"></div>
+  <div id="prog"></div>
+  <div id="tag">LOA 2027 · <b>RECIFE</b></div>
+  <div id="src">Fonte: LOA 2027 — Prefeitura do Recife</div>
+
+  <!-- 01 -->
+  <section class="scene" id="s1">
+    <div class="abs" id="s1lab">ORÇAMENTO 2027</div>
+    <div class="abs" id="s1rs">R$</div>
+    <div class="abs" id="s1num">0</div>
+    <div class="abs" id="s1sub">Esse é o orçamento do Recife para 2027.</div>
+    <div class="abs" id="s1q"><span>Sabe para onde vai o seu dinheiro?</span></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="scene" id="s2">
+    <div class="title">De onde vem<br>o dinheiro?</div>
+    <div class="brow" id="s2r1" style="top:540px">
+      <div class="blab"><span>Transferências<br><small style="font-size:28px;color:var(--gray)">União · Estado · Fundeb</small></span><b>R$ 4,42 bi</b></div>
+      <div class="track"><div class="fill" id="s2f1" style="background:var(--off)">39,8%</div></div>
+    </div>
+    <div class="brow" id="s2r2" style="top:800px">
+      <div class="blab"><span>Impostos e taxas<br><small style="font-size:28px;color:var(--gray)">do recifense</small></span><b class="red">R$ 4,15 bi</b></div>
+      <div class="track"><div class="fill" id="s2f2" style="background:var(--red);color:var(--off)">37,3%</div></div>
+    </div>
+    <div class="abs" id="s2band">
+      <h3>E A PREFEITURA QUER ARRECADAR MAIS:</h3>
+      <div class="badges">
+        <div class="badge" id="b1"><div class="k">ISS</div><div class="v">▲ 12%</div></div>
+        <div class="badge" id="b2"><div class="k">IPTU</div><div class="v">▲ 8%</div></div>
+        <div class="badge" id="b3"><div class="k">TAXA DE LIXO</div><div class="v">▲ 7%</div></div>
+        <div class="badge" id="b4"><div class="k">MULTAS: R$ 72 MI</div><div class="v">▲ 11%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="scene" id="s3">
+    <div class="title">Para onde vai<br>a maior parte?</div>
+    <svg class="abs" id="s3svg" width="600" height="600" viewBox="0 0 600 600">
+      <g transform="rotate(-90 300 300)">
+        <circle cx="300" cy="300" r="240" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="110"/>
+        <circle id="d1" cx="300" cy="300" r="240" fill="none" stroke="#E63946" stroke-width="110"/>
+        <circle id="d2" cx="300" cy="300" r="240" fill="none" stroke="#F47B20" stroke-width="110"/>
+        <circle id="d3" cx="300" cy="300" r="240" fill="none" stroke="#8A97AB" stroke-width="110"/>
+      </g>
+    </svg>
+    <div class="abs" id="s3center"><div class="p" id="s3p">0%</div><div class="l">CUSTEIO DA MÁQUINA</div></div>
+    <div class="abs" id="s3a">
+      <div class="h">80,5% · CUSTEIO = R$ 8,96 BILHÕES</div>
+      <div class="r">
+        <div id="s3r1">Pessoal<b>R$ 4,96 bi</b></div>
+        <div id="s3r2">Serviços e contratos<b>R$ 3,62 bi</b></div>
+        <div id="s3r3">Juros<b>R$ 369 mi</b></div>
+      </div>
+    </div>
+    <div class="abs" id="s3b">13,3% · INVESTIMENTOS / OBRAS<small>R$ 1,48 bilhão</small></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="scene" id="s4">
+    <div class="title" style="font-size:70px">Quase <span class="red">R$ 3 bilhões</span> em terceirizados e PJ</div>
+    <div class="abs" id="s4doc">
+      <div class="dh"><span>LOA 2027 · ELEMENTOS DE DESPESA</span><span>pp. 67–68</span></div>
+      <div class="drow"><i style="width:420px"></i><i style="width:140px"></i></div>
+      <div class="drow"><i style="width:360px"></i><i style="width:120px"></i></div>
+      <div class="drow hl"><div class="mark" id="m1"></div><span style="position:relative">Serviços de Terceiros — Pessoa Jurídica</span><span style="position:relative">R$ 1,996 bi</span></div>
+      <div class="drow"><i style="width:300px"></i><i style="width:130px"></i></div>
+      <div class="drow"><i style="width:450px"></i><i style="width:110px"></i></div>
+      <div class="drow hl"><div class="mark" id="m2"></div><span style="position:relative">Locação de Mão de Obra</span><span style="position:relative">R$ 817,8 mi</span></div>
+      <div class="drow"><i style="width:380px"></i><i style="width:150px"></i></div>
+      <div class="drow"><i style="width:330px"></i><i style="width:100px"></i></div>
+      <div class="drow" style="border:0"><i style="width:400px"></i><i style="width:125px"></i></div>
+    </div>
+    <div class="abs" id="s4eq">R$ 1,996 bi <span class="org">+</span> R$ 817,8 mi</div>
+    <div class="abs" id="s4tot">R$ 2,81 BILHÕES</div>
+    <div class="abs" id="s4stamp">= 25% DE TODO O ORÇAMENTO</div>
+  </section>
+
+  <!-- 05 -->
+  <section class="scene" id="s5">
+    <div class="title">As maiores fatias</div>
+    <div class="col" id="c1" style="left:90px"></div>
+    <div class="col" id="c2" style="left:425px"></div>
+    <div class="col" id="c3" style="left:760px"><div class="sl" id="c3s"></div></div>
+    <div class="cval" id="v1" style="left:90px">R$ 2,31 bi</div>
+    <div class="cval" id="v2" style="left:425px">R$ 2,24 bi</div>
+    <div class="cval" id="v3" style="left:760px">R$ 2,21 bi</div>
+    <div class="clab" style="left:90px">URBANISMO</div>
+    <div class="clab" style="left:425px">EDUCAÇÃO</div>
+    <div class="clab" style="left:760px">SAÚDE</div>
+    <div class="abs" id="s5alert">⚠ NA SAÚDE, SÓ 2,87% É OBRA E EQUIPAMENTO</div>
+    <div class="crow" id="r1" style="top:1260px"><div class="t"><span>Câmara Municipal</span><b>R$ 300 mi</b></div><div class="bar" id="rb1" style="background:var(--off)"></div></div>
+    <div class="crow" id="r2" style="top:1380px"><div class="t"><span>Habitação</span><b class="red">R$ 58,2 mi · 0,5%</b></div><div class="bar" id="rb2" style="background:var(--red)"></div></div>
+    <div class="crow" id="r3" style="top:1500px"><div class="t"><span>Segurança Pública</span><b class="red">R$ 26 mi · 0,2%</b></div><div class="bar" id="rb3" style="background:var(--red)"></div></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="scene" id="s6">
+    <div class="title">Mais empréstimo,<br><span class="red">mais dívida</span></div>
+    <div class="abs" id="s6post"></div>
+    <div class="abs" id="s6base"></div>
+    <div class="abs" id="s6beam"></div>
+    <div class="str" id="st1"></div><div class="str" id="st2"></div>
+    <div class="pan" id="p1" style="background:var(--red)"><div class="v">+R$ 690 MI</div><div class="k">NOVOS EMPRÉSTIMOS<br>EM 2027</div></div>
+    <div class="pan" id="p2" style="background:var(--off);color:var(--red2)"><div class="v">R$ 640,5 MI</div><div class="k" style="color:var(--navy)">JUROS + PARCELAS<br>DA DÍVIDA VELHA</div></div>
+    <div class="abs" id="s6piv"></div>
+    <div class="abs" id="s6alert"><div class="k">⚠ DÍVIDA CONSOLIDADA PROJETADA</div><div class="v">R$ 4,9 BILHÕES</div></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="scene" id="s7">
+    <div class="title" style="font-size:70px">E nas letras miúdas da LOA:</div>
+    <div class="card" id="k1" style="top:490px"><div class="lines"><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i><i></i><i style="width:90%"></i><i></i></div><div class="v">R$ 1,67 BILHÃO</div><div class="k">15% de remanejamento por decreto:<br>um “cheque em branco”</div></div>
+    <div class="card" id="k2" style="top:820px"><div class="lines"><i></i><i style="width:70%"></i><i></i><i style="width:85%"></i><i></i><i style="width:50%"></i><i></i></div><div class="v">R$ 5,7 MILHÕES</div><div class="k">para o Gabinete do Vice-Prefeito,<br>sem vice no cargo</div></div>
+    <div class="card" id="k3" style="top:1150px"><div class="lines"><i></i><i style="width:90%"></i><i></i><i style="width:65%"></i><i></i><i style="width:75%"></i><i></i></div><div class="v">R$ 10 MIL</div><div class="k">no Fundo da Mulher, e R$ 10 mil<br>no Bairro do Recife</div></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="scene" id="s8">
+    <div class="abs" id="s8bg"></div>
+    <div class="abs" id="s8a"><div class="n">24</div><div class="k">EMENDAS PROTOCOLADAS</div></div>
+    <div class="abs" id="s8b"><div class="v">R$ 121,8 MILHÕES</div><div class="k">da máquina direto para a rua</div></div>
+    <div class="abs" id="s8c">+ 7 TRAVAS DE TRANSPARÊNCIA</div>
+    <div class="abs" id="s8sig"><div class="n">EDUARDO MOURA</div><div class="k">VEREADOR DO RECIFE — NOVO</div></div>
+    <div class="abs" id="s8cta">➜ Compartilhe com quem paga imposto no Recife.</div>
+  </section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-x,3);
+const ex=x=>x>=1?1:1-Math.pow(2,-10*x);
+const eb=x=>{const c1=2.2,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pr=(lt,s,d)=>cl((lt-s)/d);
+// fade+slide in
+function inn(el,lt,s,{d=.4,dy=50,dx=0,sc=null,e=eo}={}){
+  if(typeof el==='string')el=$(el);
+  const k=e(pr(lt,s,d)), o=cl((lt-s)/(d*.6));
+  el.style.opacity=o;
+  const s0=sc==null?1:sc+(1-sc)*k;
+  el.style.transform=`translate(${dx*(1-k)}px,${dy*(1-k)}px) scale(${s0})`;
+}
+function pop(el,lt,s,d=.35){ if(typeof el==='string')el=$(el);
+  const k=pr(lt,s,d); el.style.opacity=k>0?1:0; el.style.transform=`scale(${k>0?eb(k):0})`; }
+function brl(v){ // 11.135.000.000,00
+  const i=Math.floor(v), c=Math.floor((v-i)*100);
+  return i.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+String(c).padStart(2,'0');
+}
+const S=[
+ {id:'s1',a:0,b:6,f:lt=>{
+   inn('s1lab',lt,.1); inn('s1rs',lt,.2);
+   const k=ex(pr(lt,.3,2.7)); const v=11135000000*k;
+   $('s1num').textContent=brl(k>=1?11135000000:v+ (k<1?0.37*(lt*997%100):0));
+   const hit=pr(lt,3.0,.35); $('s1num').style.transform=`scale(${lt<3?1:1+.10*(1-eo(hit))})`;
+   $('s1num').style.color=lt>=3&&lt<3.15?'#F47B20':'#F5F1E8';
+   inn('s1sub',lt,3.25,{dx:-80,dy:0}); inn('s1q',lt,4.3);
+ }},
+ {id:'s2',a:6,b:15,f:lt=>{
+   inn(document.querySelector('#s2 .title'),lt,0,{dy:30,d:.3});
+   inn('s2r1',lt,.3); inn('s2r2',lt,.6);
+   $('s2f1').style.width=(39.8*eo(pr(lt,.6,1.2)))+'%';
+   $('s2f2').style.width=(37.3*eo(pr(lt,1.0,1.2)))+'%';
+   const k=eo(pr(lt,3.4,.5)); $('s2band').style.transform=`translateY(${(1-k)*560}px)`;
+   ['b1','b2','b3','b4'].forEach((b,i)=>pop(b,lt,4.0+i*.45));
+ }},
+ {id:'s3',a:15,b:23,f:lt=>{
+   inn(document.querySelector('#s3 .title'),lt,0,{dy:30,d:.3});
+   const C=2*Math.PI*240, d=eo(pr(lt,.4,2.0));
+   const seg=(el,from,len)=>{const shown=cl(d-from,0,len); $(el).setAttribute('stroke-dasharray',`${shown*C} ${C}`); $(el).setAttribute('stroke-dashoffset',`${-from*C}`)};
+   seg('d1',0,.805); seg('d2',.805,.133); seg('d3',.938,.062);
+   $('s3p').textContent=(80.5*cl(d/.805)).toFixed(1).replace('.',',')+'%';
+   inn('s3a',lt,2.6); inn('s3r1',lt,3.0,{dy:30}); inn('s3r2',lt,3.2,{dy:30}); inn('s3r3',lt,3.4,{dy:30});
+   inn('s3b',lt,4.4);
+   const z=1+.07*eo(pr(lt,5.2,2.5));
+   $('s3svg').style.transform=`scale(${z})`; $('s3center').style.transform=`scale(${z})`;
+ }},
+ {id:'s4',a:23,b:31,f:lt=>{
+   inn(document.querySelector('#s4 .title'),lt,0,{dy:30,d:.3});
+   inn('s4doc',lt,.2,{dy:120,sc:.92});
+   $('m1').style.width=(cl((lt-1.0)/.5)*820)+'px';
+   $('m2').style.width=(cl((lt-1.8)/.5)*820)+'px';
+   inn('s4eq',lt,2.6);
+   if(lt>=4.0){ const k=pr(lt,4.0,.25); $('s4eq').style.opacity=1-k; }
+   pop('s4tot',lt,4.0,.4);
+   const sk=pr(lt,5.0,.22); const st=$('s4stamp');
+   st.style.opacity=sk>0?1:0; st.style.transform=`rotate(-6deg) scale(${2.2-1.2*eo(sk)})`;
+ }},
+ {id:'s5',a:31,b:39,f:lt=>{
+   inn(document.querySelector('#s5 .title'),lt,0,{dy:30,d:.3});
+   const H=430/2.31, vals=[2.31,2.24,2.21];
+   vals.forEach((v,i)=>{const k=eo(pr(lt,.4+i*.25,.9)); const h=v*H*k;
+     $('c'+(i+1)).style.height=h+'px'; const cv=$('v'+(i+1)); cv.style.top=(1010-h-66)+'px'; cv.style.opacity=pr(lt,.9+i*.25,.3);});
+   $('c3s').style.height=(2.21*H*0.0287*eo(pr(lt,2.9,.4)))+'px';
+   $('c3').style.boxShadow=lt>2.9?'0 0 0 6px #E63946':'none';
+   inn('s5alert',lt,2.9,{dx:-60,dy:0});
+   [['r1','rb1',600],['r2','rb2',600*58.2/300],['r3','rb3',600*26/300]].forEach(([r,b,w],i)=>{
+     inn(r,lt,4.0+i*.4,{dy:30}); $(b).style.width=(w*eo(pr(lt,4.2+i*.4,.6)))+'px';
+     if(i>0&&lt>5.6){ $(b).style.opacity=(Math.floor((lt-5.6)*4)%2)?.35:1; } else $(b).style.opacity=1;
+   });
+ }},
+ {id:'s6',a:39,b:47,f:lt=>{
+   inn(document.querySelector('#s6 .title'),lt,0,{dy:30,d:.3});
+   // damped tilt: left (empréstimos) heavier
+   let a=0; if(lt>1.4){const t=lt-1.4; a=4.5+(-9)*Math.exp(-2.4*t)*Math.cos(6*t);} else if(lt>.6){const t=lt-.6; a=9*(1-Math.exp(-3*t)*Math.cos(6*t))*.9;}
+   a=-a; // negative = left side down (rotate CCW)
+   $('s6beam').style.transform=`rotate(${a}deg)`;
+   const r=a*Math.PI/180, cx=540, cy=632, L=330;
+   const ends=[[cx-L*Math.cos(r),cy-L*Math.sin(r)],[cx+L*Math.cos(r),cy+L*Math.sin(r)]];
+   [['st1','p1',.6],['st2','p2',1.4]].forEach(([s,p,t0],i)=>{
+     const [x,y]=ends[i]; const drop=(1-eo(pr(lt,t0,.45)))*-500;
+     $(s).style.left=(x-2)+'px'; $(s).style.top=y+'px'; $(s).style.height=(70)+'px';
+     $(s).style.opacity=lt>t0?1:0;
+     const pe=$(p); pe.style.left=(x-180)+'px'; pe.style.top=(y+70+drop)+'px'; pe.style.opacity=lt>t0?1:0;
+   });
+   inn('s6alert',lt,3.2,{sc:.85});
+   if(lt>3.8){ $('s6alert').style.borderColor=(Math.floor((lt-3.8)*3)%2)?'rgba(230,57,70,.25)':'#E63946'; }
+ }},
+ {id:'s7',a:47,b:54,f:lt=>{
+   inn(document.querySelector('#s7 .title'),lt,0,{dy:30,d:.3});
+   ['k1','k2','k3'].forEach((k,i)=>{ inn(k,lt,.5+i*1.8,{dx:1100,dy:0,d:.35});
+     const v=$(k).querySelector('.v'); const pk=pr(lt,.8+i*1.8,.3); v.style.transform=`scale(${pk>0?eb(pk):0})`; v.style.transformOrigin='left center'; });
+ }},
+ {id:'s8',a:54,b:60,f:lt=>{
+   const w=eo(pr(lt,0,.55)); $('s8bg').style.clipPath=`inset(0 ${100-w*100}% 0 0)`;
+   inn('s8a',lt,.45); inn('s8b',lt,1.1); inn('s8c',lt,1.8,{dx:-60,dy:0});
+   const sk=pr(lt,3.0,.25); const sg=$('s8sig'); sg.style.opacity=sk>0?1:0; sg.style.transform=`scale(${1.25-.25*eo(sk)})`;
+   inn('s8cta',lt,4.0);
+ }},
+];
+function render(t){
+  $('prog').style.width=(cl(t/60)*1080)+'px';
+  const last=t>=54;
+  $('tag').style.color=last?'#0B1F3A':''; $('tag').querySelector('b').style.color=last?'#F5F1E8':'';
+  $('src').style.color=last?'rgba(11,31,58,.7)':''; $('src').style.top=last?'1700px':'1640px';
+  S.forEach(s=>{const on=t>=s.a&&(t<s.b||(s.b===60&&t>=60)); $(s.id).style.display=on?'block':'none'; if(on)s.f(t-s.a);});
+}
+window.render=render;
+render(window.__T??2.9);
+</script>
+</body>
+</html>
