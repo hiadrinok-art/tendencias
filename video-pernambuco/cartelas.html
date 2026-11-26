@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>3 Coisas de Pernambuco — Cartelas</title>
+<style>
+:root{
+  --blue:#123A7A; --blue2:#1B4E9E; --deep:#0A2350;
+  --off:#FFF8EC; --yel:#FFC72C; --red:#E4002B; --grn:#00A651; --sky:#2BB3E6; --org:#FF7A1A;
+  --sand:#F3DDB0; --gua:#B3123A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--deep)}
+body{font-family:'Inter',sans-serif;color:var(--off);-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--deep)}
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute}
+#prog{position:absolute;left:0;top:0;height:12px;z-index:50;background:linear-gradient(90deg,var(--red),var(--yel),var(--grn),var(--sky))}
+#tag{position:absolute;left:90px;top:170px;font-weight:800;font-size:30px;letter-spacing:5px;color:rgba(255,248,236,.6);z-index:50}
+#tag b{color:var(--yel)}
+.num{position:absolute;left:90px;top:250px;font-size:44px;font-weight:900;letter-spacing:4px;padding:10px 24px;border-radius:40px;color:var(--deep);background:var(--yel)}
+.big{position:absolute;left:84px;top:330px;font-size:170px;font-weight:900;letter-spacing:-7px;line-height:.95;text-transform:uppercase;white-space:nowrap}
+.chip{position:absolute;left:90px;font-size:50px;font-weight:800;line-height:1.1;padding:20px 30px;border-radius:18px;white-space:nowrap}
+.chip b{font-weight:900}
+.stamp{position:absolute;text-align:center;font-weight:900;border:10px solid;border-radius:20px;padding:18px 20px;letter-spacing:1px;line-height:1.05}
+/* s1 */
+#s1bg{inset:0;background:var(--blue)}
+#s1three{left:70px;top:330px;font-size:560px;font-weight:900;letter-spacing:-30px;line-height:.8;color:var(--yel)}
+#s1t{left:90px;top:820px;width:920px;font-size:104px;font-weight:900;line-height:.98;letter-spacing:-3px;text-transform:uppercase}
+#s1t span{color:var(--yel)}
+#s1flag{left:640px;top:380px}
+#s1hook{left:90px;top:1240px;width:900px;font-size:52px;font-weight:700;line-height:1.2}
+#s1hook span{border-bottom:8px solid var(--red)}
+/* s2 frevo */
+#s2bg{inset:0;background:var(--red)}
+#s2conf{inset:0}
+#s2umb{left:560px;top:640px;width:460px;height:520px}
+#s2c1{top:720px;background:var(--off);color:var(--red)}
+#s2c2{top:880px;background:var(--deep);color:var(--yel)}
+#s2c3{top:1040px;background:var(--yel);color:var(--deep)}
+#s2st{left:90px;top:1250px;width:900px;color:var(--off);border-color:var(--off);font-size:60px;background:rgba(10,35,80,.25)}
+#s2st small{display:block;font-size:34px;font-weight:800;letter-spacing:3px;margin-top:8px;color:var(--yel)}
+/* s3 bolo de rolo */
+#s3bg{inset:0;background:var(--off)}
+#s3 .big{color:var(--gua);font-size:150px;letter-spacing:-6px}
+#s3 .num{background:var(--gua);color:var(--off)}
+#s3roll{left:290px;top:560px}
+#s3c1{top:1110px;background:var(--sand);color:#6b3a10}
+#s3c2{top:1110px;left:auto;right:90px;background:var(--gua);color:var(--off)}
+#s3st{left:110px;top:1270px;width:860px;color:var(--blue);border-color:var(--blue);font-size:56px}
+#s3st small{display:block;font-size:32px;font-weight:800;letter-spacing:3px;margin-top:6px}
+#s3no{left:90px;top:1490px;width:900px;text-align:center;font-size:64px;font-weight:900;color:var(--deep)}
+#s3no s{text-decoration:none;position:relative;color:#9a8f7e}
+#s3no s:after{content:"";position:absolute;left:-10px;top:52%;height:12px;background:var(--red);border-radius:6px;width:var(--w,0)}
+/* s4 noronha */
+#s4bg{inset:0;background:linear-gradient(#FFB45E 0%,#FF8C69 22%,#2BB3E6 46%,#0E7FB8 70%,#08527F 100%)}
+#s4sea{left:0;top:0}
+#s4 .big{font-size:130px;letter-spacing:-5px;line-height:.95;white-space:normal;width:940px;color:var(--off);text-shadow:0 6px 30px rgba(8,40,80,.35)}
+#s4 .num{background:var(--off);color:#0E5F8F}
+#s4count{left:90px;top:1040px;color:var(--off)}
+#s4count .n{font-size:230px;font-weight:900;letter-spacing:-10px;line-height:.85}
+#s4count .k{font-size:58px;font-weight:900;letter-spacing:2px}
+#s4unesco{left:90px;top:1330px;width:900px;background:var(--off);color:#0E5F8F;font-size:44px;font-weight:900;padding:20px 28px;border-radius:16px}
+#s4sancho{left:90px;top:1460px;width:900px;background:var(--yel);color:var(--deep);font-size:44px;font-weight:900;padding:20px 28px;border-radius:16px;display:flex;align-items:center;gap:20px}
+#s4sancho .tr{font-size:60px}
+/* s5 */
+#s5bg{inset:0;background:var(--yel)}
+#s5q{left:90px;top:300px;width:900px;font-size:128px;font-weight:900;line-height:.95;letter-spacing:-4px;color:var(--deep);text-transform:uppercase}
+.opt{position:absolute;left:90px;width:900px;height:150px;border-radius:24px;display:flex;align-items:center;padding:0 36px;gap:28px;font-size:58px;font-weight:900}
+.opt .i{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;color:var(--off);flex:none}
+#o1{top:820px;background:var(--off);color:var(--red)} #o1 .i{background:var(--red)}
+#o2{top:1000px;background:var(--off);color:var(--gua)} #o2 .i{background:var(--gua)}
+#o3{top:1180px;background:var(--off);color:#0E7FB8} #o3 .i{background:#0E7FB8}
+#s5cta{left:90px;top:1400px;width:900px;font-size:50px;font-weight:800;line-height:1.15;color:var(--deep)}
+#s5bub{left:830px;top:1360px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="prog"></div>
+  <div id="tag">PERNAMBUCO · <b>TOP 3</b></div>
+
+  <!-- 01 abertura -->
+  <section class="scene" id="s1">
+    <div class="abs" id="s1bg"></div>
+    <div class="abs" id="s1three">3</div>
+    <svg class="abs" id="s1flag" width="360" height="240" viewBox="0 0 360 240">
+      <rect width="360" height="160" fill="#1B4E9E"/><rect y="160" width="360" height="80" fill="#FFF8EC"/>
+      <path d="M95 160 A85 85 0 0 1 265 160" fill="none" stroke="#E4002B" stroke-width="12"/>
+      <path d="M107 160 A73 73 0 0 1 253 160" fill="none" stroke="#FFC72C" stroke-width="12"/>
+      <path d="M119 160 A61 61 0 0 1 241 160" fill="none" stroke="#00A651" stroke-width="12"/>
+      <polygon points="180,48 188,72 213,72 193,87 200,111 180,96 160,111 167,87 147,72 172,72" fill="#FFC72C"/>
+      <circle cx="180" cy="200" r="22" fill="#FFC72C"/>
+      <rect x="174" y="8" width="12" height="34" fill="#E4002B"/><rect x="163" y="18" width="34" height="10" fill="#E4002B"/>
+    </svg>
+    <div class="abs" id="s1t">coisas que só<br><span>Pernambuco</span><br>tem</div>
+    <div class="abs" id="s1hook">E a <span>terceira</span> vai te dar vontade de largar tudo.</div>
+  </section>
+
+  <!-- 02 frevo -->
+  <section class="scene" id="s2">
+    <div class="abs" id="s2bg"></div>
+    <svg class="abs" id="s2conf" width="1080" height="1920"></svg>
+    <div class="num">Nº 1</div>
+    <div class="big" id="s2t">Frevo</div>
+    <svg class="abs" id="s2umb" viewBox="-230 -230 460 520">
+      <g id="s2ug">
+        <g id="s2spin"></g>
+        <circle r="18" fill="#FFF8EC"/>
+      </g>
+      <rect x="-6" y="0" width="12" height="270" rx="6" fill="#FFF8EC"/>
+      <path d="M0 262 q0 30 -30 30" stroke="#FFF8EC" stroke-width="12" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="chip" id="s2c1">vem de <b>“ferver”</b> 🔥</div>
+    <div class="chip" id="s2c2">nasceu no <b>Recife</b></div>
+    <div class="chip" id="s2c3"><b>+100 anos</b> de folia</div>
+    <div class="stamp" id="s2st">PATRIMÔNIO DA HUMANIDADE<small>UNESCO · 2012</small></div>
+  </section>
+
+  <!-- 03 bolo de rolo -->
+  <section class="scene" id="s3">
+    <div class="abs" id="s3bg"></div>
+    <div class="num">Nº 2</div>
+    <div class="big" id="s3t">Bolo de<br>rolo</div>
+    <svg class="abs" id="s3roll" width="500" height="500" viewBox="-250 -250 500 500">
+      <circle r="235" fill="#E9B872"/>
+      <circle r="222" fill="#F6D9A3"/>
+      <path id="s3spiral" fill="none" stroke="#B3123A" stroke-width="13" stroke-linecap="round"/>
+    </svg>
+    <div class="chip" id="s3c1">camadas <b>finíssimas</b></div>
+    <div class="chip" id="s3c2"><b>goiabada</b></div>
+    <div class="stamp" id="s3st">PATRIMÔNIO DE PERNAMBUCO<small>POR LEI ESTADUAL</small></div>
+    <div class="abs" id="s3no">não é <s id="s3s">rocambole</s> 😤</div>
+  </section>
+
+  <!-- 04 noronha -->
+  <section class="scene" id="s4">
+    <div class="abs" id="s4bg"></div>
+    <svg class="abs" id="s4sea" width="1080" height="1920">
+      <circle id="s4sun" cx="900" cy="700" r="80" fill="#FFE6A0"/>
+      <path id="s4pico" fill="#1F5A3A" d="M560 900 C600 880 640 860 660 800 C672 740 680 650 705 610 C720 590 740 600 748 640 C760 700 770 760 800 800 C850 850 950 870 1080 880 L1080 960 L560 960 Z"/>
+      <path id="s4isl" fill="#2E7A4E" d="M0 920 C120 880 260 870 360 900 C420 915 470 930 520 940 L520 960 L0 960 Z"/>
+      <g id="s4waves"></g>
+    </svg>
+    <div class="num">Nº 3</div>
+    <div class="big" id="s4t">Fernando de Noronha</div>
+    <div class="abs" id="s4count"><div class="n" id="s4n">0</div><div class="k">ILHAS NO ATLÂNTICO</div></div>
+    <div class="abs" id="s4unesco">🌍 Patrimônio Natural da Humanidade</div>
+    <div class="abs" id="s4sancho"><span class="tr">🏆</span><span>Baía do Sancho: várias vezes a<br>melhor praia do mundo</span></div>
+  </section>
+
+  <!-- 05 cta -->
+  <section class="scene" id="s5">
+    <div class="abs" id="s5bg"></div>
+    <div class="abs" id="s5q">Qual dessas você já viveu?</div>
+    <div class="opt" id="o1"><div class="i">1</div>Frevo</div>
+    <div class="opt" id="o2"><div class="i">2</div>Bolo de rolo</div>
+    <div class="opt" id="o3"><div class="i">3</div>Noronha</div>
+    <div class="abs" id="s5cta">💬 Comenta aqui e manda pra quem precisa conhecer Pernambuco.</div>
+  </section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-x,3);
+const eb=x=>{const c1=2.2,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pr=(lt,s,d)=>cl((lt-s)/d);
+const NS='http://www.w3.org/2000/svg';
+function inn(el,lt,s,{d=.4,dy=50,dx=0,sc=null,e=eo}={}){
+  if(typeof el==='string')el=$(el);
+  const k=e(pr(lt,s,d)), o=cl((lt-s)/(d*.6));
+  el.style.opacity=o;
+  const s0=sc==null?1:sc+(1-sc)*k;
+  el.style.transform=`translate(${dx*(1-k)}px,${dy*(1-k)}px) scale(${s0})`;
+}
+function pop(el,lt,s,d=.35,rot=0){ if(typeof el==='string')el=$(el);
+  const k=pr(lt,s,d); el.style.opacity=k>0?1:0; el.style.transform=`rotate(${rot}deg) scale(${k>0?eb(k):0})`; }
+function stampIn(el,lt,s,rot){ const k=pr(lt,s,.22); el.style.opacity=k>0?1:0; el.style.transform=`rotate(${rot}deg) scale(${2.2-1.2*eo(k)})`; }
+
+// sombrinha de frevo: 8 gomos coloridos
+(()=>{const g=$('s2spin'), C=['#E4002B','#FFC72C','#00A651','#2BB3E6','#E4002B','#FFC72C','#00A651','#2BB3E6'];
+  for(let i=0;i<8;i++){const a=i*Math.PI/4, b=(i+1)*Math.PI/4, R=215;
+    const p=document.createElementNS(NS,'path');
+    p.setAttribute('d',`M0 0 L${R*Math.cos(a)} ${R*Math.sin(a)} A${R} ${R} 0 0 1 ${R*Math.cos(b)} ${R*Math.sin(b)} Z`);
+    p.setAttribute('fill',C[i]); p.setAttribute('stroke','#FFF8EC'); p.setAttribute('stroke-width','5'); g.appendChild(p);}
+})();
+// confete
+const CONF=[...Array(46)].map((_,i)=>{const r=document.createElementNS(NS,'rect');
+  r.setAttribute('width',14+(i*7)%14); r.setAttribute('height',26); r.setAttribute('rx',4);
+  r.setAttribute('fill',['#FFC72C','#00A651','#2BB3E6','#FFF8EC'][i%4]); $('s2conf').appendChild(r);
+  return {x:(i*233)%1080, v:180+(i*97)%260, ph:(i*1.7)%6.28, y0:-(i*61)%1920};});
+// espiral do bolo de rolo
+(()=>{let d='', N=5.5, R=205; for(let k=0;k<=440;k++){const t=k/440, a=t*N*2*Math.PI, r=12+t*(R-12);
+  d+=(k?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)+' ';}
+  const p=$('s3spiral'); p.setAttribute('d',d); window.SPL=p.getTotalLength();})();
+// ondas
+const WAV=[...Array(7)].map((_,i)=>{const p=document.createElementNS(NS,'path');
+  p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(255,255,255,'+(.35-i*.035)+')'); p.setAttribute('stroke-width',6-i*.5);
+  p.setAttribute('stroke-linecap','round'); $('s4waves').appendChild(p); return p;});
+
+const S=[
+ {id:'s1',a:0,b:4.5,f:lt=>{
+   const w=eo(pr(lt,0,.4)); $('s1bg').style.clipPath=`circle(${w*150}% at 50% 50%)`;
+   pop('s1three',lt,.15,.45,-6);
+   inn('s1flag',lt,.45,{dx:200,dy:0}); $('s1flag').style.transform+=` rotate(${4*Math.sin(lt*3)}deg)`;
+   inn('s1t',lt,.6);
+   inn('s1hook',lt,2.0);
+ }},
+ {id:'s2',a:4.5,b:14.5,f:lt=>{
+   const w=eo(pr(lt,0,.4)); $('s2bg').style.clipPath=`inset(${100-w*100}% 0 0 0)`;
+   CONF.forEach((c,i)=>{const r=$('s2conf').children[i]; const y=(c.y0+lt*c.v)%2000-60;
+     r.setAttribute('transform',`translate(${c.x+30*Math.sin(lt*2+c.ph)} ${y}) rotate(${lt*200+i*40})`); r.style.opacity=pr(lt,.2,.4)*.8;});
+   inn(document.querySelector('#s2 .num'),lt,.3,{dx:-60,dy:0});
+   pop('s2t',lt,.5,.4);
+   // sombrinha: entra, gira e balança no ritmo
+   inn('s2umb',lt,.8,{dy:300,d:.5});
+   $('s2spin').setAttribute('transform',`rotate(${lt*140})`);
+   $('s2ug').setAttribute('transform',`rotate(${-12+10*Math.sin(lt*5.2)})`);
+   $('s2umb').style.transform+=` translateY(${-24*Math.abs(Math.sin(lt*5.2))}px) rotate(${8*Math.sin(lt*2.6)}deg)`;
+   inn('s2c1',lt,2.2,{dx:-120,dy:0}); inn('s2c2',lt,4.0,{dx:-120,dy:0}); inn('s2c3',lt,5.0,{dx:-120,dy:0});
+   stampIn($('s2st'),lt,6.6,-3);
+ }},
+ {id:'s3',a:14.5,b:24.5,f:lt=>{
+   const w=eo(pr(lt,0,.4)); $('s3bg').style.clipPath=`inset(0 0 0 ${100-w*100}%)`;
+   inn(document.querySelector('#s3 .num'),lt,.3,{dx:-60,dy:0});
+   inn('s3t',lt,.45);
+   inn('s3roll',lt,.8,{sc:.4,dy:0,d:.5});
+   const k=eo(pr(lt,1.0,2.6)); $('s3spiral').setAttribute('stroke-dasharray',`${k*SPL} ${SPL}`);
+   $('s3roll').style.transform+=` rotate(${-lt*12}deg)`;
+   inn('s3c1',lt,2.0,{dy:40}); inn('s3c2',lt,3.4,{dy:40});
+   stampIn($('s3st'),lt,4.7,-4);
+   inn('s3no',lt,7.0);
+   $('s3s').style.setProperty('--w',(eo(pr(lt,7.6,.35))*110)+'%');
+ }},
+ {id:'s4',a:24.5,b:34.5,f:lt=>{
+   const w=eo(pr(lt,0,.5)); $('s4bg').style.clipPath=`circle(${w*150}% at 50% 100%)`;
+   inn(document.querySelector('#s4 .num'),lt,.3,{dx:-60,dy:0});
+   inn('s4t',lt,.45);
+   const rise=eo(pr(lt,.4,1.2));
+   $('s4sun').setAttribute('cy',820-130*rise); $('s4sun').style.opacity=rise;
+   ['s4pico','s4isl'].forEach((id,i)=>{$(id).style.transform=`translateY(${(1-eo(pr(lt,.5+i*.2,.8)))*200}px)`;});
+   $('s4sea').style.transform=`scale(${1+.04*pr(lt,0,10)})`; $('s4sea').style.transformOrigin='50% 50%';
+   WAV.forEach((p,i)=>{const y=1000+i*70; let d='';
+     for(let x=-40;x<=1120;x+=40){const yy=y+10*Math.sin(x/90+lt*(2+i*.3)+i);d+=(x<0?'M':'L')+x+' '+yy.toFixed(1)+' ';}
+     p.setAttribute('d',d);});
+   inn('s4count',lt,2.0);
+   $('s4n').textContent=Math.round(21*eo(pr(lt,2.1,1.2)));
+   inn('s4unesco',lt,3.8,{dx:-100,dy:0});
+   pop('s4sancho',lt,5.4,.4);
+   $('s4sancho').querySelector('.tr').style.transform=`rotate(${lt>5.7?10*Math.sin((lt-5.7)*8)*Math.exp(-(lt-5.7)*1.5):0}deg)`;
+ }},
+ {id:'s5',a:34.5,b:40.57,f:lt=>{
+   const w=eo(pr(lt,0,.4)); $('s5bg').style.clipPath=`inset(0 ${100-w*100}% 0 0)`;
+   inn('s5q',lt,.3);
+   ['o1','o2','o3'].forEach((o,i)=>inn(o,lt,1.0+i*.25,{dx:1000,dy:0,d:.35}));
+   inn('s5cta',lt,2.0);
+   const pulse=lt>2.4?1+.04*Math.sin((lt-2.4)*6):1;
+   $('s5cta').style.transform+=` scale(${pulse})`; $('s5cta').style.transformOrigin='left center';
+ }},
+];
+// as ondas ficam no fundo do mar (abaixo do texto): visíveis e suaves
+S[3].f=(f=>lt=>{f(lt); WAV.forEach(p=>p.style.opacity=pr(lt,.6,.6));})(S[3].f);
+
+let TOTAL=40.57;
+function applyTiming(T){ if(!T)return; T.starts.forEach((a,i)=>{S[i].a=a; S[i].b=a+T.lens[i];}); TOTAL=T.total; }
+applyTiming(window.TIMING);
+window.applyTiming=applyTiming;
+function render(t){
+  $('prog').style.width=(cl(t/TOTAL)*1080)+'px';
+  const last=S[S.length-1];
+  const dark=(t>=S[2].a&&t<S[3].b)||t>=last.a;
+  $('tag').style.color=dark?'rgba(10,35,80,.6)':''; $('tag').querySelector('b').style.color=dark?'#B3123A':'';
+  S.forEach(s=>{const on=t>=s.a&&(t<s.b||(s===last&&t>=s.b)); $(s.id).style.display=on?'block':'none'; if(on)s.f(t-s.a);});
+}
+window.render=render;
+render(window.__T??2.9);
+</script>
+</body>
+</html>
